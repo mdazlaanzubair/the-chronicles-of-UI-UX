@@ -13,6 +13,7 @@
   5. Responsive Design Styles
   6. Theme Switcher
   7. Background Music Bars
+  8. Body Scroll Bars
 
 -------------------------------------------------------------------------*/
 
@@ -2561,4 +2562,24 @@ div.checkbox.switcher label input:checked + span small, div.radio.switcher label
   width: 40px;
   height: 35px;
   cursor: pointer;
+}
+
+/*=======================================================================*/
+/*  [ 8. Body Scroll Bars ]                                              */
+/*=======================================================================*/
+
+/* total width */
+body::-webkit-scrollbar {
+  width:14px
+}
+
+/* scrollbar itself */
+body::-webkit-scrollbar-thumb {
+  background-color:#acafb6;
+  border:5px solid #f7f8fa;
+}
+
+/* set button(top and bottom of the scrollbar) */
+body::-webkit-scrollbar-button {
+  display:none
 }
