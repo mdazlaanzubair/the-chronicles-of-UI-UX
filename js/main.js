@@ -312,11 +312,13 @@
 /* Theme Switcher */
 jQuery('#skin_toggler').on('click', function(){
     if(jQuery("link[id='skin']").attr('href') == 'css/skins/light.css') {
+		$("#skin_toggler_text").addClass('glow');			// Changing Theme Toggler Text Color
 		jQuery("link[id='skin']").attr('href', 'css/skins/dark.css');
-    } else if(jQuery("link[id='skin']").attr('href') == 'css/skins/dark.css') {
-		jQuery("link[id='skin']").attr('href', 'css/skins/light.css');
+		jQuery("#def-rect").attr('fill', '#f5821f'); 		// Matching Music Bars color with Theme
     } else {
+		$("#skin_toggler_text").removeClass('glow');		// Changing Theme Toggler Text Color
 		jQuery("link[id='skin']").attr('href', 'css/skins/light.css');
+		jQuery("#def-rect").attr('fill', '#ff3860'); 		// Matching Music Bars color with Theme
 	}
 });
 
@@ -328,4 +330,55 @@ var typed = new Typed('#typed_element', {
 	backDelay: 1000,
 	startDelay: 100,
 	loop: true,
+});
+
+/* Background Music */
+
+// Initializing Music
+$(document).ready(function(){
+	audio = new Audio();
+	audio.src = "music/craddles_sub_urban.mp3";
+	audio.loop = true;
+	audio.volume = 0.07;
+	audio.pause();
+});
+
+jQuery('#music_player').on('click', function(){
+	if (audio.paused == false) {
+		audio.pause();
+		$("#def-rect_text").removeClass('glow');		// Changing Music Toggler Text Color
+	} else {
+		audio.play();
+		$("#def-rect_text").addClass('glow');		// Changing Music Toggler Text Color
+	}
+
+	// Toggle Animation Music Bars
+	$("#symbol").toggleClass('d-none');
+	$("#music_bars").toggleClass('d-none');
+});
+
+
+// Animation
+$(document).ready(function ($) {
+	var bars = $('.music-bar .bar');
+  
+	var tl = (new TimelineMax()).staggerTo(bars, .3, {
+	  y: -10,
+	  repeat:-1,
+	  paused: false,
+	  yoyo:true,
+	  ease: Quad.easeInOut}, .25
+	).play();
+  
+	// $('.music-bar').on('click', function(){
+	//   tl.isActive() ? pause() : tl.play(); 
+	// });
+  
+	// function pause() {
+	//   tl.pause();
+	//   TweenMax.to(bars, .7, {
+	// 	y: 0,
+	// 	ease: Quad.easeOut}
+	//   );
+	// }
 });

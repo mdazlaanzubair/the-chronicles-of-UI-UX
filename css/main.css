@@ -12,6 +12,7 @@
      4.5. Main Content - Contact / .main-content#contact
   5. Responsive Design Styles
   6. Theme Switcher
+  7. Background Music Bars
 
 -------------------------------------------------------------------------*/
 
@@ -2524,7 +2525,6 @@ div.checkbox.switcher label input + span, div.radio.switcher label input + span,
   width: 40px;
   height: 15px;
   background: #818181;
-  border: 1px solid #eee;
   border-radius: 50px;
   transition: all 0.3s ease-in-out;
 }
@@ -2542,11 +2542,23 @@ div.checkbox.switcher label input + span small, div.radio.switcher label input +
   box-shadow: 0 0.0625rem 0.1875rem 0.0625rem rgba(0, 0, 0, 0.4);
 }
 
-div.checkbox.switcher label input:checked + span, div.radio.switcher label input:checked + span, .switch label input:checked + span {
+div.checkbox.switcher_theme label input:checked + span, div.radio_theme.switcher_theme label input:checked + span, .switch_theme label input:checked + span {
   background: #f5821f;
   border-color: #f5821f;
 }
 
 div.checkbox.switcher label input:checked + span small, div.radio.switcher label input:checked + span small, .switch label input:checked + span small {
   left: 20px;
+}
+
+/*=======================================================================*/
+/*  [ 7. Background Music Bars ]                                         */
+/*=======================================================================*/
+
+.music-bar {
+  margin-top: -10px;
+  overflow: hidden;
+  width: 40px;
+  height: 35px;
+  cursor: pointer;
 }

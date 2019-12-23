@@ -55,7 +55,22 @@
 					<div class="inner-top-header container">
 						<!-- Top Header Left Starts -->
 						<div id="top-header-left">
-							<h4>&lt;/&gt; Azlaan</h4>
+							<h4>
+								<span id="music_bars" class="d-none">
+									<svg class="music-bar" viewBox="0 0 20 20">
+										<defs>
+										<rect id="def-rect" 
+												y="18" width="3" height="20" 
+												fill="#ff3860" />
+										</defs>
+										<use class="bar" xlink:href="#def-rect" x="0" />
+										<use class="bar" xlink:href="#def-rect" x="5" />
+										<use class="bar" xlink:href="#def-rect" x="10" />
+										<use class="bar" xlink:href="#def-rect" x="15" />
+									</svg>	
+								</span>
+								<span id="symbol">&lt;/&gt;</span> Azlaan
+							</h4>
 						</div>
 						<!-- Top Header Left Ends -->
 						<!-- Top Header Right Starts -->
@@ -81,11 +96,20 @@
 									<a href="#contact">Contact</a>
 								</li>
 								<li>
-									<div class="checkbox switcher">
+									<div class="checkbox switcher checkbox_theme switcher_theme">
 										<label for="skin_toggler">
 											<input id="skin_toggler" type="checkbox" value="" >
 											<span><small></small></span>
-											<small>Dark Mode</small>
+											<small id="skin_toggler_text">Dark Mode</small>
+										</label>
+									</div>
+								</li>
+								<li>
+									<div class="checkbox switcher checkbox_music switcher_music">
+										<label for="music_player">
+											<input id="music_player" type="checkbox" value="" >
+											<span><small></small></span>
+											<small id="def-rect_text">Music</small>
 										</label>
 									</div>
 								</li>
@@ -1933,6 +1957,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
 		<script src="vendors/tagcloud/tagcloud.min.js"></script>
 		<script src="vendors/tagcloud/tagcloud.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
 		<script src="js/main.js"></script>
 		<!-- JS Files Ends -->
 	</body>

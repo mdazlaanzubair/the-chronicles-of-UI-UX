@@ -222,3 +222,21 @@ body,
 .main-content#contact .content .contact-form-wrapper .inner-contact-form-wrapper .form-wrapper form[name="contact"] .form-group button[type="submit"] {
   background: transparent;
 }
+
+/* 
+  Music Toggler Custom colouring  
+*/
+
+div.checkbox_music.switcher_music label input:checked + span, div.radio_music.switcher_music label input:checked + span, .switch_music label input:checked + span {
+  background: #ff3860;
+  border-color: #ff3860;
+}
+
+/* 
+  Glow Shadow Text Custom Style
+*/
+
+.glow {
+  color: #fff;
+  text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #ff3860, 0 0 8px #ff3860, 0 0 20px #ff3860, 0 0 20px #ff3860, 0 0 20px #ff3860;
+}
