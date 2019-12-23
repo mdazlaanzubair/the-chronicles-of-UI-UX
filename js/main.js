@@ -337,7 +337,7 @@ var typed = new Typed('#typed_element', {
 // Initializing Music
 $(document).ready(function(){
 	audio = new Audio();
-	audio.src = "music/craddles_sub_urban.mp3";
+	audio.src = "craddles_sub_urban.mp3";
 	audio.loop = true;
 	audio.volume = 0.07;
 	audio.pause();
@@ -347,14 +347,14 @@ jQuery('#music_player').on('click', function(){
 	if (audio.paused == false) {
 		audio.pause();
 		$("#def-rect_text").removeClass('glow');		// Changing Music Toggler Text Color
+		$("#symbol").removeClass('d-none');				// Toggle Header Symbol | HIDE
+		$("#music_bars").addClass('d-none');			// Toggle Animation Music Bars | SHOW
 	} else {
 		audio.play();
-		$("#def-rect_text").addClass('glow');		// Changing Music Toggler Text Color
+		$("#def-rect_text").addClass('glow');			// Changing Music Toggler Text Color
+		$("#symbol").addClass('d-none');				// Toggle Header Symbol |SHOW
+		$("#music_bars").removeClass('d-none');			// Toggle Animation Music Bars |HIDE
 	}
-
-	// Toggle Animation Music Bars
-	$("#symbol").toggleClass('d-none');
-	$("#music_bars").toggleClass('d-none');
 });
 
 
