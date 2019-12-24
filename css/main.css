@@ -2568,18 +2568,21 @@ div.checkbox.switcher label input:checked + span small, div.radio.switcher label
 /*  [ 8. Body Scroll Bars ]                                              */
 /*=======================================================================*/
 
-/* total width */
+/* Total Width */
 body::-webkit-scrollbar {
-  width:14px
+  width:4px
 }
 
-/* scrollbar itself */
-body::-webkit-scrollbar-thumb {
-  background-color:#acafb6;
-  border:5px solid #f7f8fa;
-}
-
-/* set button(top and bottom of the scrollbar) */
+/* Set button (top and bottom of the scrollbar) */
 body::-webkit-scrollbar-button {
   display:none
+}
+
+/* Scrollbar Color */
+body::-webkit-scrollbar-track {
+  background-color:#44444446;
+}
+
+body::-webkit-scrollbar-track:hover {
+  background-color:#44444465;
 }

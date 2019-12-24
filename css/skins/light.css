@@ -240,3 +240,11 @@ div.checkbox_music.switcher_music label input:checked + span, div.radio_music.sw
   color: #fff;
   text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #ff3860, 0 0 8px #ff3860, 0 0 20px #ff3860, 0 0 20px #ff3860, 0 0 20px #ff3860;
 }
+
+/* 
+  Scrollbar Color Custom Style 
+*/
+
+body::-webkit-scrollbar-thumb {
+  background-color:#ff3860;
+}
