@@ -309,56 +309,52 @@
 
 })(jQuery);
 
-/* Theme Switcher */
-jQuery('#skin_toggler').on('click', function(){
-    if(jQuery("link[id='skin']").attr('href') == 'css/skins/light.css') {
-		$("#skin_toggler_text").addClass('glow');			// Changing Theme Toggler Text Color
-		jQuery("link[id='skin']").attr('href', 'css/skins/dark.css');
-		jQuery("#def-rect").attr('fill', '#f5821f'); 		// Matching Music Bars color with Theme
-    } else {
-		$("#skin_toggler_text").removeClass('glow');		// Changing Theme Toggler Text Color
-		jQuery("link[id='skin']").attr('href', 'css/skins/light.css');
-		jQuery("#def-rect").attr('fill', '#ff3860'); 		// Matching Music Bars color with Theme
-	}
-});
+/*	***************************
+ *	CUSTOM JAVASCRIPT FUNCTIONS 
+ *	***************************	*/
 
-/* Typed JS */ 
-var typed = new Typed('#typed_element', {
-	strings: ["UI/UX Designer And Developer", "Frontend Designer", "Backend Developer"],
-	typeSpeed: 0,
-	backSpeed: 0,
-	backDelay: 1000,
-	startDelay: 100,
-	loop: true,
-});
+/*	*************************
+ *	BACKGROUND MUSIC FOR SITE 
+ *	*************************	*/
 
-/* Background Music */
+/*	******************
+ *	INITIALIZING MUSIC
+ *	******************	*/
+var bg_audio = document.getElementById("bg_audio");
+var bg_audio_src = document.getElementById("bg_audio_src");
+var bg_audio_vol = 0.0;							
 
-// Initializing Music
-$(document).ready(function(){
-	audio = new Audio();
-	audio.src = "craddles_sub_urban.mp3";
-	audio.loop = true;
-	audio.volume = 0.07;
-	audio.pause();
-});
+// old working code
+// $(document).ready(function(){
+// 	audio = new Audio();
+// 	audio.src = "craddles_sub_urban.mp3";
+// 	audio.loop = true;
+// 	audio.volume = 0.07;
+// 	audio.pause();
+// });
 
+/*	********************************
+ *	MUSIC EQUALIZER ANIMATION TOGGLE
+ *	********************************	*/
 jQuery('#music_player').on('click', function(){
-	if (audio.paused == false) {
-		audio.pause();
-		$("#def-rect_text").removeClass('glow');		// Changing Music Toggler Text Color
-		$("#symbol").removeClass('d-none');				// Toggle Header Symbol | HIDE
-		$("#music_bars").addClass('d-none');			// Toggle Animation Music Bars | SHOW
-	} else {
-		audio.play();
-		$("#def-rect_text").addClass('glow');			// Changing Music Toggler Text Color
-		$("#symbol").addClass('d-none');				// Toggle Header Symbol |SHOW
-		$("#music_bars").removeClass('d-none');			// Toggle Animation Music Bars |HIDE
+	if (bg_audio.paused == false) {
+		bg_audio_vol = 1.0;									// VOLUME WHEN PLAYING						
+		fadeOutVolume(bg_audio)							// FADEOUT PAUSE
+		$("#def-rect_text").removeClass('glow');		// HIDING GLOW EFFECT WHEN MUSIC PAUSE
+		$("#symbol").removeClass('d-none');				// SHOWING HEADER SYMBOL
+		$("#music_bars").addClass('d-none');			// HIDING MUSIC EQUALIZER ANIMATION
+	} else {					
+		bg_audio_vol = 0.0;									// VOLUME WHEN PAUSED
+		fadeInVolume(bg_audio)							// FADEIN PLAY
+		$("#def-rect_text").addClass('glow');			// SHOWING GLOW EFFECT ON MUSIC PLAY
+		$("#symbol").addClass('d-none');				// HIDING HEADER SYMBOL
+		$("#music_bars").removeClass('d-none');			// SHOWING MUSIC EQUALIZER ANIMATION
 	}
 });
 
-
-// Animation
+/*	*************************
+ *	MUSIC EQUALIZER ANIMATION
+ *	*************************	*/
 $(document).ready(function ($) {
 	var bars = $('.music-bar .bar');
   
@@ -382,3 +378,64 @@ $(document).ready(function ($) {
 	//   );
 	// }
 });
+
+/*	*********************************
+ *	THEME SWITCHER CHANGING SITE SKIN 
+ *	*********************************	*/
+jQuery('#skin_toggler').on('click', function(){
+    if(jQuery("link[id='skin']").attr('href') == 'css/skins/light.css') {
+		bg_audio_src = "track2";										// CHANGING AUDIO SOURCE ACCORDING TO THEME
+		$("#skin_toggler_text").addClass('glow');						// CHANGING THEME TOGGLER TEXT COLOR
+		jQuery("link[id='skin']").attr('href', 'css/skins/dark.css');	// LOADING DARK SKIN FOR SITE
+		jQuery("#def-rect").attr('fill', '#f5821f'); 					// MATCHING MUSIC EQUALIZER COLOR WITH THEME
+    } else {
+		bg_audio_src = "track1";										// CHANGING AUDIO SOURCE ACCORDING TO THEME
+		$("#skin_toggler_text").removeClass('glow');					// CHANGING THEME TOGGLER TEXT COLOR
+		jQuery("link[id='skin']").attr('href', 'css/skins/light.css');	// LOADING LIGHT SKIN FOR SITE
+		jQuery("#def-rect").attr('fill', '#ff3860'); 					// MATCHING MUSIC EQUALIZER COLOR WITH THEME
+	}
+});
+
+/*	***************************
+ *	TYPED JS FOR TEXT ANIMATION 
+ *	***************************	*/
+var typed = new Typed('#typed_element', {
+	strings: ["UI/UX Developer", "Frontend Developer", "Backend Developer"],
+	typeSpeed: 0,
+	backSpeed: 0,
+	backDelay: 1000,
+	startDelay: 100,
+	loop: true,
+});
+
+/*	***********************
+ *	VOLUME FADEOUT FUNCTION 
+ *	***********************	*/
+function fadeOutVolume(bg_audio) {
+    setTimeout(function() {
+        this.bg_audio.volume = bg_audio_vol
+        bg_audio_vol = bg_audio_vol - 0.1
+        if (bg_audio_vol >= 0.1) {
+            fadeOutVolume();
+        } else{
+			bg_audio_vol = 0.0
+			this.bg_audio.pause();							
+        }
+    }, 100);
+}
+
+/*	**********************
+ *	VOLUME FADEIN FUNCTION
+ *	**********************	*/
+function fadeInVolume (bg_audio) {
+    setTimeout(function() {
+		this.bg_audio.play();								
+        this.bg_audio.volume = bg_audio_vol
+        bg_audio_vol = bg_audio_vol + 0.1
+        if (bg_audio_vol <= 1.0) {
+            fadeInVolume();
+        } else{
+            bg_audio_vol = 1.0
+        }
+    }, 100);
+}
