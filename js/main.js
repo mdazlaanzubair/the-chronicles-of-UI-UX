@@ -309,51 +309,40 @@
 
 })(jQuery);
 
-/*	***************************
+/*	****************************************************************************************************************
  *	CUSTOM JAVASCRIPT FUNCTIONS 
- *	***************************	*/
+ *	****************************************************************************************************************	*/
 
 /*	*************************
  *	BACKGROUND MUSIC FOR SITE 
  *	*************************	*/
 
-/*	******************
- *	INITIALIZING MUSIC
+/*	INITIALIZING MUSIC
  *	******************	*/
 var bg_audio = document.getElementById("bg_audio");
 var bg_audio_src = document.getElementById("bg_audio_src");
 var bg_audio_vol = 0.0;							
 
-// old working code
-// $(document).ready(function(){
-// 	audio = new Audio();
-// 	audio.src = "craddles_sub_urban.mp3";
-// 	audio.loop = true;
-// 	audio.volume = 0.07;
-// 	audio.pause();
-// });
 
-/*	********************************
- *	MUSIC EQUALIZER ANIMATION TOGGLE
+/*	MUSIC EQUALIZER ANIMATION TOGGLE
  *	********************************	*/
 jQuery('#music_player').on('click', function(){
-	if (bg_audio.paused == false) {
-		bg_audio_vol = 1.0;									// VOLUME WHEN PLAYING						
-		fadeOutVolume(bg_audio)							// FADEOUT PAUSE
-		$("#def-rect_text").removeClass('glow');		// HIDING GLOW EFFECT WHEN MUSIC PAUSE
-		$("#symbol").removeClass('d-none');				// SHOWING HEADER SYMBOL
-		$("#music_bars").addClass('d-none');			// HIDING MUSIC EQUALIZER ANIMATION
-	} else {					
-		bg_audio_vol = 0.0;									// VOLUME WHEN PAUSED
-		fadeInVolume(bg_audio)							// FADEIN PLAY
+	if (bg_audio.paused) {
+		bg_audio_vol = 0.0;								// VOLUME WHEN PAUSED
+		fadeInOutVolume(bg_audio, "fadein")				// FADEIN PLAY
 		$("#def-rect_text").addClass('glow');			// SHOWING GLOW EFFECT ON MUSIC PLAY
 		$("#symbol").addClass('d-none');				// HIDING HEADER SYMBOL
 		$("#music_bars").removeClass('d-none');			// SHOWING MUSIC EQUALIZER ANIMATION
+	} else {
+		bg_audio_vol = 1.0;								// VOLUME WHEN PLAYING						
+		fadeInOutVolume(bg_audio, "fadeout")			// FADEOUT PAUSE
+		$("#def-rect_text").removeClass('glow');		// HIDING GLOW EFFECT WHEN MUSIC PAUSE
+		$("#symbol").removeClass('d-none');				// SHOWING HEADER SYMBOL
+		$("#music_bars").addClass('d-none');			// HIDING MUSIC EQUALIZER ANIMATION					
 	}
 });
 
-/*	*************************
- *	MUSIC EQUALIZER ANIMATION
+/*	MUSIC EQUALIZER ANIMATION
  *	*************************	*/
 $(document).ready(function ($) {
 	var bars = $('.music-bar .bar');
@@ -363,33 +352,74 @@ $(document).ready(function ($) {
 	  repeat:-1,
 	  paused: false,
 	  yoyo:true,
-	  ease: Quad.easeInOut}, .25
-	).play();
-  
-	// $('.music-bar').on('click', function(){
-	//   tl.isActive() ? pause() : tl.play(); 
-	// });
-  
-	// function pause() {
-	//   tl.pause();
-	//   TweenMax.to(bars, .7, {
-	// 	y: 0,
-	// 	ease: Quad.easeOut}
-	//   );
-	// }
+	  ease: Quad.easeInOut}, .25).play();
+	
 });
+
+/*	VOLUME FADEIN-OUT FUNCTION 
+ *	**************************	*/
+function fadeInOutVolume(bg_audio, status) {
+	if (status == "fadeout") {
+		setTimeout(function() {
+			this.bg_audio.volume = bg_audio_vol
+			bg_audio_vol = bg_audio_vol - 0.1
+			if (bg_audio_vol >= 0.0) {
+				fadeInOutVolume(this.bg_audio, "fadeout");
+			} 
+		}, 100);
+	}
+	else {
+		setTimeout(function() {				
+			this.bg_audio.volume = bg_audio_vol
+			this.bg_audio.play();				
+			bg_audio_vol = bg_audio_vol + 0.1
+			if (bg_audio_vol <= 1.0) {
+				fadeInOutVolume(this.bg_audio, "fadein");
+			} 
+		}, 100);
+	}
+}
+
+/*	SWITCH BETWEEN TRACKS TOGGLE
+ *	****************************	*/
+function trackSwitch (bg_audio, theme) {
+	if (theme == "dark") {
+		if(this.bg_audio.paused) {
+			changeAudioSrc("track2.mp3")
+		} else {
+			changeAudioSrc("track2.mp3", "autoplay")
+		}
+	} else {
+		if(this.bg_audio.paused) {
+			changeAudioSrc("track1.mp3")
+		} else {
+			changeAudioSrc("track1.mp3", "autoplay")
+		}
+	}
+}
+
+/*	SWITCH BETWEEN TRACKS TOGGLE
+ *	****************************	*/
+function changeAudioSrc(track, status) {
+	$("#bg_audio_src").attr("src", track);
+	this.bg_audio.load();
+	if (status == "autoplay") {
+		bg_audio_vol = 0.0;	
+		fadeInOutVolume(this.bg_audio, "fadein")
+	}
+}
 
 /*	*********************************
  *	THEME SWITCHER CHANGING SITE SKIN 
  *	*********************************	*/
 jQuery('#skin_toggler').on('click', function(){
     if(jQuery("link[id='skin']").attr('href') == 'css/skins/light.css') {
-		bg_audio_src = "track2";										// CHANGING AUDIO SOURCE ACCORDING TO THEME
+		trackSwitch(bg_audio, "dark") 									// CHANGING MUSIC ACCORDING TO THEME
 		$("#skin_toggler_text").addClass('glow');						// CHANGING THEME TOGGLER TEXT COLOR
 		jQuery("link[id='skin']").attr('href', 'css/skins/dark.css');	// LOADING DARK SKIN FOR SITE
 		jQuery("#def-rect").attr('fill', '#f5821f'); 					// MATCHING MUSIC EQUALIZER COLOR WITH THEME
     } else {
-		bg_audio_src = "track1";										// CHANGING AUDIO SOURCE ACCORDING TO THEME
+		trackSwitch(bg_audio, "light")									//CHANGING MUSIC ACCORDING TO THEME
 		$("#skin_toggler_text").removeClass('glow');					// CHANGING THEME TOGGLER TEXT COLOR
 		jQuery("link[id='skin']").attr('href', 'css/skins/light.css');	// LOADING LIGHT SKIN FOR SITE
 		jQuery("#def-rect").attr('fill', '#ff3860'); 					// MATCHING MUSIC EQUALIZER COLOR WITH THEME
@@ -407,35 +437,3 @@ var typed = new Typed('#typed_element', {
 	startDelay: 100,
 	loop: true,
 });
-
-/*	***********************
- *	VOLUME FADEOUT FUNCTION 
- *	***********************	*/
-function fadeOutVolume(bg_audio) {
-    setTimeout(function() {
-        this.bg_audio.volume = bg_audio_vol
-        bg_audio_vol = bg_audio_vol - 0.1
-        if (bg_audio_vol >= 0.1) {
-            fadeOutVolume();
-        } else{
-			bg_audio_vol = 0.0
-			this.bg_audio.pause();							
-        }
-    }, 100);
-}
-
-/*	**********************
- *	VOLUME FADEIN FUNCTION
- *	**********************	*/
-function fadeInVolume (bg_audio) {
-    setTimeout(function() {
-		this.bg_audio.play();								
-        this.bg_audio.volume = bg_audio_vol
-        bg_audio_vol = bg_audio_vol + 0.1
-        if (bg_audio_vol <= 1.0) {
-            fadeInVolume();
-        } else{
-            bg_audio_vol = 1.0
-        }
-    }, 100);
-}

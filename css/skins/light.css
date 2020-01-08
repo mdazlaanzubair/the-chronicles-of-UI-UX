@@ -15,7 +15,7 @@ body,
 .main-content#about .content .description p .name,
 .main-content#contact .content .contact-form-wrapper .inner-contact-form-wrapper .form-wrapper form[name="contact"] .form-group input:focus,
 .main-content#contact .content .contact-form-wrapper .inner-contact-form-wrapper .form-wrapper form[name="contact"] .form-group textarea:focus {
-  color: #3d404f;
+  color: #00040e;
 }
 
 #header #top-header #top-header-right #hamburger-menu > span {
