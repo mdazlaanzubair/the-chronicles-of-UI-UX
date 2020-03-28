@@ -1890,6 +1890,31 @@
 			Your browser does not support the audio element.
 		</audio>
 
+		<!-- POPUP MODAL ON PAGE LOAD -->
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Hello &amp; Welcome!</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>
+							Thanks for reaching out. It is to inform you that site is still under contruction. 
+							Everything setup just working on portfolio section.
+						</p>
+						<br>
+						<p class="text-secondary">
+							As we all know about COVID-19 or Corona Virus Pandamic Situation. So
+							<em><a href="./projects/CoronaMap/index.html" target="_blank">here</a></em> is what I created during 
+							Quarantine Days.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- JS Files Starts -->
 		<script src="vendors/jquery/jquery-3.4.1.js"></script>
 		<script src="vendors/bootstrap/js/bootstrap.js"></script>
@@ -1904,6 +1929,13 @@
 		<script src="vendors/tagcloud/tagcloud.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
 		<script src="js/main.js"></script>
+
+		<!-- LOADING POPUP MODAL ON PAGE RELOAD -->
+		<script>
+			$(window).on('load', function(){        
+				$('#myModal').modal('show');
+			}); 
+		</script>
 		<!-- JS Files Ends -->
 	</body>
 

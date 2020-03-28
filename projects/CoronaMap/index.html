@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corona Map</title>
+    <link rel="shortcut icon" href="./icons/virus.svg" />
+    
+    <!-- STYLESHEET -->
+
+    <!-- CUSTOM STYLING -->
+    <link rel="stylesheet" href="./css/styles.css">
+
+    <!-- BOOTSTRAP STYLING -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- MAP-BOX LOADING -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+</head>
+<body>
+    <div id='map' class="corona-map"></div>
+    <pre id="info-popup" class="info-popup"></pre>
+
+    <!-- POPUP MODAL ON PAGE LOAD -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Corona MAP</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        The coronavirus COVID-19 is affecting 199 countries and territories around the world and 2 
+                        international conveyances: the Diamond Princess cruise ship harbored in Yokohama, Japan, and 
+                        the Holland America's MS Zaandam cruise ship. The day is reset after midnight GMT+0.
+                    </p>
+                    <p class="mb-0">
+                        <em><a class="btn btn-link" href="https://azlaan4.github.io/" target="_blank">checkout my portfolio</a></em>
+                        <em class="float-right"><a class="btn btn-link" href="https://github.com/azlaan4/QuarantineProductivity/tree/master/CoronaMap" target="_blank">source code is here</a></em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- SCRIPTS -->
+
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<!-- CUSTOM SCRIPT -->
+<script src="./js/script.js"></script>
+
+<script>
+    // LOADING MAP TO SERVE RESULTS
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYXpsYWFuNCIsImEiOiJjazhhZGh1dngwZ3FzM2RvMWx0d2h2cDRvIn0.-QPY6ON5kK4IcpSpgZYE1w';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/dark-v10',
+        zoom: 3,
+        center: [69.3451,30.3753],
+    });
+
+    // LOADING POPUP MODAL ON PAGE RELOAD
+    $(window).on('load', function(){        
+        $('#myModal').modal('show');
+    }); 
+</script>
+
+</html>
