@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Muhammad Azlaan Zubair" />
+    <link rel="icon" href="./img/virus.svg" type="image/svg">
+
+    <title>CORONA MAP | 3D Realtime Map Ploting</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <div id="globeViz"></div>
+    <div class="top-info-container">
+      <div class="title">COVID-19</div>
+      <div class="title-desc">
+        loading countries affected by this pandemic ...
+      </div>
+    </div>
+
+    <div class="bottom-info-container">
+      <div style="font-size: 20px; color: #ccd6f6;">World Wide Stats</div>
+      <div style="color: #e6f1ff; padding: 0 5px;">
+        INFECTED: <span id="infected">0</span> • DEATHS:
+        <span id="deaths">0</span> • RECOVERED: <span id="recovered">0</span>
+      </div>
+      <div style="margin-top: 5px;">
+        <a id="info-blink" rel="noopener noreferrer" data-toggle="modal" data-target="#exampleModal">
+          CLICK ME PLEASE!
+          </a>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title font-weight-bold" id="exampleModalLabel">CORONA MAP</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              This website was developed by <a href="https://azlaan4.github.io/" target="_blank">Muhammad Azlaan Zubair</a>, 
+              student at Ilma University.
+            </p>
+            <p>
+              The data is from <a href="https://github.com/novelcovid/api" target="_blank">Novel Covid</a> real-time updates, 
+              utilizing reliable sources from around the world. An API for Current cases and more stuff about 
+              COVID-19 or the Novel Coronavirus Strain.
+            </p>
+            <hr>
+            <h6 class="mb-0 font-weight-bold">
+              Built with
+            </h6>
+            <ul class="list-group border-0 mt-0">
+              <li class="list-group-item border-0 pb-1 pt-1">
+                <a href="https://github.com/vasturiano/globe.gl" target="_blank">Globe GL</a>
+                - UI component for Globe Data Visualization
+              </li>
+              <li class="list-group-item border-0 pb-1 pt-1">
+                <a href="https://d3js.org/" target="_blank">D3</a> 
+                - D3 helps you bring data to life 
+              </li>
+              <li class="list-group-item border-0 pb-1 pt-1">
+                <a href="https://inorganik.github.io/countUp.js/" target="_blank">Count Up</a>
+                - Animations that display numerical data.
+              </li>
+              <li class="list-group-item border-0 pb-1 pt-1">
+                <a href="https://github.com/NovelCOVID/API" target="_blank">Novel COVID</a>
+                - API for information about COVID-19
+              </li>
+            </ul>
+            <h6 class="mt-2 mb-0 font-weight-bold">
+              Acknowledgments
+            </h6>
+            <ul class="list-group border-0 mt-0">
+              <li class="list-group-item border-0 pb-1 pt-1">
+                - Inspired by
+                <a href="https://covidvisualizer.com" target="_blank">https://covidvisualizer.com</a>
+              </li>
+              <li class="list-group-item border-0 pb-1 pt-1">
+                - Hat tip to anyone whos module was used
+              </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <p class="float-left">
+              If you like it please share:
+              <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                <a class="a2a_dd d-none" href="https://www.addtoany.com/share"></a>
+                <a class="a2a_button_facebook"></a>
+                <a class="a2a_button_twitter"></a>
+                <a class="a2a_button_pinterest"></a>
+                <a class="a2a_button_whatsapp"></a>
+              </div>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    <!-- AddToAny BEGIN -->
+    <script>
+      var a2a_config = a2a_config || {};
+      a2a_config.onclick = 1;
+      a2a_config.num_services = 4;
+    </script>
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+    <!-- AddToAny END -->
+
+  </body>
+</html>
