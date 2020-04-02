@@ -1,6 +1,7 @@
 {
   "name": "covid3d",
   "version": "1.0.0",
+  "homepage": "https://uok-dms.com/corona-map-3d/",
   "description": "",
   "main": "index.js",
   "scripts": {
