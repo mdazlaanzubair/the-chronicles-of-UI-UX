@@ -116,7 +116,7 @@ const SideBar = () => {
                 <span className="min-w-5 min-h-5 max-w-5 max-h-5">
                   {nav?.icon()}
                 </span>
-                <p>{nav?.title}</p>
+                <p className="invisible lg:visible">{nav?.title}</p>
               </Link>
             );
           })}

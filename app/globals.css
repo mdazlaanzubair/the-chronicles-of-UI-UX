@@ -10,7 +10,7 @@ body {
 
 @layer components {
   .nav-link {
-    @apply cursor-pointer relative flex items-center gap-3 font-semibold text-primary text-base rounded-lg px-3 py-3 transition-all ease-in-out duration-500;
+    @apply cursor-pointer relative flex items-center gap-3 font-semibold text-base rounded-lg px-3 py-3 transition-all ease-in-out duration-500;
   }
   .nav-link:hover {
     @apply bg-primary/10 text-secondary;
