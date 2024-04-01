@@ -2,32 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
+html,
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  padding: 0;
+  margin: 0;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .nav-link {
+    @apply cursor-pointer relative flex items-center gap-3 font-semibold text-primary text-base rounded-lg px-3 py-3 transition-all ease-in-out duration-500;
   }
+  .nav-link:hover {
+    @apply bg-primary/10 text-secondary;
+  }
+
+  .nav-link:active,
+  .nav-link:focus {
+    @apply bg-primary/20 text-secondary;
+  }
+
+  .nav-link-active {
+    @apply bg-primary/20 text-secondary;
+  }
+
+  .view-port-container {
+    @apply relative flex flex-col items-center justify-between w-full bg-base-100 h-full max-h-full rounded-3xl overflow-scroll;
+  }
+
+  .header-section {
+    @apply flex items-center justify-between border border-primary/0 border-b-primary/15 lg:border-b-primary/0 rounded-t-3xl w-full p-6 text-center text-secondary;
+  }
+
+  .footer-section {
+    @apply flex items-center justify-between border border-primary/0 border-t-primary/15 rounded-b-3xl w-full p-6 text-center text-secondary;
+  }
+}
+
+/* Select the scrollbar thumb */
+::-webkit-scrollbar {
+  /* Change the size of the thumb */
+  height: 0px;
+  width: 0px;
 }
