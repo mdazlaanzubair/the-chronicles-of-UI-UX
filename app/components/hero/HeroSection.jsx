@@ -1,44 +1,54 @@
 import React from "react";
 import IconSlider from "../generic/IconSlider";
-import { toolKit } from "@/app/utils/iconExporter";
+import { techLogosArrayComplete, toolKit } from "@/app/utils/iconExporter";
+import Figure from "../generic/Figure";
+import SpotLight from "../generic/SpotLight";
 
 const HeroSection = () => {
   return (
-    <div className="flex items-center justify-between gap-5">
-      <div className="w-full lg:w-1/2">
-        <div className="inline-flex items-center gap-1 bg-base-300 p-3 rounded-lg cursor-pointer mb-14">
-          <div className="inline-block rounded-full  animate-pulse">
-            <span className="block bg-accent w-2 h-2 rounded-full m-1" />
+    <div className="relative w-full flex flex-col items-center justify-between gap-5 my-10 lg:my-16">
+      <SpotLight
+        top="-top-[150%]"
+        left="-left-[150%]"
+        opacity="0.3"
+        spread="1%"
+      />
+      <div className="flex flex-row items-center justify-between gap-5">
+        <div className="w-2/3">
+          <div className="inline-flex items-center gap-1 bg-base-300 p-1 rounded-sm cursor-pointer mb-5">
+            <div className="inline-block rounded-full  animate-pulse">
+              <span className="block bg-accent w-1 h-1 rounded-full m-1" />
+            </div>
+            <span className="text-accent font-bold text-[8px] uppercase mr-3 mt-px">
+              Open to work
+            </span>
           </div>
-          <span className="text-accent font-bold text-xs uppercase mr-3">
-            Open to work
-          </span>
+          <h1 className="font-cabin text-4xl leading-snug text-secondary font-extrabold mb-8">
+            Hello! Let&apos;s peek into my digital corner!
+          </h1>
+          <p className="text-sm leading-relaxed tracking-normal font-semibold mb-3">
+            I&apos;m Azlaan, a full-stack developer based in Karachi, constantly
+            pushing the boundaries of web development. I offer User-Centric
+            Solutions with Pixel-Powered Innovation.
+          </p>
+          <p className="text-sm leading-relaxed tracking-normal font-semibold">
+            My interest in AI allows me to craft innovative solutions that{" "}
+            <span className="">leverage AI</span> to enhance{" "}
+            <span className="text-secondary">UX</span> &amp;{" "}
+            <span className="text-secondary">functionality</span>.
+          </p>
+          <br />
         </div>
-        <h1 className="text-5xl leading-snug text-secondary font-semibold mb-8">
-          Hello! Let&apos;s peek into my digital corner!
-        </h1>
-        <p className="text-base leading-relaxed tracking-wide font-semibold mb-3">
-          I&apos;m Azlaan, a{" "}
-          <span className="text-secondary">full-stack developer</span> based in{" "}
-          <span className="text-secondary">Karachi</span>, constantly pushing
-          the boundaries of web development. I offer{" "}
-          <span className="text-secondary">User-Centric Solutions</span> with{" "}
-          <span className="text-secondary">Pixel-Powered Innovation</span>.
-        </p>
-        <p className="text-base leading-relaxed tracking-wide font-semibold mb-8">
-          My interest in AI allows me to craft{" "}
-          <span className="text-secondary">innovative solutions</span> that{" "}
-          <span className="text-secondary">leverage AI</span> to enhance{" "}
-          <span className="text-secondary">UX</span> &amp;{" "}
-          <span className="text-secondary">functionality</span>.
-        </p>
-        <h2 className="text-base leading-relaxed tracking-wide font-semibold mb-5">
+        <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
+          <Figure className="" />
+        </div>
+      </div>
+      <div className="flex flex-col w-full">
+        <h2 className="text-base text-center leading-relaxed tracking-wide font-semibold mb-5">
           My toolkit for web crafting
         </h2>
-        <br />
-        <IconSlider icons={toolKit} />
+        <IconSlider icons={techLogosArrayComplete} />
       </div>
-      <div className="hidden lg:flex">asd</div>
     </div>
   );
 };

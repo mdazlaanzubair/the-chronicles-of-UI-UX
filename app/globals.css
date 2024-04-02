@@ -44,27 +44,3 @@ body {
   height: 0px;
   width: 0px;
 }
-
-.spotlight::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-image: radial-gradient(
-    circle at center,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0) 80%
-  ); /* Adjust values for spotlight */
-}
-
-.spotlight::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2; /* Ensures glow appears above the spotlight */
-  background-image: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0) 70%
-  ); /* Adjust values for glow */
-}
