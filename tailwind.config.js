@@ -8,6 +8,11 @@ module.exports = {
 
   theme: {
     extend: {
+      fontFamily: {
+        cabin: ["var(--cabin)"],
+        inter: ["var(--inter)"],
+      },
+
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -15,7 +20,7 @@ module.exports = {
       },
 
       colors: {
-        primary: "#858890",
+        primary: "#a7aab4",
         secondary: "#ffffff",
         accent: "#12a669",
         neutral: "#110c0d",
