@@ -1,10 +1,18 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import SideBar from "./components/navigation/SideBar";
 import Header from "./components/generic/Header";
 import Footer from "./components/generic/Footer";
+import MobileNavBar from "./components/navigation/MobileNavBar";
+import GeneralProvider from "./context/GeneralContext";
+import { Cabin, Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const cabin = Cabin({
+  subsets: ["latin"],
+  variable: "--cabin",
+  weight: "700",
+});
+
+const inter = Inter({ subsets: ["latin"], variable: "--inter" });
 
 export const metadata = {
   title: "Create Next App",
@@ -14,15 +22,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="text-primary bg-base-300">
-      <body className={inter.className}>
-        <main className="flex items-center bg-base-300 w-full h-[100vh] gap-5 px-7 py-10 overflow-hidden">
-          <SideBar />
-          <div className="view-port-container">
+      <body className={`${cabin.variable} ${inter.variable}`}>
+        <GeneralProvider>
+          <main className="font-inter flex flex-col lg:flex-row items-center bg-base-300 w-full h-[100vh] gap-5 px-7 py-10 overflow-hidden">
+            <SideBar />
             <Header />
-            <div className="w-full h-auto p-6">{children}</div>
-            <Footer />
-          </div>
-        </main>
+            <div className="view-port-container w-full lg:w-10/12">
+              <div className="relative w-full h-auto px-6 lg:px-32">
+                <MobileNavBar />
+                {children}
+              </div>
+              <Footer />
+            </div>
+          </main>
+        </GeneralProvider>
       </body>
     </html>
   );
