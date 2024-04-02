@@ -1,9 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useContext } from "react";
 import SpotlightLink from "./SpotlightLink";
 import Link from "next/link";
+import { GeneralContext } from "@/app/context/GeneralContext";
 
 // NAVIGATION LIST
 const navList = [
@@ -85,25 +86,18 @@ const navList = [
   },
 ];
 
-const SideBar = () => {
+const MobileNavBar = () => {
   const pathName = usePathname();
+  const { isMenuOpen } = useContext(GeneralContext);
 
   return (
-    <div className="hidden relative w-2/12 lg:flex flex-col items-start h-full max-h-full p-3 rounded-xl">
-      <Link href="/about" className="nav-link group gap-4 hover:bg-primary/10">
-        <img
-          className="w-10 rounded-full"
-          src="https://framerusercontent.com/images/t4kKb01sNaira2a5mAbB9b1PBIw.jpg"
-        />
-        <div className="profile">
-          <h1 className="font-semibold text-secondary text-sm leading-relaxed">
-            Azlaan
-          </h1>
-          <p className="font-medium text-primary group-hover:text-accent text-xs">
-            Web Engineer
-          </p>
-        </div>
-      </Link>
+    <div
+      className={`lg:hidden absolute top-0 left-0 w-2/4 rounded-r-lg bg-base-300 flex flex-col items-start h-full max-h-full p-3 ${
+        isMenuOpen
+          ? "translate-x-0 opacity-100 visible"
+          : "-translate-x-full opacity-0 invisible"
+      } transition-all ease-in-out duration-300`}
+    >
       <div className="flex flex-col w-full my-10">
         <div className="flex flex-col gap-1 w-full">
           <h2 className="text-[9px] font-semibold text-secondary px-3 mb-2">
@@ -160,4 +154,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default MobileNavBar;

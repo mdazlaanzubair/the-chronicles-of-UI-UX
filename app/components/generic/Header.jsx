@@ -1,11 +1,33 @@
-import React from "react";
+"use client";
+import { GeneralContext } from "@/app/context/GeneralContext";
+import React, { useContext } from "react";
+import Button from "./Button";
+import Link from "next/link";
 
 const Header = () => {
+  const { toggleMenu } = useContext(GeneralContext);
+
   return (
     <div className="header-section">
-      <button className="shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)] px-8 py-2 bg-[#fff] text-[#696969] rounded-md font-light transition duration-200 ease-linear">
-        Next White
-      </button>
+      <Link
+        href="/about"
+        className="nav-link w-auto text-start group gap-4 hover:bg-primary/10"
+      >
+        <img
+          className="w-10 rounded-full"
+          src="https://framerusercontent.com/images/t4kKb01sNaira2a5mAbB9b1PBIw.jpg"
+        />
+        <div className="profile">
+          <h1 className="font-semibold text-secondary text-sm leading-relaxed">
+            Azlaan
+          </h1>
+          <p className="font-medium text-primary group-hover:text-accent text-xs whitespace-nowrap">
+            Web Engineer
+          </p>
+        </div>
+      </Link>
+
+      <Button label="Menu" onClick={toggleMenu} />
     </div>
   );
 };
