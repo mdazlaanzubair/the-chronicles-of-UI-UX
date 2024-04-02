@@ -92,13 +92,13 @@ const MobileNavBar = () => {
 
   return (
     <div
-      className={`lg:hidden absolute top-0 left-0 w-2/4 rounded-r-lg bg-base-300 flex flex-col items-start h-full max-h-full p-3 ${
+      className={`lg:hidden absolute top-0 left-0 w-full rounded-r-lg bg-base-300 bg-opacity-95 z-50 flex flex-col items-start h-full max-h-full p-3 ${
         isMenuOpen
           ? "translate-x-0 opacity-100 visible"
           : "-translate-x-full opacity-0 invisible"
       } transition-all ease-in-out duration-300`}
     >
-      <div className="flex flex-col w-full my-10">
+      <div className="flex flex-col w-1/4 my-10">
         <div className="flex flex-col gap-1 w-full">
           <h2 className="text-[9px] font-semibold text-secondary px-3 mb-2">
             NAVIGATION
