@@ -21,6 +21,7 @@ const SpotlightLink = ({ href, title, icon, isActive }) => {
       className={`nav-link group gap-4 ${isActive && "nav-link-active"}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setPosition({ x: 0, y: 0 })}
+      scroll={true}
     >
       <div
         className={`absolute left-0 right-0 top-0 bottom-0 rounded-lg ${

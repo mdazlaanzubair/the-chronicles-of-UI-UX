@@ -10,7 +10,7 @@ import { GeneralContext } from "@/app/context/GeneralContext";
 const navList = [
   {
     title: "Home",
-    url: "/",
+    url: "#hero-section",
     icon: () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ const navList = [
   },
   {
     title: "Work",
-    url: "/work",
+    url: "#work-section",
     icon: () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@ const navList = [
   },
   {
     title: "Side Projects",
-    url: "/projects",
+    url: "#project-section",
     icon: () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ const navList = [
   },
   {
     title: "Feeds",
-    url: "/feeds",
+    url: "#contact-section",
     icon: () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
