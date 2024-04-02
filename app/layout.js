@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
           <SideBar />
           <div className="view-port-container">
             <Header />
-            <div className="w-full h-full p-6">{children}</div>
+            <div className="w-full h-auto p-6">{children}</div>
             <Footer />
           </div>
         </main>
