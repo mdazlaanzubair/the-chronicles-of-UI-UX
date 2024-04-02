@@ -3,18 +3,12 @@ import IconSlider from "../generic/IconSlider";
 import { techLogosArrayComplete } from "@/app/utils/iconExporter";
 import Figure from "../generic/Figure";
 
-const HeroSection = () => {
+const WorkSection = () => {
   return (
     <section
-      id="hero-section"
+      id="work-section"
       className="relative w-full flex flex-col items-center justify-between gap-5 my-10 lg:my-16"
     >
-      <div
-        className="absolute hidden lg:flex -top-[150%] -left-[150%] bottom-0 right-0 z-0"
-        style={{
-          background: `radial-gradient(circle at 50% 50%, rgb(133 136 144 / 0.3) 1%, transparent, transparent )`,
-        }}
-      />
       <div className="flex flex-row items-center justify-between gap-5 z-10">
         <div className="w-2/3">
           <div className="inline-flex items-center gap-3 bg-base-300/80 px-3 py-2 rounded-lg cursor-pointer mb-5">
@@ -48,4 +42,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default WorkSection;

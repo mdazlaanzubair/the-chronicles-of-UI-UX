@@ -22,11 +22,11 @@ body {
   }
 
   .nav-link-active {
-    @apply bg-primary/5 text-secondary;
+    @apply bg-primary/35 text-accent;
   }
 
   .view-port-container {
-    @apply relative flex flex-col gap-5 items-center justify-between w-full bg-base-100 h-full max-h-full rounded-lg overflow-scroll;
+    @apply relative flex flex-col gap-5 items-center justify-between w-full bg-base-300 h-full max-h-full rounded-lg overflow-scroll;
   }
 
   .header-section {

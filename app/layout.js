@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
           <main className="font-inter flex flex-col lg:flex-row items-center bg-base-300 w-full h-[100vh] gap-5 px-7 py-10 overflow-hidden">
             <SideBar />
             <Header />
-            <div className="view-port-container w-full lg:w-10/12">
+            <div className="view-port-container w-full lg:w-10/12 bg-base-100">
               <div className="relative w-full h-auto px-6 lg:px-32">
                 <MobileNavBar />
                 {children}
