@@ -18,7 +18,7 @@ const SpotlightLink = ({ href, title, icon, isActive }) => {
   return (
     <Link
       href={href}
-      className={`nav-link group ${isActive && "nav-link-active"}`}
+      className={`nav-link group gap-4 ${isActive && "nav-link-active"}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setPosition({ x: 0, y: 0 })}
     >
@@ -30,7 +30,7 @@ const SpotlightLink = ({ href, title, icon, isActive }) => {
           background: `radial-gradient(circle at ${position.x}px ${position.y}px, rgb(133 136 144 / 0.09) 1%, transparent, transparent )`,
         }}
       />
-      <span className="min-w-5 min-h-5 max-w-5 max-h-5">{icon}</span>
+      <span className="min-w-4 min-h-4 max-w-4 max-h-4">{icon}</span>
       <p>{title}</p>
     </Link>
   );

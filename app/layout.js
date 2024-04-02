@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="text-primary bg-base-300">
       <body className={inter.className}>
-        <main className="flex items-center bg-base-300 w-full h-[100vh] gap-5 p-10 overflow-hidden">
+        <main className="flex items-center bg-base-300 w-full h-[100vh] gap-5 px-7 py-10 overflow-hidden">
           <SideBar />
           <div className="view-port-container">
             <Header />

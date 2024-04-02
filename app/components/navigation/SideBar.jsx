@@ -89,22 +89,24 @@ const SideBar = () => {
   const pathName = usePathname();
 
   return (
-    <div className="relative w-2/12 flex flex-col items-start gap-14 h-full max-h-full rounded-xl px-3 py-5">
-      <Link href="/" className="nav-link group hover:bg-primary/10 ">
+    <div className="relative w-2/12 flex flex-col items-start h-full max-h-full p-3 rounded-xl">
+      <Link href="/about" className="nav-link group gap-4 hover:bg-primary/10">
         <img
-          className="w-11 rounded-full"
-          src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+          className="w-10 rounded-full"
+          src="https://framerusercontent.com/images/t4kKb01sNaira2a5mAbB9b1PBIw.jpg"
         />
         <div className="profile">
-          <h1 className="font-semibold text-secondary text-base">Azlaan</h1>
-          <p className="font-medium text-primary group-hover:text-accent text-xs uppercase">
+          <h1 className="font-semibold text-secondary text-sm leading-relaxed">
+            Azlaan
+          </h1>
+          <p className="font-medium text-primary group-hover:text-accent text-xs">
             Web Engineer
           </p>
         </div>
       </Link>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full my-10">
         <div className="flex flex-col gap-1 w-full">
-          <h2 className="text-xs font-semibold text-secondary mx-3 mb-3">
+          <h2 className="text-[9px] font-semibold text-secondary px-3 mb-2">
             NAVIGATION
           </h2>
           {navList?.map((nav, index) => {
