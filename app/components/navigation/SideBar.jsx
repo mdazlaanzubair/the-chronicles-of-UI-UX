@@ -46,7 +46,7 @@ const navList = [
     ),
   },
   {
-    title: "Personal Projects",
+    title: "Side Projects",
     url: "/projects",
     icon: () => (
       <svg
