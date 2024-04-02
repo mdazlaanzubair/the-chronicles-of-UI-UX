@@ -1,25 +1,22 @@
 import React from "react";
 import IconSlider from "../generic/IconSlider";
-import { techLogosArrayComplete, toolKit } from "@/app/utils/iconExporter";
+import { techLogosArrayComplete } from "@/app/utils/iconExporter";
 import Figure from "../generic/Figure";
-import SpotLight from "../generic/SpotLight";
 
 const HeroSection = () => {
   return (
     <div className="relative w-full flex flex-col items-center justify-between gap-5 my-10 lg:my-16">
-      <SpotLight
-        top="-top-[150%]"
-        left="-left-[150%]"
-        opacity="0.3"
-        spread="1%"
+      <div
+        className="absolute hidden lg:flex -top-[150%] -left-[150%] bottom-0 right-0 z-0"
+        style={{
+          background: `radial-gradient(circle at 50% 50%, rgb(133 136 144 / 0.3) 1%, transparent, transparent )`,
+        }}
       />
-      <div className="flex flex-row items-center justify-between gap-5">
+      <div className="flex flex-row items-center justify-between gap-5 z-10">
         <div className="w-2/3">
-          <div className="inline-flex items-center gap-1 bg-base-300 p-1 rounded-sm cursor-pointer mb-5">
-            <div className="inline-block rounded-full  animate-pulse">
-              <span className="block bg-accent w-1 h-1 rounded-full m-1" />
-            </div>
-            <span className="text-accent font-bold text-[8px] uppercase mr-3 mt-px">
+          <div className="inline-flex items-center gap-3 bg-base-300/80 px-3 py-2 rounded-lg cursor-pointer mb-5">
+            <span className="inline-block bg-accent w-2 h-2 rounded-full shadow-2xl shadow-accent animate-pulse" />
+            <span className="text-accent font-bold text-xs uppercase mr-3 mt-px">
               Open to work
             </span>
           </div>
@@ -43,12 +40,7 @@ const HeroSection = () => {
           <Figure className="" />
         </div>
       </div>
-      <div className="flex flex-col w-full">
-        <h2 className="text-base text-center leading-relaxed tracking-wide font-semibold mb-5">
-          My toolkit for web crafting
-        </h2>
-        <IconSlider icons={techLogosArrayComplete} />
-      </div>
+      <IconSlider icons={techLogosArrayComplete} />
     </div>
   );
 };
