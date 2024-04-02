@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import SpotlightLink from "./SpotlightLink";
+import Link from "next/link";
 
 // NAVIGATION LIST
 const navList = [
@@ -89,17 +90,18 @@ const SideBar = () => {
 
   return (
     <div className="relative w-2/12 flex flex-col items-start gap-14 h-full max-h-full rounded-xl px-3 py-5">
-      <div className="cursor-pointer flex items-center hover:bg-primary/20 rounded-lg w-full transition-all ease-in-out duration-500">
-        <div className="avatar online m-3">
-          <div className="w-10 rounded-full">
-            <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-          </div>
-        </div>
+      <Link href="/" className="nav-link group hover:bg-primary/10 ">
+        <img
+          className="w-11 rounded-full"
+          src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+        />
         <div className="profile">
           <h1 className="font-semibold text-secondary text-base">Azlaan</h1>
-          <p className="font-medium text-primary text-sm">Web Engineer</p>
+          <p className="font-medium text-primary group-hover:text-accent text-xs uppercase">
+            Web Engineer
+          </p>
         </div>
-      </div>
+      </Link>
       <div className="flex flex-col w-full">
         <div className="flex flex-col gap-1 w-full">
           <h2 className="text-xs font-semibold text-secondary mx-3 mb-3">
@@ -108,16 +110,13 @@ const SideBar = () => {
           {navList?.map((nav, index) => {
             const isActive = pathName === nav?.url;
             return (
-              <Link
+              <SpotlightLink
                 key={index}
                 href={nav?.url}
-                className={`nav-link ${isActive && "nav-link-active"}`}
-              >
-                <span className="min-w-5 min-h-5 max-w-5 max-h-5">
-                  {nav?.icon()}
-                </span>
-                <p className="invisible lg:visible">{nav?.title}</p>
-              </Link>
+                icon={nav?.icon()}
+                title={nav?.title}
+                isActive={isActive}
+              />
             );
           })}
         </div>

@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SideBar from "./components/navigation/SideBar";
+import Header from "./components/generic/Header";
+import Footer from "./components/generic/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +18,9 @@ export default function RootLayout({ children }) {
         <main className="flex items-center bg-base-300 w-full h-[100vh] gap-5 p-10 overflow-hidden">
           <SideBar />
           <div className="view-port-container">
-            <div className="header-section">Header</div>
+            <Header />
             <div className="w-full h-full p-6">{children}</div>
-            <div className="footer-section">Footer</div>
+            <Footer />
           </div>
         </main>
       </body>
