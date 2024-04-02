@@ -13,13 +13,17 @@ const IconSlider = ({ icons }) => {
       }}
     >
       {icons.map((logo, index) => (
-        <img
+        <div
           key={index}
-          className="w-10 inline-flex mx-5 saturate-200 brightness-50 hover:brightness-100"
-          src={logo?.src}
-          alt={logo?.title + "-logo"}
+          className="group w-16 h-16 bg-primary/5 p-3 mx-5 rounded-lg cursor-pointer"
           title={logo?.title}
-        />
+        >
+          <img
+            className="saturate-200 brightness-100 w-full h-full grayscale group-hover:grayscale-0"
+            src={logo?.src}
+            alt={logo?.title + "-logo"}
+          />
+        </div>
       ))}
     </Marquee>
   );
