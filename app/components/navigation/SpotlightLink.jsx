@@ -1,9 +1,12 @@
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
-const SpotlightLink = ({ href, title, icon, isActive }) => {
+const SpotlightLink = ({ href, title, icon }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-
+  const activeSection = usePathname();
   const handleMouseMove = (e) => {
     e.stopPropagation();
 
@@ -18,14 +21,15 @@ const SpotlightLink = ({ href, title, icon, isActive }) => {
   return (
     <Link
       href={href}
-      className={`nav-link group gap-4 ${isActive && "nav-link-active"}`}
+      className={`nav-link group gap-4 ${
+        href == activeSection && "nav-link-active"
+      }`}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setPosition({ x: 0, y: 0 })}
-      scroll={true}
     >
       <div
         className={`absolute left-0 right-0 top-0 bottom-0 rounded-lg ${
-          isActive && "opacity-0 group-hover:opacity-100"
+          href === activeSection && "opacity-0 group-hover:opacity-100"
         } transition-all ease-in-out duration-300`}
         style={{
           background: `radial-gradient(circle at ${position.x}px ${position.y}px, rgb(133 136 144 / 0.09) 1%, transparent, transparent )`,

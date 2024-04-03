@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero-section"
-      className="relative w-full flex flex-col items-center justify-between gap-5 my-10 lg:my-16"
+      className="relative w-full flex flex-col items-center justify-between py-10 lg:py-16"
     >
       <div
         className="absolute hidden lg:flex -top-[150%] -left-[150%] bottom-0 right-0 z-0"
@@ -28,19 +28,20 @@ const HeroSection = () => {
           </h1>
           <p className="text-sm leading-relaxed tracking-normal font-semibold mb-3">
             I&apos;m Azlaan, a full-stack developer based in Karachi, constantly
-            pushing the boundaries of web development. I offer User-Centric
-            Solutions with Pixel-Powered Innovation.
+            pushing the boundaries of web development. I offer{" "}
+            <span className="text-secondary">User-Centric Solutions</span> with{" "}
+            <span className="text-secondary">Pixel-Powered Innovation</span>.
           </p>
           <p className="text-sm leading-relaxed tracking-normal font-semibold">
             My interest in AI allows me to craft innovative solutions that{" "}
-            <span className="">leverage AI</span> to enhance{" "}
+            <span className="text-secondary">leverage AI</span> to enhance{" "}
             <span className="text-secondary">UX</span> &amp;{" "}
             <span className="text-secondary">functionality</span>.
           </p>
           <br />
         </div>
         <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
-          <Figure className="" />
+          <Figure />
         </div>
       </div>
       <IconSlider icons={techLogosArrayComplete} />

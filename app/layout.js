@@ -2,7 +2,6 @@ import "./globals.css";
 import SideBar from "./components/navigation/SideBar";
 import Header from "./components/generic/Header";
 import Footer from "./components/generic/Footer";
-import MobileNavBar from "./components/navigation/MobileNavBar";
 import GeneralProvider from "./context/GeneralContext";
 import { Cabin, Inter } from "next/font/google";
 
@@ -29,7 +28,6 @@ export default function RootLayout({ children }) {
             <Header />
             <div className="view-port-container w-full lg:w-10/12 bg-base-100 scroll-smooth">
               <div className="relative w-full h-auto px-6 lg:px-32">
-                <MobileNavBar />
                 {children}
               </div>
               <Footer />

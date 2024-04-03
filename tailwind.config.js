@@ -20,12 +20,12 @@ module.exports = {
       },
 
       colors: {
-        primary: "#6d6d6d",
-        secondary: "#cacaca",
+        primary: "#a7aab4",
+        secondary: "#f5f5f5",
         accent: "#0DE20E",
         neutral: "#110c0d",
-        "base-100": "#0d0d0d",
-        "base-300": "#040504",
+        "base-100": "#1a1b1e",
+        "base-300": "#121314",
         info: "#00c6ff",
         success: "#00d275",
         warning: "#ea580c",

@@ -1,43 +1,81 @@
+"use client";
+
 import React from "react";
-import IconSlider from "../generic/IconSlider";
-import { techLogosArrayComplete } from "@/app/utils/iconExporter";
-import Figure from "../generic/Figure";
+import Button from "../generic/Button";
+import Icon from "../generic/Icon";
+import { useRouter } from "next/navigation";
+import ImageCard from "../generic/ImageCard";
+import { workList } from "./work-list";
 
 const WorkSection = () => {
+  const router = useRouter();
   return (
     <section
       id="work-section"
-      className="relative w-full flex flex-col items-center justify-between gap-5 my-10 lg:my-16"
+      className="relative w-full flex flex-col items-center justify-between gap-5 py-10 lg:py-16"
     >
-      <div className="flex flex-row items-center justify-between gap-5 z-10">
-        <div className="w-2/3">
-          <div className="inline-flex items-center gap-3 bg-base-300/80 px-3 py-2 rounded-lg cursor-pointer mb-5">
-            <span className="inline-block bg-accent w-2 h-2 rounded-full shadow-2xl shadow-accent animate-pulse" />
-            <span className="text-accent font-bold text-xs uppercase mr-3 mt-px">
-              Open to work
-            </span>
+      <div className="flex w-full items-center justify-between gap-5 mb-5">
+        <div className="flex items-center gap-5">
+          <Icon className="hidden lg:flex" size="w-10 h-10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
+              />
+            </svg>
+          </Icon>
+          <div
+            className="flex flex-col gap-1 cursor-pointer"
+            onClick={() => router.push("/work")}
+          >
+            <h1 className="font-cabin text-xl leading-snug text-secondary font-extrabold">
+              Work
+            </h1>
+            <p className="text-sm leading-relaxed tracking-normal font-semibold">
+              Let&apos;s sneak a peek at my work.
+            </p>
           </div>
-          <h1 className="font-cabin text-4xl leading-snug text-secondary font-extrabold mb-8">
-            Hello! Let&apos;s peek into my digital corner!
-          </h1>
-          <p className="text-sm leading-relaxed tracking-normal font-semibold mb-3">
-            I&apos;m Azlaan, a full-stack developer based in Karachi, constantly
-            pushing the boundaries of web development. I offer User-Centric
-            Solutions with Pixel-Powered Innovation.
-          </p>
-          <p className="text-sm leading-relaxed tracking-normal font-semibold">
-            My interest in AI allows me to craft innovative solutions that{" "}
-            <span className="">leverage AI</span> to enhance{" "}
-            <span className="text-secondary">UX</span> &amp;{" "}
-            <span className="text-secondary">functionality</span>.
-          </p>
-          <br />
         </div>
-        <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
-          <Figure className="" />
-        </div>
+
+        <Button
+          className="hidden lg:flex"
+          label="Explore more"
+          icon={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-4 h-4 -translate-x-px group-hover:translate-x-0 mb-[.18rem] transition-all ease-in-out duration-300"
+            >
+              <path
+                fillRule="evenodd"
+                d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          }
+          onClick={() => router.push("/work")}
+        />
       </div>
-      <IconSlider icons={techLogosArrayComplete} />
+
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {workList?.map((work, index) => {
+          if (work?.isFeatured) {
+            return <ImageCard key={index} data={work} />;
+          }
+        })}
+      </div>
+
+      <div className="flex lg:hidden w-full items-center justify-center gap-5 mt-5">
+        <Button label="Explore more" onClick={() => router.push("/work")} />
+      </div>
     </section>
   );
 };
