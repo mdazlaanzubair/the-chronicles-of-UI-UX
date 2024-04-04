@@ -40,7 +40,7 @@ const IconSlider = ({ icons }) => {
             <div
               className={`absolute left-0 right-0 top-0 bottom-0 rounded-lg opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300`}
               style={{
-                background: `radial-gradient(circle at 50% 50%, rgb(255 255 255 / 0.1) 10%, rgb(255 255 255 / 0.1) 40%, transparent)`,
+                background: `radial-gradient(circle at 50% 50%, rgb(255 255 255 / 0.1) 20%, rgb(255 255 255 / 0.1) 20%, transparent)`,
               }}
             />
             <img

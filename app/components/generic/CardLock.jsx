@@ -2,7 +2,7 @@ import React from "react";
 
 const CardLock = () => {
   return (
-    <div className="absolute flex flex-col items-center justify-center z-10 top-0 bottom-0 left-0 right-0 bg-black/85 text-primary group-hover:text-secondary">
+    <div className="absolute flex flex-col items-center rounded-md justify-center z-10 top-0 bottom-0 left-0 right-0 bg-black/85 text-primary group-hover:text-secondary">
       <div className="relative p-10 bg-base-300 rounded-full">
         <div
           className={`absolute left-0 right-0 top-0 bottom-0 rounded-full opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300`}

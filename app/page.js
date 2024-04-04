@@ -5,7 +5,7 @@ import WorkSection from "./components/work/WorkSection";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full mx-auto">
+    <div className="flex flex-col w-full mx-auto px-6 lg:px-32">
       <HeroSection />
       <WorkSection />
       <ProjectSection />

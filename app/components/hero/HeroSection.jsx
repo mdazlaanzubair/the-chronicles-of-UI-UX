@@ -2,6 +2,7 @@ import React from "react";
 import IconSlider from "../generic/IconSlider";
 import { techLogosArrayComplete } from "@/app/utils/iconExporter";
 import Figure from "../generic/Figure";
+import heroImg from "@/public/other/hero-img.jpg";
 
 const HeroSection = () => {
   return (
@@ -10,12 +11,12 @@ const HeroSection = () => {
       className="relative w-full flex flex-col items-center justify-between py-10 lg:py-16"
     >
       <div
-        className="absolute hidden lg:flex -top-[150%] -left-[150%] bottom-0 right-0 z-0"
+        className="absolute hidden lg:flex -top-[150%] -left-[150%] bottom-0 right-0"
         style={{
           background: `radial-gradient(circle at 50% 50%, rgb(133 136 144 / 0.3) 1%, transparent, transparent )`,
         }}
       />
-      <div className="flex flex-row items-center justify-between gap-5 z-10">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-5 z-10">
         <div className="w-full md:w-2/3">
           <div className="inline-flex items-center gap-3 bg-base-300/80 px-3 py-2 rounded-lg cursor-pointer mb-5">
             <span className="inline-block bg-accent w-2 h-2 rounded-full shadow-2xl shadow-accent animate-pulse" />
@@ -41,7 +42,12 @@ const HeroSection = () => {
           <br />
         </div>
         <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
-          <Figure />
+          <Figure
+            src={heroImg.src}
+            size="w-[400px] h-[300px]"
+            caption="Hello World"
+            tag="_<"
+          />
         </div>
       </div>
       <IconSlider icons={techLogosArrayComplete} />

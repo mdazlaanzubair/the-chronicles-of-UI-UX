@@ -14,7 +14,7 @@ const Figure = ({
           className={`${size} border border-primary/10 rounded-xl overflow-hidden`}
         >
           <img
-            className="w-full h-full object-center object-cover hover:scale-105 rounded-xl transition-all ease-in-out duration-1000"
+            className="w-full h-full object-center object-cover hover:scale-105 rounded-xl transition-all ease-in-out duration-500"
             src={src}
             alt="profile-pic"
           />
