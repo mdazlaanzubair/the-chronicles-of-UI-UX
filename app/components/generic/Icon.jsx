@@ -20,7 +20,7 @@ const DefaultIcon = () => {
   );
 };
 
-const Icon = ({ className, children, size }) => {
+const Icon = ({ clickHandler, className, children, size }) => {
   const [position, setPosition] = useState({ x: `50%`, y: `50%` });
 
   const handleMouseMove = (e) => {
@@ -37,6 +37,7 @@ const Icon = ({ className, children, size }) => {
   return (
     <span
       className={`${className} relative rounded-xl border-[3px] group border-primary/30 bg-base-100/10 cursor-pointer`}
+      onClick={() => clickHandler && clickHandler()}
     >
       <div
         className={`m-1 mb-[.3rem] ${

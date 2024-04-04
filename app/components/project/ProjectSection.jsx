@@ -16,7 +16,11 @@ const ProjectSection = () => {
     >
       <div className="flex w-full items-center justify-between gap-5 mb-5">
         <div className="flex items-center gap-5">
-          <Icon className="hidden lg:flex" size="w-10 h-10">
+          <Icon
+            className="hidden lg:flex"
+            size="w-10 h-10"
+            clickHandler={() => router.push("/projects")}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
