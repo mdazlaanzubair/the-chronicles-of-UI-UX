@@ -1,43 +1,41 @@
 import React from "react";
-import IconSlider from "../generic/IconSlider";
-import { techLogosArrayComplete } from "@/app/utils/iconExporter";
 import Figure from "../generic/Figure";
+import Button from "../generic/Button";
 
 const ContactSection = () => {
   return (
     <section
       id="contact-section"
-      className="relative w-full flex flex-col items-center justify-between gap-5 my-10 lg:my-16"
+      className="relative w-full flex flex-row-reverse items-center justify-between gap-10 my-10 lg:my-16"
     >
-      <div className="flex flex-row items-center justify-between gap-5 z-10">
-        <div className="w-2/3">
-          <div className="inline-flex items-center gap-3 bg-base-300/80 px-3 py-2 rounded-lg cursor-pointer mb-5">
-            <span className="inline-block bg-accent w-2 h-2 rounded-full shadow-2xl shadow-accent animate-pulse" />
-            <span className="text-accent font-bold text-xs uppercase mr-3 mt-px">
-              Open to work
-            </span>
-          </div>
-          <h1 className="font-cabin text-4xl leading-snug text-secondary font-extrabold mb-8">
-            Hello! Let&apos;s peek into my digital corner!
-          </h1>
-          <p className="text-sm leading-relaxed tracking-normal font-semibold mb-3">
-            I&apos;m Azlaan, a full-stack developer based in Karachi, constantly
-            pushing the boundaries of web development. I offer User-Centric
-            Solutions with Pixel-Powered Innovation.
-          </p>
-          <p className="text-sm leading-relaxed tracking-normal font-semibold">
-            My interest in AI allows me to craft innovative solutions that{" "}
-            <span className="">leverage AI</span> to enhance{" "}
-            <span className="text-secondary">UX</span> &amp;{" "}
-            <span className="text-secondary">functionality</span>.
-          </p>
-          <br />
-        </div>
-        <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
-          <Figure className="" />
+      <div className="w-full md:w-2/3">
+        <h1 className="font-cabin text-4xl leading-snug text-secondary font-extrabold mb-3">
+          Thank you for your time
+        </h1>
+        <h2 className="text-base text-secondary leading-relaxed tracking-normal font-semibold mb-3">
+          Have a question, project idea, or just want to say hello?
+        </h2>
+        <p className="text-sm leading-relaxed tracking-normal font-semibold mb-3">
+          Shoot me an email if you want to connect! You can also connect by
+          scheduling a video call to discuss your gosals and ideas.
+        </p>
+        <div className="flex items-center gap-3">
+          <Button label="Email" />
+          <Button label="Book a call" />
+          <button
+            className={`flex gap-3 whitespace-nowrap font-semibold text-xs text-primary hover:text-secondary py-3 pb-[.6rem] rounded-lg`}
+          >
+            Know more about me
+          </button>
         </div>
       </div>
-      <IconSlider icons={techLogosArrayComplete} />
+      <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
+        <Figure
+          caption="Ilma University"
+          size="w-[350px] h-[250px]"
+          src="https://ilmauniversity.edu.pk/images/main/main.jpg"
+        />
+      </div>
     </section>
   );
 };

@@ -22,7 +22,7 @@ body {
   }
 
   .nav-link-active {
-    @apply bg-primary/20 text-accent;
+    @apply bg-primary/5 text-secondary;
   }
 
   .view-port-container {

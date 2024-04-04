@@ -3,13 +3,16 @@ import React from "react";
 const Figure = ({
   src = "https://framerusercontent.com/images/clwgKeHczjcoKiZCik9FJPKR64.jpg?scale-down-to=2048",
   className,
+  size = "w-[250px] h-[350px]",
   caption = "Profile Picture",
   tag = "Img",
 }) => {
   return (
     <div className={`${className}`}>
       <div className="border border-primary/10 rounded-2xl p-[0.35rem]">
-        <div className="w-[250px] h-[350px] border border-primary/10 rounded-xl overflow-hidden">
+        <div
+          className={`${size} border border-primary/10 rounded-xl overflow-hidden`}
+        >
           <img
             className="w-full h-full object-center object-cover hover:scale-105 rounded-xl transition-all ease-in-out duration-1000"
             src={src}
