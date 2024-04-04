@@ -24,4 +24,25 @@ export const workList = [
     isFeatured: true,
     isLocked: true,
   },
+  {
+    title: "Work Organizing Tool",
+    subTitle: "Project & Task Management Solution",
+    imgSrc: taskVareImg.src,
+    isFeatured: false,
+    isLocked: false,
+  },
+  {
+    title: "Fleet Coordination",
+    subTitle: "Transport and Delivery Infrastructure",
+    imgSrc: loadeImg.src,
+    isFeatured: false,
+    isLocked: false,
+  },
+  {
+    title: "Workforce Hub",
+    subTitle: "Employee Lifecycle Management",
+    imgSrc: talentVareImg.src,
+    isFeatured: false,
+    isLocked: true,
+  },
 ];

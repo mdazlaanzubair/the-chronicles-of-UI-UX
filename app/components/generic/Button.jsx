@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const Button = ({ className, icon, label = "Button", onClick }) => {
+const Button = ({ prefix, suffix, className, label, onClick }) => {
   const [position, setPosition] = useState({ x: `50%`, y: `-150%` });
 
   const handleMouseMove = (e) => {
@@ -18,7 +18,7 @@ const Button = ({ className, icon, label = "Button", onClick }) => {
   return (
     <button
       onClick={() => onClick && onClick()}
-      className={`${className} relative flex gap-3 group items-center justify-center w-auto h-auto whitespace-nowrap oup font-semibold text-xs bg-gradient-to-t from-base-100 to-primary/20 border-2 border-primary/10 text-primary hover:text-secondary p-3 pb-[.6rem] rounded-lg`}
+      className={`${className} relative flex gap-3 group items-center justify-center w-auto h-auto whitespace-nowrap font-semibold text-xs bg-gradient-to-t from-base-100 to-primary/20 text-primary hover:text-secondary py-3 px-4 pb-[.6rem] rounded-lg`}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setPosition({ x: `50%`, y: `-150%` })}
     >
@@ -28,8 +28,9 @@ const Button = ({ className, icon, label = "Button", onClick }) => {
           background: `radial-gradient(circle at ${position.x} ${position.y}, rgb(255 255 255 / 0.1) 10%, rgb(255 255 255 / 0.09) 20%, transparent)`,
         }}
       />
+      {prefix && prefix}
       {label}
-      {icon && icon}
+      {suffix && suffix}
     </button>
   );
 };

@@ -1,7 +1,64 @@
 import React from "react";
+import Icon from "../components/generic/Icon";
+import ImageCard from "../components/generic/ImageCard";
+import { projectList } from "../components/project/project-list";
 
 const ProjectsPage = () => {
-  return <div>Projects</div>;
+  return (
+    <div className="relative w-full flex flex-col items-center justify-between gap-5 py-6 lg:py-16">
+      <div
+        className="absolute hidden lg:flex -top-[230%] left-[0] bottom-0 right-0"
+        style={{
+          background: `radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.25) 25%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)`,
+        }}
+      />
+      <div
+        className="absolute flex lg:hidden -top-[230%] left-[0] bottom-0 right-0"
+        style={{
+          background: `radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.25) 25%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%)`,
+        }}
+      />
+
+      <div className="flex flex-col items-center mt-5 z-10 px-6 lg:px-32">
+        <div className="relative">
+          <div
+            className={`absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-20 h-20 rounded-xl blur-3xl opacity-75`}
+            style={{
+              background: `radial-gradient(circle at center, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / 0.5) 100%)`,
+            }}
+          />
+          <Icon size="w-20 h-20">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z"
+              />
+            </svg>
+          </Icon>
+        </div>
+
+        <h1 className="font-cabin text-3xl leading-snug text-secondary text-center font-extrabold mt-5 mb-3">
+          Personal Projects
+        </h1>
+        <p className="text-sm leading-relaxed tracking-normal font-semibold text-center">
+          Some of my creations while digging or experimenting web technologies.
+        </p>
+      </div>
+
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-5 px-6 lg:px-32">
+        {projectList?.map((project, index) => (
+          <ImageCard key={index} data={project} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default ProjectsPage;

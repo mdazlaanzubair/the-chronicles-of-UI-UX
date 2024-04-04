@@ -24,4 +24,25 @@ export const projectList = [
     isFeatured: true,
     isLocked: false,
   },
+  {
+    title: "Fleet Coordination",
+    subTitle: "Transport and Delivery Infrastructure",
+    imgSrc: loadeImg.src,
+    isFeatured: false,
+    isLocked: false,
+  },
+  {
+    title: "Postman AI",
+    subTitle: "AI Social Media Manager",
+    imgSrc: socialMediaBotImg.src,
+    isFeatured: false,
+    isLocked: false,
+  },
+  {
+    title: "Work Organizing Tool",
+    subTitle: "Project & Task Management Solution",
+    imgSrc: taskVareImg.src,
+    isFeatured: false,
+    isLocked: false,
+  },
 ];

@@ -23,10 +23,10 @@ export default function RootLayout({ children }) {
     <html lang="en" className="text-primary bg-base-300">
       <body className={`${cabin.variable} ${inter.variable}`}>
         <GeneralProvider>
-          <main className="font-inter flex flex-col lg:flex-row items-center bg-base-300 w-full h-[100vh] gap-5 p-3 overflow-hidden">
+          <main className="font-inter flex flex-col lg:flex-row items-center bg-base-300 w-full h-[100vh] gap-5 p-3 lg:p-10 overflow-hidden">
             <SideBar />
             <Header />
-            <div className="view-port-container w-full lg:w-10/12 bg-base-100 scroll-smooth">
+            <div className="view-port-container w-full lg:w-10/12 bg-base-100/35 scroll-smooth">
               <div className="relative w-full h-auto">{children}</div>
               <Footer />
             </div>

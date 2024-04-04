@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { GeneralContext } from "@/app/context/GeneralContext";
 
 const SpotlightLink = ({ href, title, icon }) => {
+  const { toggleMenu } = useContext(GeneralContext);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const activeSection = usePathname();
   const handleMouseMove = (e) => {
@@ -24,6 +26,7 @@ const SpotlightLink = ({ href, title, icon }) => {
       className={`nav-link group gap-4 ${
         href == activeSection && "nav-link-active"
       }`}
+      onClick={toggleMenu}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setPosition({ x: 0, y: 0 })}
     >

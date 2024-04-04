@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 
 const DefaultIcon = () => {
   return (
@@ -20,41 +18,27 @@ const DefaultIcon = () => {
   );
 };
 
-const Icon = ({ clickHandler, className, children, size }) => {
-  const [position, setPosition] = useState({ x: `50%`, y: `50%` });
-
-  const handleMouseMove = (e) => {
-    e.stopPropagation();
-
-    // Calculate relative position within the link element
-    const cardRect = e.currentTarget.getBoundingClientRect();
-    const relativeX = e.clientX - cardRect.left;
-    const relativeY = e.clientY - cardRect.top;
-
-    setPosition({ x: `${relativeX}px`, y: `${relativeY}px` });
-  };
-
+const Icon = ({ children, size }) => {
   return (
-    <span
-      className={`${className} relative rounded-xl border-[3px] group border-primary/30 bg-base-100/10 cursor-pointer`}
-      onClick={() => clickHandler && clickHandler()}
+    <div
+      className={`relative ${
+        size ? size : "w-14 h-14"
+      } inline-block overflow-hidden rounded-xl`}
     >
       <div
-        className={`m-1 mb-[.3rem] ${
-          size ? size : "w-14 h-14"
-        } p-1 rounded-xl text-primary overflow-clip`}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => setPosition({ x: `50%`, y: `50%` })}
+        className={`w-full h-full rounded-xl bg-base-300 p-[.3rem] overflow-hidden`}
       >
         <div
-          className={`absolute left-0 right-0 top-0 bottom-0 rounded-xl opacity-100 group-hover:opacity-100 transition-all ease-in-out duration-300`}
+          className={`absolute left-0 right-0 -top-[550%] bottom-0 rounded-xl opacity-100`}
           style={{
-            background: `radial-gradient(circle at ${position.x} ${position.y}, rgb(255 255 255 / 0.1) 10%, rgb(255 255 255 / 0.09) 20%, transparent)`,
+            background: `radial-gradient(circle at center, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / 0.5) 50%, transparent)`,
           }}
         />
-        {children ? children : <DefaultIcon />}
+        <div className={`w-full h-full rounded-lg bg-base-100 p-[.5rem]`}>
+          {children ? children : <DefaultIcon />}
+        </div>
       </div>
-    </span>
+    </div>
   );
 };
 
