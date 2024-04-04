@@ -18,7 +18,7 @@ const DefaultIcon = () => {
   );
 };
 
-const Icon = ({ children, size }) => {
+const Icon = ({ children, size, isHideLight }) => {
   return (
     <div
       className={`relative ${
@@ -28,12 +28,14 @@ const Icon = ({ children, size }) => {
       <div
         className={`w-full h-full rounded-xl bg-base-300 p-[.3rem] overflow-hidden`}
       >
-        <div
-          className={`absolute left-0 right-0 -top-[550%] bottom-0 rounded-xl opacity-100`}
-          style={{
-            background: `radial-gradient(circle at center, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / 0.5) 50%, transparent)`,
-          }}
-        />
+        {!isHideLight && (
+          <div
+            className={`absolute left-0 right-0 -top-[550%] bottom-0 rounded-xl opacity-100`}
+            style={{
+              background: `radial-gradient(circle at center, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / 0.5) 50%, transparent)`,
+            }}
+          />
+        )}
         <div className={`w-full h-full rounded-lg bg-base-100 p-[.5rem]`}>
           {children ? children : <DefaultIcon />}
         </div>

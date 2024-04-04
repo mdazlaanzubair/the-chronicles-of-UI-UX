@@ -21,12 +21,7 @@ const WorkPage = () => {
 
       <div className="flex flex-col items-center mt-5 z-10 px-6 lg:px-32">
         <div className="relative">
-          <div
-            className={`absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-20 h-20 rounded-xl blur-3xl opacity-75`}
-            style={{
-              background: `radial-gradient(circle at center, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / 0.5) 100%)`,
-            }}
-          />
+          <div className="absolute rounded-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-10 h-10 bg-secondary blur-2xl transition-all ease-in-out duration-1000" />
           <Icon size="w-20 h-20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +43,8 @@ const WorkPage = () => {
           Executive Efforts
         </h1>
         <p className="text-sm leading-relaxed tracking-normal font-semibold text-center">
-          Take a look at my professional contributions.
+          Some contributions to fulfill specific business need or clients&apos;
+          requirements
         </p>
       </div>
 

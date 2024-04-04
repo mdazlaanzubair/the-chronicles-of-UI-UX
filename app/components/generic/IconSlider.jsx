@@ -14,7 +14,7 @@ const IconSlider = ({ icons }) => {
           className={`mx-1 lowercase font-medium text-xs px-3 py-[.27rem] ${
             tool === "toolkit"
               ? "text-primary border-primary/30"
-              : "text-accent border-accent"
+              : "text-secondary border-sectext-secondary"
           } rounded border bg-base-300 whitespace-nowrap transition-all ease-in-out duration-300`}
         >
           {tool}

@@ -48,7 +48,8 @@ const ProjectsPage = () => {
           Personal Projects
         </h1>
         <p className="text-sm leading-relaxed tracking-normal font-semibold text-center">
-          Some of my creations while digging or experimenting web technologies.
+          Things I built while learning, exploring, testing and trying the web
+          technologies
         </p>
       </div>
 
