@@ -21,7 +21,6 @@ const ContactSection = () => {
         </p>
         <div className="flex items-center gap-3">
           <Button label="Email" />
-          <Button label="Book a call" />
           <button
             className={`flex gap-3 whitespace-nowrap font-semibold text-xs text-primary hover:text-secondary py-3 pb-[.6rem] rounded-lg`}
           >
