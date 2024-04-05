@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
-const Button = ({ prefix, suffix, className, label, onClick }) => {
+const ButtonLink = ({ className, label, link, icon, target = "_self" }) => {
   const [position, setPosition] = useState({ x: `50%`, y: `-150%` });
 
   const handleMouseMove = (e) => {
     e.stopPropagation();
+    console.log(link, icon, target);
 
     // Calculate relative position within the link element
     const cardRect = e.currentTarget.getBoundingClientRect();
@@ -17,9 +19,11 @@ const Button = ({ prefix, suffix, className, label, onClick }) => {
   };
 
   return (
-    <button
-      onClick={() => onClick && onClick()}
-      className={`${className} relative flex gap-3 group items-center justify-center w-auto h-auto whitespace-nowrap font-semibold text-xs bg-gradient-to-t from-base-100 to-primary/20 text-primary hover:text-secondary py-3 px-4 pb-[.6rem] rounded-lg`}
+    <Link
+      href={link}
+      title={label}
+      target={target}
+      className={`${className} relative flex gap-3 group items-center justify-center w-auto h-auto whitespace-nowrap font-semibold text-xs bg-gradient-to-t from-base-100 to-primary/20 text-primary hover:text-secondary p-3 rounded-lg`}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setPosition({ x: `50%`, y: `-150%` })}
     >
@@ -29,11 +33,9 @@ const Button = ({ prefix, suffix, className, label, onClick }) => {
           background: `radial-gradient(circle at ${position.x} ${position.y}, rgb(255 255 255 / 0.1) 10%, rgb(255 255 255 / 0.09) 20%, transparent)`,
         }}
       />
-      {prefix && prefix}
-      {label}
-      {suffix && suffix}
-    </button>
+      {icon ? icon : label}
+    </Link>
   );
 };
 
-export default Button;
+export default ButtonLink;

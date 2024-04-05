@@ -33,7 +33,7 @@ const IconSlider = ({ icons }) => {
         {icons.map((logo, index) => (
           <div
             key={index}
-            className="group relative w-10 h-10 lg:w-16 lg:h-16 bg-base-300/30 border-2 border-primary/15 p-3 mx-5 rounded-lg cursor-pointer overflow-auto"
+            className="group relative w-10 h-10 lg:w-16 lg:h-16 bg-base-300/30 border-[3px] border-primary/20 p-3 mx-5 rounded-lg cursor-pointer overflow-auto"
             onMouseEnter={() => setTool(logo?.title)}
             onMouseLeave={() => setTool("toolkit")}
           >

@@ -38,7 +38,7 @@ const ProjectSection = () => {
             </Icon>
           </div>
           <div className="flex flex-col gap-1">
-            <h1 className="font-cabin text-xl leading-snug text-secondary font-extrabold">
+            <h1 className="font-display text-xl leading-snug text-secondary font-extrabold">
               Personal Projects
             </h1>
             <p className="text-sm leading-relaxed tracking-normal font-semibold">
@@ -72,10 +72,6 @@ const ProjectSection = () => {
             return <ImageCard key={index} data={project} />;
           }
         })}
-      </div>
-
-      <div className="flex lg:hidden w-full items-center justify-center gap-5 mt-5">
-        <Button label="Explore more" onClick={() => router.push("/projects")} />
       </div>
     </section>
   );

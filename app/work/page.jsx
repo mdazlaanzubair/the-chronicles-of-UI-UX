@@ -7,15 +7,9 @@ const WorkPage = () => {
   return (
     <div className="relative w-full flex flex-col items-center justify-between gap-5 py-6 lg:py-16">
       <div
-        className="absolute hidden lg:flex -top-[230%] left-[0] bottom-0 right-0"
+        className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
         style={{
-          background: `radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.25) 25%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)`,
-        }}
-      />
-      <div
-        className="absolute flex lg:hidden -top-[230%] left-[0] bottom-0 right-0"
-        style={{
-          background: `radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.25) 25%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%)`,
+          background: `radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), transparent, transparent)`,
         }}
       />
 
@@ -39,7 +33,7 @@ const WorkPage = () => {
           </Icon>
         </div>
 
-        <h1 className="font-cabin text-3xl leading-snug text-secondary text-center font-extrabold mt-5 mb-3">
+        <h1 className="font-display text-3xl lg:text-4xl leading-snug text-secondary text-center font-extrabold mt-5 mb-3">
           Executive Efforts
         </h1>
         <p className="text-sm leading-relaxed tracking-normal font-semibold text-center">

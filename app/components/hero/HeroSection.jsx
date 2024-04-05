@@ -18,7 +18,7 @@ const HeroSection = () => {
               Open to work
             </span>
           </div>
-          <h1 className="font-cabin text-4xl leading-snug text-secondary font-extrabold mb-8">
+          <h1 className="font-display text-4xl leading-snug text-secondary font-extrabold mb-8">
             Hello! Let&apos;s peek into my digital corner!
           </h1>
           <p className="text-sm leading-relaxed tracking-normal font-semibold mb-3">

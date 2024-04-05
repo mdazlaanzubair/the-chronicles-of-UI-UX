@@ -30,11 +30,11 @@ body {
   }
 
   .header-section {
-    @apply flex lg:hidden items-center justify-between border border-primary/0 border-b-primary/5 lg:border-b-primary/0 rounded-t-3xl w-full text-center text-secondary;
+    @apply flex lg:hidden items-center justify-between border border-primary/0 border-b-primary/10 lg:border-b-primary/0 rounded-t-3xl w-full text-center text-secondary;
   }
 
   .footer-section {
-    @apply flex items-center justify-between border border-primary/0 border-t-primary/5 rounded-b-3xl w-full p-6 lg:px-32 text-center text-secondary;
+    @apply flex items-center justify-between border border-primary/0 border-t-primary/10 rounded-b-3xl w-full p-6 lg:px-32 text-center text-secondary;
   }
 }
 

@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        cabin: ["var(--cabin)"],
+        display: ["var(--display)"],
         inter: ["var(--inter)"],
       },
 

@@ -3,12 +3,12 @@ import SideBar from "./components/navigation/SideBar";
 import Header from "./components/generic/Header";
 import Footer from "./components/generic/Footer";
 import GeneralProvider from "./context/GeneralContext";
-import { Cabin, Inter } from "next/font/google";
+import { Eczar, Inter } from "next/font/google";
 
-const cabin = Cabin({
+const display = Eczar({
   subsets: ["latin"],
-  variable: "--cabin",
-  weight: "700",
+  variable: "--display",
+  weight: "800",
 });
 
 const inter = Inter({ subsets: ["latin"], variable: "--inter" });
@@ -21,7 +21,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="text-primary bg-base-300">
-      <body className={`${cabin.variable} ${inter.variable}`}>
+      <body className={`${display.variable} ${inter.variable}`}>
         <GeneralProvider>
           <main className="font-inter flex flex-col lg:flex-row items-center bg-base-300 w-full h-[100vh] gap-5 p-3 lg:p-10 overflow-hidden">
             <SideBar />

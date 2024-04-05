@@ -6,10 +6,10 @@ import Link from "next/link";
 import MobileNavBar from "../navigation/MobileNavBar";
 
 const Header = () => {
-  const { toggleMenu } = useContext(GeneralContext);
+  const { toggleMenu, isMenuOpen } = useContext(GeneralContext);
 
   return (
-    <div className="flex lg:hidden flex-col gap-3 w-full h-auto">
+    <div className="flex lg:hidden flex-col w-full transition-all ease-in-out duration-300">
       <div className="header-section">
         <Link
           href="/about"
@@ -31,7 +31,7 @@ const Header = () => {
 
         <Button label="Menu" onClick={toggleMenu} />
       </div>
-      <MobileNavBar />
+      {isMenuOpen && <MobileNavBar />}
     </div>
   );
 };
