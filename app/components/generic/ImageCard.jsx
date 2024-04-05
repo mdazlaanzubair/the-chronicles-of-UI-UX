@@ -1,8 +1,5 @@
-"use client";
-
 import React from "react";
 import CardLock from "./CardLock";
-import { useRouter } from "next/navigation";
 import Tilter from "./Tilter";
 
 const dummyData = {
@@ -15,14 +12,13 @@ const dummyData = {
   isLocked: false,
 };
 
-const ImageCard = ({ data }) => {
+const ImageCard = ({ data, clickHandler }) => {
   const { id, title, subTitle, imgSrc, isLocked } = data ?? dummyData;
-  const router = useRouter();
 
   return (
     <Tilter>
       <div
-        onClick={() => router.push(`/work/${id}`)}
+        onClick={() => clickHandler && clickHandler()}
         className="w-full group h-[55vh] border-4 border-transparent hover:bg-primary/20 hover:border-primary/30 p-[.35rem] rounded-lg overflow-hidden cursor-pointer transition-all ease-in-out duration-1000"
       >
         <div className="relative w-full h-full flex flex-col rounded-md">

@@ -1,9 +1,14 @@
+"use client";
+
 import React from "react";
 import Icon from "../components/generic/Icon";
 import ImageCard from "../components/generic/ImageCard";
 import { workList } from "../components/work/work-list";
+import { useRouter } from "next/navigation";
 
 const WorkPage = () => {
+  const router = useRouter();
+
   return (
     <div className="relative w-full flex flex-col items-center justify-between gap-5 py-6 lg:py-16">
       <div
@@ -44,7 +49,11 @@ const WorkPage = () => {
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-5 px-6 lg:px-32">
         {workList?.map((work, index) => (
-          <ImageCard key={index} data={work} />
+          <ImageCard
+            key={index}
+            data={work}
+            clickHandler={() => router.push(`/work/${work?.id}`)}
+          />
         ))}
       </div>
     </div>

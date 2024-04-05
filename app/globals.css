@@ -25,6 +25,14 @@ body {
     @apply bg-primary/5 text-secondary;
   }
 
+  .project-heading-style {
+    @apply text-secondary mb-1 text-[11px] leading-relaxed tracking-widest uppercase font-black;
+  }
+
+  .project-para-style {
+    @apply text-[14px] mb-3 font-semibold leading-relaxed tracking-wide;
+  }
+
   .work-heading-style {
     @apply text-secondary mb-1 text-[11px] leading-relaxed tracking-widest uppercase font-black;
   }

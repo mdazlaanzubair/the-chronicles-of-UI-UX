@@ -69,7 +69,13 @@ const ProjectSection = () => {
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {projectList?.map((project, index) => {
           if (project?.isFeatured) {
-            return <ImageCard key={index} data={project} />;
+            return (
+              <ImageCard
+                key={index}
+                data={project}
+                clickHandler={() => router.push(`/projects/${project?.id}`)}
+              />
+            );
           }
         })}
       </div>

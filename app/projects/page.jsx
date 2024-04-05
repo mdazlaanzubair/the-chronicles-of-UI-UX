@@ -1,9 +1,13 @@
+"use client";
+
 import React from "react";
 import Icon from "../components/generic/Icon";
 import ImageCard from "../components/generic/ImageCard";
 import { projectList } from "../components/project/project-list";
+import { useRouter } from "next/navigation";
 
 const ProjectsPage = () => {
+  const router = useRouter();
   return (
     <div className="relative w-full flex flex-col items-center justify-between gap-5 py-6 lg:py-16">
       <div
@@ -49,7 +53,11 @@ const ProjectsPage = () => {
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-5 px-6 lg:px-32">
         {projectList?.map((project, index) => (
-          <ImageCard key={index} data={project} />
+          <ImageCard
+            key={index}
+            data={project}
+            clickHandler={() => router.push(`/projects/${project?.id}`)}
+          />
         ))}
       </div>
     </div>

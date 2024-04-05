@@ -27,8 +27,8 @@ const WorkPage = ({ params }) => {
 
   // FUNCTION TO GET WORK DATA BY ID
   const getWorkById = (id) => {
-    const getWorkById = workList?.filter((work) => work?.id == id);
-    setWorkData(getWorkById[0]);
+    const dataArray = workList?.filter((work) => work?.id == id);
+    setWorkData(dataArray[0]);
   };
 
   useEffect(() => {
@@ -53,8 +53,6 @@ const WorkPage = ({ params }) => {
 
     return () => observer.disconnect();
   }, [params]);
-
-  useEffect(() => console.log("activeSection", activeSection), [activeSection]);
 
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-between gap-5">
@@ -146,7 +144,7 @@ const WorkPage = ({ params }) => {
               size="w-full h-full"
               src={workData?.details?.coverImgSrc}
               caption="The Case Study"
-              tag="TaskVare"
+              tag="IMG"
             />
           </div>
           <div className="container mt-10 mx-auto">
