@@ -56,7 +56,9 @@ const ProjectsPage = () => {
           <ImageCard
             key={index}
             data={project}
-            clickHandler={() => router.push(`/projects/${project?.id}`)}
+            clickHandler={() =>
+              project?.isLocked ? null : router.push(`/projects/${project?.id}`)
+            }
           />
         ))}
       </div>

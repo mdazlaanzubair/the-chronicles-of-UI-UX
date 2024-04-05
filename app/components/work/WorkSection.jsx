@@ -73,7 +73,9 @@ const WorkSection = () => {
               <ImageCard
                 key={index}
                 data={work}
-                clickHandler={() => router.push(`/work/${work?.id}`)}
+                clickHandler={() =>
+                  work?.isLocked ? null : router.push(`/work/${work?.id}`)
+                }
               />
             );
           }
