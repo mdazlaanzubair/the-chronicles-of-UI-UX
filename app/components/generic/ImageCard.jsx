@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
 import CardLock from "./CardLock";
+import { useRouter } from "next/navigation";
 
 const dummyData = {
+  id: 0,
   title: "Project Title",
   subTitle: "Project Long Sub Title",
   imgSrc:
@@ -11,10 +15,14 @@ const dummyData = {
 };
 
 const ImageCard = ({ data }) => {
-  const { title, subTitle, imgSrc, isLocked } = data ?? dummyData;
+  const { id, title, subTitle, imgSrc, isLocked } = data ?? dummyData;
+  const router = useRouter();
 
   return (
-    <div className="w-full  group h-[55vh] border-4 border-transparent hover:bg-primary/20 hover:border-primary/30 p-[.35rem] rounded-lg overflow-hidden cursor-pointer transition-all ease-in-out duration-1000">
+    <div
+      onClick={() => router.push(`/work/${id}`)}
+      className="w-full  group h-[55vh] border-4 border-transparent hover:bg-primary/20 hover:border-primary/30 p-[.35rem] rounded-lg overflow-hidden cursor-pointer transition-all ease-in-out duration-1000"
+    >
       <div className="relative w-full h-full flex flex-col rounded-md">
         <div
           className="absolute bg-secondary inset-0 top-0 bottom-0 left-0 right-0 bg-center bg-cover rounded-md"

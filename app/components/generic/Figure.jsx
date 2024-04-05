@@ -1,7 +1,8 @@
 import React from "react";
+import placeholderBG from "@/public/backgrounds/placeholder-bg.jpg";
 
 const Figure = ({
-  src = "https://framerusercontent.com/images/clwgKeHczjcoKiZCik9FJPKR64.jpg?scale-down-to=2048",
+  src = placeholderBG.src,
   className,
   size = "w-[250px] h-[350px]",
   caption = "Profile Picture",
