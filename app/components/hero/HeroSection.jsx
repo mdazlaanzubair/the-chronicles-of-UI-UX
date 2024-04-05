@@ -39,8 +39,8 @@ const HeroSection = () => {
           <Figure
             src={heroImg.src}
             size="w-[400px] h-[300px]"
-            caption="Hello World"
-            tag="_<"
+            caption="How may i help you?"
+            tag="Hello World"
           />
         </div>
       </div>

@@ -21,7 +21,7 @@ const Figure = ({
         </div>
       </div>
       <p className="flex items-center justify-end text-[10px] text-primary my-3 gap-3 font-bold uppercase mx-3">
-        <span className="mt-px">{caption}</span>
+        <span className="mt-px mb-px capitalize">{caption}</span>
         <span className="px-2 py-px rounded border-2 bg-base-300 border-primary/30">
           {tag}
         </span>
