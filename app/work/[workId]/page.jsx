@@ -16,6 +16,8 @@ const contentSections = [
 ];
 
 const WorkPage = ({ params }) => {
+  const [activeSection, setActiveSection] = useState("Overview");
+
   const [workData, setWorkData] = useState(null);
   const [isContentNavOpen, setIsContentNavOpen] = useState(true);
   const router = useRouter();
@@ -29,7 +31,30 @@ const WorkPage = ({ params }) => {
     setWorkData(getWorkById[0]);
   };
 
-  useEffect(() => getWorkById(params?.workId), [params]);
+  useEffect(() => {
+    // FETCHING WORK DATA
+    getWorkById(params?.workId);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    ); // Adjust threshold value as needed
+
+    contentSections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [params]);
+
+  useEffect(() => console.log("activeSection", activeSection), [activeSection]);
 
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-between gap-5">
@@ -42,7 +67,7 @@ const WorkPage = ({ params }) => {
 
       <div
         id="Back to Top"
-        className="w-full border-b-2 gap-3 bg-base-100 z-10 opacity-80 backdrop-blur-xl border-primary/20 flex items-center justify-between p-3"
+        className="w-full gap-3 z-10 flex items-center justify-between p-3"
       >
         <div className="flex flex-shrink">
           <Button
@@ -163,7 +188,7 @@ const WorkPage = ({ params }) => {
                     </div>
                   </div>
                 </div>
-                <div className="my-5 lg:my-10 h-[.15rem] bg-primary/15" />
+                <div className="w-2/4 mx-auto my-5 lg:my-10 h-[.15rem] bg-primary/15" />
                 <div
                   id="Problem"
                   className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
@@ -184,7 +209,7 @@ const WorkPage = ({ params }) => {
                     </div>
                   </div>
                 </div>
-                <div className="my-5 lg:my-10 h-[.15rem] bg-primary/15" />
+                <div className="w-2/4 mx-auto my-5 lg:my-10 h-[.15rem] bg-primary/15" />
                 <div
                   id="Solution"
                   className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
@@ -205,7 +230,7 @@ const WorkPage = ({ params }) => {
                     </div>
                   </div>
                 </div>
-                <div className="my-5 lg:my-10 h-[.15rem] bg-primary/15" />
+                <div className="w-2/4 mx-auto my-5 lg:my-10 h-[.15rem] bg-primary/15" />
                 <div
                   id="Impact"
                   className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
@@ -226,7 +251,7 @@ const WorkPage = ({ params }) => {
                     </div>
                   </div>
                 </div>
-                <div className="my-5 lg:my-10 h-[.15rem] bg-primary/15" />
+                <div className="w-2/4 mx-auto my-5 lg:my-10 h-[.15rem] bg-primary/15" />
                 <div
                   id="Final Thoughts"
                   className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
@@ -251,17 +276,18 @@ const WorkPage = ({ params }) => {
             </div>
           </div>
         </div>
-        <ContentNavigation isShow={isContentNavOpen} />
+        <ContentNavigation
+          isShow={isContentNavOpen}
+          activeNav={activeSection}
+        />
       </div>
-
-      {/* <div className="w-full h-[30vh] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-5 px-6 lg:px-32"></div> */}
     </div>
   );
 };
 
 export default WorkPage;
 
-const ContentNavigation = ({ isShow }) => {
+const ContentNavigation = ({ isShow, activeNav }) => {
   return (
     <div
       className={`relative ${
@@ -280,7 +306,9 @@ const ContentNavigation = ({ isShow }) => {
               <a
                 key={index}
                 href={"#" + section}
-                className="text-[11px] hover:text-secondary py-2 transition-all ease-in-out duration-300"
+                className={`text-[11px] ${
+                  activeNav == section ? "text-secondary" : "text-primary"
+                } hover:text-secondary py-2 transition-all ease-in-out duration-300`}
               >
                 {section}
               </a>
