@@ -7,7 +7,7 @@ import SocialNavigation from "./SocialNavigation";
 const SideBar = () => {
   return (
     <div className="hidden relative w-2/12 lg:flex flex-col items-start h-full max-h-full p-3 rounded-xl">
-      <Link href="/about" className="nav-link group gap-4 hover:bg-primary/10">
+      <Link href="/" className="nav-link group gap-4 hover:bg-primary/10">
         <img
           className="w-10 rounded-full"
           src="https://framerusercontent.com/images/t4kKb01sNaira2a5mAbB9b1PBIw.jpg"

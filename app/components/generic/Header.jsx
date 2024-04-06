@@ -12,7 +12,7 @@ const Header = () => {
     <div className="flex lg:hidden flex-col w-full transition-all ease-in-out duration-300">
       <div className="header-section">
         <Link
-          href="/about"
+          href="/"
           className="nav-link w-auto text-start group gap-4 hover:bg-primary/10"
         >
           <img

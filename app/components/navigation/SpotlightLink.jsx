@@ -28,7 +28,7 @@ const SpotlightLink = ({ href, title, icon }) => {
       }`}
       onClick={toggleMenu}
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => setPosition({ x: 0, y: 0 })}
+      // onMouseLeave={() => setPosition({ x: 0, y: 0 })}
     >
       <div
         className={`absolute left-0 right-0 top-0 bottom-0 rounded-lg opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300`}

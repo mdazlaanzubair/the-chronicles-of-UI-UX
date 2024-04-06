@@ -123,10 +123,11 @@ const socialNavList = [
     ),
   },
 ];
+
 const SocialNavigation = () => {
   return (
     <div className="flex flex-col gap-1 w-full">
-      <h2 className="text-xs font-semibold text-secondary mx-3 my-4">
+      <h2 className="text-[9px] font-semibold text-secondary mx-3 my-4">
         I&apos;M SOCIAL
       </h2>
       <div className="flex flex-wrap items-center gap-3">

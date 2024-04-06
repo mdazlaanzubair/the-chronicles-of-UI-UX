@@ -22,7 +22,7 @@ body {
   }
 
   .nav-link-active {
-    @apply bg-primary/5 text-secondary;
+    @apply bg-primary/5 text-accent;
   }
 
   .project-heading-style {
