@@ -59,7 +59,7 @@ const WorkPage = ({ params }) => {
       <div
         className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
         style={{
-          background: `radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), transparent, transparent)`,
+          background: `radial-gradient(circle at center, rgba(97,163,212, 1) 0%, rgba(97,163,212, 0.5) 50%, rgba(97,163,212, 0.15) 50%, rgba(97,163,212, 0), rgba(97,163,212, 0), transparent, transparent)`,
         }}
       />
 
@@ -305,7 +305,7 @@ const ContentNavigation = ({ isShow, activeNav }) => {
                 key={index}
                 href={"#" + section}
                 className={`text-[11px] ${
-                  activeNav == section ? "text-secondary" : "text-primary"
+                  activeNav == section ? "text-accent" : "text-primary"
                 } hover:text-secondary py-2 transition-all ease-in-out duration-300`}
               >
                 {section}

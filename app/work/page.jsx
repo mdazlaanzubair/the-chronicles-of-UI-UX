@@ -14,14 +14,14 @@ const WorkPage = () => {
       <div
         className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
         style={{
-          background: `radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), transparent, transparent)`,
+          background: `radial-gradient(circle at center, rgba(97,163,212, 1) 0%, rgba(97,163,212, 0.5) 50%, rgba(97,163,212, 0.15) 50%, rgba(97,163,212, 0), rgba(97,163,212, 0), transparent, transparent)`,
         }}
       />
 
       <div className="flex flex-col items-center mt-5 z-10 px-6 lg:px-32">
         <div className="relative">
-          <div className="absolute rounded-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-10 h-10 bg-secondary blur-2xl transition-all ease-in-out duration-1000" />
-          <Icon size="w-20 h-20">
+          <div className="absolute rounded-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#61a3d4] blur-2xl transition-all ease-in-out duration-1000" />
+          <Icon size="w-20 h-20" lightColor="97 163 212">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

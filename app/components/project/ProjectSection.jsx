@@ -19,9 +19,9 @@ const ProjectSection = () => {
           className="flex group items-center gap-3 cursor-pointer"
           onClick={() => router.push("/projects")}
         >
-          <div className="relative hidden lg:flex">
-            <div className="absolute opacity-0 group-hover:opacity-85 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-10 h-10 bg-secondary rounded-full blur-2xl transition-all ease-in-out duration-1000" />
+          <div className="relative hidden lg:flex group-hover:text-accent">
             <Icon isHideLight={true}>
+              <div className="absolute opacity-0 group-hover:opacity-85 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-7 h-7 bg-accent rounded-full blur-2xl transition-all ease-in-out duration-1000" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

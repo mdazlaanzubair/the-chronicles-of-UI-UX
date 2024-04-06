@@ -18,7 +18,7 @@ const DefaultIcon = () => {
   );
 };
 
-const Icon = ({ children, size, isHideLight }) => {
+const Icon = ({ children, size, isHideLight, lightColor }) => {
   return (
     <div
       className={`relative ${
@@ -32,7 +32,11 @@ const Icon = ({ children, size, isHideLight }) => {
           <div
             className={`absolute left-0 right-0 -top-[550%] bottom-0 rounded-xl opacity-100`}
             style={{
-              background: `radial-gradient(circle at center, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / 0.5) 50%, transparent)`,
+              background: `radial-gradient(circle at center, rgb(${
+                lightColor ? lightColor : "254 239 159"
+              } / 1) 0%, rgb(${
+                lightColor ? lightColor : "254 239 159"
+              } / 0.5) 50%, transparent)`,
             }}
           />
         )}

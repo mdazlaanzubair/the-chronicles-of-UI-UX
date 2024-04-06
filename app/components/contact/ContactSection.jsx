@@ -16,7 +16,7 @@ const ContactSection = () => {
         <h2 className="text-base text-secondary leading-relaxed tracking-normal font-semibold mb-3">
           If you have a question, project idea, or wanted to say hello?{" "}
           <a
-            className="underline underline-offset-4"
+            className="underline underline-offset-4 text-accent"
             href="mailto:mdazlaan1996@gmail.com?subject=Hi%20There!&body=Hi%20Azlaan!%20Hope%20you're%20doin'%20well.%20I%20just%20want%20to%20discuss%20a%20project%20with%20you.%20Please%20contact."
           >
             Just shoot me an email
@@ -30,7 +30,7 @@ const ContactSection = () => {
         <div className="flex items-center gap-3">
           <Button label="About me" />
           <a
-            className={`flex gap-3 whitespace-nowrap font-semibold text-xs text-primary hover:text-secondary py-3 pb-[.6rem] rounded-lg`}
+            className={`flex gap-3 whitespace-nowrap font-semibold text-xs text-primary hover:text-accent py-3 pb-[.6rem] rounded-lg transition-all ease-in-out duration-300`}
             href="https://calendly.com/mdazlaanzubair/virtual-interaction"
             target="_blank"
           >

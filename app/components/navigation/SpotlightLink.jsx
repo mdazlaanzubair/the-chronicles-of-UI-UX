@@ -31,12 +31,9 @@ const SpotlightLink = ({ href, title, icon }) => {
       onMouseLeave={() => setPosition({ x: 0, y: 0 })}
     >
       <div
-        // className={`absolute left-0 right-0 top-0 bottom-0 rounded-lg ${
-        //   href === activeSection && "opacity-0 group-hover:opacity-100"
-        // } transition-all ease-in-out duration-300`}
         className={`absolute left-0 right-0 top-0 bottom-0 rounded-lg opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300`}
         style={{
-          background: `radial-gradient(circle at ${position.x}px ${position.y}px, rgb(133 136 144 / 0.09) 1%, transparent, transparent )`,
+          background: `radial-gradient(circle at ${position.x}px ${position.y}px, rgb(254 239 159 / 0.09) 1%, transparent, transparent )`,
         }}
       />
       <span className="min-w-4 min-h-4 max-w-4 max-h-4">{icon}</span>

@@ -24,7 +24,7 @@ const ProjectPage = ({ params }) => {
       <div
         className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
         style={{
-          background: `radial-gradient(circle at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), transparent, transparent)`,
+          background: `radial-gradient(circle at center, rgba(254,239,159, 1) 0%, rgba(254,239,159, 0.5) 50%, rgba(254,239,159, 0.15) 50%, rgba(254,239,159, 0), rgba(254,239,159, 0), transparent, transparent)`,
         }}
       />
 

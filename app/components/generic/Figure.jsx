@@ -10,7 +10,7 @@ const Figure = ({
   tag = "Img",
 }) => {
   return (
-    <div className={`${className}`}>
+    <div className={`group ${className}`}>
       <Tilter>
         <div className="border border-primary/10 rounded-2xl p-[0.35rem]">
           <div
@@ -25,8 +25,10 @@ const Figure = ({
         </div>
       </Tilter>
       <p className="flex items-center justify-end text-[10px] text-primary my-3 gap-3 font-bold uppercase mx-3">
-        <span className="mt-px mb-px capitalize">{caption}</span>
-        <span className="px-2 py-px rounded border-2 bg-base-300 border-primary/30">
+        <span className="mt-px mb-px capitalize group-hover:text-accent transition-all ease-in-out duration-300">
+          {caption}
+        </span>
+        <span className="px-2 py-px rounded border-2 bg-base-300 border-primary/30 group-hover:text-secondary transition-all ease-in-out duration-300">
           {tag}
         </span>
       </p>

@@ -19,7 +19,7 @@ const Button = ({ prefix, suffix, className, label, onClick }) => {
   return (
     <button
       onClick={() => onClick && onClick()}
-      className={`${className} relative flex gap-1 group items-center justify-center w-auto h-auto whitespace-nowrap font-semibold text-xs bg-gradient-to-t from-base-100 to-primary/20 text-primary hover:text-secondary p-3 pb-[.5rem] lg:p-4 lg:pb-[.8rem] rounded-lg`}
+      className={`${className} relative flex gap-1 group items-center justify-center w-auto h-auto whitespace-nowrap font-semibold text-xs bg-gradient-to-t from-base-100 to-primary/20 text-primary hover:text-accent p-3 pb-[.5rem] lg:p-4 lg:pb-[.8rem] rounded-lg`}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setPosition({ x: `50%`, y: `-150%` })}
     >
@@ -30,7 +30,7 @@ const Button = ({ prefix, suffix, className, label, onClick }) => {
         }}
       />
       {prefix && prefix}
-      {label && label}
+      <span className="mb-[.17rem]">{label && label}</span>
       {suffix && suffix}
     </button>
   );

@@ -30,7 +30,7 @@ const ButtonLink = ({ className, label, link, icon, target = "_self" }) => {
       <div
         className={`absolute left-0 right-0 top-0 bottom-0 rounded-lg opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-1000`}
         style={{
-          background: `radial-gradient(circle at ${position.x} ${position.y}, rgb(255 255 255 / 0.1) 10%, rgb(255 255 255 / 0.09) 20%, transparent)`,
+          background: `radial-gradient(circle at ${position.x} ${position.y}, rgb(254,239,159 / 0.1) 10%, rgb(254,239,159 / 0.09) 20%, transparent)`,
         }}
       />
       {icon ? icon : label}

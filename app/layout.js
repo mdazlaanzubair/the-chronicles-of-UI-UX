@@ -3,12 +3,12 @@ import SideBar from "./components/navigation/SideBar";
 import Header from "./components/generic/Header";
 import Footer from "./components/generic/Footer";
 import GeneralProvider from "./context/GeneralContext";
-import { Eczar, Inter } from "next/font/google";
+import { Red_Hat_Display, Inter } from "next/font/google";
 
-const display = Eczar({
+const display = Red_Hat_Display({
   subsets: ["latin"],
   variable: "--display",
-  weight: "600",
+  weight: "variable",
 });
 
 const inter = Inter({ subsets: ["latin"], variable: "--inter" });
