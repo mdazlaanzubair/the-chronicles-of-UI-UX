@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
             <SideBar />
             <Header />
             <div className="view-port-container w-full h-full lg:w-10/12 bg-base-100/35 scroll-smooth">
-              <div className="relative w-full h-full">{children}</div>
+              <div className="relative w-full h-auto">{children}</div>
               <Footer />
             </div>
           </main>
