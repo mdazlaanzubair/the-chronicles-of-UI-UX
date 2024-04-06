@@ -30,7 +30,7 @@ const Button = ({ prefix, suffix, className, label, onClick }) => {
         }}
       />
       {prefix && prefix}
-      <span className="mb-[.17rem]">{label && label}</span>
+      {label && <span className="mb-[.17rem]">{label}</span>}
       {suffix && suffix}
     </button>
   );
