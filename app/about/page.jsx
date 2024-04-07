@@ -198,7 +198,7 @@ const Stripes = ({
   isTop = true,
   isLeft = true,
   position = "left",
-  rotation = "rotate-45",
+  rotation = "rotate-90",
 }) => {
   return (
     <div className="my-10">
@@ -208,7 +208,6 @@ const Stripes = ({
         } absolute w-full flex flex-col gap-1 ${rotation}`}
       >
         <Marquee
-          autoFill
           direction={position}
           style={{
             maskImage:
@@ -230,7 +229,7 @@ const Stripes = ({
           ))}
         </Marquee>
       </div>
-      <Marquee
+      {/* <Marquee
         autoFill
         direction={position}
         style={{
@@ -251,7 +250,7 @@ const Stripes = ({
             <span className="text-sm">{item?.title}</span>
           </div>
         ))}
-      </Marquee>
+      </Marquee> */}
     </div>
   );
 };
