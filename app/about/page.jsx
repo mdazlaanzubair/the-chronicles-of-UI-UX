@@ -47,9 +47,9 @@ const AboutPage = () => {
               .
             </p>
             <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
-              These virtual adventures weren't just fun; they ignited a passion
-              for competition. Counter-Strike became my new obsession, and I
-              dreamed of joining the ranks of legendary players like{" "}
+              These virtual adventures weren&apos;t just fun; they ignited a
+              passion for competition. Counter-Strike became my new obsession,
+              and I dreamed of joining the ranks of legendary players like{" "}
               <span className="text-secondary">Device</span>,{" "}
               <span className="text-secondary">Neo</span>, or{" "}
               <span className="text-secondary">Niko</span> (my personal CS
@@ -139,15 +139,15 @@ const AboutPage = () => {
               HOW DO I SPENT MY SPARE TIME
             </h1>
             <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
-              When I'm not coding away, you'll find me diving headfirst into the
-              ever-evolving world of tech. Devouring articles about the latest
-              innovations keeps me inspired.
+              When I&apos;m not coding away, you&apos;ll find me diving
+              headfirst into the ever-evolving world of tech. Devouring articles
+              about the latest innovations keeps me inspired.
             </p>
             <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
-              I'm always eager to explore new web tools that can help me craft
-              even better experiences. But it's not all work and no play. A
-              touch of creativity sneaks in too I love experimenting with AI art
-              using{" "}
+              I&apos;m always eager to explore new web tools that can help me
+              craft even better experiences. But it&apos;s not all work and no
+              play. A touch of creativity sneaks in too I love experimenting
+              with AI art using{" "}
               <Link
                 href="https://leonardo.ai/"
                 target="_blank"
@@ -158,7 +158,7 @@ const AboutPage = () => {
               , the results can be truly mind-blowing!
             </p>
             <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
-              Of course, the competitive fire still burns. Whether it's
+              Of course, the competitive fire still burns. Whether it&apos;s
               strategizing in a classic game of{" "}
               <Link
                 href="https://store.steampowered.com/app/730/CounterStrike_2/"
