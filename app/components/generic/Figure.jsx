@@ -7,7 +7,7 @@ const Figure = ({
   className,
   size = "w-[250px] h-[350px]",
   caption = "Profile Picture",
-  tag = "Img",
+  tag = "Imagine",
 }) => {
   return (
     <div className={`group ${className}`}>

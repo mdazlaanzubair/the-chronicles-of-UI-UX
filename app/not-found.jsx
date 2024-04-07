@@ -6,15 +6,14 @@ import img404 from "@/public/other/404.jpg";
 
 export default function Custom404() {
   return (
-    <div className="w-full h-full flex flex-col lg:flex-row-reverse justify-center items-center px-6 lg:px-32">
+    <div className="w-full h-full flex flex-col lg:flex-row-reverse justify-center items-center p-6 lg:p-32">
       <div className="hidden lg:w-1/2 lg:flex">
         <div className="container mx-auto">
           <Figure
             // className="w-3/4 h-3/2 mx-auto"
             size="w-full h-full"
             src={img404.src}
-            caption="The Case Study"
-            tag="IMG"
+            caption="Found Peace"
           />
         </div>
       </div>

@@ -38,7 +38,7 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className={`${
+                className={`mb-[.12rem] ${
                   isMenuOpen
                     ? "w-0 h-0 opacity-0 rotate-180"
                     : "w-6 h-6 opacity-100 rotate-0"
@@ -56,7 +56,7 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className={`${
+                className={`mb-[.15rem] ${
                   isMenuOpen
                     ? "w-6 h-6 opacity-100 rotate-0"
                     : "w-0 h-0 opacity-0 -rotate-180"

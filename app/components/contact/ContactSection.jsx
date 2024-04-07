@@ -1,9 +1,14 @@
+"use client";
+
 import React from "react";
 import Figure from "../generic/Figure";
 import Button from "../generic/Button";
 import contactImage from "@/public/other/contact-img.jpg";
+import { useRouter } from "next/navigation";
 
 const ContactSection = () => {
+  const router = useRouter();
+
   return (
     <section
       id="contact-section"
@@ -28,7 +33,7 @@ const ContactSection = () => {
           &amp; ideas.
         </p>
         <div className="flex items-center gap-3">
-          <Button label="About me" />
+          <Button label="About me" onClick={() => router.push("/about")} />
           <a
             className={`flex gap-3 whitespace-nowrap font-semibold text-xs text-primary hover:text-accent py-3 pb-[.6rem] rounded-lg transition-all ease-in-out duration-300`}
             href="https://calendly.com/mdazlaanzubair/virtual-interaction"
@@ -41,7 +46,6 @@ const ContactSection = () => {
       <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
         <Figure
           caption="Feel free to contact"
-          tag="Good Bye"
           size="w-[300px] h-[300px]"
           src={contactImage.src}
         />
