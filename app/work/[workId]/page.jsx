@@ -12,6 +12,28 @@ const spotLightVariants = {
   visible: { opacity: 1, transition: { duration: 3 } },
 };
 
+const contentContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.23,
+    },
+  },
+};
+
+const contentVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: "easeOut",
+      duration: 0.3,
+    },
+  },
+};
+
 const contentSections = [
   "Overview",
   "Problem",
@@ -60,10 +82,19 @@ const WorkPage = ({ params }) => {
 
     return () => observer.disconnect();
   }, [params]);
+
   useEffect(() => setIsVisible(true), []);
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-between gap-5">
+    <motion.div
+      variants={contentContainerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{
+        once: true,
+      }}
+      className="relative w-full h-full flex flex-col items-center justify-between gap-3"
+    >
       {isVisible && (
         <motion.div
           variants={spotLightVariants}
@@ -71,7 +102,7 @@ const WorkPage = ({ params }) => {
           animate="visible"
           className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
           style={{
-            background: `radial-gradient(circle at center, rgba(97,163,212, 1) 0%, rgba(97,163,212, 0.5) 50%, rgba(97,163,212, 0.15) 50%, rgba(97,163,212, 0), rgba(97,163,212, 0), transparent, transparent)`,
+            background: `radial-gradient(circle at center, rgba(97,163,212, 1) 0%, rgba(97,163,212, 0.9) 50%, rgba(97,163,212, 0.3) 50%, rgba(97,163,212, 0), rgba(97,163,212, 0), transparent, transparent)`,
           }}
         />
       )}
@@ -80,7 +111,7 @@ const WorkPage = ({ params }) => {
         id="Back to Top"
         className="w-full gap-3 z-10 flex items-center justify-between p-3"
       >
-        <div className="flex flex-shrink">
+        <motion.div variants={contentVariants} className="flex flex-shrink">
           <Button
             onClick={() => router.back()}
             prefix={
@@ -100,9 +131,9 @@ const WorkPage = ({ params }) => {
               </svg>
             }
           />
-        </div>
+        </motion.div>
         <div className="flex flex-grow"></div>
-        <div className="flex flex-shrink">
+        <motion.div variants={contentVariants} className="flex flex-shrink">
           <Button
             className="hidden lg:flex"
             onClick={toggleContentNav}
@@ -140,17 +171,23 @@ const WorkPage = ({ params }) => {
               )
             }
           />
-        </div>
+        </motion.div>
       </div>
 
       <div className="flex w-full h-full justify-between items-start gap-3 z-10 p-3 lg:px-16 overflow-auto">
         <div className="w-full h-full flex flex-col overflow-scroll">
-          <h1 className="font-display text-3xl lg:text-4xl leading-snug text-secondary text-center font-extrabold mt-5 mb-3">
+          <motion.h1
+            variants={contentVariants}
+            className="font-display text-3xl lg:text-4xl leading-snug text-secondary text-center font-extrabold mt-5 mb-3"
+          >
             {workData?.title}
-          </h1>
-          <p className="text-center text-sm w-full font-bold mb-10">
+          </motion.h1>
+          <motion.p
+            variants={contentVariants}
+            className="text-center text-sm w-full font-bold mb-10"
+          >
             {workData?.subTitle}
-          </p>
+          </motion.p>
           <div className="container mx-auto">
             <Figure
               className="w-3/4 h-3/2 mx-auto"
@@ -169,33 +206,68 @@ const WorkPage = ({ params }) => {
                 >
                   <div className="col-span-1 flex flex-col gap-3">
                     <div>
-                      <h1 className="work-heading-style">My Role</h1>
-                      <p className="work-para-style">
+                      <motion.h1
+                        variants={contentVariants}
+                        className="work-heading-style"
+                      >
+                        My Role
+                      </motion.h1>
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.overview?.myRole}
-                      </p>
+                      </motion.p>
                     </div>
                     <div>
-                      <h1 className="work-heading-style">The Team</h1>
-                      <p className="work-para-style">
+                      <motion.h1
+                        variants={contentVariants}
+                        className="work-heading-style"
+                      >
+                        The Team
+                      </motion.h1>
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.overview?.team}
-                      </p>
+                      </motion.p>
                     </div>
                     <div>
-                      <h1 className="work-heading-style">Timeline</h1>
-                      <p className="work-para-style">
+                      <motion.h1
+                        variants={contentVariants}
+                        className="work-heading-style"
+                      >
+                        Timeline
+                      </motion.h1>
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.overview?.timeline}
-                      </p>
+                      </motion.p>
                     </div>
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div>
-                      <h1 className="work-heading-style">Overview</h1>
-                      <p className="work-para-style">
+                      <motion.h1
+                        variants={contentVariants}
+                        className="work-heading-style"
+                      >
+                        Overview
+                      </motion.h1>
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.overview?.projectDesc?.para1}
-                      </p>
-                      <p className="work-para-style">
+                      </motion.p>
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.overview?.projectDesc?.para2}
-                      </p>
+                      </motion.p>
                     </div>
                   </div>
                 </div>
@@ -205,18 +277,27 @@ const WorkPage = ({ params }) => {
                   className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
                 >
                   <div className="col-span-1 flex flex-col gap-3">
-                    <h1 className="text-secondary mb-1 text-[16px] font-semibold">
+                    <motion.h1
+                      variants={contentVariants}
+                      className="text-secondary mb-1 text-[16px] font-semibold"
+                    >
                       What&apos;s the problem
-                    </h1>
+                    </motion.h1>
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div>
-                      <p className="work-para-style">
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.problemStatement?.para1}
-                      </p>
-                      <p className="work-para-style">
+                      </motion.p>
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.problemStatement?.para2}
-                      </p>
+                      </motion.p>
                     </div>
                   </div>
                 </div>
@@ -226,18 +307,27 @@ const WorkPage = ({ params }) => {
                   className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
                 >
                   <div className="col-span-1 flex flex-col gap-3">
-                    <h1 className="text-secondary mb-1 text-[16px] font-semibold">
+                    <motion.h1
+                      variants={contentVariants}
+                      className="text-secondary mb-1 text-[16px] font-semibold"
+                    >
                       Resolution of that problem
-                    </h1>
+                    </motion.h1>
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div>
-                      <p className="work-para-style">
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.solution?.para1}
-                      </p>
-                      <p className="work-para-style">
+                      </motion.p>
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.solution?.para2}
-                      </p>
+                      </motion.p>
                     </div>
                   </div>
                 </div>
@@ -247,18 +337,27 @@ const WorkPage = ({ params }) => {
                   className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
                 >
                   <div className="col-span-1 flex flex-col gap-3">
-                    <h1 className="text-secondary mb-1 text-[16px] font-semibold">
+                    <motion.h1
+                      variants={contentVariants}
+                      className="text-secondary mb-1 text-[16px] font-semibold"
+                    >
                       Impact of solution
-                    </h1>
+                    </motion.h1>
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div>
-                      <p className="work-para-style">
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.impact?.para1}
-                      </p>
-                      <p className="work-para-style">
+                      </motion.p>
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.impact?.para2}
-                      </p>
+                      </motion.p>
                     </div>
                   </div>
                 </div>
@@ -268,18 +367,27 @@ const WorkPage = ({ params }) => {
                   className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
                 >
                   <div className="col-span-1 flex flex-col gap-3">
-                    <h1 className="text-secondary mb-1 text-[16px] font-semibold">
+                    <motion.h1
+                      variants={contentVariants}
+                      className="text-secondary mb-1 text-[16px] font-semibold"
+                    >
                       Final Thoughts
-                    </h1>
+                    </motion.h1>
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div>
-                      <p className="work-para-style">
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.closingNotes?.para1}
-                      </p>
-                      <p className="work-para-style">
+                      </motion.p>
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
                         {workData?.details?.closingNotes?.para2}
-                      </p>
+                      </motion.p>
                     </div>
                   </div>
                 </div>
@@ -292,7 +400,7 @@ const WorkPage = ({ params }) => {
           activeNav={activeSection}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

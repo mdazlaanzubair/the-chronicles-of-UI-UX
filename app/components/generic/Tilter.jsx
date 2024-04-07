@@ -4,7 +4,7 @@ import React from "react";
 import Tilt from "react-parallax-tilt";
 
 const Tilter = ({ children }) => (
-  <Tilt className="background-stripes parallax-effect" perspective={1000}>
+  <Tilt perspective={1000} tiltMaxAngleX={5} tiltMaxAngleY={5}>
     <div className="inner-element">
       {children ? (
         children

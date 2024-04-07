@@ -12,13 +12,43 @@ const spotLightVariants = {
   visible: { opacity: 1, transition: { duration: 3 } },
 };
 
+const contentContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.23,
+    },
+  },
+};
+
+const contentVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: "easeOut",
+      duration: 0.3,
+    },
+  },
+};
+
 const WorkPage = () => {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => setIsVisible(true), []);
 
   return (
-    <div className="relative w-full flex flex-col items-center justify-between gap-5 py-6 lg:py-16">
+    <motion.div
+      variants={contentContainerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{
+        once: true,
+      }}
+      className="relative w-full flex flex-col items-center justify-between gap-5 py-6 lg:py-16"
+    >
       {isVisible && (
         <motion.div
           variants={spotLightVariants}
@@ -26,14 +56,26 @@ const WorkPage = () => {
           animate="visible"
           className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
           style={{
-            background: `radial-gradient(circle at center, rgba(97,163,212, 1) 0%, rgba(97,163,212, 0.5) 50%, rgba(97,163,212, 0.15) 50%, rgba(97,163,212, 0), rgba(97,163,212, 0), transparent, transparent)`,
+            background: `radial-gradient(circle at center, rgba(97,163,212, 1) 0%, rgba(97,163,212, 0.9) 50%, rgba(97,163,212, 0.3) 50%, rgba(97,163,212, 0), rgba(97,163,212, 0), transparent, transparent)`,
           }}
         />
       )}
 
       <div className="flex flex-col items-center mt-5 z-10 px-6 lg:px-32">
-        <div className="relative">
-          <div className="absolute rounded-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#61a3d4] blur-2xl transition-all ease-in-out duration-1000" />
+        <motion.div variants={contentVariants} className="relative">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  ease: "easeOut",
+                  duration: 0.3,
+                },
+              },
+            }}
+            className="absolute rounded-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#61a3d4] blur-2xl transition-all ease-in-out duration-1000"
+          />
           <Icon size="w-20 h-20" lightColor="97 163 212">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -49,29 +91,37 @@ const WorkPage = () => {
               />
             </svg>
           </Icon>
-        </div>
+        </motion.div>
 
-        <h1 className="font-display text-3xl lg:text-4xl leading-snug text-secondary text-center font-extrabold mt-5 mb-3">
+        <motion.h1
+          variants={contentVariants}
+          className="font-display text-3xl lg:text-4xl leading-snug text-secondary text-center font-extrabold mt-5 mb-3"
+        >
           Executive Efforts
-        </h1>
-        <p className="text-sm leading-relaxed tracking-normal font-semibold text-center">
+        </motion.h1>
+        <motion.p
+          variants={contentVariants}
+          className="text-sm leading-relaxed tracking-normal font-semibold text-center"
+        >
           Some contributions to fulfill specific business need or clients&apos;
           requirements
-        </p>
+        </motion.p>
       </div>
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-5 px-6 lg:px-32">
         {workList?.map((work, index) => (
-          <ImageCard
-            key={index}
-            data={work}
-            clickHandler={() =>
-              work?.isLocked ? null : router.push(`/work/${work?.id}`)
-            }
-          />
+          <motion.div variants={contentVariants} key={index}>
+            <ImageCard
+              key={index}
+              data={work}
+              clickHandler={() =>
+                work?.isLocked ? null : router.push(`/work/${work?.id}`)
+              }
+            />
+          </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

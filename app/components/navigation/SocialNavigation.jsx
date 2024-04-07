@@ -1,5 +1,30 @@
+"use client";
+
 import React from "react";
 import ButtonLink from "../generic/ButtonLink";
+import { motion } from "framer-motion";
+
+const contentContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.23,
+    },
+  },
+};
+
+const contentVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: "easeOut",
+      duration: 0.3,
+    },
+  },
+};
 
 // SOCIAL NAVIGATION LIST
 const socialNavList = [
@@ -130,17 +155,26 @@ const SocialNavigation = () => {
       <h2 className="text-[9px] font-semibold text-secondary mx-3 my-4">
         I&apos;M SOCIAL
       </h2>
-      <div className="flex flex-wrap items-center gap-3">
+      <motion.div
+        variants={contentContainerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{
+          once: true,
+        }}
+        className="flex flex-wrap items-center gap-3"
+      >
         {socialNavList?.map((item, index) => (
-          <ButtonLink
-            key={index}
-            link={item?.url}
-            label={item?.title}
-            target="_blank"
-            icon={<span className="w-5 h-5">{item?.icon()}</span>}
-          />
+          <motion.div variants={contentVariants} key={index}>
+            <ButtonLink
+              link={item?.url}
+              label={item?.title}
+              target="_blank"
+              icon={<span className="w-5 h-5">{item?.icon()}</span>}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

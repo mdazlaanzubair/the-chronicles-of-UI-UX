@@ -15,12 +15,40 @@ const spotLightVariants = {
   visible: { opacity: 1, transition: { duration: 3 } },
 };
 
+const contentContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.23,
+    },
+  },
+};
+
+const contentVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: "easeOut",
+      duration: 0.3,
+    },
+  },
+};
+
 const AboutPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => setIsVisible(true), []);
 
   return (
-    <div
+    <motion.div
+      variants={contentContainerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{
+        once: true,
+      }}
       id="about-section"
       className="flex flex-col w-full h-full mx-auto px-6 lg:px-32 overflow-hidden"
     >
@@ -31,17 +59,23 @@ const AboutPage = () => {
           animate="visible"
           className="absolute flex -top-[300%] -left-[300%] bottom-0 right-0 blur-3xl"
           style={{
-            background: `radial-gradient(circle at center, rgba(255,93,212, 1) 0%, rgba(255,93,212, 0.5) 50%, rgba(255,93,212, 0.15) 50%, rgba(255,93,212, 0), rgba(255,93,212, 0), transparent, transparent)`,
+            background: `radial-gradient(circle at center, rgba(255,93,212, 1) 0%, rgba(255,93,212, 0.9) 50%, rgba(255,93,212, 0.3) 50%, rgba(255,93,212, 0), rgba(255,93,212, 0), transparent, transparent)`,
           }}
         />
       )}
       <div className="relative w-full flex flex-col items-center justify-between py-10 lg:py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-5 z-10">
           <div className="w-full md:w-2/3">
-            <h1 className="font-display text-xs leading-snug tracking-wider text-secondary font-extrabold mb-2">
+            <motion.h1
+              variants={contentVariants}
+              className="font-display text-xs leading-snug tracking-wider text-secondary font-extrabold mb-2"
+            >
               WHO AM I
-            </h1>
-            <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
+            </motion.h1>
+            <motion.p
+              variants={contentVariants}
+              className="text-sm leading-relaxed tracking-normal font-medium mb-3"
+            >
               I was born and raised in Karachi, Pakistan with no clear interests
               except for gaming. Growing up, gaming was my entire world. I spent
               countless hours exploring the sprawling landscapes of{" "}
@@ -61,8 +95,11 @@ const AboutPage = () => {
                 Project I.G.I
               </Link>
               .
-            </p>
-            <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
+            </motion.p>
+            <motion.p
+              variants={contentVariants}
+              className="text-sm leading-relaxed tracking-normal font-medium mb-3"
+            >
               These virtual adventures weren&apos;t just fun; they ignited a
               passion for competition. Counter-Strike became my new obsession,
               and I dreamed of joining the ranks of legendary players like{" "}
@@ -71,7 +108,7 @@ const AboutPage = () => {
               <span className="text-secondary">Niko</span> (my personal CS
               hero!). I practiced relentlessly, strategizing and honing my
               skills, all with the goal of becoming a pro gamer.
-            </p>
+            </motion.p>
           </div>
           <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
             <Figure
@@ -90,10 +127,16 @@ const AboutPage = () => {
         />
         <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-5 z-10">
           <div className="w-full md:w-2/3">
-            <h1 className="font-display text-xs leading-snug tracking-wider text-secondary font-extrabold mb-2">
+            <motion.h1
+              variants={contentVariants}
+              className="font-display text-xs leading-snug tracking-wider text-secondary font-extrabold mb-2"
+            >
               PRO-GAMING TO PROGRAMMING
-            </h1>
-            <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
+            </motion.h1>
+            <motion.p
+              variants={contentVariants}
+              className="text-sm leading-relaxed tracking-normal font-medium mb-3"
+            >
               Everything changed thanks to a friend named{" "}
               <Link
                 href="https://www.linkedin.com/in/b4basitali/"
@@ -113,13 +156,19 @@ const AboutPage = () => {
                 Saylani Welfare
               </Link>
               .
-            </p>
-            <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
+            </motion.p>
+            <motion.p
+              variants={contentVariants}
+              className="text-sm leading-relaxed tracking-normal font-medium mb-3"
+            >
               Now, coding was a complete mystery to me at the time. But hey,
               free education? Why not? Little did I know, that decision would
               spark a whole new passion within me.
-            </p>
-            <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
+            </motion.p>
+            <motion.p
+              variants={contentVariants}
+              className="text-sm leading-relaxed tracking-normal font-medium mb-3"
+            >
               So, I enrolled in the{" "}
               <span className="text-secondary">BS program</span> at{" "}
               <Link
@@ -132,7 +181,7 @@ const AboutPage = () => {
               , determined to build a solid foundation in software engineering.
               There, I immersed myself in learning various web development
               tools, mastering them to craft incredible experiences for the web.
-            </p>
+            </motion.p>
           </div>
           <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
             <Figure
@@ -151,15 +200,24 @@ const AboutPage = () => {
         />
         <div className="flex flex-col lg:flex-row items-center justify-between gap-5 z-10">
           <div className="w-full md:w-2/3">
-            <h1 className="font-display text-xs leading-snug tracking-wider text-secondary font-extrabold mb-2">
+            <motion.h1
+              variants={contentVariants}
+              className="font-display text-xs leading-snug tracking-wider text-secondary font-extrabold mb-2"
+            >
               HOW DO I SPENT MY SPARE TIME
-            </h1>
-            <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
+            </motion.h1>
+            <motion.p
+              variants={contentVariants}
+              className="text-sm leading-relaxed tracking-normal font-medium mb-3"
+            >
               When I&apos;m not coding away, you&apos;ll find me diving
               headfirst into the ever-evolving world of tech. Devouring articles
               about the latest innovations keeps me inspired.
-            </p>
-            <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
+            </motion.p>
+            <motion.p
+              variants={contentVariants}
+              className="text-sm leading-relaxed tracking-normal font-medium mb-3"
+            >
               I&apos;m always eager to explore new web tools that can help me
               craft even better experiences. But it&apos;s not all work and no
               play. A touch of creativity sneaks in too I love experimenting
@@ -172,8 +230,11 @@ const AboutPage = () => {
                 Leonardo AI
               </Link>
               , the results can be truly mind-blowing!
-            </p>
-            <p className="text-sm leading-relaxed tracking-normal font-medium mb-3">
+            </motion.p>
+            <motion.p
+              variants={contentVariants}
+              className="text-sm leading-relaxed tracking-normal font-medium mb-3"
+            >
               Of course, the competitive fire still burns. Whether it&apos;s
               strategizing in a classic game of{" "}
               <Link
@@ -192,7 +253,7 @@ const AboutPage = () => {
                 Chess
               </Link>
               , I find a healthy dose of competition to keep me sharp.
-            </p>
+            </motion.p>
           </div>
           <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
             <Figure
@@ -204,7 +265,7 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

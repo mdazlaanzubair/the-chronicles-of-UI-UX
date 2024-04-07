@@ -14,7 +14,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.4",
-    "react-parallax-tilt": "^1.7.219"
+    "react-parallax-tilt": "^1.7.219",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
