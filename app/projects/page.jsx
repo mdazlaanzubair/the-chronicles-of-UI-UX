@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Icon from "../components/generic/Icon";
 import ImageCard from "../components/generic/ImageCard";
-import { projectList } from "../components/project/project-list";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { GeneralContext } from "../context/GeneralContext";
 
 const spotLightVariants = {
   hidden: { opacity: 0 },
@@ -35,6 +35,8 @@ const contentVariants = {
 };
 
 const ProjectsPage = () => {
+  const { projectList, selectProject } = useContext(GeneralContext);
+
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => setIsVisible(true), []);
@@ -108,16 +110,12 @@ const ProjectsPage = () => {
         </motion.p>
       </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-5 px-6 lg:px-32">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 mt-10 gap-5 px-6 lg:px-32">
         {projectList?.map((project, index) => (
           <motion.div variants={contentVariants} key={index}>
             <ImageCard
               data={project}
-              clickHandler={() =>
-                project?.isLocked
-                  ? null
-                  : router.push(`/projects/${project?.id}`)
-              }
+              clickHandler={() => selectProject(project)}
             />
           </motion.div>
         ))}

@@ -5,6 +5,7 @@ import Figure from "../components/generic/Figure";
 import aboutImg1 from "@/public/other/about-img-1.jpg";
 import aboutImg2 from "@/public/other/about-img-2.jpg";
 import aboutImg3 from "@/public/other/about-img-3.jpg";
+import aboutImg4 from "@/public/other/about-img-4.jpg";
 import { techLogosArrayComplete } from "../utils/iconExporter";
 import Marquee from "react-fast-marquee";
 import Link from "next/link";
@@ -185,7 +186,7 @@ const AboutPage = () => {
           </div>
           <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
             <Figure
-              src={aboutImg2.src}
+              src={aboutImg4.src}
               size="w-[400px] h-[300px]"
               caption="Programming As Professional"
               tag="IMAGINE"

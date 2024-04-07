@@ -5,7 +5,6 @@ import Button from "../generic/Button";
 import Icon from "../generic/Icon";
 import { useRouter } from "next/navigation";
 import ImageCard from "../generic/ImageCard";
-import { workList } from "./work-list";
 import { motion } from "framer-motion";
 
 const contentContainerVariants = {
@@ -30,7 +29,7 @@ const contentVariants = {
   },
 };
 
-const WorkSection = () => {
+const WorkSection = ({ workList, selectWork }) => {
   const router = useRouter();
   return (
     <motion.section
@@ -106,17 +105,12 @@ const WorkSection = () => {
         </motion.div>
       </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5">
         {workList?.map((work, index) => {
           if (work?.isFeatured) {
             return (
               <motion.div variants={contentVariants} key={index}>
-                <ImageCard
-                  data={work}
-                  clickHandler={() =>
-                    work?.isLocked ? null : router.push(`/work/${work?.id}`)
-                  }
-                />
+                <ImageCard data={work} clickHandler={() => selectWork(work)} />
               </motion.div>
             );
           }

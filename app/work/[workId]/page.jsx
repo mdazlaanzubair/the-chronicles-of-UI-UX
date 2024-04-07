@@ -2,10 +2,10 @@
 
 import Button from "@/app/components/generic/Button";
 import Figure from "@/app/components/generic/Figure";
-import { workList } from "@/app/components/work/work-list";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { GeneralContext } from "@/app/context/GeneralContext";
 
 const spotLightVariants = {
   hidden: { opacity: 0 },
@@ -17,7 +17,7 @@ const contentContainerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.23,
+      staggerChildren: 0.1,
     },
   },
 };
@@ -44,9 +44,10 @@ const contentSections = [
 ];
 
 const WorkPage = ({ params }) => {
+  const { workData } = useContext(GeneralContext);
+
   const [activeSection, setActiveSection] = useState("Overview");
 
-  const [workData, setWorkData] = useState(null);
   const [isContentNavOpen, setIsContentNavOpen] = useState(true);
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
@@ -54,16 +55,7 @@ const WorkPage = ({ params }) => {
   // FUNCTION TO TOGGLE CONTENT NAVBAR
   const toggleContentNav = () => setIsContentNavOpen(!isContentNavOpen);
 
-  // FUNCTION TO GET WORK DATA BY ID
-  const getWorkById = (id) => {
-    const dataArray = workList?.filter((work) => work?.id == id);
-    setWorkData(dataArray[0]);
-  };
-
   useEffect(() => {
-    // FETCHING WORK DATA
-    getWorkById(params?.workId);
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -83,7 +75,7 @@ const WorkPage = ({ params }) => {
     return () => observer.disconnect();
   }, [params]);
 
-  useEffect(() => setIsVisible(true), []);
+  useEffect(() => setIsVisible(true), [params]);
 
   return (
     <motion.div
@@ -256,18 +248,18 @@ const WorkPage = ({ params }) => {
                       >
                         Overview
                       </motion.h1>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.overview?.projectDesc?.para1}
-                      </motion.p>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.overview?.projectDesc?.para2}
-                      </motion.p>
+                      {workData?.details?.overview?.desc &&
+                        Object.values(workData?.details?.overview?.desc)?.map(
+                          (para, index) => (
+                            <motion.p
+                              key={index}
+                              variants={contentVariants}
+                              className="work-para-style"
+                            >
+                              {para}
+                            </motion.p>
+                          )
+                        )}
                     </div>
                   </div>
                 </div>
@@ -281,23 +273,60 @@ const WorkPage = ({ params }) => {
                       variants={contentVariants}
                       className="text-secondary mb-1 text-[16px] font-semibold"
                     >
-                      What&apos;s the problem
+                      What&apos;s{" "}
+                      <a
+                        href={workData?.url}
+                        target="_blank"
+                        className="text-accent underline underline-offset-2"
+                      >
+                        {workData?.title}
+                      </a>
                     </motion.h1>
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.problemStatement?.para1}
-                      </motion.p>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.problemStatement?.para2}
-                      </motion.p>
+                      {workData?.details?.projectDesc &&
+                        Object.values(workData?.details?.projectDesc)?.map(
+                          (para, index) => (
+                            <motion.p
+                              key={index}
+                              variants={contentVariants}
+                              className="work-para-style"
+                            >
+                              {para}
+                            </motion.p>
+                          )
+                        )}
+                    </div>
+                  </div>
+                </div>
+                <div className="w-2/4 mx-auto my-5 lg:my-10 h-[.15rem] bg-primary/15" />
+                <div
+                  id="Problem"
+                  className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
+                >
+                  <div className="col-span-1 flex flex-col gap-3">
+                    <motion.h1
+                      variants={contentVariants}
+                      className="text-secondary mb-1 text-[16px] font-semibold"
+                    >
+                      Problem Statement
+                    </motion.h1>
+                  </div>
+                  <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
+                    <div>
+                      {workData?.details?.problemStatement &&
+                        Object.values(workData?.details?.problemStatement)?.map(
+                          (para, index) => (
+                            <motion.p
+                              key={index}
+                              variants={contentVariants}
+                              className="work-para-style"
+                            >
+                              {para}
+                            </motion.p>
+                          )
+                        )}
                     </div>
                   </div>
                 </div>
@@ -311,23 +340,23 @@ const WorkPage = ({ params }) => {
                       variants={contentVariants}
                       className="text-secondary mb-1 text-[16px] font-semibold"
                     >
-                      Resolution of that problem
+                      Solution
                     </motion.h1>
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.solution?.para1}
-                      </motion.p>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.solution?.para2}
-                      </motion.p>
+                      {workData?.details?.solution &&
+                        Object.values(workData?.details?.solution)?.map(
+                          (para, index) => (
+                            <motion.p
+                              key={index}
+                              variants={contentVariants}
+                              className="work-para-style"
+                            >
+                              {para}
+                            </motion.p>
+                          )
+                        )}
                     </div>
                   </div>
                 </div>
@@ -346,18 +375,18 @@ const WorkPage = ({ params }) => {
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.impact?.para1}
-                      </motion.p>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.impact?.para2}
-                      </motion.p>
+                      {workData?.details?.impact &&
+                        Object.values(workData?.details?.impact)?.map(
+                          (para, index) => (
+                            <motion.p
+                              key={index}
+                              variants={contentVariants}
+                              className="work-para-style"
+                            >
+                              {para}
+                            </motion.p>
+                          )
+                        )}
                     </div>
                   </div>
                 </div>
@@ -376,18 +405,18 @@ const WorkPage = ({ params }) => {
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
                     <div>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.closingNotes?.para1}
-                      </motion.p>
-                      <motion.p
-                        variants={contentVariants}
-                        className="work-para-style"
-                      >
-                        {workData?.details?.closingNotes?.para2}
-                      </motion.p>
+                      {workData?.details?.closingNotes &&
+                        Object.values(workData?.details?.closingNotes)?.map(
+                          (para, index) => (
+                            <motion.p
+                              key={index}
+                              variants={contentVariants}
+                              className="work-para-style"
+                            >
+                              {para}
+                            </motion.p>
+                          )
+                        )}
                     </div>
                   </div>
                 </div>

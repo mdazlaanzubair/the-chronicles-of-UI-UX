@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { projectList } from "./project-list";
 import Icon from "../generic/Icon";
 import { useRouter } from "next/navigation";
 import Button from "../generic/Button";
@@ -30,8 +29,9 @@ const contentVariants = {
   },
 };
 
-const ProjectSection = () => {
+const ProjectSection = ({ projectList, selectProject }) => {
   const router = useRouter();
+
   return (
     <motion.section
       variants={contentContainerVariants}
@@ -106,18 +106,14 @@ const ProjectSection = () => {
         </motion.div>
       </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5">
         {projectList?.map((project, index) => {
           if (project?.isFeatured) {
             return (
               <motion.div variants={contentVariants} key={index}>
                 <ImageCard
                   data={project}
-                  clickHandler={() =>
-                    project?.isLocked
-                      ? null
-                      : router.push(`/projects/${project?.id}`)
-                  }
+                  clickHandler={() => selectProject(project)}
                 />
               </motion.div>
             );

@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ContactSection from "./components/contact/ContactSection";
 import HeroSection from "./components/hero/HeroSection";
 import ProjectSection from "./components/project/ProjectSection";
 import WorkSection from "./components/work/WorkSection";
 import { motion } from "framer-motion";
+import { GeneralContext } from "./context/GeneralContext";
 
 const spotLightVariants = {
   hidden: { opacity: 0 },
@@ -13,6 +14,9 @@ const spotLightVariants = {
 };
 
 export default function Home() {
+  const { workList, selectWork, projectList, selectProject } =
+    useContext(GeneralContext);
+
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => setIsVisible(true), []);
 
@@ -31,8 +35,11 @@ export default function Home() {
       )}
       <div className="z-10">
         <HeroSection />
-        <WorkSection />
-        <ProjectSection />
+        <WorkSection workList={workList} selectWork={selectWork} />
+        <ProjectSection
+          projectList={projectList}
+          selectProject={selectProject}
+        />
         <ContactSection />
       </div>
     </div>

@@ -2,10 +2,10 @@
 
 import Button from "@/app/components/generic/Button";
 import Figure from "@/app/components/generic/Figure";
-import { projectList } from "@/app/components/project/project-list";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { GeneralContext } from "@/app/context/GeneralContext";
 
 const spotLightVariants = {
   hidden: { opacity: 0 },
@@ -35,19 +35,12 @@ const contentVariants = {
 };
 
 const ProjectPage = ({ params }) => {
-  const [projectData, setProjectData] = useState(null);
+  const { projectData } = useContext(GeneralContext);
+
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
-  // FUNCTION TO GET PROJECT DATA BY ID
-  const getProjectById = (id) => {
-    const dataArray = projectList?.filter((project) => project?.id == id);
-    setProjectData(dataArray[0]);
-  };
-
-  // FETCHING PROJECT DATA
-  useEffect(() => getProjectById(params?.projectId), [params]);
-  useEffect(() => setIsVisible(true), []);
+  useEffect(() => setIsVisible(true), [params]);
 
   return (
     <motion.div
