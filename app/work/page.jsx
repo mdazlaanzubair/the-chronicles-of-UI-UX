@@ -1,22 +1,35 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Icon from "../components/generic/Icon";
 import ImageCard from "../components/generic/ImageCard";
 import { workList } from "../components/work/work-list";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+
+const spotLightVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 3 } },
+};
 
 const WorkPage = () => {
   const router = useRouter();
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => setIsVisible(true), []);
 
   return (
     <div className="relative w-full flex flex-col items-center justify-between gap-5 py-6 lg:py-16">
-      <div
-        className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
-        style={{
-          background: `radial-gradient(circle at center, rgba(97,163,212, 1) 0%, rgba(97,163,212, 0.5) 50%, rgba(97,163,212, 0.15) 50%, rgba(97,163,212, 0), rgba(97,163,212, 0), transparent, transparent)`,
-        }}
-      />
+      {isVisible && (
+        <motion.div
+          variants={spotLightVariants}
+          initial="hidden"
+          animate="visible"
+          className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
+          style={{
+            background: `radial-gradient(circle at center, rgba(97,163,212, 1) 0%, rgba(97,163,212, 0.5) 50%, rgba(97,163,212, 0.15) 50%, rgba(97,163,212, 0), rgba(97,163,212, 0), transparent, transparent)`,
+          }}
+        />
+      )}
 
       <div className="flex flex-col items-center mt-5 z-10 px-6 lg:px-32">
         <div className="relative">

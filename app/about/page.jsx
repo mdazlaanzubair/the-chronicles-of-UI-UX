@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Figure from "../components/generic/Figure";
 import aboutImg1 from "@/public/other/about-img-1.jpg";
 import aboutImg2 from "@/public/other/about-img-2.jpg";
@@ -6,19 +8,33 @@ import aboutImg3 from "@/public/other/about-img-3.jpg";
 import { techLogosArrayComplete } from "../utils/iconExporter";
 import Marquee from "react-fast-marquee";
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+const spotLightVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 3 } },
+};
 
 const AboutPage = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => setIsVisible(true), []);
+
   return (
     <div
       id="about-section"
       className="flex flex-col w-full h-full mx-auto px-6 lg:px-32 overflow-hidden"
     >
-      <div
-        className="absolute flex -top-[300%] -left-[300%] bottom-0 right-0 blur-3xl"
-        style={{
-          background: `radial-gradient(circle at center, rgba(255,93,212, 1) 0%, rgba(255,93,212, 0.5) 50%, rgba(255,93,212, 0.15) 50%, rgba(255,93,212, 0), rgba(255,93,212, 0), transparent, transparent)`,
-        }}
-      />
+      {isVisible && (
+        <motion.div
+          variants={spotLightVariants}
+          initial="hidden"
+          animate="visible"
+          className="absolute flex -top-[300%] -left-[300%] bottom-0 right-0 blur-3xl"
+          style={{
+            background: `radial-gradient(circle at center, rgba(255,93,212, 1) 0%, rgba(255,93,212, 0.5) 50%, rgba(255,93,212, 0.15) 50%, rgba(255,93,212, 0), rgba(255,93,212, 0), transparent, transparent)`,
+          }}
+        />
+      )}
       <div className="relative w-full flex flex-col items-center justify-between py-10 lg:py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-5 z-10">
           <div className="w-full md:w-2/3">
@@ -229,28 +245,6 @@ const Stripes = ({
           ))}
         </Marquee>
       </div>
-      {/* <Marquee
-        autoFill
-        direction={position}
-        style={{
-          maskImage:
-            "linear-gradient(90deg, transparent, #fff, #fff, transparent)",
-        }}
-      >
-        {techLogosArrayComplete?.map((item, index) => (
-          <div
-            key={index}
-            className="bg-base-100 p-2 flex items-center gap-1 rounded"
-          >
-            <img
-              className="w-[16px] h-[16px]"
-              src={item.src}
-              alt={item?.title}
-            />
-            <span className="text-sm">{item?.title}</span>
-          </div>
-        ))}
-      </Marquee> */}
     </div>
   );
 };

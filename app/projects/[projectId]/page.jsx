@@ -5,10 +5,17 @@ import Figure from "@/app/components/generic/Figure";
 import { projectList } from "@/app/components/project/project-list";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
+const spotLightVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 3 } },
+};
 
 const ProjectPage = ({ params }) => {
   const [projectData, setProjectData] = useState(null);
   const router = useRouter();
+  const [isVisible, setIsVisible] = useState(false);
 
   // FUNCTION TO GET PROJECT DATA BY ID
   const getProjectById = (id) => {
@@ -18,15 +25,21 @@ const ProjectPage = ({ params }) => {
 
   // FETCHING PROJECT DATA
   useEffect(() => getProjectById(params?.projectId), [params]);
+  useEffect(() => setIsVisible(true), []);
 
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-between gap-5">
-      <div
-        className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
-        style={{
-          background: `radial-gradient(circle at center, rgba(254,239,159, 1) 0%, rgba(254,239,159, 0.5) 50%, rgba(254,239,159, 0.15) 50%, rgba(254,239,159, 0), rgba(254,239,159, 0), transparent, transparent)`,
-        }}
-      />
+      {isVisible && (
+        <motion.div
+          variants={spotLightVariants}
+          initial="hidden"
+          animate="visible"
+          className="absolute flex -top-[300%] left-1/2 -translate-x-1/2 bottom-0 right-0 w-2/4 blur-3xl"
+          style={{
+            background: `radial-gradient(circle at center, rgba(254,239,159, 1) 0%, rgba(254,239,159, 0.5) 50%, rgba(254,239,159, 0.15) 50%, rgba(254,239,159, 0), rgba(254,239,159, 0), transparent, transparent)`,
+          }}
+        />
+      )}
 
       <div
         id="Back to Top"
