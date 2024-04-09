@@ -40,8 +40,8 @@ const HeroSection = () => {
       id="hero-section"
       className="relative w-full flex flex-col items-center justify-between py-10 lg:py-16"
     >
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-5 z-10">
-        <div className="w-full md:w-2/3">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-20 z-10">
+        <div className="w-full md:w-1/2">
           <motion.div variants={contentVariants}>
             <Link
               href="#contact-section"
@@ -79,7 +79,7 @@ const HeroSection = () => {
           </motion.p>
           <br />
         </div>
-        <div className="hidden w-full h-full lg:w-1/2 lg:flex justify-center">
+        <div className="hidden lg:flex w-1/2 justify-center">
           <Figure
             src={heroImg.src}
             size="w-[400px] h-[300px]"
