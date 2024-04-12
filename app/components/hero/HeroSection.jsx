@@ -5,6 +5,7 @@ import Figure from "../generic/Figure";
 import heroImg from "@/public/other/hero-img.jpg";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import BentoGrid from "./BentoGrid";
 
 const contentContainerVariants = {
   hidden: { opacity: 0 },
@@ -40,7 +41,16 @@ const HeroSection = () => {
       id="hero-section"
       className="relative w-full flex flex-col items-center justify-between py-10 lg:py-16"
     >
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-20 z-10">
+      <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-20 z-10">
+        <div className="flex w-full lg:w-1/2 justify-center">
+          <BentoGrid />
+          {/* <Figure
+            src={heroImg.src}
+            size="w-[400px] h-[300px]"
+            caption="Hello World"
+          /> */}
+        </div>
+
         <div className="w-full md:w-1/2">
           <motion.div variants={contentVariants}>
             <Link
@@ -78,13 +88,6 @@ const HeroSection = () => {
             <span className="text-secondary">functionality</span>.
           </motion.p>
           <br />
-        </div>
-        <div className="hidden lg:flex w-1/2 justify-center">
-          <Figure
-            src={heroImg.src}
-            size="w-[400px] h-[300px]"
-            caption="Hello World"
-          />
         </div>
       </div>
       <motion.div

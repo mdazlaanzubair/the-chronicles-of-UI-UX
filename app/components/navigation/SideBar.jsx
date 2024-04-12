@@ -17,9 +17,9 @@ const SideBar = () => {
     >
       <div
         className={`flex items-center justify-center bg-base-300/80 flex-col p-3 rounded-lg ${
-          isMenuOpen && activeSection !== "/"
+          isMenuOpen || activeSection !== "/"
             ? "translate-x-2 opacity-100"
-            : "-translate-x-full -left-full opacity-0 lg:translate-x-2 lg:left-0 lg:opacity-100"
+            : "-translate-x-full -left-full opacity-0 lg:translate-x-2 lg:left-0"
         } transition-all ease-in-out duration-300`}
       >
         <button

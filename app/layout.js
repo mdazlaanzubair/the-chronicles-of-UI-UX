@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="text-primary bg-base-300">
       <body className={`${display.variable} ${inter.variable}`}>
         <GeneralProvider>
-          <main className="font-inter relative flex flex-col items-center bg-base-300 w-full h-[100vh] p-5 overflow-hidden">
+          <main className="font-inter relative flex flex-col items-center bg-base-300 w-full h-[100vh] lg:px-28 p-5 overflow-hidden">
             <SideBar />
             {/* <Header /> */}
             <div className="view-port-container w-full h-full bg-base-100/35 scroll-smooth">

@@ -65,3 +65,25 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* BENTO GRID BACKGROUND ANIMATION STYLING */
+.bento-grid-container h1 {
+  color: rgba(225, 225, 225, 0.1);
+  background-image: url("../public/backgrounds//abstract-bg.jpg");
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-sizxe: cover;
+  -webkit-background-clip: text;
+  animation: animate 15s linear infinite;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@keyframes animate {
+  0% {
+    background-position: left 0px top 10px;
+  }
+  100% {
+    background-position: left 800px top 10px;
+  }
+}
