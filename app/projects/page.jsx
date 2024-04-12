@@ -6,6 +6,7 @@ import ImageCard from "../components/generic/ImageCard";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { GeneralContext } from "../context/GeneralContext";
+import { projectListData } from "../context/constants";
 
 const spotLightVariants = {
   hidden: { opacity: 0 },
@@ -35,8 +36,6 @@ const contentVariants = {
 };
 
 const ProjectsPage = () => {
-  const { projectList, selectProject } = useContext(GeneralContext);
-
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => setIsVisible(true), []);
@@ -111,11 +110,23 @@ const ProjectsPage = () => {
       </div>
 
       <div className="w-full grid grid-cols-1 lg:grid-cols-2 mt-10 gap-5 px-6 lg:px-32">
-        {projectList?.map((project, index) => (
-          <motion.div variants={contentVariants} key={index}>
+        {projectListData?.map((project, index) => (
+          <motion.div
+            variants={contentVariants}
+            key={index}
+            className={
+              index === 1 ||
+              index === 2 ||
+              index === 5 ||
+              index === 6 ||
+              index === 9
+                ? "col-span-1 lg:col-span-2"
+                : "col-span-1"
+            }
+          >
             <ImageCard
               data={project}
-              clickHandler={() => selectProject(project)}
+              clickHandler={() => router.push(`/projects/${project?.id}`)}
             />
           </motion.div>
         ))}
