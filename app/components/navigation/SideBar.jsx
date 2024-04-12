@@ -24,7 +24,7 @@ const SideBar = () => {
       >
         <button
           onClick={() => router.back()}
-          className="relative p-3 bg-base-100 text-primary rounded-lg"
+          className="relative p-3 bg-base-100 text-primary rounded-lg hover:text-secondary transition-all ease-in-out duration-300"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

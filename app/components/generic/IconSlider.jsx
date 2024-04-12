@@ -4,22 +4,21 @@ import React, { useState } from "react";
 import Marquee from "react-fast-marquee";
 
 const IconSlider = ({ icons }) => {
-  const [tool, setTool] = useState("toolkit");
+  const [tool, setTool] = useState("JavaScript");
 
   return (
     <div className="flex flex-col w-full">
-      <h2 className="text-sm leading-relaxed tracking-wide font-semibold mb-5">
-        My
+      <h2 className="text-base leading-relaxed tracking-wide font-semibold mb-5">
+        Technologies I use for web crafting, such as
         <span
-          className={`mx-1 lowercase font-medium text-xs px-3 py-[.27rem] ${
-            tool === "toolkit"
+          className={`mx-1 lowercase font-medium text-sm px-2 py-[.27rem] ${
+            tool === "JavaScript"
               ? "text-primary border-primary/30"
-              : "text-accent border-accent"
+              : "text-secondary border-secondary"
           } rounded border bg-base-300 whitespace-nowrap transition-all ease-in-out duration-300`}
         >
           {tool}
         </span>
-        for web crafting
       </h2>
       <Marquee
         autoFill
@@ -33,14 +32,14 @@ const IconSlider = ({ icons }) => {
         {icons.map((logo, index) => (
           <div
             key={index}
-            className="group relative w-10 h-10 lg:w-16 lg:h-16 bg-base-300/30 border-[3px] border-primary/20 hover:border-accent/20 p-3 mx-5 rounded-lg cursor-pointer overflow-auto"
+            className="group relative w-10 h-10 lg:w-16 lg:h-16 bg-base-300/30 border-[3px] border-primary/20 hover:border-secondary/20 p-3 mx-5 rounded-lg cursor-pointer overflow-auto"
             onMouseEnter={() => setTool(logo?.title)}
             onMouseLeave={() => setTool("toolkit")}
           >
             <div
               className={`absolute left-0 right-0 top-0 bottom-0 rounded-lg opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300`}
               style={{
-                background: `radial-gradient(circle at 50% 50%, rgb(254 239 159 / 0.1) 20%, rgb(254 239 159 / 0.1) 20%, transparent)`,
+                background: `radial-gradient(circle at 50% 50%, rgb(255 255 255 / 0.1) 20%, rgb(255 255 255 / 0.1) 20%, transparent)`,
               }}
             />
             <img
