@@ -48,7 +48,8 @@ const ProjectPage = ({ params }) => {
     setIsVisible(true);
   }, [params]);
 
-  if (projectData?.id === 0) router.push(`/not-found`);
+  if (projectData?.id === 0 || projectData?.isLocked === true)
+    router.push(`/not-found`);
   else {
     return (
       <motion.div

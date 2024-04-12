@@ -2,12 +2,12 @@ import React from "react";
 
 const CardLock = () => {
   return (
-    <div className="absolute flex flex-col items-center rounded-md justify-center z-10 top-0 bottom-0 left-0 right-0 bg-black/85 text-primary group-hover:text-secondary">
+    <div className="absolute opacity-50 group-hover:opacity-100 flex flex-col items-center rounded-md justify-center z-10 top-0 bottom-0 left-0 right-0 bg-black/85 text-primary group-hover:text-accent transition-all ease-in-out duration-300">
       <div className="relative p-10 bg-base-300 rounded-full">
         <div
           className={`absolute left-0 right-0 top-0 bottom-0 rounded-full opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300`}
           style={{
-            background: `radial-gradient(circle at 50% 50%, rgb(255 255 255 / 0.1) 10%, rgb(255 255 255 / 0.1) 40%, transparent)`,
+            background: `radial-gradient(circle at 50% 50%, rgb(51 255 0 / 0.1) 10%, rgb(51 255 0 / 0.1) 40%, transparent)`,
           }}
         />
         <svg
@@ -23,7 +23,7 @@ const CardLock = () => {
           />
         </svg>
       </div>
-      <h1 className="opacity-0 font-semibold text-sm mt-3 uppercase group-hover:opacity-100 transition-all ease-in-out duration-300">
+      <h1 className="opacity-0 font-semibold text-sm mt-3 uppercase group-hover:opacity-100">
         UpComing
       </h1>
     </div>

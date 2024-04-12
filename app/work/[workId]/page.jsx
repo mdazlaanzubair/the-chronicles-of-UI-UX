@@ -82,7 +82,8 @@ const WorkPage = ({ params }) => {
     return () => observer.disconnect();
   }, [params]);
 
-  if (workData?.id === 0) router.push(`/not-found`);
+  if (workData?.id === 0 || workData?.isLocked === true)
+    router.push(`/not-found`);
   else {
     return (
       <motion.div
