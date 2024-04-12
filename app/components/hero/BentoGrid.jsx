@@ -34,7 +34,7 @@ const BentoGrid = () => {
     "bg-base-100 w-full h-full flex justify-center items-center text-center overflow-clip";
 
   return (
-    <div className="w-full lg:w-2/3 h-full grid gap-3">
+    <div className="w-full lg:w-10/12 h-full grid gap-3">
       <motion.div
         variants={contentContainerVariants}
         initial="hidden"
@@ -46,15 +46,15 @@ const BentoGrid = () => {
       >
         <motion.div
           variants={contentVariants}
-          className={`${boxStyle} row-span-2 rounded-bl-[35px] rounded-t-[65px]`}
+          className={`${boxStyle} row-span-2 rounded-bl-[50px] rounded-t-[100px]`}
         >
           <div className="flex flex-col w-full h-full">
             <button
               onClick={() => router.push("/about")}
               type="button"
-              className="bg-secondary/80 text-base-100 w-full h-1/2 text-sm font-bold uppercase rounded-full cursor-pointer hover:bg-secondary hover:font-black transition-all ease-in-out duration-500"
+              className="bg-secondary/80 text-base-100 w-full h-[45%] lg:h-[70%] text-base font-bold uppercase rounded-full cursor-pointer hover:bg-secondary hover:font-black transition-all ease-in-out duration-500"
             >
-              About Me
+              About <br /> Me
             </button>
             <div
               className="group w-full h-1/2 flex items-center justify-center cursor-pointer hover:text-secondary hover:font-black transition-all ease-in-out duration-500"
@@ -111,10 +111,18 @@ const BentoGrid = () => {
 
         <motion.div
           variants={contentVariants}
-          className={`${boxStyle} rounded-b-[35px] rounded-tl-[35px]`}
+          className={`${boxStyle} group rounded-b-[35px] rounded-tl-[35px] cursor-pointer`}
+          onClick={() =>
+            window.open(
+              "https://calendly.com/mdazlaanzubair/virtual-interaction/",
+              "_blank"
+            )
+          }
         >
           <div className="bento-grid-container h-[120px] flex items-center justify-center">
-            <h1 className="text-[150%] lg:text-[200%] font-black">Web Dev.</h1>
+            <h1 className="text-[150%] lg:text-[200%] font-black leading-none group-hover:scale-105">
+              Hire <br /> me.
+            </h1>
           </div>
         </motion.div>
         <motion.div
@@ -122,7 +130,7 @@ const BentoGrid = () => {
           className={`${boxStyle} row-span-2 rounded-r-[45px] cursor-pointer hover:text-secondary transition-all ease-in-out duration-500`}
           onClick={() => router.push("/projects")}
         >
-          <span className="text-lg font-semibold [writing-mode:vertical-lr] rotate-180">
+          <span className="text-lg font-semibold [writing-mode:vertical-lr] rotate-180 uppercase">
             Side Projects
           </span>
         </motion.div>
@@ -131,7 +139,7 @@ const BentoGrid = () => {
           className={`${boxStyle} col-span-2 rounded-t-[40px] cursor-pointer rounded-l-[40px] font-semibold hover:text-secondary hover:font-bold transition-all ease-in-out duration-500`}
           onClick={() => router.push("/work")}
         >
-          <span className="flex items-center justify-center h-[100px]">
+          <span className="flex items-center justify-center h-[100px] uppercase">
             Case Studies
           </span>
         </motion.div>

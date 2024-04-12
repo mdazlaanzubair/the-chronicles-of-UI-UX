@@ -46,9 +46,9 @@ const ContactSection = () => {
       <div className="w-full md:w-2/3">
         <motion.h1
           variants={contentVariants}
-          className="font-display text-4xl leading-snug text-secondary font-extrabold mb-5"
+          className="font-display text-4xl lg:text-6xl leading-snug text-secondary font-extrabold mb-5"
         >
-          Thank you for your time
+          Say hello!
         </motion.h1>
         <motion.h2
           variants={contentVariants}

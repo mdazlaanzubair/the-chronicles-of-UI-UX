@@ -29,18 +29,18 @@ export default function Home() {
           animate="visible"
           className="absolute flex -top-[300%] -left-[300%] bottom-0 right-0 blur-3xl"
           style={{
-            background: `radial-gradient(circle at center, rgba(254,239,159, 1) 0%, rgba(254,239,159, 0.9) 50%, rgba(254,239,159, 0.2) 50%, rgba(254,239,159, 0), rgba(254,239,159, 0), transparent, transparent)`,
+            background: `radial-gradient(circle at center, rgba(255,255,255, 1) 0%, rgba(255,255,255, 0.9) 50%, rgba(255,255,255, 0.2) 50%, rgba(255,255,255, 0), rgba(255,255,255, 0), transparent, transparent)`,
           }}
         />
       )}
       <div className="z-10">
         <HeroSection />
-        <WorkSection workList={workList} selectWork={selectWork} />
+        {/* <WorkSection workList={workList} selectWork={selectWork} />
         <ProjectSection
           projectList={projectList}
           selectProject={selectProject}
-        />
-        <ContactSection />
+        /> */}
+        {/* <ContactSection /> */}
       </div>
     </div>
   );
