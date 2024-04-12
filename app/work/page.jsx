@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icon from "../components/generic/Icon";
 import ImageCard from "../components/generic/ImageCard";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { GeneralContext } from "../context/GeneralContext";
+import { workListData } from "../context/constants";
 
 const spotLightVariants = {
   hidden: { opacity: 0 },
@@ -35,8 +35,6 @@ const contentVariants = {
 };
 
 const WorkPage = () => {
-  const { workList, selectWork } = useContext(GeneralContext);
-
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => setIsVisible(true), []);
@@ -111,7 +109,7 @@ const WorkPage = () => {
       </div>
 
       <div className="w-full grid grid-cols-1 lg:grid-cols-3 mt-10 gap-5 px-6 lg:px-32">
-        {workList?.map((work, index) => (
+        {workListData?.map((work, index) => (
           <motion.div
             variants={contentVariants}
             key={index}
@@ -128,7 +126,7 @@ const WorkPage = () => {
             <ImageCard
               key={index}
               data={work}
-              clickHandler={() => selectWork(work)}
+              clickHandler={() => router.push(`/work/${work?.id}`)}
             />
           </motion.div>
         ))}

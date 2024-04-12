@@ -44,12 +44,11 @@ const contentSections = [
 ];
 
 const WorkPage = ({ params }) => {
-  const { workData } = useContext(GeneralContext);
+  const { workData, selectWork } = useContext(GeneralContext);
 
   const [activeSection, setActiveSection] = useState("Overview");
 
   const [isContentNavOpen, setIsContentNavOpen] = useState(true);
-  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
   // FUNCTION TO TOGGLE CONTENT NAVBAR
@@ -72,13 +71,19 @@ const WorkPage = ({ params }) => {
       if (element) observer.observe(element);
     });
 
+    // SELECTING THE CASE STUDY BY ID
+    selectWork(params?.workId);
+
+    // SETTING SPOTLIGHT STATE VISIBLE
+    // TO AVOID ANIMATION ON EVERY VIEW
+    setIsVisible(true);
+
     return () => observer.disconnect();
   }, [params]);
 
-  useEffect(() => setIsVisible(true), [params]);
-
   return (
     <motion.div
+      id="Back to Top"
       variants={contentContainerVariants}
       initial="hidden"
       whileInView="visible"
@@ -99,72 +104,47 @@ const WorkPage = ({ params }) => {
         />
       )}
 
-      <div
-        id="Back to Top"
-        className="w-full gap-3 z-10 flex items-center justify-between p-3"
+      <motion.div
+        variants={contentVariants}
+        className="fixed hidden lg:flex top-5 right-5 z-50"
       >
-        <motion.div variants={contentVariants} className="flex flex-shrink">
-          <Button
-            onClick={() => router.back()}
-            prefix={
+        <Button
+          onClick={toggleContentNav}
+          prefix={
+            isContentNavOpen ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth={2}
+                strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-4 h-4 mb-px"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"
+                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
                 />
               </svg>
-            }
-          />
-        </motion.div>
-        <div className="flex flex-grow"></div>
-        <motion.div variants={contentVariants} className="flex flex-shrink">
-          <Button
-            className="hidden lg:flex"
-            onClick={toggleContentNav}
-            prefix={
-              isContentNavOpen ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 mb-px"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 mb-px"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
-                  />
-                </svg>
-              )
-            }
-          />
-        </motion.div>
-      </div>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-4 h-4 mb-px"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
+                />
+              </svg>
+            )
+          }
+        />
+      </motion.div>
 
       <div className="flex w-full h-full justify-between items-start gap-3 z-10 p-3 lg:px-16 overflow-auto">
         <div className="w-full h-full flex flex-col overflow-scroll">
@@ -344,20 +324,30 @@ const WorkPage = ({ params }) => {
                     </motion.h1>
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
-                    <div>
+                    <motion.p
+                      variants={contentVariants}
+                      className="work-para-style"
+                    >
+                      {workData?.details?.solution?.para}
+                    </motion.p>
+                    <ul className="list-decimal pl-5">
                       {workData?.details?.solution &&
-                        Object.values(workData?.details?.solution)?.map(
-                          (para, index) => (
-                            <motion.p
+                        Object.values(workData?.details?.solution?.list)?.map(
+                          (listItem, index) => (
+                            <motion.li
                               key={index}
                               variants={contentVariants}
                               className="work-para-style"
                             >
-                              {para}
-                            </motion.p>
+                              <strong className="text-secondary">
+                                {listItem?.title}
+                              </strong>
+                              <br />
+                              {listItem?.desc}
+                            </motion.li>
                           )
                         )}
-                    </div>
+                    </ul>
                   </div>
                 </div>
                 <div className="w-2/4 mx-auto my-5 lg:my-10 h-[.15rem] bg-primary/15" />
@@ -374,20 +364,30 @@ const WorkPage = ({ params }) => {
                     </motion.h1>
                   </div>
                   <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
-                    <div>
+                    <motion.p
+                      variants={contentVariants}
+                      className="work-para-style"
+                    >
+                      {workData?.details?.impact?.para}
+                    </motion.p>
+                    <ul className="list-decimal pl-5">
                       {workData?.details?.impact &&
-                        Object.values(workData?.details?.impact)?.map(
-                          (para, index) => (
-                            <motion.p
+                        Object.values(workData?.details?.impact?.list)?.map(
+                          (listItem, index) => (
+                            <motion.li
                               key={index}
                               variants={contentVariants}
                               className="work-para-style"
                             >
-                              {para}
-                            </motion.p>
+                              <strong className="text-secondary">
+                                {listItem?.title}
+                              </strong>
+                              <br />
+                              {listItem?.desc}
+                            </motion.li>
                           )
                         )}
-                    </div>
+                    </ul>
                   </div>
                 </div>
                 <div className="w-2/4 mx-auto my-5 lg:my-10 h-[.15rem] bg-primary/15" />
