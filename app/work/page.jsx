@@ -110,9 +110,21 @@ const WorkPage = () => {
         </motion.p>
       </div>
 
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 mt-10 gap-5 px-6 lg:px-32">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-3 mt-10 gap-5 px-6 lg:px-32">
         {workList?.map((work, index) => (
-          <motion.div variants={contentVariants} key={index}>
+          <motion.div
+            variants={contentVariants}
+            key={index}
+            className={
+              index === 1 ||
+              index === 2 ||
+              index === 5 ||
+              index === 6 ||
+              index === 9
+                ? "col-span-1 lg:col-span-2"
+                : "col-span-1"
+            }
+          >
             <ImageCard
               key={index}
               data={work}
