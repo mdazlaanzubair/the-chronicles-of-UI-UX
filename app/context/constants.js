@@ -5,6 +5,7 @@ import talentVareImg from "@/public/work/talentvare-img.jpg";
 import noImage from "@/public/backgrounds/card-bg-img.jpg";
 import loadeImg from "@/public/work/loade-img.jpg";
 import loadeCoverImg from "@/public/work/loade-cover-img.jpg";
+import socialMediaImg from "@/public/projects/social-media-img.jpg";
 
 export const caseStudyNotFound = {
   id: 0,
@@ -293,13 +294,13 @@ export const workListData = [
 export const projectListData = [
   {
     id: 1,
-    title: "TalentVare",
-    subTitle: "Workforce Management & Onboarding System",
-    imgSrc: loadeImg.src,
+    title: "Schedulist",
+    subTitle: "Social Media Post Scheduler",
+    imgSrc: socialMediaImg.src,
     isFeatured: true,
-    isLocked: false,
+    isLocked: true,
     details: {
-      coverImgSrc: loadeCoverImg.src,
+      coverImgSrc: socialMediaImg.src,
       overview: {
         myRole: "Frontend Developer, API Integrator",
         techUsed: "React, Open AI, Mongo DB, Python, Django",
