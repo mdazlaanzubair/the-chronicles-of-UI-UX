@@ -5,6 +5,7 @@ import profilePic from "@/public/other/profile.jpeg";
 import calculateYearCount from "@/app/utils/expCalculator";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { downloadPDF } from "@/app/utils/downloadPDF";
 
 const contentContainerVariants = {
   hidden: { opacity: 0 },
@@ -93,7 +94,12 @@ const BentoGrid = () => {
             },
           }}
           className={`${boxStyle} rounded-br-[35px] rounded-t-[35px] cursor-pointer hover:text-secondary hover:font-black transition-all ease-in-out duration-500`}
-          onClick={() => alert("Resume is not attached yet!!!")}
+          onClick={() =>
+            downloadPDF(
+              "/public/doc/resume.pdf",
+              "Resume - Muhammad Azlaan Zubair.pdf"
+            )
+          }
         >
           <div className="flex items-center justify-center">
             <span className="text-xs font-bold text-center uppercase">
