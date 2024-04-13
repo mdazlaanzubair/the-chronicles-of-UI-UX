@@ -81,9 +81,9 @@ body {
 
 @keyframes animate {
   0% {
-    background-position: left 0px top -10px;
+    background-position: left 0;
   }
   100% {
-    background-position: left 800px top 10px;
+    background-position: left 100%;
   }
 }
