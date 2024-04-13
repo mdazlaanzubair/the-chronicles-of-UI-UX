@@ -39,11 +39,7 @@ const HeroSection = () => {
       id="hero-section"
       className="relative w-full flex flex-col items-center justify-between py-10 lg:py-16"
     >
-      <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-20 z-10">
-        <div className="flex w-full lg:w-1/2 justify-center">
-          <BentoGrid />
-        </div>
-
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-20 z-10">
         <div className="w-full md:w-1/2">
           <div className="w-full lg:w-10/12">
             <motion.div variants={contentVariants}>
@@ -59,7 +55,7 @@ const HeroSection = () => {
             </motion.div>
             <motion.h1
               variants={contentVariants}
-              className="font-display text-4xl lg:text-6xl leading-snug text-secondary font-extrabold mb-8"
+              className="font-display text-4xl lg:text-5xl leading-snug text-secondary font-extrabold mb-8"
             >
               Hello &amp; welcome to my digital corner!
             </motion.h1>
@@ -84,8 +80,11 @@ const HeroSection = () => {
             </motion.p>
           </div>
         </div>
+        <div className="flex w-full lg:w-1/2 justify-center">
+          <BentoGrid />
+        </div>
       </div>
-      <motion.div
+      {/* <motion.div
         variants={{
           hidden: { opacity: 0, x: -20 },
           visible: { opacity: 1, x: 0 },
@@ -93,7 +92,7 @@ const HeroSection = () => {
         className="w-full"
       >
         <IconSlider icons={techLogosArrayComplete} />
-      </motion.div>
+      </motion.div> */}
     </motion.section>
   );
 };
