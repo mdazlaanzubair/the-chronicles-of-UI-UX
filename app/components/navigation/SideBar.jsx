@@ -26,7 +26,7 @@ const SideBar = () => {
       >
         <button
           onClick={() => router.back()}
-          className="relative p-3 bg-base-100 text-primary rounded-lg hover:text-secondary transition-all ease-in-out duration-300"
+          className="relative group p-3 bg-base-100 text-primary rounded-lg hover:text-secondary transition-all ease-in-out duration-300"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +42,9 @@ const SideBar = () => {
               d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
             />
           </svg>
+          <p className="hidden lg:flex absolute top-1/2 -translate-y-1/2 left-full opacity-0 group-hover:opacity-100 group-hover:ml-3 z-50 px-5 py-[.6rem] rounded-lg bg-base-100 text-secondary whitespace-nowrap transition-all ease-in-out duration-500">
+            Fall Back
+          </p>
         </button>
       </div>
       <div
@@ -59,6 +62,9 @@ const SideBar = () => {
             title={nav?.title}
           >
             <div className="w-5 h-5">{nav?.icon()}</div>
+            <p className="hidden lg:flex absolute top-1/2 -translate-y-1/2 left-full opacity-0 group-hover:opacity-100 group-hover:ml-3 z-50 px-5 py-[.6rem] rounded-lg bg-base-100 text-secondary whitespace-nowrap transition-all ease-in-out duration-500">
+              {nav?.title}
+            </p>
           </Link>
         ))}
       </div>
