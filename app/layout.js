@@ -21,6 +21,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="text-primary bg-base-300">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={`${display.variable} ${inter.variable}`}>
         <GeneralProvider>
           <main className="font-inter relative flex flex-col items-center bg-base-300 w-full h-[100vh] lg:px-28 p-5 overflow-hidden">

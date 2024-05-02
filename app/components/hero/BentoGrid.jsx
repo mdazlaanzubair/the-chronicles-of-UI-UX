@@ -6,6 +6,7 @@ import calculateYearCount from "@/app/utils/expCalculator";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { downloadPDF } from "@/app/utils/downloadPDF";
+import Link from "next/link";
 
 const contentContainerVariants = {
   hidden: { opacity: 0 },
@@ -82,44 +83,48 @@ const BentoGrid = () => {
             </span>
           </div>
         </motion.div>
-        <motion.div
-          variants={{
-            ...contentVariants,
-            visible: {
-              ...contentVariants.visible,
-              transition: {
-                ...contentVariants.visible.transition,
-                delay: 0.4,
-              },
-            },
-          }}
-          className={`${boxStyle} rounded-br-[35px] rounded-t-[35px] cursor-pointer hover:text-secondary hover:font-black transition-all ease-in-out duration-500`}
-          onClick={() =>
-            downloadPDF(
-              "/public/doc/resume.pdf",
-              "Resume - Muhammad Azlaan Zubair.pdf"
-            )
-          }
+        <Link
+          href="./doc/resume.pdf"
+          target="_blank"
+          alt="my-cv"
+          rel="noopener noreferrer"
         >
-          <div className="flex items-center justify-center">
-            <span className="text-xs font-bold text-center uppercase">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-8 h-8 mb-1 mx-auto"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z"
-                  clipRule="evenodd"
-                />
-                <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
-              </svg>
-              Resume
-            </span>
-          </div>
-        </motion.div>
+          <motion.div
+            variants={{
+              ...contentVariants,
+              visible: {
+                ...contentVariants.visible,
+                transition: {
+                  ...contentVariants.visible.transition,
+                  delay: 0.4,
+                },
+              },
+            }}
+            className={`${boxStyle} rounded-br-[35px] rounded-t-[35px] cursor-pointer hover:text-secondary hover:font-black transition-all ease-in-out duration-500`}
+            // onClick={() =>
+            //   downloadPDF("/public/", "Resume - Muhammad Azlaan Zubair.pdf")
+            // }
+          >
+            <div className="flex items-center justify-center">
+              <span className="text-xs font-bold text-center uppercase">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-8 h-8 mb-1 mx-auto"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z"
+                    clipRule="evenodd"
+                  />
+                  <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                </svg>
+                Resume
+              </span>
+            </div>
+          </motion.div>
+        </Link>
         <motion.div
           variants={{
             ...contentVariants,
