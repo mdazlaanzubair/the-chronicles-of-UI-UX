@@ -35,12 +35,7 @@ export default function Home() {
       )}
       <div className="z-10">
         <HeroSection />
-        {/* <WorkSection workList={workList} selectWork={selectWork} />
-        <ProjectSection
-          projectList={projectList}
-          selectProject={selectProject}
-        /> */}
-        {/* <ContactSection /> */}
+        <ContactSection />
       </div>
     </div>
   );

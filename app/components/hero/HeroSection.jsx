@@ -39,9 +39,9 @@ const HeroSection = () => {
       id="hero-section"
       className="relative w-full flex flex-col items-center justify-between py-10 lg:py-16"
     >
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-20 z-10">
+      <div className="flex flex-col lg:flex-row items-center justify-evenly gap-0 z-10">
         <div className="w-full md:w-1/2">
-          <div className="w-full lg:w-10/12">
+          <div className="w-full lg:w-12/12">
             <motion.div variants={contentVariants}>
               <Link
                 href="#contact-section"
@@ -80,7 +80,7 @@ const HeroSection = () => {
             </motion.p>
           </div>
         </div>
-        <div className="flex w-full lg:w-1/2 justify-center">
+        <div className="flex w-full lg:w-1/3 justify-center">
           <BentoGrid />
         </div>
       </div>
