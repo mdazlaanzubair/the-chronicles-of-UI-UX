@@ -7,6 +7,8 @@ import noImage from "@/public/backgrounds/card-bg-img.jpg";
 import loadeImg from "@/public/work/loade-img.jpg";
 import loadeCoverImg from "@/public/work/loade-cover-img.jpg";
 import socialMediaImg from "@/public/projects/social-media-img.jpg";
+import insureMyTripImg from "@/public/work/insure-my-trip-img.jpg";
+import insureMyTripCoverImg from "@/public/work/insure-my-trip-cover-img.jpg";
 
 export const caseStudyNotFound = {
   id: 0,
@@ -193,6 +195,89 @@ export const workListData = [
   },
   {
     id: 3,
+    title: "Travel Insurance",
+    subTitle: "Insure My Trip",
+    url: "https://yallacompare.com/uae/en/services/travel-insurance/",
+    imgSrc: insureMyTripImg.src,
+    isFeatured: true,
+    isLocked: false,
+    details: {
+      coverImgSrc: insureMyTripCoverImg.src,
+      overview: {
+        myRole: "Frontend Development & Integration",
+        team: "Mahmoud Abdelnasser (Design), Salal Yousuf (Backend)",
+        timeline: "Jul 2024 - Aug 2024",
+        desc: {
+          para1:
+            "Traditional travel insurance acquisition is often cumbersome for customers and inefficient for providers. Repetitive data entry, limited self-service options, and manual processing lead to frustration and delays.",
+          para2:
+            "Insure My Trip, a web application, revolutionizes the travel insurance purchase process, streamlining customer experience and boosting operational efficiency.",
+        },
+      },
+      projectDesc: {
+        para1:
+          "Our team, tackled these challenges by developing a web application with automation at its core. Insure My Trip streamlines the travel insurance purchase experience for both customers and the company.",
+      },
+      problemStatement: {
+        para1:
+          "The current travel insurance journey suffers from several bottlenecks, like, repetitive data entry across online forms and phone calls creates frustration and slows down the process.",
+        para2:
+          "Lack of self-service options for policy amendments and cancellations limits flexibility and convenience. Manual data entry by agents leads to delays and potential inaccuracies in quotes. Uncertainty about final costs due to inaccurate or delayed price quotes.",
+        para3:
+          "High operational costs incurred through manual processing of applications and queries. Potential loss of customers due to a long and tedious purchase process.",
+      },
+      solution: {
+        para: "Insure My Trip incorporates the following features to address the identified problems:",
+        list: [
+          {
+            title: "Intuitive User Interface",
+            desc: "A user-friendly and responsive interface guides customers through the selection process. Easy navigation, clear product descriptions, and interactive tools like coverage calculators simplify plan selection based on individual needs.",
+          },
+          {
+            title: "Automated Underwriting and Policy Issuance",
+            desc: "Integration of advanced algorithms and data analytics enables real-time risk assessment, automated premium calculations, and instant policy issuance. Customers receive their digital policy documents electronically without manual intervention.",
+          },
+          {
+            title: "Seamless Payment Integration",
+            desc: "The platform supports various payment methods, including credit/debit cards, online banking, and mobile wallets. Secure payment gateways ensure safe and efficient transactions. Customers can manage travel insurance expenses with installment payment options or premium financing. Integrated payment confirmation and receipt generation streamline the purchase process further.",
+          },
+          {
+            title: "Robust Customer Support",
+            desc: "AI-powered chatbots offer instant support, guide users through the application, and assist with plan selection. Live chat and call-back options connect customers with human agents for complex inquiries. Additionally, a comprehensive FAQ section, educational resources, and video tutorials empower customers with information about travel insurance and app usage.",
+          },
+        ],
+      },
+      impact: {
+        para: "The implementation of these features has significantly benefited both customers and the company:",
+        list: [
+          {
+            title: "Enhanced Customer Experience",
+            desc: "Streamlined application process, self-service options, and instant policy issuance eliminate frustration and delays.",
+          },
+          {
+            title: "Improved Operational Efficiency",
+            desc: "Automation reduces manual processing, lowers operational costs, and frees up resources for other tasks.",
+          },
+          {
+            title: "Increased Customer Satisfaction",
+            desc: "Seamless purchasing experience and readily available information promote customer satisfaction and trust.",
+          },
+          {
+            title: "Wider Customer Base",
+            desc: "A faster and more accessible process allows the company to attract a broader customer base.",
+          },
+        ],
+      },
+      closingNotes: {
+        para1:
+          "By automating the travel insurance purchase process, Insure My Trip revolutionizes the experience for both customers and the company. It empowers customers with self-service tools and delivers fast, efficient service.",
+        para2:
+          "As a developer, I am proud to have contributed to a solution that enhances customer satisfaction, improves operational efficiency, and positions Insure My Trip as a leader in the travel insurance landscape.",
+      },
+    },
+  },
+  {
+    id: 4,
     title: "TalentVare",
     subTitle: "Workforce Management & Onboarding System",
     url: "https://transvare.com/talentvare/",
