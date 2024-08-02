@@ -92,7 +92,7 @@ const ProjectPage = ({ params }) => {
                 className="w-3/4 h-3/2 mx-auto"
                 size="w-full h-full"
                 src={projectData?.details?.coverImgSrc}
-                caption="The Case Study"
+                caption="The Project Overview"
                 tag="IMG"
               />
             </div>
@@ -122,20 +122,6 @@ const ProjectPage = ({ params }) => {
                         variants={contentVariants}
                         className="project-heading-style"
                       >
-                        The Team
-                      </motion.h1>
-                      <motion.p
-                        variants={contentVariants}
-                        className="project-para-style"
-                      >
-                        {projectData?.details?.overview?.team}
-                      </motion.p>
-                    </div>
-                    <div>
-                      <motion.h1
-                        variants={contentVariants}
-                        className="project-heading-style"
-                      >
                         Timeline
                       </motion.h1>
                       <motion.p
@@ -143,6 +129,44 @@ const ProjectPage = ({ params }) => {
                         className="project-para-style"
                       >
                         {projectData?.details?.overview?.timeline}
+                      </motion.p>
+                    </div>
+                    <div>
+                      <motion.h1
+                        variants={contentVariants}
+                        className="project-heading-style"
+                      >
+                        Source
+                      </motion.h1>
+                      <motion.p
+                        variants={contentVariants}
+                        className="project-para-style"
+                      >
+                        {projectData?.details?.overview?.sourceCode && (
+                          <a
+                            href={projectData?.details?.overview?.sourceCode}
+                            target="_blank"
+                            className="text-accent"
+                          >
+                            Code
+                          </a>
+                        )}
+                        {projectData?.details?.overview?.liveUrl &&
+                          projectData?.details?.overview?.sourceCode && (
+                            <span className="opacity-30 px-2">{" | "}</span>
+                          )}
+                        {projectData?.details?.overview?.liveUrl && (
+                          <a
+                            href={projectData?.details?.overview?.liveUrl}
+                            target="_blank"
+                            className="text-accent"
+                          >
+                            Live URL
+                          </a>
+                        )}
+                        {!projectData?.details?.overview?.liveUrl &&
+                          !projectData?.details?.overview?.sourceCode &&
+                          "None"}
                       </motion.p>
                     </div>
                   </div>
@@ -167,7 +191,7 @@ const ProjectPage = ({ params }) => {
                         {projectData?.details?.overview?.projectDesc?.para2}
                       </motion.p>
                     </div>
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                       <div>
                         <motion.h1
                           variants={contentVariants}
@@ -182,20 +206,51 @@ const ProjectPage = ({ params }) => {
                           {projectData?.details?.overview?.techUsed}
                         </motion.p>
                       </div>
-                      <div>
-                        <motion.h1
-                          variants={contentVariants}
-                          className="project-heading-style"
-                        >
-                          Source
-                        </motion.h1>
-                        <motion.p
-                          variants={contentVariants}
-                          className="project-para-style"
-                        >
-                          {projectData?.details?.overview?.techUsed}
-                        </motion.p>
-                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="container mx-auto">
+              <div className="flex items-center">
+                <div className="w-full h-full flex flex-col p-6 overflow-scroll">
+                  <div
+                    id="Features"
+                    className="grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-10"
+                  >
+                    <div className="col-span-1 flex flex-col gap-3">
+                      <motion.h1
+                        variants={contentVariants}
+                        className="text-secondary mb-1 text-[16px] font-semibold"
+                      >
+                        Key features
+                      </motion.h1>
+                    </div>
+                    <div className="col-span-1 lg:col-span-3 flex flex-col gap-3">
+                      <motion.p
+                        variants={contentVariants}
+                        className="work-para-style"
+                      >
+                        {projectData?.details?.solution?.para}
+                      </motion.p>
+                      <ul className="list-decimal pl-5">
+                        {projectData?.details?.features &&
+                          Object.values(
+                            projectData?.details?.features?.list
+                          )?.map((listItem, index) => (
+                            <motion.li
+                              key={index}
+                              variants={contentVariants}
+                              className="work-para-style"
+                            >
+                              <strong className="text-secondary">
+                                {listItem?.title}
+                              </strong>
+                              <br />
+                              {listItem?.desc}
+                            </motion.li>
+                          ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
