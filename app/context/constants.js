@@ -500,7 +500,7 @@ export const projectListData = [
     subTitle: "Social Media Hub for Chat GPT Users",
     imgSrc: promptareImg.src,
     isFeatured: true,
-    isLocked: false,
+    isLocked: true,
     details: {
       coverImgSrc: promptareImgCover.src,
       overview: {
@@ -554,7 +554,7 @@ export const projectListData = [
     subTitle: "AI-Powered Text Analyzer",
     imgSrc: parabotImg.src,
     isFeatured: true,
-    isLocked: false,
+    isLocked: true,
     details: {
       coverImgSrc: parabotImgCover.src,
       overview: {
