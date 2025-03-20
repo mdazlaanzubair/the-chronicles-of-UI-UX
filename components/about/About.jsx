@@ -1,13 +1,16 @@
-"use client"
-
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 
 import { BiChevronRight as ListIcon } from "react-icons/bi";
 
 import Button from "../Button";
 import ResumeLinkBtn from "../ResumeLinkBtn";
-import Animator from "../Animator";
+// import Animator from "../Animator";
 import * as about_animation from "../../public/about_animation.json";
+
+const AnimatorNoSSR = dynamic(() => import("../Animator"), {
+  ssr: false,
+});
 
 const About = () => {
   const skill_tags = [
@@ -106,7 +109,7 @@ const About = () => {
           whileInView={{ opacity: 1, translateY: 0 }}
           transition={{ duration: 0.3, delay: 0.8 }}
         >
-          <Animator animation={about_animation} />
+          <AnimatorNoSSR animation={about_animation} />
         </motion.div>
         <motion.p
           initial={{ opacity: 0, translateY: 10 }}
