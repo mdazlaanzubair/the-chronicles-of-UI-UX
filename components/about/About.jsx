@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from "framer-motion";
 
 import { BiChevronRight as ListIcon } from "react-icons/bi";
