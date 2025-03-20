@@ -17,7 +17,7 @@ Feel free to explore the folders and see the code. Each website tells a part of 
 * [**Current**](https://www.linkedin.com/in/mdazlaanzubair/) - Created on 06 Mar 2025
 * [Checkout v3](https://www.linkedin.com/in/mdazlaanzubair/) - Created on 06 Mar 2025
 * [Checkout v2](https://www.linkedin.com/in/mdazlaanzubair/) - Created on 06 Mar 2025
-* [Checkout v1](https://www.linkedin.com/in/mdazlaanzubair/) - Created on 06 Mar 2025
+* [Checkout v1](https://v1.mdazlaanzubair.com/) - Created on 22 Dec 2019 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v1)
 
 If you have any questions or want to talk, just [**reach out**](https://www.linkedin.com/in/mdazlaanzubair/)!
 
