@@ -1,25 +1,17 @@
 # The Chronicles of UI/UX 📖✨
 
-Hello and welcome to my portfolio website repository! Here, you'll find all my portfolio websites I've created so far. I've put together this repository to track my progress and growth in both design and development. You'll see how my skills have evolved over time, including improvements in design aesthetics, color selection, animations, coding, and folder organization. Enjoy exploring my work!
+This is the third portfolio I have made almost 1 years back in `Apr 7, 2024`. It's just a re-designed of my previous overly animated portfolio. This iteration focuses on a refined user experience, emphasizing performance, accessibility, and a seamless presentation. 
 
-## Why I Made This 🧭
+I've aimed for a balance of technical sophistication and intuitive design, creating a portfolio that's both impressive and user-friendly. Let's check it out [**live here**](https://mdazlaanzubair.com/)
 
-I made this to keep track of my progress as a developer. It helps me in a few ways:
+## Tech Stack
 
-- **Keep track of my design journey:** I can see how my understanding of good design has grown over time.
-- **Remember what I’ve learned:** Each website I created, teaches me something new and shows how the trends of that time influenced me.
-- **Share my experience:** Maybe my journey can help others with their designs too.
+This project utilizes a cutting-edge tech stack for a high-performing and maintainable codebase:
 
-## Take a Look Around 🗺️
-
-Feel free to explore the folders and see the code. Each website tells a part of my design story.
-
-- [**Current**](https://mdazlaanzubair.com/) - Created on 07 Apr 2024
-- [Checkout v2](https://v2.mdazlaanzubair.com/) - Created on 07 Jul 2023 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v2)
-- [Checkout v1](https://v1.mdazlaanzubair.com/) - Created on 22 Dec 2019 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v1)
-
-If you have any questions or want to talk, just [**reach out**](https://www.linkedin.com/in/mdazlaanzubair/)!
-
-Enjoy! 💻✨
-
-\- Muhammad Azlaan Zubair
+- **Next.js (v14.1.4):** A powerful React framework for building performant and scalable web applications.
+- **React (v18):** JavaScript library for building the UI, known for its component-based architecture and virtual DOM.
+- **Framer Motion (v11.0.25):** A motion library for React, used to create fluid animations and transitions.
+- **React Fast Marquee (v1.6.4):** A library for creating smooth, hardware-accelerated marquee effects.
+- **React Parallax Tilt (v1.7.219):** A library for adding interactive tilt effects to elements.
+- **React Spinners (v0.13.8):** A collection of loading spinners to enhance the user experience.
+- **Tailwind CSS (v3.3.0):** A utility-first CSS framework that allows for rapid UI development and consistent design.
