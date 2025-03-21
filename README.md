@@ -14,7 +14,8 @@ I made this to keep track of my progress as a developer. It helps me in a few wa
 
 Feel free to explore the folders and see the code. Each website tells a part of my design story.
 
-- [**Current**](https://mdazlaanzubair.com/) - Created on 07 Apr 2024
+- [**Latest**](https://mdazlaanzubair.com/) - Current active version
+- [Checkout v3](https://v3.mdazlaanzubair.com/) - Created on 07 Apr 2024 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v3)
 - [Checkout v2](https://v2.mdazlaanzubair.com/) - Created on 07 Jul 2023 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v2)
 - [Checkout v1](https://v1.mdazlaanzubair.com/) - Created on 22 Dec 2019 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v1)
 
