@@ -2,7 +2,6 @@ import React from "react";
 import profile_pic from "../assets/profile.jpeg";
 import bg_img from "../assets/backgrounds/card-bg-img.jpg";
 import resume from "../assets/doc/resume.pdf";
-import calculateYearCount from "../utils/expCalculator";
 
 import { HiDocumentText } from "react-icons/hi2";
 import { FaIdCard } from "react-icons/fa";
@@ -10,6 +9,7 @@ import { GrLinkedinOption } from "react-icons/gr";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { IoLogoTwitter } from "react-icons/io";
 import { useNavigate } from "react-router";
+import { calculateYearCount } from "../utils/expCalculator";
 
 type Props = {};
 
