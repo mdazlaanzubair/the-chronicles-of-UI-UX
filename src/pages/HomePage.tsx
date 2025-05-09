@@ -3,6 +3,7 @@ import HeroSection from "../components/Hero";
 import IconSlider from "../components/IconSlider";
 import { toolKit } from "../utils/iconExporter";
 import ProjectGridSlider from "../components/ProjectGridSlider";
+import ServicesSection from "../components/Services";
 
 type Props = {};
 
@@ -15,6 +16,7 @@ const HomePage = (props: Props) => {
       <HeroSection />
       <IconSlider icons={toolKit} />
       <ProjectGridSlider />
+      <ServicesSection />
     </section>
   );
 };

@@ -4,6 +4,7 @@ import FancyButton from "./FancyButton";
 import { FaPhone } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router";
+import AvailabilityStatus from "./AvailabilityStatus";
 
 type Props = {};
 
@@ -13,16 +14,15 @@ const HeroSection = (props: Props) => {
   return (
     <section
       id="hero-section"
-      className="w-full h-auto flex flex-col justify-between px-10 py-5 bg-base-100 rounded-2xl"
+      className="w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-2xl"
     >
-      <div className="w-fit flex items-center justify-between gap-3 mb-7">
+      {/* <div className="w-fit flex items-center justify-between gap-3 mb-7">
         <div className="avatar shrink">
           <div className="w-16 rounded-full">
             <img src={profile_pic} alt="profile pic" />
           </div>
         </div>
         <div className="grow">
-          {/* <AvailabilityStatus /> */}
           <h1 className="text-[18px] font-normal text-base-content mb-0">
             Md. Azlaan Zubair
           </h1>
@@ -30,15 +30,24 @@ const HeroSection = (props: Props) => {
             Web Engineer
           </h2>
         </div>
-      </div>
+      </div> */}
+
+      <AvailabilityStatus />
       <h1 className="text-[32px] font-medium my-3">
         Hello &amp; welcome to my digital corner!
       </h1>
-      <p className="text-base-content/60 text-[16px]">
-        I&apos;m Azlaan, a full-stack developer based in Karachi, constantly
-        pushing the boundaries of web development. I offer{" "}
-        <span className="text-base-content">User-Centric Solutions</span> with{" "}
-        <span className="text-base-content">Pixel-Powered Innovation</span>.
+      <p className="text-base-content/60 text-[16px] font-light">
+        I&apos;m Azlaan, a full-stack developer based in{" "}
+        <span className="text-base-content font-medium">Karachi, Pakistan</span>
+        , constantly pushing the boundaries of web development. I offer{" "}
+        <span className="text-base-content font-medium">
+          User-Centric Solutions
+        </span>{" "}
+        with{" "}
+        <span className="text-base-content font-medium">
+          Pixel-Powered Innovation
+        </span>
+        .
       </p>
       {/* <p className="text-base-content/60 text-[16px]">
         My interest in AI allows me to craft innovative solutions that{" "}
@@ -69,9 +78,9 @@ const HeroSection = (props: Props) => {
           className={
             "w-30 btn-ghost bg-base-100 text-base-content border-transparent shadow-none"
           }
-          onClick={() => navigate("/case-studies")}
-          text_1={"View Work"}
-          text_2={"Case Studies"}
+          onClick={() => navigate("/about")}
+          text_1={"Explore more"}
+          text_2={"About me"}
         />
       </div>
     </section>

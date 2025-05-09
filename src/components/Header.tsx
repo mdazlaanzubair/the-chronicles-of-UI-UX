@@ -4,12 +4,13 @@ import dark_logo from "../assets/logo-dark.svg";
 import light_logo from "../assets/logo-light.svg";
 import DarkModeToggler from "./DarkModeToggler";
 import FancyButton from "./FancyButton";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
 const Header = (props: Props) => {
   const navigate = useNavigate();
+
   const { isDarkMode } = useDarkMode();
   const [isToggleMenu, setIsToggleMenu] = useState(false);
 
@@ -32,16 +33,14 @@ const Header = (props: Props) => {
           />
           <DarkModeToggler />
         </div>
-        <div className="grow text-right">
-          <FancyButton
-            className={
-              "w-[20%] btn-sm btn-outline border-transparent bg-transparent shadow-none"
-            }
-            onClick={() => setIsToggleMenu(!isToggleMenu)}
-            text_1={"Menu"}
-            text_2={"Open"}
-          />
-        </div>
+        <FancyButton
+          className={
+            "w-[15%] text-center btn-sm btn-outline border-transparent bg-transparent shadow-none btn-default"
+          }
+          onClick={() => setIsToggleMenu(!isToggleMenu)}
+          text_1={"Menu"}
+          text_2={"Open"}
+        />
         <div
           className={`w-full flex flex-wrap items-center justify-between gap-2 py-2 ${
             isToggleMenu ? "h-auto" : "h-0 p-0 hidden"

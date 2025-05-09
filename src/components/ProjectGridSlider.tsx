@@ -1,12 +1,15 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
-import { toolKit } from "../utils/iconExporter";
 import bg_img from "../assets/backgrounds/abstract-bg1.jpg";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+import { toolKit } from "../utils/iconExporter";
 
 type Props = {};
 
 const ProjectGridSlider = (props: Props) => {
+  const navigate = useNavigate();
+
   return (
     <section
       id="icon-section"
@@ -26,10 +29,18 @@ const ProjectGridSlider = (props: Props) => {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 z-20 flex items-center justify-center rounded-xl backdrop-blur-3xl bg-white opacity-0 group-hover:opacity-50 transition-all ease-in-out duration-300"></div>
+            <div
+              style={{
+                backdropFilter: "blur(1000px)",
+              }}
+              className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-white opacity-0 group-hover:opacity-50 transition-all ease-in-out duration-300"
+            ></div>
 
             {/* Button */}
-            <button className="opacity-0 group-hover:opacity-100 absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-fit btn btn-xs btn-neutral font-bold">
+            <button
+              onClick={() => navigate("/case-studies")}
+              className="opacity-0 group-hover:opacity-100 absolute z-30 my-auto mx-auto w-fit btn btn-xs btn-neutral font-bold"
+            >
               View
               <FaArrowRightLong className="text-[1px] w-0 opacity-0 -translate-x-full group-hover:text-xs group-hover:w-fit group-hover:opacity-100 group-hover:translate-x-0 transition-all ease-in-out duration-300" />
             </button>

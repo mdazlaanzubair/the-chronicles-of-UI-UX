@@ -8,8 +8,8 @@ import { FaIdCard } from "react-icons/fa";
 import { GrLinkedinOption } from "react-icons/gr";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { IoLogoTwitter } from "react-icons/io";
-import { useNavigate } from "react-router";
 import { calculateYearCount } from "../utils/expCalculator";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -47,6 +47,7 @@ const AboutBentoGrid = (props: Props) => {
         <div className="grid grid-cols-3 gap-3 auto-rows-fr">
           <div
             className={`group rounded-full cursor-pointer bg-base-200 flex flex-col items-center justify-center overflow-clip`}
+            onClick={() => navigate("/")}
           >
             <img
               className="w-full h-full"
