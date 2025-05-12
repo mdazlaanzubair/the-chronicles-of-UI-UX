@@ -1,9 +1,9 @@
-import React from "react";
 import Marquee from "react-fast-marquee";
 import bg_img from "../assets/backgrounds/abstract-bg1.jpg";
-import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { toolKit } from "../utils/iconExporter";
+import { MdArrowOutward } from "react-icons/md";
+import SectionHeader from "./SectionHeader";
 
 type Props = {};
 
@@ -11,43 +11,41 @@ const ProjectGridSlider = (props: Props) => {
   const navigate = useNavigate();
 
   return (
-    <section
-      id="icon-section"
-      className="flex flex-col w-full bg-base-200 rounded-2xl"
-    >
-      <Marquee autoFill pauseOnHover direction="right" speed={25}>
-        {toolKit?.map((logo, index) => (
-          <div
-            key={index}
-            className="group relative flex flex-col items-center justify-center bg-base-100 w-[189px] h-[130px] mx-[6px] rounded-xl cursor-pointer gap-3 overflow-hidden"
-          >
-            <img
-              className="absolute inset-0 w-full h-full object-cover object-center rounded-xl transition-all ease-in-out duration-300 z-0"
-              src={bg_img}
-              alt={logo?.title + "-logo"}
-              title={logo?.title}
-            />
-
-            {/* Overlay */}
+    <>
+      <SectionHeader id="icon-section-head" title="Let's sneak a peek at my work." />
+      <section
+        id="icon-section"
+        className="flex flex-col w-full bg-base-200 rounded-2xl"
+      >
+        <Marquee autoFill pauseOnHover direction="right" speed={25}>
+          {toolKit?.map((logo, index) => (
             <div
-              style={{
-                backdropFilter: "blur(1000px)",
-              }}
-              className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-white opacity-0 group-hover:opacity-50 transition-all ease-in-out duration-300"
-            ></div>
-
-            {/* Button */}
-            <button
-              onClick={() => navigate("/case-studies")}
-              className="opacity-0 group-hover:opacity-100 absolute z-30 my-auto mx-auto w-fit btn btn-xs btn-neutral font-bold"
+              key={index}
+              className="relative flex flex-col items-center justify-center mx-[6px] w-fit h-fit gap-3 overflow-hidden"
             >
-              View
-              <FaArrowRightLong className="text-[1px] w-0 opacity-0 -translate-x-full group-hover:text-xs group-hover:w-fit group-hover:opacity-100 group-hover:translate-x-0 transition-all ease-in-out duration-300" />
-            </button>
-          </div>
-        ))}
-      </Marquee>
-    </section>
+              <div className="border-4 border-base-300 w-[189px] h-[130px] rounded-lg overflow-hidden">
+                <img
+                  className="w-full h-full object-cover object-center"
+                  src={bg_img}
+                  alt={logo?.title + "-logo"}
+                  title={logo?.title}
+                />
+              </div>
+
+              <div className="action-center absolute bottom-0 right-0 w-fit h-fit p-1 flex items-center bg-base-300 justify-center border border-base-300 rounded-tl-lg rounded-br-xl z-10">
+                <button
+                  onClick={() => navigate("/case-studies")}
+                  className="group btn btn-sm btn-square btn-neutral"
+                  title="View All"
+                >
+                  <MdArrowOutward className="group-hover:rotate-45 transition-all text-xl ease-in-out duration-300 font-black" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </Marquee>
+      </section>
+    </>
   );
 };
 

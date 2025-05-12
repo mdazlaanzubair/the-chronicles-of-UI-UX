@@ -12,7 +12,7 @@ type Props = {
 
 const IconSlider = (props: Props) => {
   return (
-    <section id="icon-section" className="flex flex-col w-full bg-base-100 rounded-2xl px-3 py-5">
+    <section id="icon-section" className="flex flex-col w-full bg-base-100 rounded-lg px-3 py-5 border-4 border-base-300">
       <Marquee
         autoFill
         pauseOnHover

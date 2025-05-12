@@ -6,6 +6,7 @@ const DarkModeToggler: React.FC = () => {
 
   return (
     <label className="label text-base-content text-xs font-semibold" htmlFor="dark-mode-toggler">
+      Dark Mode
       <input
         id="dark-mode-toggler"
         name="dark-mode-toggler"
@@ -15,7 +16,6 @@ const DarkModeToggler: React.FC = () => {
         checked={isDarkMode}
         onChange={toggleDarkMode}
       />
-      Dark Mode
     </label>
   );
 };
