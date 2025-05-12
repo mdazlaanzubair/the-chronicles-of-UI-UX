@@ -5,9 +5,7 @@ import { toolKit } from "../utils/iconExporter";
 import { MdArrowOutward } from "react-icons/md";
 import SectionHeader from "./SectionHeader";
 
-type Props = {};
-
-const ProjectGridSlider = (props: Props) => {
+const ProjectGridSlider = () => {
   const navigate = useNavigate();
 
   return (

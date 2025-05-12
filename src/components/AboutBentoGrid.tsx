@@ -1,17 +1,13 @@
-import React from "react";
-import profile_pic from "../assets/profile.jpeg";
 import bg_img from "../assets/backgrounds/card-bg-img.jpg";
 import resume from "../assets/doc/resume.pdf";
+import dark_logo from "../assets/logo-dark.svg";
+import light_logo from "../assets/logo-light.svg";
 
 import { HiDocumentText } from "react-icons/hi2";
 import { FaIdCard } from "react-icons/fa";
-import { GrLinkedinOption } from "react-icons/gr";
-import { TbBrandGithubFilled } from "react-icons/tb";
-import { IoLogoTwitter } from "react-icons/io";
 import { calculateYearCount } from "../utils/expCalculator";
 import { useNavigate } from "react-router-dom";
-
-type Props = {};
+import { useDarkMode } from "../provider/DarkModeProvider";
 
 const bio_constants = {
   experience_in_year: calculateYearCount(),
@@ -35,28 +31,29 @@ const bio_constants = {
   },
 };
 
-const AboutBentoGrid = (props: Props) => {
+const AboutBentoGrid = () => {
+  const { isDarkMode } = useDarkMode();
   const navigate = useNavigate();
 
   return (
     <section
       id="hero-section"
-      className="w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-2xl"
+      className="relative w-full h-auto flex flex-col justify-between p-3 bg-base-100 rounded-lg border-4 border-base-300"
     >
       <div className="w-full h-full grid gap-3">
-        <div className="grid grid-cols-3 gap-3 auto-rows-fr">
+        <div className="grid grid-cols-3 gap-2 auto-rows-fr">
           <div
-            className={`group rounded-full cursor-pointer bg-base-200 flex flex-col items-center justify-center overflow-clip`}
+            className={`group rounded-2xl cursor-pointer bg-base-content flex flex-col items-center justify-center overflow-clip`}
             onClick={() => navigate("/")}
           >
             <img
-              className="w-full h-full"
-              src={profile_pic}
-              alt="muhammad azlaan zubair profile picture"
+              className="w-full h-full group-hover:scale-95 transition-all ease-in-out duration-300"
+              src={isDarkMode ? light_logo : dark_logo}
+              alt="Muhammad Azlaan Zubair Logo"
             />
           </div>
           <div
-            className={`group rounded-t-2xl rounded-l-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center text-base-content/60 hover:text-base-content border-4 border-transparent hover:border-base-content transition-all ease-in-out duration-300`}
+            className={`group rounded-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center text-base-content hover:text-base-content border-4 border-transparent hover:border-base-content transition-all ease-in-out duration-300`}
           >
             <div className="flex flex-col items-center justify-center">
               <span className="text-3xl group-hover:text-2xl transition-all ease-in-out duration-300 font-black">
@@ -69,16 +66,20 @@ const AboutBentoGrid = (props: Props) => {
             </div>
           </div>
           <div
-            className={`group rounded-br-2xl rounded-t-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center text-base-content/60 border-4 border-transparent hover:border-base-content hover:text-base-content transition-all ease-in-out duration-300`}
-            onClick={() => window.open(resume, "_blank")}
+            className={`group relative overflow-hidden row-span-2 rounded-2xl border-4 border-base-300 cursor-pointer bg-base-200 parent flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
+            onClick={() => navigate("/personal-projects")}
           >
-            <HiDocumentText className="text-3xl mb-2 group-hover:text-2xl transition-all ease-in-out duration-300" />
-            <span className="text-[1px] opacity-0 font-bold text-center uppercase group-hover:text-xs group-hover:opacity-100 transition-all ease-in-out duration-300">
-              Resume
+            <img
+              className="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover"
+              src={bg_img}
+              alt="background image"
+            />
+            <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-full text-lg [writing-mode:vertical-lr] rotate-180 flex flex-col items-center justify-center uppercase font-bold z-10 bg-black/60 text-white/60 group hover:text-white hover:bg-black/70 transition-all ease-in-out duration-300">
+              Side Projects
             </span>
           </div>
           <div
-            className={`group rounded-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center text-base-content/60 border-4 border-transparent hover:border-base-content hover:text-base-content transition-all ease-in-out duration-300`}
+            className={`group rounded-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center text-base-content border-4 border-transparent hover:border-base-content hover:text-base-content transition-all ease-in-out duration-300`}
             onClick={() => navigate("/about")}
           >
             <FaIdCard className="text-3xl mb-2 group-hover:text-2xl transition-all ease-in-out duration-300" />
@@ -88,7 +89,7 @@ const AboutBentoGrid = (props: Props) => {
           </div>
 
           <div
-            className={`group rounded-b-2xl rounded-tl-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center border-4 border-transparent hover:border-accent text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
+            className={`group rounded-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center border-4 border-transparent hover:border-accent text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
             onClick={() =>
               window.open(bio_constants.social.calendly.url, "_blank")
             }
@@ -100,20 +101,7 @@ const AboutBentoGrid = (props: Props) => {
             </div>
           </div>
           <div
-            className={`group relative overflow-hidden row-span-2 rounded-r-2xl border-4 border-transparent cursor-pointer bg-base-200 parent flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
-            onClick={() => navigate("/personal-projects")}
-          >
-            <img
-              className="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover"
-              src={bg_img}
-              alt="background image"
-            />
-            <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-full text-lg [writing-mode:vertical-lr] rotate-180 flex flex-col items-center justify-center uppercase font-bold z-10 text-white/60 group hover:text-accent transition-all ease-in-out duration-300">
-              Side Projects
-            </span>
-          </div>
-          <div
-            className={`group relative overflow-hidden col-span-2 rounded-t-2xl border-4 border-transparent cursor-pointer parent rounded-l-2xl bg-base-200 flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
+            className={`group relative overflow-hidden col-span-2 rounded-2xl border-4 border-base-300 cursor-pointer parent bg-base-200 flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
             onClick={() => navigate("/case-studies")}
           >
             <img
@@ -121,11 +109,20 @@ const AboutBentoGrid = (props: Props) => {
               src={bg_img}
               alt="background image"
             />
-            <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-ful text-lg flex flex-col items-center justify-center uppercase font-bold z-10 text-white/60 group hover:text-accent transition-all ease-in-out duration-300">
+            <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-ful text-lg flex flex-col items-center justify-center uppercase font-bold z-10 bg-black/60 text-white/60 group hover:text-white hover:bg-black/70 transition-all ease-in-out duration-300">
               Case Studies
             </span>
           </div>
           <div
+            className={`group rounded-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center text-base-content border-4 border-transparent hover:border-base-content hover:text-base-content transition-all ease-in-out duration-300`}
+            onClick={() => window.open(resume, "_blank")}
+          >
+            <HiDocumentText className="text-3xl mb-2 group-hover:text-2xl transition-all ease-in-out duration-300" />
+            <span className="text-[1px] opacity-0 font-bold text-center uppercase group-hover:text-xs group-hover:opacity-100 transition-all ease-in-out duration-300">
+              Resume
+            </span>
+          </div>
+          {/* <div
             className={`group rounded-b-2xl rounded-l-2xl cursor-pointer bg-base-200 border-4 border-transparent hover:border-base-content flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
             onClick={() =>
               window.open(bio_constants.social.linkedin.url, "_blank")
@@ -157,7 +154,7 @@ const AboutBentoGrid = (props: Props) => {
             <span className="text-[1px] opacity-0 font-bold text-center uppercase group-hover:text-xs group-hover:opacity-100 transition-all ease-in-out duration-300">
               {bio_constants.social.github.title}
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

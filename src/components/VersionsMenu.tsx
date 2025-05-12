@@ -1,9 +1,6 @@
-import { version } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 
-type Props = {};
-
-const VersionsMenu = (props: Props) => {
+const VersionsMenu = () => {
   const version_links = [
     {
       title: "latest (v4)",
@@ -30,7 +27,7 @@ const VersionsMenu = (props: Props) => {
           className={`btn btn-ghost btn-sm group relative overflow-hidden border-transparent bg-transparent shadow-none btn-default`}
           tabIndex={1}
         >
-          Current Version
+          Portfolio Versions
         </button>
         <ul
           tabIndex={1}

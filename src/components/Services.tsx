@@ -1,15 +1,6 @@
-import React from "react";
-import profile_pic from "../assets/profile.jpeg";
-import FancyButton from "./FancyButton";
-import { FaPhone } from "react-icons/fa";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate } from "react-router";
 import SectionHeader from "./SectionHeader";
 
-type Props = {};
-
-const ServicesSection = (props: Props) => {
-  const navigate = useNavigate();
+const ServicesSection = () => {
   const services_list = [
     {
       id: 1,

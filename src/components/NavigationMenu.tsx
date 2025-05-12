@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
-
-const NavigationMenu = (props: Props) => {
+const NavigationMenu = () => {
   const navigate = useNavigate();
 
   const navigation_links = [
@@ -32,7 +30,7 @@ const NavigationMenu = (props: Props) => {
     return (
       <div className="dropdown dropdown-end">
         <button
-          className={`btn w-[4vw] btn-ghost btn-sm group relative overflow-hidden border-transparent bg-transparent shadow-none btn-default`}
+          className={`btn w-14 btn-ghost btn-sm group relative overflow-hidden border-transparent bg-transparent shadow-none btn-default`}
           tabIndex={1}
         >
           <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center gap-2 content-center opacity-100 group-hover:opacity-0 translate-y-0 group-hover:-translate-y-full transition-all ease-in-out duration-500">

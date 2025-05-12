@@ -3,9 +3,7 @@ import { FaPhone } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router";
 
-type Props = {};
-
-const HeroSection = (props: Props) => {
+const HeroSection = () => {
   const navigate = useNavigate();
 
   return (

@@ -16,9 +16,9 @@ function App() {
     >
       <VersionsMenu />
 
-      <main className="w-full lg:w-[500px] h-auto flex flex-col items-center justify-center overflow-x-hidden overflow-y-hidden mx-auto my-10 bg-base-200 rounded-2xl">
+      <main className="w-full lg:w-[500px] h-auto flex flex-col items-center justify-center overflow-x-hidden overflow-y-hidden mx-auto lg:my-10 bg-base-200 lg:rounded-2xl">
         <Header />
-        <div className="w-full h-full p-4 flex flex-col items-center justify-center gap-3">
+        <div className="w-full h-full p-2 lg:p-4 flex flex-col items-center justify-center gap-3">
           <Outlet />
           <Footer />
         </div>

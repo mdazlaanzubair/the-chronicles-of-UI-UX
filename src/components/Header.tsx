@@ -6,9 +6,8 @@ import FancyButton from "./FancyButton";
 import { useNavigate } from "react-router-dom";
 import NavigationMenu from "./NavigationMenu";
 
-type Props = {};
 
-const Header = (props: Props) => {
+const Header = () => {
   const navigate = useNavigate();
 
   const { isDarkMode } = useDarkMode();

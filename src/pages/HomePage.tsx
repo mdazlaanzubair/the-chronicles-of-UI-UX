@@ -1,13 +1,11 @@
-import React from "react";
 import HeroSection from "../components/Hero";
 import IconSlider from "../components/IconSlider";
 import { toolKit } from "../utils/iconExporter";
 import ProjectGridSlider from "../components/ProjectGridSlider";
 import ServicesSection from "../components/Services";
+import AboutBentoGrid from "../components/AboutBentoGrid";
 
-type Props = {};
-
-const HomePage = (props: Props) => {
+const HomePage = () => {
   return (
     <section
       id="home-page"
@@ -15,6 +13,7 @@ const HomePage = (props: Props) => {
     >
       <HeroSection />
       <IconSlider icons={toolKit} />
+      <AboutBentoGrid />
       <ProjectGridSlider />
       <ServicesSection />
     </section>
