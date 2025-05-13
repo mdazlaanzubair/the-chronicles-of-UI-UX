@@ -38,7 +38,7 @@ const AboutBentoGrid = () => {
   return (
     <section
       id="hero-section"
-      className="relative w-full h-auto flex flex-col justify-between p-3 bg-base-100 rounded-lg border-4 border-base-300"
+      className="relative w-full h-auto flex flex-col justify-between p-3 bg-base-100 rounded-lg"
     >
       <div className="w-full h-full grid gap-3">
         <div className="grid grid-cols-3 gap-2 auto-rows-fr">
