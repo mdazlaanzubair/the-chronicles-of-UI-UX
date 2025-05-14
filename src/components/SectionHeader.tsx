@@ -12,8 +12,8 @@ const SectionHeader = (props: Props) => {
       ${
         props.mode === "light"
           ? "bg-base-content text-base-200"
-          : "bg-base-100 text-base-content/60"
-      } rounded-lg`}
+          : "bg-base-100 text-base-content"
+      } rounded-lg border border-base-300`}
     >
       <h1 className="text-[12px] font-medium text-center">{props.title}</h1>
     </section>

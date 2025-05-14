@@ -22,12 +22,14 @@ const HeroSection = () => {
       </div>
 
       <h1 className="text-[32px] font-medium my-3">
-        Hello &amp; welcome to my digital corner!
+        Hi! I&apos;m Azlaan, a full-stack developer based in{" "}
+        <span className="relative text-base-content w-fit flex flex-col items-center justify-center">
+          <span className="bg-gradient-to-r from-accent/5 via-accent to-accent absolute bottom-2 -left-2 -right-2 h-3"></span>
+          <strong className="z-10 font-bold">Karachi, Pakistan</strong>
+        </span>
       </h1>
       <p className="text-base-content/60 text-[16px] font-light">
-        I&apos;m Azlaan, a full-stack developer based in{" "}
-        <span className="text-base-content font-medium">Karachi, Pakistan</span>
-        , constantly pushing the boundaries of web development. I offer{" "}
+        Constantly pushing the boundaries of web development. I offer{" "}
         <span className="text-base-content font-medium">
           User-Centric Solutions
         </span>{" "}

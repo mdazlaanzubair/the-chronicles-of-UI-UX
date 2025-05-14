@@ -14,7 +14,11 @@ const HomePage = () => {
       <HeroSection />
       <IconSlider icons={toolKit} />
       <AboutBentoGrid />
-      <ProjectGridSlider />
+      <ProjectGridSlider
+        title="Let's sneak a peek at my work."
+        sectionID="case-study-section-head"
+        direction="right"
+      />
       <ServicesSection />
     </section>
   );

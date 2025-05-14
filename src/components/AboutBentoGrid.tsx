@@ -37,11 +37,11 @@ const AboutBentoGrid = () => {
 
   return (
     <section
-      id="hero-section"
-      className="relative w-full h-auto flex flex-col justify-between p-3 bg-base-100 rounded-lg"
+      id="about-section"
+      className="relative w-full h-auto flex flex-col justify-between bg-base-200 rounded-lg"
     >
       <div className="w-full h-full grid gap-3">
-        <div className="grid grid-cols-3 gap-2 auto-rows-fr">
+        <div className="grid grid-cols-3 gap-3 auto-rows-fr">
           <div
             className={`group rounded-2xl cursor-pointer bg-base-content flex flex-col items-center justify-center overflow-clip`}
             onClick={() => navigate("/")}
@@ -53,7 +53,7 @@ const AboutBentoGrid = () => {
             />
           </div>
           <div
-            className={`group rounded-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center text-base-content hover:text-base-content border-4 border-transparent hover:border-base-content transition-all ease-in-out duration-300`}
+            className={`group rounded-2xl cursor-pointer bg-base-100 flex flex-col items-center justify-center text-base-content hover:text-base-content border-4 border-transparent hover:border-base-content transition-all ease-in-out duration-300`}
           >
             <div className="flex flex-col items-center justify-center">
               <span className="text-3xl group-hover:text-2xl transition-all ease-in-out duration-300 font-black">
@@ -79,17 +79,17 @@ const AboutBentoGrid = () => {
             </span>
           </div>
           <div
-            className={`group rounded-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center text-base-content border-4 border-transparent hover:border-base-content hover:text-base-content transition-all ease-in-out duration-300`}
-            onClick={() => navigate("/about")}
+            className={`group rounded-2xl cursor-pointer bg-base-100 flex flex-col items-center justify-center text-base-content border-4 border-transparent hover:border-base-content hover:text-base-content transition-all ease-in-out duration-300`}
+            onClick={() => navigate("/credentials")}
           >
             <FaIdCard className="text-3xl mb-2 group-hover:text-2xl transition-all ease-in-out duration-300" />
             <span className="text-[1px] opacity-0 font-bold text-center uppercase group-hover:text-xs group-hover:opacity-100 transition-all ease-in-out duration-300">
-              Read Me
+              Credentials
             </span>
           </div>
 
           <div
-            className={`group rounded-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center border-4 border-transparent hover:border-accent text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
+            className={`group rounded-2xl cursor-pointer bg-base-100 flex flex-col items-center justify-center border-4 border-transparent hover:border-accent text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
             onClick={() =>
               window.open(bio_constants.social.calendly.url, "_blank")
             }
@@ -114,7 +114,7 @@ const AboutBentoGrid = () => {
             </span>
           </div>
           <div
-            className={`group rounded-2xl cursor-pointer bg-base-200 flex flex-col items-center justify-center text-base-content border-4 border-transparent hover:border-base-content hover:text-base-content transition-all ease-in-out duration-300`}
+            className={`group rounded-2xl cursor-pointer bg-base-100 flex flex-col items-center justify-center text-base-content border-4 border-transparent hover:border-base-content hover:text-base-content transition-all ease-in-out duration-300`}
             onClick={() => window.open(resume, "_blank")}
           >
             <HiDocumentText className="text-3xl mb-2 group-hover:text-2xl transition-all ease-in-out duration-300" />

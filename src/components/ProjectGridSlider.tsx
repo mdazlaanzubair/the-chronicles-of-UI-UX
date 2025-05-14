@@ -5,17 +5,31 @@ import { toolKit } from "../utils/iconExporter";
 import { MdArrowOutward } from "react-icons/md";
 import SectionHeader from "./SectionHeader";
 
-const ProjectGridSlider = () => {
+type Props = {
+  title: string;
+  sectionID: string;
+  direction?: "right" | "left" | "up" | "down";
+  speed?: number;
+  autofill?: boolean;
+  pauseOnHover?: boolean;
+};
+
+const ProjectGridSlider = (props: Props) => {
   const navigate = useNavigate();
 
   return (
     <>
-      <SectionHeader id="icon-section-head" title="Let's sneak a peek at my work." />
+      <SectionHeader id={props.sectionID} title={props.title} />
       <section
-        id="icon-section"
+        id={props.sectionID + "-marquee"}
         className="flex flex-col w-full bg-base-200 rounded-2xl"
       >
-        <Marquee autoFill pauseOnHover direction="right" speed={25}>
+        <Marquee
+          autoFill={props.autofill ?? true}
+          pauseOnHover={props.pauseOnHover ?? true}
+          direction={props.direction ?? "right"}
+          speed={props.speed ?? 25}
+        >
           {toolKit?.map((logo, index) => (
             <div
               key={index}

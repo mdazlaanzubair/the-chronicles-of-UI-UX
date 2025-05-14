@@ -13,6 +13,10 @@ const NavigationMenu = () => {
       url: "/about",
     },
     {
+      title: "Credentials",
+      url: "/credentials",
+    },
+    {
       title: "Case Studies",
       url: "/case-studies",
     },
