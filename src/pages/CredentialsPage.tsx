@@ -1,4 +1,3 @@
-import dark_logo from "../assets/logo-light.svg";
 import cobone_logo from "../assets//credentials-logo/cobone_logo.jpeg";
 import yallacompare_logo from "../assets//credentials-logo/yallacompare_logo.jpeg";
 import transviti_logo from "../assets//credentials-logo/transviti_logo.jpeg";
@@ -10,7 +9,11 @@ import umsi_logo from "../assets//credentials-logo/umsi-logo.jpeg";
 import hkust_logo from "../assets//credentials-logo/hkust_logo.jpeg";
 import deeplearningai_logo from "../assets//credentials-logo/deeplearningai_logo.jpeg";
 
-import SectionHeader from "../components/SectionHeader";
+import EducationCard from "../components/EducationCard";
+import ExperienceCard from "../components/ExperienceCard";
+import CertificateCard from "../components/CertificateCard";
+import NoCredentials from "../components/NoCredentials";
+import FooterBtn from "../components/FooterBtn";
 import { MdArrowOutward } from "react-icons/md";
 
 const CredentialsPage = () => {
@@ -159,188 +162,100 @@ const CredentialsPage = () => {
     },
   ];
 
-  if (experiences.length) {
-    return (
-      <section
-        id="credentials-page"
-        className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
-      >
-        <SectionHeader
-          id="experience-section-head"
-          title="Experience"
-          mode="dark"
-        />
-        <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
-          {experiences.map((experience, index) => (
-            <li
+  return (
+    <section
+      id="credentials-page"
+      className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
+    >
+      <FooterBtn
+        mode="light"
+        label="Experience"
+        icon_1={<MdArrowOutward />}
+        icon_2={<MdArrowOutward />}
+        onClickHandler={() =>
+          window.open(
+            "https://www.linkedin.com/in/mdazlaanzubair/details/experience/",
+            "_blank"
+          )
+        }
+      />
+      <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
+        {experiences.length === 0 ? (
+          <NoCredentials message="No Experience" />
+        ) : (
+          experiences.map((exp, index) => (
+            <ExperienceCard
               key={index}
-              className="group relative flex items-start justify-between gap-5 bg-base-100 rounded-xl border border-base-300 p-3 overflow-hidden transition-all ease-in-out duration-300"
-            >
-              <button
-                type="button"
-                className="absolute btn btn-sm btn-neutral btn-square opacity-0 top-3 right-3 -rotate-180 group-hover:rotate-0 group-hover:opacity-100 group-hover:top-3 group-hover:right-3 group-hover:translate-x-0 group-hover:translate-y-0 transition-all ease-in-out duration-300"
-                onClick={() =>
-                  window.open(
-                    "https://www.linkedin.com/in/mdazlaanzubair/details/experience/",
-                    "_blank"
-                  )
-                }
-              >
-                <MdArrowOutward />
-              </button>
+              company={exp.company}
+              date={exp.date}
+              title={exp.title}
+              description={exp.description}
+              location={exp.location}
+            />
+          ))
+        )}
+      </ul>
 
-              <div className="min-w-14 min-h-14 max-w-14 max-h-14 w-14 h-14 shrink overflow-hidden bg-white rounded-box p-2 my-5">
-                <img
-                  className="w-full h-full rounded-lg group-hover:scale-95 transition-all ease-in-out duration-300"
-                  src={experience.company.logo}
-                  alt={experience.company.name + " logo"}
-                />
-              </div>
 
-              <div className="grow flex flex-col gap-1">
-                <span className="text-[12px] font-light italic text-base-content/30">
-                  {experience.date}
-                </span>
-                <h1 className="text-[14px] font-semibold text-base-content">
-                  {experience.title}
-                  <a
-                    className="link link-accent text-decoration-none"
-                    href={experience.company.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {` @${experience.company.name}`}
-                  </a>
-                </h1>
-                <span className="text-[12px] text-base-content font-normal">
-                  {experience.location}
-                </span>
-                <p className="text-[13px] text-base-content/60 font-normal">
-                  {experience.description}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <SectionHeader
-          id="education-section-head"
-          title="Education"
-          mode="dark"
-        />
-        <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
-          {education.map((edu_item, index) => (
-            <li
+      <FooterBtn
+        mode="light"
+        label="Education"
+        icon_1={<MdArrowOutward />}
+        icon_2={<MdArrowOutward />}
+        onClickHandler={() =>
+          window.open(
+            "https://www.linkedin.com/in/mdazlaanzubair/details/education/",
+            "_blank"
+          )
+        }
+      />
+      <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
+        {education.length === 0 ? (
+          <NoCredentials message="No Education" />
+        ) : (
+          education.map((edu_item, index) => (
+            <EducationCard
               key={index}
-              className="group relative flex items-start justify-between gap-5 bg-base-100 rounded-xl border border-base-300 p-3 overflow-hidden transition-all ease-in-out duration-300"
-            >
-              <button
-                type="button"
-                className="absolute btn btn-sm btn-neutral btn-square opacity-0 top-3 right-3 -rotate-180 group-hover:rotate-0 group-hover:opacity-100 group-hover:top-3 group-hover:right-3 group-hover:translate-x-0 group-hover:translate-y-0 transition-all ease-in-out duration-300"
-                onClick={() =>
-                  window.open(
-                    "https://www.linkedin.com/in/mdazlaanzubair/details/education/",
-                    "_blank"
-                  )
-                }
-              >
-                <MdArrowOutward />
-              </button>
+              date={edu_item.date}
+              degree={edu_item.degree}
+              field={edu_item.field}
+              institute={edu_item.institute}
+            />
+          ))
+        )}
+      </ul>
 
-              <div className="min-w-14 min-h-14 max-w-14 max-h-14 w-14 h-14 shrink overflow-hidden bg-white rounded-box p-2 my-5">
-                <img
-                  className="w-full h-full rounded-lg group-hover:scale-95 transition-all ease-in-out duration-300"
-                  src={edu_item.institute.logo}
-                  alt={edu_item.institute.name + " logo"}
-                />
-              </div>
 
-              <div className="grow flex flex-col gap-1">
-                <span className="text-[12px] font-light italic text-base-content/30">
-                  {edu_item.date}
-                </span>
-                <h1 className="text-[14px] font-semibold text-base-content">
-                  {edu_item.degree}
-                  <a
-                    className="link link-accent text-decoration-none"
-                    href={edu_item.institute.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {` @${edu_item.institute.name}`}
-                  </a>
-                </h1>
-                <span className="text-[12px] text-base-content font-normal">
-                  {edu_item.field}
-                </span>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <SectionHeader
-          id="certification-section-head"
-          title="Certifications"
-          mode="dark"
-        />
-        <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
-          {certifications.map((certificate, index) => (
-            <li
+      <FooterBtn
+        mode="light"
+        label="Certifications"
+        icon_1={<MdArrowOutward />}
+        icon_2={<MdArrowOutward />}
+        onClickHandler={() =>
+          window.open(
+            "https://www.linkedin.com/in/mdazlaanzubair/details/certifications/",
+            "_blank"
+          )
+        }
+      />
+      <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
+        {certifications.length === 0 ? (
+          <NoCredentials message="No Certifications" />
+        ) : (
+          certifications.map((certi, index) => (
+            <CertificateCard
               key={index}
-              className="group relative flex items-start justify-between gap-5 bg-base-100 rounded-xl border border-base-300 p-3 overflow-hidden transition-all ease-in-out duration-300"
-            >
-              <button
-                type="button"
-                className="absolute btn btn-sm btn-neutral btn-square opacity-0 top-3 right-3 -rotate-180 group-hover:rotate-0 group-hover:opacity-100 group-hover:top-3 group-hover:right-3 group-hover:translate-x-0 group-hover:translate-y-0 transition-all ease-in-out duration-300"
-                onClick={() =>
-                  window.open(
-                    "https://www.linkedin.com/in/mdazlaanzubair/details/certifications/",
-                    "_blank"
-                  )
-                }
-              >
-                <MdArrowOutward />
-              </button>
-
-              <div className="min-w-14 min-h-14 max-w-14 max-h-14 w-14 h-14 shrink overflow-hidden bg-white rounded-box p-2 my-5">
-                <img
-                  className="w-full h-full rounded-lg group-hover:scale-95 transition-all ease-in-out duration-300"
-                  src={certificate.institute.logo}
-                  alt={certificate.institute.name + " logo"}
-                />
-              </div>
-
-              <div className="grow flex flex-col gap-1">
-                <span className="text-[12px] font-light italic text-base-content/30">
-                  Issued in {certificate.date}
-                </span>
-                <h1 className="text-[14px] font-semibold text-base-content">
-                  {certificate.title}
-                  <a
-                    className="link link-accent text-decoration-none block text-[12px]"
-                    href={certificate.institute.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {` @${certificate.institute.name}`}
-                  </a>
-                </h1>
-                <span className="text-[12px] text-base-content font-normal">
-                  Credential ID
-                  <a
-                    className="link link-info text-decoration-none"
-                    href={certificate.certificate_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {` ${certificate.credentialId}`}
-                  </a>
-                </span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-    );
-  }
+              certificate_url={certi.certificate_url}
+              credentialId={certi.credentialId}
+              title={certi.title}
+              institute={certi.institute}
+              date={certi.date}
+            />
+          ))
+        )}
+      </ul>
+    </section>
+  );
 };
 
 export default CredentialsPage;
