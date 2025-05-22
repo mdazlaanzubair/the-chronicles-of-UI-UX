@@ -44,7 +44,7 @@ const AboutBentoGrid = () => {
         <div className="grid grid-cols-3 gap-3 auto-rows-fr">
           <div
             className={`group rounded-2xl cursor-pointer bg-base-content flex flex-col items-center justify-center overflow-clip`}
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/about")}
           >
             <img
               className="w-full h-full group-hover:scale-95 transition-all ease-in-out duration-300"
