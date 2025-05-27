@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
 
 import { useNavigate } from "react-router-dom";
-import { case_studies } from "../utils/constants";
+import { case_studies } from "../utils/constant_export";
 import SectionHeader from "./SectionHeader";
 
 type Props = {
@@ -48,7 +48,7 @@ const ProjectGridSlider = (props: Props) => {
               <button
                 onClick={() => navigate("/work")}
                 className="opacity-0 group-hover:opacity-100 absolute top-1/2 lef-1/2 -translate-y-1/2 btn btn-sm btn-neutral z-20 transition-all ease-in-out duration-300"
-                title="View All"
+                title={`View ${title} Projects`}
               >
                 View
               </button>

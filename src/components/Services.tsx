@@ -1,36 +1,14 @@
+import { services_list } from "../utils/constant_export";
 import SectionHeader from "./SectionHeader";
 
 const ServicesSection = () => {
-  const services_list = [
-    {
-      id: 1,
-      title: "Design",
-      desc: "Craft user-centric interfaces that represent your brand.",
-    },
-    {
-      id: 2,
-      title: "Development",
-      desc: "Develop websites that deliver a smooth UX across all devices.",
-    },
-
-    {
-      id: 3,
-      title: "Scraping",
-      desc: "Extract valuable data efficiently and ethically to support smart decisions.",
-    },
-    {
-      id: 4,
-      title: "Consulting",
-      desc: "Offer guidance to improve your workflows, and tech choices.",
-    },
-  ];
 
   return (
     <>
       <SectionHeader
         id="services-section-head"
         title="To be precise, I do"
-        mode="light"
+        mode="dark"
       />
       <section
         id="services-section-body"

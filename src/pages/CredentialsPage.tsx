@@ -25,7 +25,7 @@ const CredentialsPage = () => {
           <SectionHeader
             id={`${sectionKey}-section`}
             title={`${sectionKey}`}
-            mode="light"
+            mode="dark"
           />
           <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg mt-3">
             {items.length === 0 ? (
