@@ -13,16 +13,12 @@ const NavigationMenu = () => {
       url: "/about",
     },
     {
+      title: "Work",
+      url: "/work",
+    },
+    {
       title: "Credentials",
       url: "/credentials",
-    },
-    {
-      title: "Case Studies",
-      url: "/case-studies",
-    },
-    {
-      title: "Personal Projects",
-      url: "/personal-projects",
     },
     {
       title: "Contact",
@@ -50,11 +46,7 @@ const NavigationMenu = () => {
         >
           {navigation_links.map((menu_item, index) => (
             <li key={index}>
-              <a
-                onClick={() => navigate(menu_item.url)}
-              >
-                {menu_item.title}
-              </a>
+              <a onClick={() => navigate(menu_item.url)}>{menu_item.title}</a>
             </li>
           ))}
         </ul>

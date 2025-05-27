@@ -54,6 +54,7 @@ const AboutBentoGrid = () => {
           </div>
           <div
             className={`group rounded-2xl cursor-pointer bg-base-100 flex flex-col items-center justify-center text-base-content hover:text-base-content border-4 border-transparent hover:border-base-content transition-all ease-in-out duration-300`}
+            onClick={() => navigate("/credentials")}
           >
             <div className="flex flex-col items-center justify-center">
               <span className="text-3xl group-hover:text-2xl transition-all ease-in-out duration-300 font-black">
@@ -102,7 +103,7 @@ const AboutBentoGrid = () => {
           </div>
           <div
             className={`group relative overflow-hidden col-span-2 rounded-2xl border-4 border-base-300 cursor-pointer parent bg-base-200 flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
-            onClick={() => navigate("/case-studies")}
+            onClick={() => navigate("/work")}
           >
             <img
               className="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover"
@@ -110,7 +111,7 @@ const AboutBentoGrid = () => {
               alt="background image"
             />
             <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-ful text-lg flex flex-col items-center justify-center uppercase font-bold z-10 bg-black/60 text-white/60 group hover:text-white hover:bg-black/70 transition-all ease-in-out duration-300">
-              Case Studies
+              Work
             </span>
           </div>
           <div

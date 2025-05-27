@@ -1,8 +1,7 @@
 import Marquee from "react-fast-marquee";
-import bg_img from "../assets/backgrounds/abstract-bg1.jpg";
+
 import { useNavigate } from "react-router-dom";
-import { toolKit } from "../utils/iconExporter";
-import { MdArrowOutward } from "react-icons/md";
+import { case_studies } from "../utils/constants";
 import SectionHeader from "./SectionHeader";
 
 type Props = {
@@ -30,29 +29,29 @@ const ProjectGridSlider = (props: Props) => {
           direction={props.direction ?? "right"}
           speed={props.speed ?? 25}
         >
-          {toolKit?.map((logo, index) => (
+          {case_studies?.map(({ imgSrc, title }, index) => (
             <div
               key={index}
-              className="relative flex flex-col items-center justify-center mx-[6px] w-fit h-fit gap-3 overflow-hidden"
+              className="group relative flex flex-col items-center justify-center mx-[6px] w-fit h-fit gap-3 overflow-hidden cursor-pointer"
+              onClick={() => navigate("/work")}
             >
-              <div className="border-4 border-base-300 w-[189px] h-[130px] rounded-lg overflow-hidden">
+              <div className="w-[189px] h-[130px] rounded-lg overflow-hidden">
                 <img
-                  className="w-full h-full object-cover object-center"
-                  src={bg_img}
-                  alt={logo?.title + "-logo"}
-                  title={logo?.title}
+                  className="w-full h-full object-cover"
+                  src={imgSrc}
+                  alt={title + "-logo"}
+                  title={title}
                 />
               </div>
 
-              <div className="action-center absolute bottom-0 right-0 w-fit h-fit p-1 flex items-center bg-base-300 justify-center border border-base-300 rounded-tl-lg rounded-br-xl z-10">
-                <button
-                  onClick={() => navigate("/case-studies")}
-                  className="group btn btn-sm btn-square btn-neutral"
-                  title="View All"
-                >
-                  <MdArrowOutward className="group-hover:rotate-45 transition-all text-xl ease-in-out duration-300 font-black" />
-                </button>
-              </div>
+              <div className="opacity-0 group-hover:opacity-100 absolute bottom-0 right-0 w-full h-full p-1 flex items-center bg-white/5 backdrop-blur-sm z-10 rounded-lg transition-all ease-in-out duration-300"></div>
+              <button
+                onClick={() => navigate("/work")}
+                className="opacity-0 group-hover:opacity-100 absolute top-1/2 lef-1/2 -translate-y-1/2 btn btn-sm btn-neutral z-20 transition-all ease-in-out duration-300"
+                title="View All"
+              >
+                View
+              </button>
             </div>
           ))}
         </Marquee>

@@ -3,7 +3,6 @@ import IconSlider from "../components/IconSlider";
 import { toolKit } from "../utils/iconExporter";
 import ProjectGridSlider from "../components/ProjectGridSlider";
 import ServicesSection from "../components/Services";
-import AboutBentoGrid from "../components/AboutBentoGrid";
 
 const HomePage = () => {
   return (
@@ -13,7 +12,6 @@ const HomePage = () => {
     >
       <HeroSection />
       <IconSlider icons={toolKit} />
-      <AboutBentoGrid />
       <ProjectGridSlider
         title="Let's sneak a peek at my work."
         sectionID="case-study-section-head"

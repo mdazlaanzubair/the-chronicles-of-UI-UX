@@ -1,22 +1,63 @@
-import EducationCard from "../components/EducationCard";
-import ExperienceCard from "../components/ExperienceCard";
-import CertificateCard from "../components/CertificateCard";
 import NoCredentials from "../components/NoCredentials";
 import FooterBtn from "../components/FooterBtn";
 import { MdArrowOutward } from "react-icons/md";
-
 import {
   experiences,
   education,
   certifications,
 } from "../utils/constant_export";
 
+import CredentialCard from "../components/CredentialsCard";
+
 const CredentialsPage = () => {
+  const credentials = {
+    experiences,
+    education,
+    certifications,
+  };
+
   return (
     <section
       id="credentials-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
+
+{
+  // loop credentials data to populate this ui
+  /*
+   <FooterBtn
+        mode="light"
+        label="Experience"
+        icon_1={<MdArrowOutward />}
+        icon_2={<MdArrowOutward />}
+        onClickHandler={() =>
+          window.open(
+            "https://www.linkedin.com/in/mdazlaanzubair/details/experience/",
+            "_blank"
+          )
+        }
+      />
+      <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
+        {experiences.length === 0 ? (
+          <NoCredentials message="No Experience" />
+        ) : (
+          experiences.map((exp, index) => (
+            <CredentialCard
+              key={index}
+              firm={exp.company}
+              date={exp.date}
+              title={exp.title}
+              description={exp.description}
+              location={exp.location}
+            />
+          ))
+        )}
+      </ul>
+  */
+}
+
+
+
       <FooterBtn
         mode="light"
         label="Experience"
@@ -34,9 +75,9 @@ const CredentialsPage = () => {
           <NoCredentials message="No Experience" />
         ) : (
           experiences.map((exp, index) => (
-            <ExperienceCard
+            <CredentialCard
               key={index}
-              company={exp.company}
+              firm={exp.company}
               date={exp.date}
               title={exp.title}
               description={exp.description}
@@ -63,12 +104,13 @@ const CredentialsPage = () => {
           <NoCredentials message="No Education" />
         ) : (
           education.map((edu_item, index) => (
-            <EducationCard
+            <CredentialCard
               key={index}
               date={edu_item.date}
-              degree={edu_item.degree}
+              title={edu_item.title}
               field={edu_item.field}
-              institute={edu_item.institute}
+              firm={edu_item.firm}
+              description={edu_item.description}
             />
           ))
         )}
@@ -91,13 +133,14 @@ const CredentialsPage = () => {
           <NoCredentials message="No Certifications" />
         ) : (
           certifications.map((certi, index) => (
-            <CertificateCard
+            <CredentialCard
               key={index}
-              certificate_url={certi.certificate_url}
-              credentialId={certi.credentialId}
-              title={certi.title}
-              institute={certi.institute}
+              doc_url={certi.doc_url}
+              credential_id={certi.credentialId}
+              firm={certi.firm}
               date={certi.date}
+              title={certi.title}
+              description={certi.description}
             />
           ))
         )}

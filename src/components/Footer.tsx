@@ -54,12 +54,12 @@ const Footer = () => {
       url: "/about",
     },
     {
-      title: "Case Studies",
-      url: "/case-studies",
+      title: "Work",
+      url: "/work",
     },
     {
-      title: "Personal Projects",
-      url: "/personal-projects",
+      title: "Credentials",
+      url: "/credentials",
     },
     {
       title: "Contact",

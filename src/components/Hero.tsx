@@ -21,12 +21,9 @@ const HeroSection = () => {
         </small>
       </div>
 
-      <h1 className="text-[32px] font-medium my-3">
-        Hi! I&apos;m Azlaan, a full-stack developer based in{" "}
-        <span className="relative text-base-content w-fit flex flex-col items-center justify-center">
-          <span className="bg-gradient-to-r from-accent/5 via-accent to-accent absolute bottom-2 -left-2 -right-2 h-3"></span>
-          <strong className="z-10 font-bold">Karachi, Pakistan</strong>
-        </span>
+      <h1 className="text-[32px] font-light my-3">
+        Hi! I&apos;m Azlaan, <br /> a web engineer based in{" "}
+        <strong className="z-10 font-bold">Karachi, Pakistan</strong>
       </h1>
       <p className="text-base-content/60 text-[16px] font-light">
         Constantly pushing the boundaries of web development. I offer{" "}

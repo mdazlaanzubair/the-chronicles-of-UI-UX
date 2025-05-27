@@ -11,7 +11,10 @@ import deeplearningai_logo from "../assets/credentials-logo/deeplearningai_logo.
 
 export const experiences = [
   {
-    date: "September 2024 - Present",
+    credential_id: "",
+    doc_url: "",
+    field: "",
+    date: "Sep 2024 - Present",
     title: "Frontend Developer",
     company: {
       name: "Cobone",
@@ -22,7 +25,10 @@ export const experiences = [
     description: `Developed and maintained responsive UI components for Cobone.com’s e-commerce platform. Reduced page load times by 25% and boosted mobile engagement by 40%. Implemented real-time filtering and streamlined navigation to boost conversions.`,
   },
   {
-    date: "June 2024 - August 2024",
+    credential_id: "",
+    doc_url: "",
+    field: "",
+    date: "Jun 2024 - Aug 2024",
     title: "Frontend Developer",
     company: {
       name: "YallaCompare",
@@ -33,7 +39,10 @@ export const experiences = [
     description: `Developed micro-frontend apps for Health and Travel services, improving performance by 20%, satisfaction by 35%, and reducing onboarding time by 25%.`,
   },
   {
-    date: "October 2023 - June 2024",
+    credential_id: "",
+    doc_url: "",
+    field: "",
+    date: "Oct 2023 - Jun 2024",
     title: "Frontend Developer",
     company: {
       name: "Transviti",
@@ -44,7 +53,10 @@ export const experiences = [
     description: `Streamlined talent acquisition with TalentVare portals. Integrated Microsoft Entra ID with TaskVare, reducing errors by 30%. Automated LOADe delivery bookings, improving logistics efficiency by 15%.`,
   },
   {
-    date: "February 2020 - October 2023",
+    credential_id: "",
+    doc_url: "",
+    field: "",
+    date: "Feb 2020 - Oct 2023",
     title: "IT Assistant",
     company: {
       name: "SUPARCO",
@@ -58,98 +70,123 @@ export const experiences = [
 
 export const education = [
   {
-    date: "August 2024 - September 2026",
-    degree: "Master's degree",
+    credential_id: "",
+    doc_url: "",
+    date: "Aug 2024 - Sep 2026",
+    title: "Master's degree",
     field: "Computer Software Engineering",
-    institute: {
+    firm: {
       name: "FAST University",
       url: "https://khi.nu.edu.pk/",
       logo: fast_logo,
     },
+    description: "I paused my endless scroll through tech trends just long enough to realize my true calling: solving complex computing problems, leading diverse teams, and communicating like a pro—whether it's a bug fix or a boardroom pitch. I'm beyond thrilled to spend my life embracing lifelong learning, wielding modern tools, and coding with a conscience in a world where ethics and innovation go hand in hand.",
   },
   {
-    date: "September 2016 - October 2020",
-    degree: "Bachelor of Science - BS",
+    credential_id: "",
+    doc_url: "",
+    date: "Sep 2016 - Oct 2020",
+    title: "Bachelor of Science - BS",
     field: "Computer Software Engineering",
-    institute: {
+    firm: {
       name: "ILMA University",
       url: "https://ilmauniversity.edu.pk/",
       logo: ilma_logo,
     },
+    description:
+      "What a thrill! my paper crane production line had to be shut down, so I could finally discover my true passion: coding and chasing bugs & errors all day long. I'm so excited to spend the rest of my life in this stimulating and fulfilling career.",
   },
 ];
 
 export const certifications = [
   {
+    field: "",
     title: "Front-End Web UI Frameworks and Tools",
-    institute: {
+    firm: {
       name: "The Hong Kong University of Science and Technology",
       url: "https://www.hkust.edu.hk/",
       logo: hkust_logo,
     },
     date: "Jan 2025",
     credentialId: "DT9KFAGVJ8EG",
-    certificate_url:
+    doc_url:
       "https://www.coursera.org/account/accomplishments/certificate/DT9KFAGVJ8EG",
+    description:
+      "Gained hands-on experience with front-end libraries and frameworks, particularly Bootstrap. I developed responsive web pages and completed a full-scale front-end project, enhancing my understanding of the end-to-end process of front-end development.",
   },
   {
+    field: "",
     title: "Image Processing and OCR",
-    institute: {
+    firm: {
       name: "University of Michigan - School of Information",
       url: "https://si.umich.edu/",
       logo: umsi_logo,
     },
     date: "Aug 2019",
     credentialId: "F42TMF48MXZP",
-    certificate_url:
+    doc_url:
       "https://www.coursera.org/account/accomplishments/certificate/F42TMF48MXZP",
+    description:
+      "Explored techniques in image processing and optical character recognition (OCR). I worked with libraries such as Pillow, Tesseract, and OpenCV to analyze and manipulate images, enhancing my skills in computer vision applications.",
   },
   {
+    field: "",
     title: "Introduction to AI",
-    institute: {
+    firm: {
       name: "DeepLearning.AI",
       url: "https://www.deeplearning.ai/",
       logo: deeplearningai_logo,
     },
     date: "Apr 2019",
     credentialId: "W2CWXZ2FHD3Q",
-    certificate_url:
+    doc_url:
       "https://www.coursera.org/account/accomplishments/certificate/W2CWXZ2FHD3Q",
+    description:
+      "I learned about the foundational AI concepts, including machine learning, deep learning, and neural networks. I examined the capabilities of generative AI models and large language models, gaining insights into their applications in various domains.",
   },
   {
-    title: "date Structures in Python",
-    institute: {
+    field: "",
+    title: "Data Structures in Python",
+    firm: {
       name: "University of Michigan",
       url: "https://umich.edu/",
       logo: um_logo,
     },
     date: "Apr 2016",
     credentialId: "33JDM48G7YVB",
-    certificate_url:
+    doc_url:
       "https://www.coursera.org/account/accomplishments/certificate/33JDM48G7YVB",
+    description:
+      "I explored core data structures in Python, such as lists, dictionaries, and tuples. Applied these structures to perform complex data analysis, enhancing my proficiency in Python programming.",
   },
   {
+    field: "",
     title: "Web Structuring",
-    institute: {
+    firm: {
       name: "University of Michigan - School of Information",
       url: "https://si.umich.edu/",
       logo: umsi_logo,
     },
     date: "Apr 2016",
     credentialId: "6UK5ZXUCXU72",
-    certificate_url:
+    doc_url:
       "https://www.coursera.org/account/accomplishments/certificate/6UK5ZXUCXU72",
+    description:
+      "This course is focused on creating syntactically correct HTML and CSS. I built responsive and accessible websites, laying a strong foundation in web development practices.",
   },
   {
+    field: "",
     title: "Python Programming",
-    institute: {
+    firm: {
       name: "University of Michigan",
       url: "https://umich.edu/",
       logo: um_logo,
     },
     date: "Mar 2016",
     credentialId: "893KLF5Y6NL9",
-    certificate_url:
+    doc_url:
       "https://www.coursera.org/account/accomplishments/certificate/893KLF5Y6NL9",
+    description:
+      "Acquired fundamental programming concepts in Python, including variables, conditionals, loops, and functions. This course served as a stepping stone to more advanced topics in Python programming.",
   },
 ];

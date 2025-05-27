@@ -27,12 +27,8 @@ export const app_router = createBrowserRouter([
         element: <CredentialsPage />,
       },
       {
-        path: "/case-studies",
-        element: <h1>Case Studies</h1>,
-      },
-      {
-        path: "/personal-projects",
-        element: <h1>Personal Projects</h1>,
+        path: "/work",
+        element: <h1>Work</h1>,
       },
       {
         path: "/contact",

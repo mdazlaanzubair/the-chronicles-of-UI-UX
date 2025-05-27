@@ -1,6 +1,7 @@
 import about_img1 from "../assets/other/about-img-1.jpg";
 import about_img2 from "../assets/other/about-img-2.jpg";
 import about_img4 from "../assets/other/about-img-4.jpg";
+import AboutBentoGrid from "../components/AboutBentoGrid";
 import AboutTerminal from "../components/AboutTerminal";
 
 const AboutPage = () => {
@@ -9,6 +10,7 @@ const AboutPage = () => {
       id="about-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
+      <AboutBentoGrid />
       <AboutTerminal />
       <div className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300">
         <div className="absolute z-10 bottom-0 right-0 w-fit flex items-center justify-center gap-2 bg-base-300 rounded-tl-lg pt-1 px-3">
@@ -177,7 +179,7 @@ const AboutPage = () => {
           </a>{" "}
           or a cerebral battle of wits on{" "}
           <a
-            href="https://www.counter-strike.net/cs2"
+            href="https://www.chess.com/member/mdazlaanzubair"
             target="_blank"
             className="link link-accent"
           >

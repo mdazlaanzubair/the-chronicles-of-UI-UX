@@ -10,160 +10,154 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as RoutesImport } from './routes/routes'
-import { Route as ProjectsImport } from './routes/projects'
-import { Route as ContactImport } from './routes/contact'
-import { Route as CaseStudiesImport } from './routes/case-studies'
-import { Route as AboutImport } from './routes/about'
-import { Route as IndexImport } from './routes/index'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as RoutesImport } from "./routes/routes";
+import { Route as ProjectsImport } from "./routes/projects";
+import { Route as ContactImport } from "./routes/contact";
+import { Route as CaseStudiesImport } from "./routes/work";
+import { Route as AboutImport } from "./routes/about";
+import { Route as IndexImport } from "./routes/index";
 
 // Create/Update Routes
 
 const RoutesRoute = RoutesImport.update({
-  id: '/routes',
-  path: '/routes',
+  id: "/routes",
+  path: "/routes",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ProjectsRoute = ProjectsImport.update({
-  id: '/projects',
-  path: '/projects',
+  id: "/projects",
+  path: "/projects",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ContactRoute = ContactImport.update({
-  id: '/contact',
-  path: '/contact',
+  id: "/contact",
+  path: "/contact",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const CaseStudiesRoute = CaseStudiesImport.update({
-  id: '/case-studies',
-  path: '/case-studies',
+  id: "/work",
+  path: "/work",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
+  id: "/about",
+  path: "/about",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/case-studies': {
-      id: '/case-studies'
-      path: '/case-studies'
-      fullPath: '/case-studies'
-      preLoaderRoute: typeof CaseStudiesImport
-      parentRoute: typeof rootRoute
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactImport
-      parentRoute: typeof rootRoute
-    }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsImport
-      parentRoute: typeof rootRoute
-    }
-    '/routes': {
-      id: '/routes'
-      path: '/routes'
-      fullPath: '/routes'
-      preLoaderRoute: typeof RoutesImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/about": {
+      id: "/about";
+      path: "/about";
+      fullPath: "/about";
+      preLoaderRoute: typeof AboutImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/work": {
+      id: "/work";
+      path: "/work";
+      fullPath: "/work";
+      preLoaderRoute: typeof CaseStudiesImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/contact": {
+      id: "/contact";
+      path: "/contact";
+      fullPath: "/contact";
+      preLoaderRoute: typeof ContactImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/projects": {
+      id: "/projects";
+      path: "/projects";
+      fullPath: "/projects";
+      preLoaderRoute: typeof ProjectsImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/routes": {
+      id: "/routes";
+      path: "/routes";
+      fullPath: "/routes";
+      preLoaderRoute: typeof RoutesImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/case-studies': typeof CaseStudiesRoute
-  '/contact': typeof ContactRoute
-  '/projects': typeof ProjectsRoute
-  '/routes': typeof RoutesRoute
+  "/": typeof IndexRoute;
+  "/about": typeof AboutRoute;
+  "/work": typeof CaseStudiesRoute;
+  "/contact": typeof ContactRoute;
+  "/projects": typeof ProjectsRoute;
+  "/routes": typeof RoutesRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/case-studies': typeof CaseStudiesRoute
-  '/contact': typeof ContactRoute
-  '/projects': typeof ProjectsRoute
-  '/routes': typeof RoutesRoute
+  "/": typeof IndexRoute;
+  "/about": typeof AboutRoute;
+  "/work": typeof CaseStudiesRoute;
+  "/contact": typeof ContactRoute;
+  "/projects": typeof ProjectsRoute;
+  "/routes": typeof RoutesRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/case-studies': typeof CaseStudiesRoute
-  '/contact': typeof ContactRoute
-  '/projects': typeof ProjectsRoute
-  '/routes': typeof RoutesRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/about": typeof AboutRoute;
+  "/work": typeof CaseStudiesRoute;
+  "/contact": typeof ContactRoute;
+  "/projects": typeof ProjectsRoute;
+  "/routes": typeof RoutesRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/case-studies'
-    | '/contact'
-    | '/projects'
-    | '/routes'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/case-studies' | '/contact' | '/projects' | '/routes'
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: "/" | "/about" | "/work" | "/contact" | "/projects" | "/routes";
+  fileRoutesByTo: FileRoutesByTo;
+  to: "/" | "/about" | "/work" | "/contact" | "/projects" | "/routes";
   id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/case-studies'
-    | '/contact'
-    | '/projects'
-    | '/routes'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/"
+    | "/about"
+    | "/work"
+    | "/contact"
+    | "/projects"
+    | "/routes";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  CaseStudiesRoute: typeof CaseStudiesRoute
-  ContactRoute: typeof ContactRoute
-  ProjectsRoute: typeof ProjectsRoute
-  RoutesRoute: typeof RoutesRoute
+  IndexRoute: typeof IndexRoute;
+  AboutRoute: typeof AboutRoute;
+  CaseStudiesRoute: typeof CaseStudiesRoute;
+  ContactRoute: typeof ContactRoute;
+  ProjectsRoute: typeof ProjectsRoute;
+  RoutesRoute: typeof RoutesRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -173,11 +167,11 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ProjectsRoute: ProjectsRoute,
   RoutesRoute: RoutesRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -187,7 +181,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/case-studies",
+        "/work",
         "/contact",
         "/projects",
         "/routes"
@@ -199,7 +193,7 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.tsx"
     },
-    "/case-studies": {
+    "/work": {
       "filePath": "case-studies.tsx"
     },
     "/contact": {
