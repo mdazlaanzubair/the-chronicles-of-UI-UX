@@ -18,7 +18,7 @@ const ProjectGridSlider = (props: Props) => {
 
   return (
     <>
-      <SectionHeader id={props.sectionID} title={props.title} mode="light" />
+      <SectionHeader id={props.sectionID} title={props.title} mode="dark" />
       <section
         id={props.sectionID + "-marquee"}
         className="flex flex-col w-full bg-base-200 rounded-2xl"
