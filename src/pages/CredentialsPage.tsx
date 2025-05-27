@@ -8,6 +8,7 @@ import {
 } from "../utils/constant_export";
 
 import CredentialCard from "../components/CredentialsCard";
+import SectionHeader from "../components/SectionHeader";
 
 const CredentialsPage = () => {
   const credentials = {
@@ -21,130 +22,30 @@ const CredentialsPage = () => {
       id="credentials-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
-
-{
-  // loop credentials data to populate this ui
-  /*
-   <FooterBtn
-        mode="light"
-        label="Experience"
-        icon_1={<MdArrowOutward />}
-        icon_2={<MdArrowOutward />}
-        onClickHandler={() =>
-          window.open(
-            "https://www.linkedin.com/in/mdazlaanzubair/details/experience/",
-            "_blank"
-          )
-        }
-      />
-      <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
-        {experiences.length === 0 ? (
-          <NoCredentials message="No Experience" />
-        ) : (
-          experiences.map((exp, index) => (
-            <CredentialCard
-              key={index}
-              firm={exp.company}
-              date={exp.date}
-              title={exp.title}
-              description={exp.description}
-              location={exp.location}
-            />
-          ))
-        )}
-      </ul>
-  */
-}
-
-
-
-      <FooterBtn
-        mode="light"
-        label="Experience"
-        icon_1={<MdArrowOutward />}
-        icon_2={<MdArrowOutward />}
-        onClickHandler={() =>
-          window.open(
-            "https://www.linkedin.com/in/mdazlaanzubair/details/experience/",
-            "_blank"
-          )
-        }
-      />
-      <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
-        {experiences.length === 0 ? (
-          <NoCredentials message="No Experience" />
-        ) : (
-          experiences.map((exp, index) => (
-            <CredentialCard
-              key={index}
-              firm={exp.company}
-              date={exp.date}
-              title={exp.title}
-              description={exp.description}
-              location={exp.location}
-            />
-          ))
-        )}
-      </ul>
-
-      <FooterBtn
-        mode="light"
-        label="Education"
-        icon_1={<MdArrowOutward />}
-        icon_2={<MdArrowOutward />}
-        onClickHandler={() =>
-          window.open(
-            "https://www.linkedin.com/in/mdazlaanzubair/details/education/",
-            "_blank"
-          )
-        }
-      />
-      <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
-        {education.length === 0 ? (
-          <NoCredentials message="No Education" />
-        ) : (
-          education.map((edu_item, index) => (
-            <CredentialCard
-              key={index}
-              date={edu_item.date}
-              title={edu_item.title}
-              field={edu_item.field}
-              firm={edu_item.firm}
-              description={edu_item.description}
-            />
-          ))
-        )}
-      </ul>
-
-      <FooterBtn
-        mode="light"
-        label="Certifications"
-        icon_1={<MdArrowOutward />}
-        icon_2={<MdArrowOutward />}
-        onClickHandler={() =>
-          window.open(
-            "https://www.linkedin.com/in/mdazlaanzubair/details/certifications/",
-            "_blank"
-          )
-        }
-      />
-      <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg">
-        {certifications.length === 0 ? (
-          <NoCredentials message="No Certifications" />
-        ) : (
-          certifications.map((certi, index) => (
-            <CredentialCard
-              key={index}
-              doc_url={certi.doc_url}
-              credential_id={certi.credentialId}
-              firm={certi.firm}
-              date={certi.date}
-              title={certi.title}
-              description={certi.description}
-            />
-          ))
-        )}
-      </ul>
+      {Object.entries(credentials).map(([sectionKey, items]) => (
+        <div className="w-full h-auto" key={sectionKey}>
+          <SectionHeader id={`${sectionKey}-section`} title={`${sectionKey}`} mode="light" />
+          <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg mt-3">
+            {items.length === 0 ? (
+              <NoCredentials message="No Experience" />
+            ) : (
+              items.map((cred, index) => (
+                <CredentialCard
+                  key={index}
+                  firm={cred.firm}
+                  date={cred.date}
+                  title={cred.title}
+                  description={cred.description}
+                  location={cred.location}
+                  field={cred.field}
+                  doc_url={cred.doc_url}
+                  credential_id={cred.credentialId}
+                />
+              ))
+            )}
+          </ul>
+        </div>
+      ))}
     </section>
   );
 };

@@ -4,6 +4,7 @@ type FooterBtnProps = {
   mode: string; // light or dark
   label: string;
   username?: string;
+  classNames?: string;
   icon_1: JSX.Element;
   icon_2: JSX.Element;
   onClickHandler: () => void;
@@ -16,14 +17,14 @@ const FooterBtn = (props: FooterBtnProps) => {
         props.mode === "light"
           ? "bg-base-100 text-base-content"
           : "bg-base-content text-base-200"
-      }`}
+      } ${props.classNames}`}
       onClick={props.onClickHandler}
     >
       <div className="grow text-left flex flex-col">
         <span className="text-[12px] font-medium">{props.label}</span>
         {props.username && (
           <span className="text-[10px] font-light text-base-content/50 group-hover:text-accent transition-all ease-in-out duration-300">
-            {"@"+props.username}
+            {"@" + props.username}
           </span>
         )}
       </div>

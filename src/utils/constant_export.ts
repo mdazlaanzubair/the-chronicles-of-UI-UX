@@ -11,12 +11,12 @@ import deeplearningai_logo from "../assets/credentials-logo/deeplearningai_logo.
 
 export const experiences = [
   {
-    credential_id: "",
+    credentialId: "",
     doc_url: "",
     field: "",
     date: "Sep 2024 - Present",
     title: "Frontend Developer",
-    company: {
+    firm: {
       name: "Cobone",
       url: "https://www.cobone.com/en/",
       logo: cobone_logo,
@@ -25,12 +25,12 @@ export const experiences = [
     description: `Developed and maintained responsive UI components for Cobone.com’s e-commerce platform. Reduced page load times by 25% and boosted mobile engagement by 40%. Implemented real-time filtering and streamlined navigation to boost conversions.`,
   },
   {
-    credential_id: "",
+    credentialId: "",
     doc_url: "",
     field: "",
     date: "Jun 2024 - Aug 2024",
     title: "Frontend Developer",
-    company: {
+    firm: {
       name: "YallaCompare",
       url: "https://yallacompare.com/uae/en/",
       logo: yallacompare_logo,
@@ -39,12 +39,12 @@ export const experiences = [
     description: `Developed micro-frontend apps for Health and Travel services, improving performance by 20%, satisfaction by 35%, and reducing onboarding time by 25%.`,
   },
   {
-    credential_id: "",
+    credentialId: "",
     doc_url: "",
     field: "",
     date: "Oct 2023 - Jun 2024",
     title: "Frontend Developer",
-    company: {
+    firm: {
       name: "Transviti",
       url: "https://transviti.com/",
       logo: transviti_logo,
@@ -53,12 +53,12 @@ export const experiences = [
     description: `Streamlined talent acquisition with TalentVare portals. Integrated Microsoft Entra ID with TaskVare, reducing errors by 30%. Automated LOADe delivery bookings, improving logistics efficiency by 15%.`,
   },
   {
-    credential_id: "",
+    credentialId: "",
     doc_url: "",
     field: "",
     date: "Feb 2020 - Oct 2023",
     title: "IT Assistant",
-    company: {
+    firm: {
       name: "SUPARCO",
       url: "https://www.linkedin.com/company/pakistan-space-and-upper-atmosphere-research-comission-suparco/about/",
       logo: suparco_logo,
@@ -70,8 +70,9 @@ export const experiences = [
 
 export const education = [
   {
-    credential_id: "",
+    credentialId: "",
     doc_url: "",
+    location: "",
     date: "Aug 2024 - Sep 2026",
     title: "Master's degree",
     field: "Computer Software Engineering",
@@ -80,11 +81,13 @@ export const education = [
       url: "https://khi.nu.edu.pk/",
       logo: fast_logo,
     },
-    description: "I paused my endless scroll through tech trends just long enough to realize my true calling: solving complex computing problems, leading diverse teams, and communicating like a pro—whether it's a bug fix or a boardroom pitch. I'm beyond thrilled to spend my life embracing lifelong learning, wielding modern tools, and coding with a conscience in a world where ethics and innovation go hand in hand.",
+    description:
+      "I paused my endless scroll through tech trends just long enough to realize my true calling: solving complex computing problems, leading diverse teams, and communicating like a pro—whether it's a bug fix or a boardroom pitch. I'm beyond thrilled to spend my life embracing lifelong learning, wielding modern tools, and coding with a conscience in a world where ethics and innovation go hand in hand.",
   },
   {
-    credential_id: "",
+    credentialId: "",
     doc_url: "",
+    location: "",
     date: "Sep 2016 - Oct 2020",
     title: "Bachelor of Science - BS",
     field: "Computer Software Engineering",
@@ -101,6 +104,7 @@ export const education = [
 export const certifications = [
   {
     field: "",
+    location: "",
     title: "Front-End Web UI Frameworks and Tools",
     firm: {
       name: "The Hong Kong University of Science and Technology",
@@ -116,6 +120,7 @@ export const certifications = [
   },
   {
     field: "",
+    location: "",
     title: "Image Processing and OCR",
     firm: {
       name: "University of Michigan - School of Information",
@@ -131,6 +136,7 @@ export const certifications = [
   },
   {
     field: "",
+    location: "",
     title: "Introduction to AI",
     firm: {
       name: "DeepLearning.AI",
@@ -146,6 +152,7 @@ export const certifications = [
   },
   {
     field: "",
+    location: "",
     title: "Data Structures in Python",
     firm: {
       name: "University of Michigan",
@@ -161,6 +168,7 @@ export const certifications = [
   },
   {
     field: "",
+    location: "",
     title: "Web Structuring",
     firm: {
       name: "University of Michigan - School of Information",
@@ -176,6 +184,7 @@ export const certifications = [
   },
   {
     field: "",
+    location: "",
     title: "Python Programming",
     firm: {
       name: "University of Michigan",

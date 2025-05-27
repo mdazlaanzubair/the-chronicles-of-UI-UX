@@ -15,7 +15,7 @@ const SectionHeader = (props: Props) => {
           : "bg-base-100 text-base-content"
       } rounded-lg border border-base-300`}
     >
-      <h1 className="text-[12px] font-medium text-center">{props.title}</h1>
+      <h1 className="text-[12px] font-medium text-center capitalize">{props.title}</h1>
     </section>
   );
 };

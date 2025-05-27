@@ -32,12 +32,12 @@ const CredentialCard = (props: Props) => {
     <>
       <div
         key={props.key}
-        className="group relative flex items-center justify-between gap-5 bg-base-100 rounded-xl border border-base-300 p-3 overflow-hidden transition-all ease-in-out duration-300 cursor-pointer"
+        className="group relative flex items-center justify-between gap-5 bg-base-100/50 rounded-xl border border-base-300 p-3 overflow-hidden transition-all ease-in-out duration-300 cursor-pointer"
         onClick={() => setShowModal(true)}
       >
-        <div className="min-w-14 min-h-14 max-w-14 max-h-14 w-14 h-14 shrink overflow-hidden bg-white rounded-box p-2 my-auto">
+        <div className="min-w-14 min-h-14 max-w-14 max-h-14 w-14 h-14 shrink overflow-hidden rounded-box p-2 my-auto">
           <img
-            className="w-full h-full rounded-lg group-hover:scale-95 transition-all ease-in-out duration-300"
+            className="w-full h-full rounded-lg"
             src={props.firm.logo}
             alt={props.firm.name + " logo"}
           />
@@ -66,13 +66,9 @@ const CredentialCard = (props: Props) => {
               </span>
             )}
             <span className="text-[12px] text-base-content font-normal">
-              {/* {props.location} */}
               {props.date}
             </span>
           </p>
-          {/* <p className="text-[13px] text-base-content/60 font-normal">
-            {props.description}
-          </p> */}
         </div>
       </div>
       <CredentialCardModal
@@ -95,7 +91,7 @@ const CredentialCardModal = (props: ModalProps) => {
   return (
     <div
       className={`
-        fixed top-0 left-0 bottom-0 right-0 flex flex-col items-center justify-center overflow-hidden bg-black/20 backdrop-blur-sm p-2
+        fixed top-0 left-0 bottom-0 right-0 flex flex-col items-center justify-center overflow-hidden bg-black/60 backdrop-blur-sm p-2
         ${!props.showModal ? "opacity-0 -z-50" : "opacity-100 z-50"}
         transition-all ease-in-out duration-500
         `}
