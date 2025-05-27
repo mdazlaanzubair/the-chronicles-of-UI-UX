@@ -1,6 +1,4 @@
 import NoCredentials from "../components/NoCredentials";
-import FooterBtn from "../components/FooterBtn";
-import { MdArrowOutward } from "react-icons/md";
 import {
   experiences,
   education,
@@ -24,7 +22,11 @@ const CredentialsPage = () => {
     >
       {Object.entries(credentials).map(([sectionKey, items]) => (
         <div className="w-full h-auto" key={sectionKey}>
-          <SectionHeader id={`${sectionKey}-section`} title={`${sectionKey}`} mode="light" />
+          <SectionHeader
+            id={`${sectionKey}-section`}
+            title={`${sectionKey}`}
+            mode="light"
+          />
           <ul className="relative w-full h-auto flex flex-col gap-3 justify-between bg-base-200 rounded-lg mt-3">
             {items.length === 0 ? (
               <NoCredentials message="No Experience" />
