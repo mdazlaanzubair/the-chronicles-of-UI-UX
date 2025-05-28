@@ -1,4 +1,3 @@
-import { CgDesignmodo } from "react-icons/cg";
 
 // THIS FILE HOLD THE DYNAMIC DATA OF THIS WEBSITE
 import noImage from "../assets/backgrounds/card-bg-img.jpg";
