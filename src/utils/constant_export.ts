@@ -1,4 +1,4 @@
-
+import { CgDesignmodo } from "react-icons/cg";
 
 // THIS FILE HOLD THE DYNAMIC DATA OF THIS WEBSITE
 import noImage from "../assets/backgrounds/card-bg-img.jpg";
@@ -25,17 +25,12 @@ import insureMyHealthImg from "../assets/work/insure-my-health-img.jpg";
 import insureMyHealthCoverImg from "../assets/work/insure-my-health-cover-img.jpg";
 
 // IMAGES FOR PERSONAL PROJECT
-import promptareImg from "../assets/projects/promptare-img.jpg";
-import promptareImgCover from "../assets/projects/promptare-img-cover.jpg";
 import webCrawlerImg from "../assets/projects/webCrawler-img.jpg";
 import webCrawlerImgCover from "../assets/projects/webCrawler-img-cover.jpg";
-import parabotImg from "../assets/projects/parabot-img-cover.jpg";
-import parabotImgCover from "../assets/projects/parabot-img-cover.jpg";
 import narratorImg from "../assets/projects/narrator-img.jpg";
 import narratorImgCover from "../assets/projects/narrator-img-cover.jpg";
 import queryMindImg from "../assets/projects/queryMind-img.jpg";
 import queryMindImgCover from "../assets/projects/queryMind-img-cover.jpg";
-
 
 // IMAGES FOR TECH LOGOS
 import cobone_logo from "../assets/credentials-logo/cobone_logo.jpeg";
@@ -750,110 +745,6 @@ export const projects_list = [
   },
   {
     id: 2,
-    title: "Promptare",
-    subTitle: "Social Media Hub for Chat GPT Users",
-    imgSrc: promptareImg,
-    isFeatured: true,
-    isLocked: true,
-    details: {
-      coverImgSrc: promptareImgCover,
-      overview: {
-        myRole: "Fullstack Developer",
-        techUsed:
-          "Next JS, Next Auth, Mongo DB, Mongoose, Tailwind, Daisy UI, React Select, React Spinner, React Toastify, React Multi Select, React Clipboard Copy",
-        timeline: "May 2023 - Aug 2023",
-        sourceCode: "https://github.com/mdazlaanzubair/Promptare",
-        liveUrl: "https://promptare.vercel.app/",
-        projectDesc: {
-          para1:
-            "This project entails the development of a comprehensive social media platform designed to elevate the Chat GPT user experience. The platform serves as a dynamic hub for discovering, sharing, and interacting with powerful prompts and commands, fostering a vibrant community of users passionate about leveraging Chat GPT for a myriad of applications.",
-          para2:
-            "Whether for creative writing, problem-solving, or content generation, this social media hub provides a collaborative space for users to explore and enhance their Chat GPT capabilities. The project successfully created a user-centric platform that enhances the Chat GPT experience, promotes community building, and fosters innovation in the use of AI-driven tools.",
-        },
-      },
-      features: {
-        para: "Key features:",
-        list: [
-          {
-            title: "User Authentication",
-            desc: "Implemented secure user authentication using Next Auth, enabling users to create accounts, log in, and manage their profiles.",
-          },
-          {
-            title: "Database Management",
-            desc: "Utilized MongoDB and Mongoose for efficient data storage and retrieval, ensuring scalability and performance.",
-          },
-          {
-            title: "Responsive Design",
-            desc: "Tailwind CSS and Daisy UI were employed to create a visually appealing, responsive design that works seamlessly across different devices.",
-          },
-          {
-            title: "Interactive Components",
-            desc: "Integrated React Select, React Spinner, React Toastify, React Multi Select, and React Clipboard Copy to enhance user interaction and provide a smooth, user-friendly experience.",
-          },
-          {
-            title: "Community Engagement",
-            desc: "The platform allows users to post, share, and discover prompts, encouraging community engagement and collaboration.",
-          },
-          {
-            title: "Content Categorization",
-            desc: "Users can categorize and tag their posts, making it easier to find relevant content and prompts.",
-          },
-        ],
-      },
-    },
-  },
-  {
-    id: 3,
-    title: "ParaBot",
-    subTitle: "AI-Powered Text Analyzer",
-    imgSrc: parabotImg,
-    isFeatured: true,
-    isLocked: true,
-    details: {
-      coverImgSrc: parabotImgCover,
-      overview: {
-        myRole: "Frontend Developer",
-        techUsed:
-          "React, Vite, Tailwind CSS, DaisyUI, Axios, React Router DOM, React Toastify, React Loader Spinner, React Copy to Clipboard, Hugging Face BART-Large-CNN",
-        timeline: "Mar 2023",
-        sourceCode: "https://github.com/mdazlaanzubair/Parabot",
-        liveUrl: "https://para-bot.netlify.app/summarizer",
-        projectDesc: {
-          para1:
-            "Parabot is an AI-powered chatbot designed to assist with text analysis and summarization. The focus of this project was to streamline the process of understanding and condensing large amounts of text, enhancing efficiency for users engaged in various reading and writing activities. By leveraging advanced AI capabilities, Parabot aims to offer valuable support in summarizing lengthy texts and providing quick insights.",
-          para2:
-            "The primary goal of this project is to develop a powerful AI-driven tool that can assist users with analyzing and summarizing text. By automating the process of text analysis and summarization, Parabot aims to enhance productivity and efficiency for readers, writers, and researchers.",
-        },
-      },
-      features: {
-        para: "Key features:",
-        list: [
-          {
-            title: "Text Summarization",
-            desc: "Utilized Hugging Face's BART-Large-CNN model to provide accurate and concise summaries of longer texts.",
-          },
-          {
-            title: "Text Analysis",
-            desc: "Capable of analyzing text to extract key information and insights.",
-          },
-          {
-            title: "User-Friendly Interface",
-            desc: "Designed with React, Tailwind CSS, and DaisyUI to create a visually appealing and responsive user interface.",
-          },
-          {
-            title: "Interactive Components",
-            desc: "Integrated React Router DOM for seamless navigation, React Toastify for notifications, and React Loader Spinner for loading animations.",
-          },
-          {
-            title: "Clipboard Functionality",
-            desc: "Implemented React Copy to Clipboard to easily copy summarized text for use in other applications.",
-          },
-        ],
-      },
-    },
-  },
-  {
-    id: 4,
     title: "Query Mind",
     subTitle: "Testing a Pre-Trained QnA Model",
     imgSrc: queryMindImg,

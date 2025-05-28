@@ -4,6 +4,7 @@ import App from "../App";
 import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
 import CredentialsPage from "../pages/CredentialsPage";
+import WorkPage from "../pages/WorkPage";
 
 export const app_router = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ export const app_router = createBrowserRouter([
       },
       {
         path: "/work",
-        element: <h1>Work</h1>,
+        element: <WorkPage />,
+      },
+      {
+        path: "/work/?:type",
+        element: <WorkPage />,
       },
       {
         path: "/contact",

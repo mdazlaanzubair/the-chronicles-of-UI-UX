@@ -1,7 +1,7 @@
 import profile_pic from "../assets/profile.jpeg";
 import { FaPhone } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
-import FooterBtn from "./FooterBtn";
+import SectionHeadBtn from "./SectionHeadBtn";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { FaLinkedin, FaTwitter } from "react-icons/fa6";
 import { PiInstagramLogoFill } from "react-icons/pi";
@@ -75,10 +75,10 @@ const Footer = () => {
             (link, index) =>
               link.title !== "Calendly" && (
                 <div className="col-span-1" key={index}>
-                  <FooterBtn
+                  <SectionHeadBtn
                     mode="light"
                     label={link.title}
-                    username={link.username}
+                    sub_label={link.username}
                     icon_1={link.icon}
                     icon_2={<MdArrowOutward />}
                     onClickHandler={() => window.open(link.url, "_blank")}
@@ -87,7 +87,7 @@ const Footer = () => {
               )
           )}
         <div className="col-span-2">
-          <FooterBtn
+          <SectionHeadBtn
             mode="dark"
             label="Book a call"
             icon_1={<FaPhone />}

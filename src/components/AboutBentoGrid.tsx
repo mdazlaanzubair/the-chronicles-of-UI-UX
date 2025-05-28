@@ -67,15 +67,15 @@ const AboutBentoGrid = () => {
             </div>
           </div>
           <div
-            className={`group relative overflow-hidden row-span-2 rounded-2xl border-4 border-base-300 cursor-pointer bg-base-200 parent flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
-            onClick={() => navigate("/personal-projects")}
+            className={`group relative overflow-hidden row-span-2 rounded-2xl border-4 border-base-300 cursor-pointer bg-black parent flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
+            onClick={() => navigate("/work/side-projects")}
           >
             <img
               className="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover"
               src={bg_img}
               alt="background image"
             />
-            <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-full text-lg [writing-mode:vertical-lr] rotate-180 flex flex-col items-center justify-center uppercase font-bold z-10 bg-black/60 text-white/60 group hover:text-white hover:bg-black/70 transition-all ease-in-out duration-300">
+            <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-full text-lg [writing-mode:vertical-lr] rotate-180 flex flex-col items-center justify-center uppercase font-bold z-10 bg-black/40 text-white/60 group hover:text-white hover:bg-black/50 transition-all ease-in-out duration-300">
               Side Projects
             </span>
           </div>
@@ -102,15 +102,15 @@ const AboutBentoGrid = () => {
             </div>
           </div>
           <div
-            className={`group relative overflow-hidden col-span-2 rounded-2xl border-4 border-base-300 cursor-pointer parent bg-base-200 flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
-            onClick={() => navigate("/work")}
+            className={`group relative overflow-hidden col-span-2 rounded-2xl border-4 border-base-300 cursor-pointer parent bg-black flex flex-col items-center justify-center text-base-content/60 hover:text-base-content transition-all ease-in-out duration-300`}
+            onClick={() => navigate("/work/case-studies")}
           >
             <img
               className="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover"
               src={bg_img}
               alt="background image"
             />
-            <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-ful text-lg flex flex-col items-center justify-center uppercase font-bold z-10 bg-black/60 text-white/60 group hover:text-white hover:bg-black/70 transition-all ease-in-out duration-300">
+            <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-ful text-lg flex flex-col items-center justify-center uppercase font-bold z-10 bg-black/60 text-white/40 group hover:text-white hover:bg-black/50 transition-all ease-in-out duration-300">
               Work
             </span>
           </div>

@@ -9,23 +9,35 @@ const HeroSection = () => {
   return (
     <section
       id="hero-section"
-      className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg border-4 overflow-hidden border-base-300"
+      className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg border overflow-hidden border-base-300"
     >
-      <div className="absolute top-0 left-0 w-fit flex items-center justify-center gap-2 bg-base-300 rounded-br-lg py-1 px-3">
+      <div className="w-fit flex items-center justify-center gap-2">
         <div className="inline-grid *:[grid-area:1/1] mb-1">
           <div className="status status-sm status-accent animate-ping"></div>
           <div className="status status-sm status-accent"></div>
         </div>
-        <small className="text-[10px] font-medium text-base-content pb-1">
+        <small className="text-[12px] font-light text-base-content/50 mb-1">
           Welcome to my digital corner
         </small>
       </div>
 
-      <h1 className="text-[32px] font-light my-3">
+      <h1 className="text-[32px] font-light mb-3">
         Hi! I&apos;m Azlaan, <br /> a web engineer based in{" "}
-        <strong className="z-10 font-bold">Karachi, Pakistan</strong>
+        <strong className="z-10 font-bold">Karachi, Pakistan 🇵🇰</strong>
       </h1>
-      <p className="text-base-content/60 text-[16px] font-light">
+      <p className="text-base-content/60 text-[16px] font-light mb-3 leading-relaxed tracking-wide">
+        I craft web to{" "}
+        <span className="text-base-content font-medium">
+          establish your online presence
+        </span>
+        . I'm a <br />
+        software engineer, specialized in{" "}
+        <span className="text-base-content font-medium">
+          building &amp; designing <br /> things for the web
+        </span>
+        .
+      </p>
+      <p className="text-base-content/60 text-[16px] font-light leading-relaxed tracking-tight">
         Constantly pushing the boundaries of web development. I offer{" "}
         <span className="text-base-content font-medium">
           User-Centric Solutions
@@ -36,12 +48,6 @@ const HeroSection = () => {
         </span>
         .
       </p>
-      {/* <p className="text-base-content/60 text-[16px]">
-        My interest in AI allows me to craft innovative solutions that{" "}
-        <span className="text-base-content">leverage AI</span> to enhance{" "}
-        <span className="text-base-content">UX</span> &amp;{" "}
-        <span className="text-base-content">functionality</span>.
-      </p> */}
 
       <span className="my-3"></span>
 

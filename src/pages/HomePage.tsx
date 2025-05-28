@@ -3,6 +3,7 @@ import IconSlider from "../components/IconSlider";
 import { toolKit } from "../utils/iconExporter";
 import ProjectGridSlider from "../components/ProjectGridSlider";
 import ServicesSection from "../components/Services";
+import { case_studies } from "../utils/constant_export";
 
 const HomePage = () => {
   return (
@@ -13,9 +14,10 @@ const HomePage = () => {
       <HeroSection />
       <IconSlider icons={toolKit} />
       <ProjectGridSlider
-        title="Let's sneak a peek at my work."
+        title="Case Studies and Business Solution"
         sectionID="case-study-section-head"
         direction="right"
+        projects={case_studies}
       />
       <ServicesSection />
     </section>
