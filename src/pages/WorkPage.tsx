@@ -6,9 +6,7 @@ import ProjectDisplayCard from "../components/ProjectDisplayCard";
 import { case_studies, projects_list } from "../utils/constant_export";
 import { useParams } from "react-router-dom";
 
-type Props = {};
-
-const WorkPage = (props: Props) => {
+const WorkPage = () => {
   let { type } = useParams();
   const [activeTab, setActiveTab] = useState<string>();
 
@@ -89,21 +87,35 @@ const WorkPage = (props: Props) => {
         </p>
       </div>
 
-      {activeTab === "case-studies" &&
-        case_studies.length &&
-        [...case_studies]
-          .reverse()
-          .map(({ title, imgSrc }, index) => (
-            <ProjectDisplayCard index={index} imgSrc={imgSrc} title={title} />
-          ))}
+      <div
+        className={`w-full h-auto p-0 m-0 flex flex-col items-center justify-start gap-3 ${
+          activeTab === "case-studies"
+            ? "relative opacity-100 z-0"
+            : "absolute opacity-0 -z-50"
+        } transition-opacity ease-in-out duration-500`}
+      >
+        {case_studies.length &&
+          [...case_studies]
+            .reverse()
+            .map(({ title, imgSrc }, index) => (
+              <ProjectDisplayCard index={index} imgSrc={imgSrc} title={title} />
+            ))}
+      </div>
 
-      {activeTab === "side-projects" &&
-        projects_list.length &&
-        [...projects_list]
-          .reverse()
-          .map(({ title, imgSrc }, index) => (
-            <ProjectDisplayCard index={index} imgSrc={imgSrc} title={title} />
-          ))}
+      <div
+        className={`w-full h-auto p-0 m-0 flex flex-col items-center justify-start gap-3 ${
+          activeTab === "side-projects"
+            ? "relative opacity-100 z-0"
+            : "absolute opacity-0 -z-50"
+        } transition-opacity ease-in-out duration-500`}
+      >
+        {projects_list.length &&
+          [...projects_list]
+            .reverse()
+            .map(({ title, imgSrc }, index) => (
+              <ProjectDisplayCard index={index} imgSrc={imgSrc} title={title} />
+            ))}
+      </div>
     </section>
   );
 };

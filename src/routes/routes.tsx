@@ -28,11 +28,7 @@ export const app_router = createBrowserRouter([
         element: <CredentialsPage />,
       },
       {
-        path: "/work",
-        element: <WorkPage />,
-      },
-      {
-        path: "/work/?:type",
+        path: "/work/:type?",
         element: <WorkPage />,
       },
       {

@@ -1,4 +1,3 @@
-import { MdArrowLeft, MdArrowOutward, MdArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
@@ -13,11 +12,11 @@ const ProjectDisplayCard = ({ title, imgSrc, index }: Props) => {
   return (
     <div
       key={index}
-      className="group relative flex flex-col items-center justify-center w-full h-auto max-h-[357px] gap-3 overflow-hidden cursor-pointer"
+      className="group relative flex flex-col items-center justify-center w-full h-[356px] max-h-[356px] gap-3 overflow-hidden cursor-pointer"
       onClick={() => navigate("/work")}
       title={`${title} Case Study`}
     >
-      <div className="w-full h-auto rounded-2xl overflow-hidden border-4 border-base-100">
+      <div className="w-full h-full rounded-2xl overflow-hidden border-4 border-base-100">
         <img
           className="w-full h-full object-cover"
           src={imgSrc}
