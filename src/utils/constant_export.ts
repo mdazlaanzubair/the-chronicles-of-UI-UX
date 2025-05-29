@@ -1,4 +1,3 @@
-
 // THIS FILE HOLD THE DYNAMIC DATA OF THIS WEBSITE
 import noImage from "../assets/backgrounds/card-bg-img.jpg";
 
@@ -718,8 +717,9 @@ export const projects_list = [
         liveUrl: null,
         projectDesc: {
           para1:
-            "The Image-to-Story Narration System is an innovative project that combines computer vision, natural language processing, and text-to-speech technologies to generate compelling narratives based on images and user-provided comments. This system seamlessly integrates multiple AI models and pipelines to analyze images, extract contextual information, generate engaging stories, and convert text into synthesized speech, offering users a rich and immersive storytelling experience.",
-          para2:
+            "The Image-to-Story Narration System is an innovative project that combines computer vision, natural language processing, and text-to-speech technologies to generate compelling narratives based on images and user-provided comments.",
+          para2:"This system seamlessly integrates multiple AI models and pipelines to analyze images, extract contextual information, generate engaging stories, and convert text into synthesized speech, offering users a rich and immersive storytelling experience.",
+            para3:
             "The primary goal of this project is to develop an AI-powered system that can analyze images, generate contextual stories, and convert them into speech. This integration of computer vision, natural language processing, and text-to-speech technologies aims to offer users a unique and immersive storytelling experience.",
         },
       },
@@ -760,8 +760,9 @@ export const projects_list = [
         liveUrl: null,
         projectDesc: {
           para1:
-            "Query Mind is a project aimed at testing the performance of a pre-trained Question-Answering (QnA) model for a proposed application. The testing is conducted on Google Colab, an online platform for running machine learning experiments. The goal is to provide quick and accurate answers to user queries by leveraging the power of Natural Language Processing (NLP) and AI.",
-          para2:
+            "Query Mind is a project aimed at testing the performance of a pre-trained Question-Answering (QnA) model for a proposed application. The testing is conducted on Google Colab, an online platform for running machine learning experiments.",
+          para2:"The goal is to provide quick and accurate answers to user queries by leveraging the power of Natural Language Processing (NLP) and AI.",
+            para3:
             "The primary goal of this project is to develop and test an AI-powered QnA system that can provide quick and accurate answers to user queries. The performance of the pre-trained QnA model will be evaluated to ensure its effectiveness for the proposed Query Mind application.",
         },
       },
@@ -805,8 +806,10 @@ export const projects_list = [
         liveUrl: null,
         projectDesc: {
           para1:
-            "This project involves the development of a Python script to scrape data from the website https://patient.info/, which contains extensive information regarding various health conditions. The script aims to extract valuable data on diseases and related discussions, making it easier for users to access and analyze health information. The project showcases the use of web scraping techniques to gather structured data for further use.",
+            "This project involves the development of a Python script to scrape data from the website https://patient.info/, which contains extensive information regarding various health conditions. ",
           para2:
+            "The script aims to extract valuable data on diseases and related discussions, making it easier for users to access and analyze health information. The project showcases the use of web scraping techniques to gather structured data for further use.",
+          para3:
             "The primary goal of this project is to develop a comprehensive web scraper that can systematically extract and organize health information from the PATIENT INFO website. By automating the data collection process, the project aims to provide users with easy access to detailed health data and discussions, facilitating better health information management and research.",
         },
       },

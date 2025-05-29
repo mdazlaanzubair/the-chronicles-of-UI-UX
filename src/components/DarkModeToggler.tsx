@@ -11,7 +11,6 @@ const DarkModeToggler: React.FC = () => {
         id="dark-mode-toggler"
         name="dark-mode-toggler"
         type="checkbox"
-        defaultChecked
         className="toggle toggle-accent toggle-xs"
         checked={isDarkMode}
         onChange={toggleDarkMode}

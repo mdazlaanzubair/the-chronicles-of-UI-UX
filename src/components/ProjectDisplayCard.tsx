@@ -1,19 +1,21 @@
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  index?: number;
+  id: number;
   title: string;
   imgSrc: string;
+  type: string;
+
+  index?: number;
 };
 
-const ProjectDisplayCard = ({ title, imgSrc, index }: Props) => {
+const ProjectDisplayCard = ({ title, imgSrc, id, type, index }: Props) => {
   const navigate = useNavigate();
 
   return (
     <div
       key={index}
       className="group relative flex flex-col items-center justify-center w-full h-[356px] max-h-[356px] gap-3 overflow-hidden cursor-pointer"
-      onClick={() => navigate("/work")}
       title={`${title} Case Study`}
     >
       <div className="w-full h-full rounded-2xl overflow-hidden border-4 border-base-100">
@@ -31,7 +33,7 @@ const ProjectDisplayCard = ({ title, imgSrc, index }: Props) => {
         </h1>
       </div>
       <button
-        onClick={() => navigate("/work")}
+        onClick={() => navigate(`/work/read/${type}/${id}`)}
         className="opacity-0 group-hover:opacity-100 absolute top-1/2 lef-1/2 group-hover:-translate-y-1/2 btn btn-sm btn-neutral z-20 transition-all ease-in-out duration-300"
         title={`${title} Case Study`}
       >

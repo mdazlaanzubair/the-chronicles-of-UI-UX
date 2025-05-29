@@ -7,7 +7,7 @@ import { case_studies, projects_list } from "../utils/constant_export";
 import { useParams } from "react-router-dom";
 
 const WorkPage = () => {
-  let { type } = useParams();
+  let { type } = useParams() ?? "case-studies";
   const [activeTab, setActiveTab] = useState<string>();
 
   useEffect(() => {
@@ -23,7 +23,6 @@ const WorkPage = () => {
       id="work-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
     >
-      <strong>{type}</strong>
       <div className="relative w-full h-auto grid grid-cols-2 gap-3">
         <SectionHeadBtn
           label="Case Studies"
@@ -97,8 +96,14 @@ const WorkPage = () => {
         {case_studies.length &&
           [...case_studies]
             .reverse()
-            .map(({ title, imgSrc }, index) => (
-              <ProjectDisplayCard index={index} imgSrc={imgSrc} title={title} />
+            .map(({ title, imgSrc, id }, index) => (
+              <ProjectDisplayCard
+              key={index}
+                id={id}
+                imgSrc={imgSrc}
+                title={title}
+                type="case-study"
+              />
             ))}
       </div>
 
@@ -112,8 +117,14 @@ const WorkPage = () => {
         {projects_list.length &&
           [...projects_list]
             .reverse()
-            .map(({ title, imgSrc }, index) => (
-              <ProjectDisplayCard index={index} imgSrc={imgSrc} title={title} />
+            .map(({ title, imgSrc, id }, index) => (
+              <ProjectDisplayCard
+              key={index}
+                id={id}
+                imgSrc={imgSrc}
+                title={title}
+                type="side-project"
+              />
             ))}
       </div>
     </section>

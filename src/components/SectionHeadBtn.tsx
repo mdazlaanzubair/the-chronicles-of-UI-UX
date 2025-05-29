@@ -23,8 +23,14 @@ const SectionHeadBtn = (props: SectionHeadBtnProps) => {
       <div className="grow text-left flex flex-col">
         <span className="text-[12px] font-medium">{props.label}</span>
         {props.sub_label && (
-          <span className="text-[10px] font-light text-base-content/50 group-hover:text-accent transition-all ease-in-out duration-300">
-            {"@" + props.sub_label}
+          <span
+            className={`text-[10px] font-light ${
+              props.mode === "light"
+                ? "text-base-content/50"
+                : "text-base-200/50"
+            }  group-hover:text-accent transition-all ease-in-out duration-300`}
+          >
+            {props.sub_label}
           </span>
         )}
       </div>

@@ -78,7 +78,7 @@ const Footer = () => {
                   <SectionHeadBtn
                     mode="light"
                     label={link.title}
-                    sub_label={link.username}
+                    sub_label={`@${link.username}`}
                     icon_1={link.icon}
                     icon_2={<MdArrowOutward />}
                     onClickHandler={() => window.open(link.url, "_blank")}

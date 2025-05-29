@@ -1,7 +1,7 @@
 import FancyButton from "./FancyButton";
 import { FaPhone } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const navigate = useNavigate();
