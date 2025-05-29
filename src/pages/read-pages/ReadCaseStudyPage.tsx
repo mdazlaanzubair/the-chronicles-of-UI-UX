@@ -8,45 +8,45 @@ import { FaTimeline } from "react-icons/fa6";
 import SectionHeadBtn from "../../components/SectionHeadBtn";
 import { CgWorkAlt } from "react-icons/cg";
 
-interface CaseStudyInterface {
+interface CaseStudy {
   id: number;
   title: string;
   subTitle: string;
   url: string;
-  imgSrc: string; // adjust to StaticImageData if you're using Next.js or similar
+  imgSrc: string;
   isFeatured: boolean;
   isLocked: boolean;
   details: {
-    images: {
-      insureMyHealthImg: string; // adjust type if needed
-      insureMyHealthCoverImg: string; // adjust type if needed
-    };
+    images: string[];
     overview: {
       myRole: string;
       team: string;
       timeline: string;
       desc: {
         para1: string;
-        para2: string;
+        para2?: string;
       };
     };
     projectDesc: {
       para1: string;
-      para2: string;
+      para2?: string;
+      para3?: string;
     };
     problemStatement: {
       para1: string;
-      para2: string;
+      para2?: string;
+      para3?: string;
+      para4?: string;
     };
     solution: {
-      para: string;
+      para?: string;
       list: {
         title: string;
         desc: string;
       }[];
     };
     impact: {
-      para: string;
+      para?: string;
       list: {
         title: string;
         desc: string;
@@ -54,7 +54,7 @@ interface CaseStudyInterface {
     };
     closingNotes: {
       para1: string;
-      para2: string;
+      para2?: string;
     };
   };
 }
@@ -64,7 +64,7 @@ const ReadCaseStudyPage = () => {
   const navigate = useNavigate();
 
   const parsedId = useMemo(() => parseInt(id || "", 10), [id]);
-  const [readData, setReadData] = useState<CaseStudyInterface | null>(null);
+  const [readData, setReadData] = useState<CaseStudy | null>(null);
 
   useEffect(() => {
     if (isNaN(parsedId)) {
@@ -152,9 +152,14 @@ const ReadCaseStudyPage = () => {
 
         <ProjectOverviewListing
           title={"Solution"}
-          subTitle="Impact"
           para={readData.details.solution.para}
           listItem={readData.details.solution.list}
+        />
+
+        <ProjectOverviewListing
+          title={"Impact"}
+          para={readData.details.impact.para}
+          listItem={readData.details.impact.list}
         />
 
         <ProjectOverview
@@ -184,10 +189,7 @@ const ReadCaseStudyPage = () => {
           }
         />
 
-        <ImageDisplay
-          src={readData.details.images.insureMyHealthCoverImg}
-          alt={readData.title}
-        />
+        <ImageDisplay src={readData.details.images[0]} alt={readData.title} />
       </div>
     </section>
   );
@@ -207,6 +209,7 @@ const ProjectOverview = ({
     <h1 className="text-[32px] font-bold mb-3">{title}</h1>
     {Object.entries(paras).map(([key, value], index) => (
       <p
+        key={`${key}-${index}`}
         className={`text-[12px] font-medium text-base-content/60 ${
           index === Object.entries(paras).length - 1 ? "" : "mb-3"
         }`}

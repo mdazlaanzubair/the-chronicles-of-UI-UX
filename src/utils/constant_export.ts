@@ -275,10 +275,7 @@ export const case_studies = [
     isFeatured: true,
     isLocked: false,
     details: {
-      images: {
-        insureMyHealthImg,
-        insureMyHealthCoverImg,
-      },
+      images: [insureMyHealthImg, insureMyHealthCoverImg],
       overview: {
         myRole: "Frontend Design, Development & Integration",
         team: "Muhammad Sufyan Shoaib (Backend)",
@@ -361,10 +358,7 @@ export const case_studies = [
     isFeatured: true,
     isLocked: false,
     details: {
-      images: {
-        insureMyTripImg,
-        insureMyTripCoverImg,
-      },
+      images: [insureMyTripImg, insureMyTripCoverImg],
       overview: {
         myRole: "Frontend Development & Integration",
         team: "Mahmoud Abdelnasser (Design), Salal Yousuf (Backend)",
@@ -447,10 +441,7 @@ export const case_studies = [
     isFeatured: true,
     isLocked: false,
     details: {
-      images: {
-        loadeImg,
-        loadeCoverImg,
-      },
+      images: [loadeImg, loadeCoverImg],
       overview: {
         myRole: "Frontend Development & Integration",
         team: "Shebaan (Design), Maheer (Backend Lead), Abdul Rehman (Backend)",
@@ -549,10 +540,7 @@ export const case_studies = [
     isFeatured: true,
     isLocked: false,
     details: {
-      images: {
-        taskVareImg,
-        taskVareCoverImg,
-      },
+      images: [taskVareImg, taskVareCoverImg],
       overview: {
         myRole: "Frontend Development, Research & Integration",
         team: "Shebaan (Design), Maheer (Backend), Noman (Backend)",
@@ -627,10 +615,7 @@ export const case_studies = [
     isFeatured: true,
     isLocked: false,
     details: {
-      images: {
-        talentVareImg,
-        talentVareCoverImg,
-      },
+      images: [talentVareImg, talentVareCoverImg],
       overview: {
         myRole: "Frontend Development & Integration",
         team: "Shebaan (Design), Maheer (Backend Lead), Noman Rehman (Backend), Musadiq Shariq (Sr. Frontend)",
@@ -718,8 +703,9 @@ export const projects_list = [
         projectDesc: {
           para1:
             "The Image-to-Story Narration System is an innovative project that combines computer vision, natural language processing, and text-to-speech technologies to generate compelling narratives based on images and user-provided comments.",
-          para2:"This system seamlessly integrates multiple AI models and pipelines to analyze images, extract contextual information, generate engaging stories, and convert text into synthesized speech, offering users a rich and immersive storytelling experience.",
-            para3:
+          para2:
+            "This system seamlessly integrates multiple AI models and pipelines to analyze images, extract contextual information, generate engaging stories, and convert text into synthesized speech, offering users a rich and immersive storytelling experience.",
+          para3:
             "The primary goal of this project is to develop an AI-powered system that can analyze images, generate contextual stories, and convert them into speech. This integration of computer vision, natural language processing, and text-to-speech technologies aims to offer users a unique and immersive storytelling experience.",
         },
       },
@@ -761,8 +747,9 @@ export const projects_list = [
         projectDesc: {
           para1:
             "Query Mind is a project aimed at testing the performance of a pre-trained Question-Answering (QnA) model for a proposed application. The testing is conducted on Google Colab, an online platform for running machine learning experiments.",
-          para2:"The goal is to provide quick and accurate answers to user queries by leveraging the power of Natural Language Processing (NLP) and AI.",
-            para3:
+          para2:
+            "The goal is to provide quick and accurate answers to user queries by leveraging the power of Natural Language Processing (NLP) and AI.",
+          para3:
             "The primary goal of this project is to develop and test an AI-powered QnA system that can provide quick and accurate answers to user queries. The performance of the pre-trained QnA model will be evaluated to ensure its effectiveness for the proposed Query Mind application.",
         },
       },
