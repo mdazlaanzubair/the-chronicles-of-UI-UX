@@ -4,10 +4,12 @@ import App from "../App";
 import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
 import CredentialsPage from "../pages/CredentialsPage";
-import WorkPage from "../pages/WorkPage";
+import WorkPage from "../pages/work-pages/WorkPage";
 import ReadPage from "../pages/read-pages/ReadPage";
 import ReadCaseStudyPage from "../pages/read-pages/ReadCaseStudyPage";
 import ReadProjectPage from "../pages/read-pages/ReadProjectPage";
+import CaseStudiesPage from "../pages/work-pages/CaseStudiesPage";
+import ProjectsPage from "../pages/work-pages/ProjectsPage";
 
 export const app_router = createBrowserRouter([
   {
@@ -19,23 +21,37 @@ export const app_router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/home",
+        path: "home",
         element: <Navigate to="/" replace />,
       },
       {
-        path: "/about",
+        path: "about",
         element: <AboutPage />,
       },
       {
-        path: "/credentials",
+        path: "credentials",
         element: <CredentialsPage />,
       },
       {
-        path: "/work/:type?",
+        path: "work",
         element: <WorkPage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/work/case-studies" replace />,
+          },
+          {
+            path: "case-studies",
+            element: <CaseStudiesPage />,
+          },
+          {
+            path: "side-projects",
+            element: <ProjectsPage />,
+          },
+        ],
       },
       {
-        path: "/work/read",
+        path: "work/read",
         element: <ReadPage />,
         children: [
           {
@@ -43,17 +59,17 @@ export const app_router = createBrowserRouter([
             element: <Navigate to="/work" replace />,
           },
           {
-            path: "/work/read/case-study/:id",
+            path: "case-study/:id",
             element: <ReadCaseStudyPage />,
           },
           {
-            path: "/work/read/side-project/:id",
+            path: "side-project/:id",
             element: <ReadProjectPage />,
           },
         ],
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <h1>Contact Me</h1>,
       },
     ],

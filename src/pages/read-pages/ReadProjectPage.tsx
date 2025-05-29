@@ -2,17 +2,14 @@ import type { JSX } from "react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { projects_list } from "../../utils/constant_export";
-import {
-  FaUserTie,
-  FaTimeline,
-} from "react-icons/fa6";
+import { FaUserTie, FaTimeline } from "react-icons/fa6";
 import { GiTechnoHeart } from "react-icons/gi";
 import { IoCodeWorking } from "react-icons/io5";
 import { SiLinuxserver, SiNounproject } from "react-icons/si";
 import SectionHeadBtn from "../../components/SectionHeadBtn";
 import { CgWorkAlt } from "react-icons/cg";
 
-interface ProjectDetails {
+interface ProjectDetailsInterface {
   id: number;
   title: string;
   subTitle: string;
@@ -49,7 +46,9 @@ const ReadProjectPage: React.FC = () => {
   const navigate = useNavigate();
 
   const parsedId = useMemo(() => parseInt(id || "", 10), [id]);
-  const [readData, setReadData] = useState<ProjectDetails | null>(null);
+  const [readData, setReadData] = useState<ProjectDetailsInterface | null>(
+    null
+  );
 
   useEffect(() => {
     if (isNaN(parsedId)) {
@@ -60,12 +59,13 @@ const ReadProjectPage: React.FC = () => {
     const matchedProject = projects_list.find(
       (project) => project.id === parsedId
     );
+
     if (!matchedProject) {
       console.warn("No data found for ID:", id);
       return navigate("/work");
+    } else {
+      setReadData(matchedProject);
     }
-
-    setReadData(matchedProject);
   }, [parsedId, navigate]);
 
   const { prevProjectId, nextProjectId } = useMemo(() => {
@@ -85,6 +85,7 @@ const ReadProjectPage: React.FC = () => {
     title,
     imgSrc,
     details: {
+      coverImgSrc,
       overview: {
         myRole,
         techUsed,
@@ -117,7 +118,7 @@ const ReadProjectPage: React.FC = () => {
           icon={<GiTechnoHeart />}
           title="Tech Stack"
           value={techUsed}
-          isTech={true}
+          isTwoColumn={true}
         />
 
         <InfoTagsLink
@@ -155,7 +156,7 @@ const ReadProjectPage: React.FC = () => {
           }
         />
 
-        <ImageDisplay src={imgSrc} alt={title} />
+        <ImageDisplay src={coverImgSrc} alt={title} />
       </div>
     </section>
   );
@@ -164,7 +165,6 @@ const ReadProjectPage: React.FC = () => {
 export default ReadProjectPage;
 
 // Subcomponents
-
 const ProjectOverview = ({
   title,
   para1,
@@ -226,18 +226,23 @@ interface InfoTagsProps {
   title: string;
   value: string;
   icon?: JSX.Element;
-  isTech?: boolean | null;
+  isTwoColumn?: boolean | null;
 }
 
-const InfoTags: React.FC<InfoTagsProps> = ({ icon, title, value, isTech }) => (
+const InfoTags: React.FC<InfoTagsProps> = ({
+  icon,
+  title,
+  value,
+  isTwoColumn,
+}) => (
   <div
     className={`${
-      isTech ? "col-span-2" : "col-span-1"
+      isTwoColumn ? "col-span-2" : "col-span-1"
     } p-5 flex items-center gap-3 bg-base-100 rounded-lg border border-base-300`}
   >
     {icon}
     <div className="flex flex-col">
-      <span className="text-[12px] font-medium text-base-content/60">
+      <span className="text-[12px] font-medium text-base-content/60 uppercase">
         {title}
       </span>
       <span className="text-[12px] lg:text-[14px] font-medium text-base-content">
@@ -251,7 +256,7 @@ const InfoTagsLink: React.FC<InfoTagsProps> = ({ icon, title, value }) => (
   <div className="col-span-1 p-5 flex items-center gap-3 bg-base-100 rounded-lg border border-base-300">
     {icon}
     <div className="flex flex-col">
-      <span className="text-[12px] font-medium text-base-content/60">
+      <span className="text-[12px] font-medium text-base-content/60 uppercase">
         {title}
       </span>
       <a

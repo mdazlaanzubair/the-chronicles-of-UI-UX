@@ -1,77 +1,312 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState, type JSX } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { case_studies } from "../../utils/constant_export";
+import { FaUserTie } from "react-icons/fa";
+import { RiTeamFill } from "react-icons/ri";
+import { SiLinuxserver, SiNounproject } from "react-icons/si";
+import { FaTimeline } from "react-icons/fa6";
+import SectionHeadBtn from "../../components/SectionHeadBtn";
+import { CgWorkAlt } from "react-icons/cg";
+
+interface CaseStudyInterface {
+  id: number;
+  title: string;
+  subTitle: string;
+  url: string;
+  imgSrc: string; // adjust to StaticImageData if you're using Next.js or similar
+  isFeatured: boolean;
+  isLocked: boolean;
+  details: {
+    images: {
+      insureMyHealthImg: string; // adjust type if needed
+      insureMyHealthCoverImg: string; // adjust type if needed
+    };
+    overview: {
+      myRole: string;
+      team: string;
+      timeline: string;
+      desc: {
+        para1: string;
+        para2: string;
+      };
+    };
+    projectDesc: {
+      para1: string;
+      para2: string;
+    };
+    problemStatement: {
+      para1: string;
+      para2: string;
+    };
+    solution: {
+      para: string;
+      list: {
+        title: string;
+        desc: string;
+      }[];
+    };
+    impact: {
+      para: string;
+      list: {
+        title: string;
+        desc: string;
+      }[];
+    };
+    closingNotes: {
+      para1: string;
+      para2: string;
+    };
+  };
+}
 
 const ReadCaseStudyPage = () => {
-  let { id } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const [readData, setReadData] = useState<object | null>();
+  const parsedId = useMemo(() => parseInt(id || "", 10), [id]);
+  const [readData, setReadData] = useState<CaseStudyInterface | null>(null);
 
   useEffect(() => {
-    const parsedId = parseInt(id || "", 10);
-
-    // redirect if id is not a number
     if (isNaN(parsedId)) {
       console.warn("Invalid ID:", id);
-      navigate("/work");
-      return;
+      return navigate("/work");
     }
 
-    // extracting data from list
-    const data = case_studies.filter((item) => item.id === parsedId);
-
-    // if no data redirect
-    if (data.length <= 0) {
-      console.warn("No data found for ID:", id);
-      navigate("/work");
-      return;
-    }
-
-    setReadData(data[0]);
-  }, [id]);
-
-  if (!readData) {
-    console.log("Redirecting...");
-    navigate("/work");
-  } else {
-    return (
-      <section
-        id="read-page"
-        className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
-      >
-        <div
-          id="project-overview"
-          className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg border overflow-hidden border-base-300"
-        >
-          <h1 className="text-[32px] font-light mb-3">ReadCaseStudyPage</h1>
-          <p className="text-base-content/60 text-[16px] font-light mb-3 leading-relaxed tracking-wide">
-            I craft web to{" "}
-            <span className="text-base-content font-medium">
-              establish your online presence
-            </span>
-            . I'm a <br />
-            software engineer, specialized in{" "}
-            <span className="text-base-content font-medium">
-              building &amp; designing <br /> things for the web
-            </span>
-            .
-          </p>
-          <p className="text-base-content/60 text-[16px] font-light leading-relaxed tracking-tight">
-            Constantly pushing the boundaries of web development. I offer{" "}
-            <span className="text-base-content font-medium">
-              User-Centric Solutions
-            </span>{" "}
-            with{" "}
-            <span className="text-base-content font-medium">
-              Pixel-Powered Innovation
-            </span>
-            .
-          </p>
-        </div>
-      </section>
+    const matchedProject = case_studies.find(
+      (project) => project.id === parsedId
     );
-  }
+
+    if (!matchedProject) {
+      console.warn("No data found for ID:", id);
+      return navigate("/work");
+    } else {
+      setReadData(matchedProject);
+    }
+  }, [parsedId, navigate]);
+
+  const { prevCaseStudyId, nextCaseStudyId } = useMemo(() => {
+    const sorted = [...case_studies].sort((a, b) => a.id - b.id);
+    const currentIndex = sorted.findIndex((project) => project.id === parsedId);
+
+    return {
+      prevCaseStudyId: currentIndex > 0 ? sorted[currentIndex - 1].id : null,
+      nextCaseStudyId:
+        currentIndex < sorted.length - 1 ? sorted[currentIndex + 1].id : null,
+    };
+  }, [parsedId]);
+
+  if (!readData) return null;
+
+  const handleNavigate = (id: number | null, fallbackPath: string) => {
+    navigate(id ? `/work/read/case-study/${id}` : fallbackPath);
+  };
+
+  return (
+    <section
+      id="read-page"
+      className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
+    >
+      <div className="grid grid-cols-2 gap-3 w-full h-auto">
+        <ProjectOverview
+          title={readData.title}
+          paras={readData.details.overview.desc}
+        />
+
+        <ImageDisplay src={readData.imgSrc} alt={readData.title} />
+
+        <InfoTags
+          icon={<FaTimeline />}
+          title="Timeline"
+          value={readData.details.overview.timeline}
+        />
+
+        <InfoTagsLink
+          icon={<SiLinuxserver />}
+          title="Source Code"
+          value={readData.url}
+        />
+
+        <InfoTags
+          isTwoColumn={true}
+          icon={<FaUserTie />}
+          title="My Role"
+          value={readData.details.overview.myRole}
+        />
+
+        <InfoTags
+          isTwoColumn={true}
+          icon={<RiTeamFill />}
+          title="The Team"
+          value={readData.details.overview.team}
+        />
+
+        <ProjectOverview
+          title={"Overview"}
+          paras={readData.details.projectDesc}
+        />
+
+        <ProjectOverview
+          title={"Problem Statement"}
+          paras={readData.details.problemStatement}
+        />
+
+        <ProjectOverviewListing
+          title={"Solution"}
+          subTitle="Impact"
+          para={readData.details.solution.para}
+          listItem={readData.details.solution.list}
+        />
+
+        <ProjectOverview
+          title={"Final Thoughts"}
+          paras={readData.details.closingNotes}
+        />
+
+        <SectionHeadBtn
+          mode={prevCaseStudyId ? "dark" : "light"}
+          label={prevCaseStudyId ? "Previous" : "Back"}
+          sub_label={prevCaseStudyId ? "Case Study" : "To Case Studies"}
+          icon_1={<CgWorkAlt />}
+          icon_2={<CgWorkAlt />}
+          onClickHandler={() =>
+            handleNavigate(prevCaseStudyId, "/work/case-studies")
+          }
+        />
+
+        <SectionHeadBtn
+          mode={nextCaseStudyId ? "dark" : "light"}
+          label={nextCaseStudyId ? "Next" : "Jump"}
+          sub_label={nextCaseStudyId ? "Case Study" : "To Projects"}
+          icon_1={nextCaseStudyId ? <CgWorkAlt /> : <SiNounproject />}
+          icon_2={nextCaseStudyId ? <CgWorkAlt /> : <SiNounproject />}
+          onClickHandler={() =>
+            handleNavigate(nextCaseStudyId, "/work/side-projects")
+          }
+        />
+
+        <ImageDisplay
+          src={readData.details.images.insureMyHealthCoverImg}
+          alt={readData.title}
+        />
+      </div>
+    </section>
+  );
 };
 
 export default ReadCaseStudyPage;
+
+// Subcomponents
+const ProjectOverview = ({
+  title,
+  paras,
+}: {
+  title: string;
+  paras: object;
+}) => (
+  <div className="col-span-2 p-5 bg-base-100 rounded-lg border border-base-300">
+    <h1 className="text-[32px] font-bold mb-3">{title}</h1>
+    {Object.entries(paras).map(([key, value], index) => (
+      <p
+        className={`text-[12px] font-medium text-base-content/60 ${
+          index === Object.entries(paras).length - 1 ? "" : "mb-3"
+        }`}
+      >
+        {value}
+      </p>
+    ))}
+  </div>
+);
+
+const ImageDisplay = ({ src, alt }: { src: string; alt: string }) => (
+  <div className="w-full h-[356px] max-h-[356px] col-span-2 rounded-2xl overflow-hidden border-4 border-base-100">
+    <img
+      className="w-full h-full object-cover"
+      src={src}
+      alt={alt}
+      title={alt}
+    />
+  </div>
+);
+
+const ProjectOverviewListing = ({
+  title,
+  subTitle,
+  para,
+  listItem,
+}: {
+  title: string;
+  subTitle?: string;
+  para?: string;
+  listItem: { title: string; desc: string }[];
+}) => (
+  <div className="col-span-2 p-5 bg-base-100 rounded-lg border border-base-300">
+    <h1 className="text-[32px] font-bold mb-3">{title}</h1>
+    {para && (
+      <p className="text-[12px] font-medium text-base-content/60 mb-3">
+        {para}
+      </p>
+    )}
+    {subTitle && <h2 className="text-[18px] font-semibold mb-3">{subTitle}</h2>}
+    <ul className="w-full flex flex-col gap-3">
+      {listItem.map((item, index) => (
+        <li key={index} className="w-full">
+          <h3 className="text-[14px] font-medium capitalize text-base-content mb-2">
+            {item.title}
+          </h3>
+          <p className="text-[12px] font-light capitalize text-base-content/60">
+            {item.desc}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+interface InfoTagsProps {
+  title: string;
+  value: string;
+  icon?: JSX.Element;
+  isTwoColumn?: boolean | null;
+}
+
+const InfoTags: React.FC<InfoTagsProps> = ({
+  icon,
+  title,
+  value,
+  isTwoColumn,
+}) => (
+  <div
+    className={`${
+      isTwoColumn ? "col-span-2" : "col-span-1"
+    } p-5 flex items-center gap-3 bg-base-100 rounded-lg border border-base-300`}
+  >
+    {icon}
+    <div className="flex flex-col">
+      <span className="text-[10px] font-bold text-base-content/50 uppercase">
+        {title}
+      </span>
+      <span className="text-[12px] lg:text-[14px] font-medium text-base-content">
+        {value}
+      </span>
+    </div>
+  </div>
+);
+
+const InfoTagsLink: React.FC<InfoTagsProps> = ({ icon, title, value }) => (
+  <div className="col-span-1 p-5 flex items-center gap-3 bg-base-100 rounded-lg border border-base-300">
+    {icon}
+    <div className="flex flex-col">
+      <span className="text-[10px] font-bold text-base-content/50 uppercase">
+        {title}
+      </span>
+      <a
+        href={value ? value : "#no-link"}
+        className={`text-[12px] lg:text-[14px] link ${
+          value ? "link-accent" : "text-base-content"
+        } font-medium no-underline`}
+      >
+        Click here
+      </a>
+    </div>
+  </div>
+);

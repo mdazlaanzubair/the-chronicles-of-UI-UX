@@ -293,8 +293,8 @@ export const case_studies = [
       projectDesc: {
         para1:
           "Our team, developed Insure My Health to address these challenges. By combining user-centric design, advanced automation, and robust data management, we aimed to create a seamless and efficient healthcare insurance purchasing experience.",
-        // para2:
-        //   "TalentVare simplify employee lifecycle management. From pre-boarding to off-boarding, automate tasks, manage paperwork, and ensure policy compliance. Streamline your processes, enhance efficiency, and seamlessly manage employee transitions.",
+        para2:
+          "TalentVare simplify employee lifecycle management. From pre-boarding to off-boarding, automate tasks, manage paperwork, and ensure policy compliance. Streamline your processes, enhance efficiency, and seamlessly manage employee transitions.",
       },
       problemStatement: {
         para1:
