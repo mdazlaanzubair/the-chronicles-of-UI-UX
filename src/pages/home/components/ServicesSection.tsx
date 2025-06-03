@@ -1,6 +1,6 @@
 import { CgDesignmodo } from "react-icons/cg";
-import { services_list } from "../utils/constant_export";
-import SectionHeader from "./SectionHeader";
+import { services_list } from "../../../utils/constant_export";
+import SectionHeader from "../../../components/SectionHeader";
 import { IoCodeWorking } from "react-icons/io5";
 import { SiConsul, SiGoogledataproc } from "react-icons/si";
 

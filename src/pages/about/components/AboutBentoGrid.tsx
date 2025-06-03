@@ -1,13 +1,13 @@
-import bg_img from "../assets/backgrounds/card-bg-img.jpg";
-import resume from "../assets/doc/resume.pdf";
-import dark_logo from "../assets/logo-dark.svg";
-import light_logo from "../assets/logo-light.svg";
+import bg_img from "../../../assets/backgrounds/card-bg-img.jpg";
+import resume from "../../../assets/doc/resume.pdf";
+import dark_logo from "../../../assets/logo-dark.svg";
+import light_logo from "../../../assets/logo-light.svg";
 
 import { HiDocumentText } from "react-icons/hi2";
 import { FaIdCard } from "react-icons/fa";
-import { calculateYearCount } from "../utils/expCalculator";
+import { calculateYearCount } from "../../../utils/expCalculator";
 import { useNavigate } from "react-router-dom";
-import { useDarkMode } from "../provider/DarkModeProvider";
+import { useDarkMode } from "../../../provider/DarkModeProvider";
 
 const bio_constants = {
   experience_in_year: calculateYearCount(),

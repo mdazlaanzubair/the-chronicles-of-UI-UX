@@ -1,12 +1,12 @@
 import type { JSX } from "react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { projects_list } from "../../utils/constant_export";
+import { projects_list } from "../../../utils/constant_export";
 import { FaUserTie, FaTimeline } from "react-icons/fa6";
 import { GiTechnoHeart } from "react-icons/gi";
 import { IoCodeWorking } from "react-icons/io5";
 import { SiLinuxserver, SiNounproject } from "react-icons/si";
-import SectionHeadBtn from "../../components/SectionHeadBtn";
+import SectionHeadBtn from "../../../components/SectionHeadBtn";
 import { CgWorkAlt } from "react-icons/cg";
 
 interface ProjectDetailsInterface {

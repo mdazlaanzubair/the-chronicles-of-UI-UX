@@ -1,4 +1,4 @@
-import FancyButton from "./FancyButton";
+import FancyButton from "../../../components/FancyButton";
 import { FaPhone } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";

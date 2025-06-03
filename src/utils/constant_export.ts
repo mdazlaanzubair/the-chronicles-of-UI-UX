@@ -5,22 +5,48 @@ import noImage from "../assets/backgrounds/card-bg-img.jpg";
 import projectTaskVare from "../assets/work/taskvare.png";
 import taskVareImg from "../assets/work/taskvare-img.jpg";
 import taskVareCoverImg from "../assets/work/taskvare-cover-img.jpg";
+import taskvare01 from "../assets/work/taskvare-01.png";
+import taskvare02 from "../assets/work/taskvare-02.png";
+import taskvare03 from "../assets/work/taskvare-03.png";
+import taskvare04 from "../assets/work/taskvare-04.png";
 
 import projectTalentVare from "../assets/work/talentvare.png";
 import talentVareImg from "../assets/work/talentvare-img.jpg";
 import talentVareCoverImg from "../assets/work/talentvare-cover-img.jpg";
+import talentvare01 from "../assets/work/talentvare-01.png";
+import talentvare02 from "../assets/work/talentvare-02.png";
+import talentvare03 from "../assets/work/talentvare-03.png";
+import talentvare04 from "../assets/work/talentvare-04.png";
 
 import projectTravelInsurance from "../assets/work/travel_insurance.png";
 import insureMyTripImg from "../assets/work/insure-my-trip-img.jpg";
 import insureMyTripCoverImg from "../assets/work/insure-my-trip-cover-img.jpg";
+import insureMyTrip01 from "../assets/work/insure-my-trip-01.png";
+import insureMyTrip02 from "../assets/work/insure-my-trip-02.png";
+import insureMyTrip03 from "../assets/work/insure-my-trip-03.png";
+import insureMyTrip04 from "../assets/work/insure-my-trip-04.png";
+import insureMyTrip05 from "../assets/work/insure-my-trip-05.png";
+import insureMyTrip06 from "../assets/work/insure-my-trip-06.png";
 
 import projectLoade from "../assets/work/loade.png";
 import loadeImg from "../assets/work/loade-img.jpg";
 import loadeCoverImg from "../assets/work/loade-cover-img.jpg";
+import loade01 from "../assets/work/loade-01.png";
+import loade02 from "../assets/work/loade-02.png";
+import loade03 from "../assets/work/loade-03.png";
+import loade04 from "../assets/work/loade-04.png";
+import loade05 from "../assets/work/loade-05.png";
+import loade06 from "../assets/work/loade-06.png";
 
 import projectHealthInsurance from "../assets/work/health_insurance.png";
 import insureMyHealthImg from "../assets/work/insure-my-health-img.jpg";
 import insureMyHealthCoverImg from "../assets/work/insure-my-health-cover-img.jpg";
+import insureMyHealth01 from "../assets/work/insure-my-health-01.jpeg";
+import insureMyHealth02 from "../assets/work/insure-my-health-02.jpg";
+import insureMyHealth03 from "../assets/work/insure-my-health-03.png";
+import insureMyHealth04 from "../assets/work/insure-my-health-04.png";
+import insureMyHealth05 from "../assets/work/insure-my-health-05.png";
+import insureMyHealth06 from "../assets/work/insure-my-health-06.png";
 
 // IMAGES FOR PERSONAL PROJECT
 import webCrawlerImg from "../assets/projects/webCrawler-img.jpg";
@@ -265,7 +291,7 @@ export const caseStudyNotFound = {
   imgSrc: noImage,
 };
 
-export const case_studies = [
+export const case_studies_old = [
   {
     id: 1,
     title: "Health Insurance",
@@ -817,6 +843,504 @@ export const projects_list = [
           },
         ],
       },
+    },
+  },
+];
+
+export const case_studies = [
+  {
+    id: 1,
+    title: "TaskVare",
+    sub_title: "Azure Active Directory Sync Integration",
+    img: taskVareImg,
+    overview: {
+      timeline: "Jan 2024 – Feb 2024",
+      my_role: "Frontend Development, Research & Integration",
+      team: [
+        {
+          name: "Shebaan Kalim",
+          role: "UI/UX Designer",
+          profile: "https://www.linkedin.com/in/shebaankalim/",
+        },
+        {
+          name: "Mohammad Maheer",
+          role: "Backend Lead",
+          profile: "https://www.linkedin.com/in/mohammad-maheer/",
+        },
+        {
+          name: "Noman Shahid",
+          role: "Backend Developer",
+          profile: "https://www.linkedin.com/in/noman-shahid-99a349204/",
+        },
+      ],
+      title: "Overview",
+      desc: [
+        "TaskVare is a modern, web-based task and project management solution built to help organizations improve productivity, streamline workflows, and foster team collaboration. The platform is known for its intuitive interface, real-time collaboration tools, and strong integration capabilities.",
+        "However, a critical limitation surfaced: TaskVare lacked support for Azure Active Directory (AAD), a key component in many enterprise IT infrastructures used for employee identity and access management.",
+        "To resolve this, we developed and integrated a full-fledged AAD synchronization feature. This enabled enterprises to automatically sync and manage employee data across both platforms, unlocking new operational efficiencies and significantly improving the enterprise user experience.",
+      ],
+      img: taskvare01,
+    },
+    problem: {
+      title: "Problem Statement",
+      desc: "Organizations using Azure Active Directory (AAD) for employee identity management faced several challenges when adopting TaskVare, including the need for manual data entry that required admins to duplicate employee data in both AAD and TaskVare, leading to inconsistent records where changes such as job titles and access rights were not reflected in real time. This resulted in wasted time as IT teams spent hours reconciling user access and data between platforms, and introduced security risks due to potential human error, access mismanagement, or outdated records. These issues created friction for enterprise adoption and limited TaskVare's scalability for large teams.",
+    },
+    solutions: {
+      title: "The Solution",
+      desc: "We designed and implemented seamless AAD integration to synchronize user data in real time.",
+      solution_list: [
+        {
+          title: "Azure Graph API",
+          desc: "We leveraged Microsoft’s Graph API to securely fetch and update user records from Azure Active Directory. This allowed us to programmatically access employee metadata such as name, email, job title, and department.",
+          img: taskvare02,
+        },
+        {
+          title: "MSAL (Microsoft Authentication Library)",
+          desc: "To ensure secure communication between platforms, we used MSAL for robust OAuth 2.0-based authentication. This protected sensitive employee data and ensured access control compliance.",
+          img: "",
+        },
+        {
+          title: "Two-Way Data Binding",
+          desc: "We implemented bi-directional sync, so changes made in either TaskVare or AAD were automatically reflected in both systems. This included: New employee onboarding, Role updates, Access revocations, Profile updates.",
+          img: taskvare03,
+        },
+      ],
+    },
+    impact: {
+      title: "The Impact",
+      desc: "The Azure AD integration brought substantial operational benefits",
+      img: taskvare04,
+      impact_list: [
+        {
+          title: "Reduced Admin Overhead",
+          desc: "Admins could concentrate on more complex system management tasks. No more double entries.",
+        },
+        {
+          title: "Real-Time Sync",
+          desc: "Ensured data consistency across platforms, reducing the risk of outdated permissions or missing employee records.",
+        },
+        {
+          title: "Simplified Access Management",
+          desc: "TaskVare now respects existing AAD user groups, enabling seamless role-based access provisioning.",
+        },
+        {
+          title: "Enterprise Readiness",
+          desc: "Opened doors for TaskVare adoption within mid to large-scale organizations relying on Microsoft infrastructure.",
+        },
+      ],
+    },
+    contributions: {
+      title: "My Contributions",
+      desc: "As the Frontend Developer, I was responsible for designing and building the AAD sync interface. I also created employee directory views with live sync indicators. Additionally, I handled user feedback states, such as sync success, failure, and conflict resolution. Furthermore, I researched Microsoft Graph API endpoints and integrated them with backend APIs. Collaborating with backend developers, I implemented secure MSAL-based authentication. Lastly, I ensured a responsive UI/UX across devices.",
+      learning_list: [],
+    },
+    conclusion: {
+      title: "Final Thoughts",
+      desc: "The AAD sync module was more than a technical integration, it was a strategic step toward making TaskVare a true enterprise-ready solution. By aligning with modern IT infrastructures, we made TaskVare more accessible, more secure, and more powerful for organizations that rely on centralized identity systems. As a developer, I’m proud to have played a role in bridging this gap and contributing to TaskVare’s mission of redefining collaborative workspaces.",
+    },
+  },
+  {
+    id: 2,
+    title: "LOADe",
+    sub_title: "Fixed Vehicle Orders Module",
+    img: loadeImg,
+    overview: {
+      timeline: "Oct 2023 – Jan 2024",
+      my_role: "Frontend Development & Integration",
+      team: [
+        {
+          name: "Shebaan Kalim",
+          role: "UI/UX Designer",
+          profile: "https://www.linkedin.com/in/shebaankalim/",
+        },
+        {
+          name: "Mohammad Maheer",
+          role: "Backend Lead",
+          profile: "https://www.linkedin.com/in/mohammad-maheer/",
+        },
+        {
+          name: "Abdul Rahman",
+          role: "Backend Developer",
+          profile: "https://www.linkedin.com/in/hafizabdulrahman20/",
+        },
+      ],
+      title: "Overview",
+      desc: [
+        "LOADe is a revolutionary Pakistani logistics startup focused on transforming the delivery ecosystem through tech-driven solutions. Initially modeled as an on-demand logistics platform, similar to ride-hailing for goods. LOADe offered businesses the flexibility to book delivery services as needed.",
+        "However, a major bottleneck emerged for companies requiring recurring deliveries to the same locations. Repeating the booking process manually every time was inefficient and time-consuming.",
+        "To solve this, we developed a new feature: the Fixed Vehicle Orders Module, designed specifically to cater to clients with consistent delivery patterns, offering them a more stable, predictable, and automated experience.",
+      ],
+      img: loade01,
+    },
+    problem: {
+      title: "Problem Statement",
+      desc: "LOADe’s corporate users faced challenges with repetitive bookings, inconsistent driver assignment, fragmented tracking, and unstructured invoicing. These inefficiencies increased operational overhead for businesses with structured supply chains or routine delivery needs.",
+    },
+    solutions: {
+      title: "The Solution",
+      desc: "We designed and implemented a recurring logistics booking system tailored to enterprise needs. Core features included",
+      solution_list: [
+        {
+          title: "Quotation Management",
+          desc: "Clients can define pickup/drop-off points, schedule frequency, and timeframes in a single unified quote.",
+          img: loade02,
+        },
+        {
+          title: "Dedicated Driver Assignment",
+          desc: "Each fixed order assigns a single dedicated driver for the term, promoting route familiarity and client-specific handling knowledge.",
+          img: loade03,
+        },
+        {
+          title: "Driver Change Request",
+          desc: "In case of disruptions, businesses can request driver reassignment via the admin panel without canceling the full booking.",
+          img: "",
+        },
+        {
+          title: "Subscription Model",
+          desc: "Clients can choose between per-trip variable orders and recurring fixed vehicle orders.",
+          img: "",
+        },
+        {
+          title: "Driver Monitoring",
+          desc: "Track attendance, location-based check-ins, and performance metrics for assigned drivers.",
+          img: loade04,
+        },
+        {
+          title: "Invoice Automation + Online Payment",
+          desc: "Invoices are generated automatically at billing cycle close, based on usage. Payments are accepted through IBFT or Credit/debit cards via PayFast",
+          img: loade05,
+        },
+        {
+          title: "Monthly Reports",
+          desc: "Automated monthly reports offer delivery stats, and driver performance, aiding business intelligence.",
+          img: "",
+        },
+      ],
+    },
+    impact: {
+      title: "The Impact",
+      desc: "",
+      img: loade06,
+      impact_list: [
+        {
+          title: "Increased Efficiency",
+          desc: "Reduced booking load and centralized quote management saved time and reduced logistical complexity.",
+        },
+        {
+          title: "Improved Consistency",
+          desc: "A single driver per booking term improved reliability, route efficiency, and client trust.",
+        },
+        {
+          title: "Enhanced Operational Control",
+          desc: "Driver tracking, performance dashboards, and quick change mechanisms empowered companies to fine-tune operations.",
+        },
+        {
+          title: "Simplified Billing",
+          desc: "Subscription-based billing with online payments enabled seamless financial management and predictable cost planning.",
+        },
+      ],
+    },
+    contributions: {
+      title: "My Contributions",
+      desc: "I built interactive forms for fixed booking and quotation setup, integrated real-time driver tracking visuals and attendance logs, ensured mobile-first responsive design across dashboards and invoicing screens, connected the frontend to backend APIs for driver assignment, change requests, and report generation, and coordinated closely with the UI/UX designer to ensure intuitive customer workflows.",
+      learning_list: [],
+    },
+    conclusion: {
+      title: "Final Thoughts",
+      desc: "The Fixed Vehicle Orders module reflects LOADe’s commitment to customer-centric innovation and operational excellence. By listening to business needs and addressing recurring inefficiencies, we created a feature that streamlines logistics for high-volume clients. As a developer, I take pride in contributing to a solution that enhances transparency, simplifies workflows, and delivers real-world impact for businesses across Pakistan’s growing delivery ecosystem.",
+    },
+  },
+  {
+    id: 3,
+    title: "TalentVare",
+    sub_title: "Redefining Recruitment Through Transparency & Automation",
+    img: talentVareImg,
+    overview: {
+      timeline: "Mar 2024 – Jun 2024",
+      my_role: "Frontend Development & Integration",
+      team: [
+        {
+          name: "Shebaan Kalim",
+          role: "UI/UX Designer",
+          profile: "https://www.linkedin.com/in/shebaankalim/",
+        },
+        {
+          name: "Musadiq Shariq",
+          role: "Frontend Developer",
+          profile: "https://www.linkedin.com/in/musadiq-shariq-90b701230/",
+        },
+        {
+          name: "Mohammad Maheer",
+          role: "Backend Lead",
+          profile: "https://www.linkedin.com/in/mohammad-maheer/",
+        },
+        {
+          name: "Noman Shahid",
+          role: "Backend Developer",
+          profile: "https://www.linkedin.com/in/noman-shahid-99a349204/",
+        },
+      ],
+      title: "Overview",
+      desc: [
+        "TalentVare is a modern Human Resource Management System (HRMS) and job board platform designed to address the inefficiencies in today’s hiring lifecycle. From resume management to final onboarding, it streamlines communication and reduces the burden of juggling multiple tools for both candidates and HR teams.",
+        "Our objective was to bridge the communication gap between employers and applicants, creating a unified platform that simplifies hiring while maintaining transparency and trust at every stage.",
+      ],
+      img: talentvare01,
+    },
+    problem: {
+      title: "Problem Statement",
+      desc: "The modern recruitment process is often fragmented and opaque, causing candidate confusion as applicants frequently remain unaware of their application status, which creates uncertainty and reduces engagement. Additionally, HR professionals face tool overload, relying on multiple systems for interviews, offer letters, approvals, and applicant tracking, leading to inefficiencies and potential data loss. Compounding these issues, scattered documentation such as resumes, interview scores, and offer approvals are managed across various platforms, creating silos that hinder effective collaboration.",
+    },
+    solutions: {
+      title: "The Solution",
+      desc: "TalentVare delivers a fully integrated hiring solution by centralizing core recruitment features into a seamless interface.",
+      solution_list: [
+        {
+          title: "Real-Time Application Status Tracking",
+          desc: "Candidates receive live updates on every stage of their application—from submission to interview to final offer. This fosters trust, transparency, and a better candidate experience.",
+          img: talentvare02,
+        },
+        {
+          title: "Unified HR Workflow",
+          desc: "Recruiters manage the entire hiring process—including interviews, evaluations, approvals, and offer generation—seamlessly within TalentVare, utilizing key features such as interview scheduling and scoring, role-based approval flows for offers, auto-generation of offer letters, and central tracking of candidate progress.",
+          img: talentvare03,
+        },
+        {
+          title: "Resume & Profile Management",
+          desc: "Job seekers can build and manage resumes directly within the platform, with the flexibility to create a resume using platform templates, upload an existing resume, and download customized resumes for other opportunities.",
+          img: talentvare04,
+        },
+      ],
+    },
+    impact: {
+      title: "The Impact",
+      desc: "The implementation of TalentVare’s features delivered value across both sides of the recruitment ecosystem",
+      img: "",
+      impact_list: [
+        {
+          title: "Improved Candidate Experience",
+          desc: "Improved candidate experience through transparent communication, application visibility, and easy resume management.",
+        },
+        {
+          title: "HR Operational Efficiency",
+          desc: "HR efficiency improved through tool consolidation, streamlined interviews, and centralized data.",
+        },
+        {
+          title: "Simplified Recruitment Stack",
+          desc: "Simplified recruitment stack reduces external tool dependency and consolidates workflows.",
+        },
+      ],
+    },
+    contributions: {
+      title: "My Contributions",
+      desc: "As a Frontend Developer, I was responsible for developing the candidate and HR dashboards, integrating the real-time application status system using WebSocket/REST updates, collaborating with the backend team to implement resume creation tools and download features, ensuring responsive, accessible design across devices, and working with the design team to deliver clear, user-centric interfaces.",
+      learning_list: [],
+    },
+    conclusion: {
+      title: "Final Thoughts",
+      desc: "TalentVare stands as a transformative solution in the HR tech space, redefining how companies manage recruitment and how candidates navigate the job search process. By focusing on transparency, efficiency, and user empowerment, we created a system that benefits all stakeholders involved. As a developer, contributing to TalentVare allowed me to build technology that not only solves real-world problems but also enhances the human experience behind every hiring decision.",
+    },
+  },
+  {
+    id: 4,
+    title: "Insure My Health",
+    sub_title: "Simplifying Healthcare Insurance",
+    img: insureMyHealthImg,
+    overview: {
+      timeline: "Jun 2024 – Aug 2024",
+      my_role: "Frontend Design, Development & Integration",
+      team: [
+        {
+          name: "Muhammad Sufyan Shoaib",
+          role: "Backend Lead",
+          profile: "https://www.linkedin.com/in/sufyanshoaib/",
+        },
+      ],
+      title: "Overview",
+      desc: [
+        "Traditional healthcare insurance purchasing is often a complex, opaque, and time-consuming process for both customers and providers. To tackle this, we developed Insure My Health, a SaaS platform that automates and streamlines the end-to-end health insurance journey.",
+        "Insure My Health combines intuitive UI, real-time underwriting automation, seamless third-party integrations, and efficient claims management, ultimately reducing operational friction and improving user experience.",
+      ],
+      img: insureMyHealth01,
+    },
+    problem: {
+      title: "Problem Statement",
+      desc: "The healthcare insurance industry faces several recurring issues, including complex, lengthy forms with repetitive data entry, lack of clarity around policy coverage, pricing, and benefits, long wait times for policy issuance and claims, manual underwriting processes leading to delays, poor customer support and transparency, and high acquisition costs and inefficiencies. These challenges result in poor customer experience and higher operating costs for insurers.",
+    },
+    solutions: {
+      title: "The Solution",
+      desc: "We designed Insure My Health with a strong focus on automation, clarity, and user empowerment",
+      solution_list: [
+        {
+          title: "Intuitive User Interface",
+          desc: "User-friendly flow for insurance process, including plan comparison, health assessment, and premium calculators.",
+          img: insureMyHealth02,
+        },
+        {
+          title: "Automated Underwriting & Instant Policy Generation",
+          desc: "Data analytics and risk assessment algorithms enable instant underwriting, immediate policy issuance, and eliminate manual paperwork.",
+          img: insureMyHealth03,
+        },
+        {
+          title: "Seamless Integration",
+          desc: "Integration with healthcare providers and payment gateways.",
+          img: insureMyHealth04,
+        },
+        {
+          title: "Claims Management",
+          desc: "Efficient claim lifecycle with online filing, tracking, and real-time updates.",
+          img: insureMyHealth05,
+        },
+      ],
+    },
+    impact: {
+      title: "The Impact",
+      desc: "",
+      img: insureMyHealth06,
+      impact_list: [
+        {
+          title: "Enhanced Customer Experience",
+          desc: "Enhanced customer experience with faster onboarding, clear plan info, and improved satisfaction.",
+        },
+        {
+          title: "Increased Operational Efficiency",
+          desc: "50–70% reduction in manual processing, faster turnaround time, and fewer support tickets.",
+        },
+        {
+          title: "Data-Driven Insights",
+          desc: "Data-driven insights enable insurers to personalize policies and improve risk modeling through data analysis.",
+        },
+        {
+          title: "Stronger Customer Relationships",
+          desc: "Transparent communication and proactive support features.",
+        },
+      ],
+    },
+    contributions: {
+      title: "My Contributions",
+      desc: "As the Frontend Engineer, I designed responsive UI components based on customer personas, implemented dynamic flows with modern JavaScript frameworks, and integrated REST APIs for plan, claims, and user authentication. I also ensured accessibility, performance optimization, and security best practices.",
+      learning_list: [
+        {
+          title: "Designing for trust",
+          desc: "Health insurance requires exceptional clarity in UI/UX to build user confidence.",
+        },
+        {
+          title: "Working in sync",
+          desc: "Close collaboration with the backend developer was essential to streamline the data-driven components.",
+        },
+        {
+          title: "Building scalable components",
+          desc: "The UI was designed with reusability and scalability in mind for future expansion.",
+        },
+      ],
+    },
+    conclusion: {
+      title: "Final Thoughts",
+      desc: "Insure My Health showcases how technology can meaningfully enhance the insurance experience, benefiting both customers and insurers. This project deepened my skills in frontend development and collaborative problem-solving. I’m proud to have contributed to a platform that simplifies healthcare access and empowers users through transparency and automation.",
+    },
+  },
+  {
+    id: 5,
+    title: "Insure My Trip",
+    sub_title: "Transforming Travel Insurance",
+    img: insureMyTripImg,
+    overview: {
+      timeline: "Jun 2024 – Aug 2024",
+      my_role: "Frontend Development & Integration",
+      team: [
+        {
+          name: "Mahmood AbdelNasser",
+          role: "UI/UX Designer",
+          profile: "https://www.linkedin.com/in/mhmoodabdoo/",
+        },
+        {
+          name: "Hamdy Salah",
+          role: "Frontend Developer",
+          profile: "https://www.linkedin.com/in/hamdysalah/",
+        },
+        {
+          name: "Salal Yousuf",
+          role: "Backend Developer",
+          profile: "https://www.linkedin.com/in/salalyousuf/",
+        },
+      ],
+      title: "Overview",
+      desc: [
+        "Travel insurance is a crucial part of any journey. Yet, for many users, the process of acquiring it is still slow, confusing, and frustrating. To solve this, we built Insure My Trip, a web application designed to simplify and modernize the travel insurance purchasing journey.",
+        "By automating key workflows and enhancing usability, our platform drastically reduces manual effort, improves transparency, and empowers users to handle everything, from quote to policy issuance, in just minutes.",
+      ],
+      img: insureMyTrip01,
+    },
+    problem: {
+      title: "Problem Statement",
+      desc: "The creation of Insure My Trip was driven by several user and business pain points, including repetitive data entry across multiple forms and calls, lack of self-service options for changes or cancellations, manual quote creation leading to delays and errors, uncertainty around final pricing until late in the process, high operational costs, limited scalability, and the loss of customers due to complexity and friction.",
+    },
+    solutions: {
+      title: "The Solution",
+      desc: "To address these issues, we built a platform rooted in simplicity, automation, and empowerment",
+      solution_list: [
+        {
+          title: "Intuitive User Interface",
+          desc: "Intuitive UI with clear descriptions, smart filters, and real-time feedback.",
+          img: insureMyTrip02,
+        },
+        {
+          title: "Automated Underwriting & Instant Policy Generation",
+          desc: "Real-time algorithms enable risk assessments, premium calculations, and policy generation.",
+          img: insureMyTrip03,
+        },
+        {
+          title: "Seamless Payment Integration",
+          desc: "The platform’s payment module supports cards, wallets, and bank transfers, with installment options and instant confirmation.",
+          img: insureMyTrip04,
+        },
+        {
+          title: "Smart Customer Support",
+          desc: "Tiered support system includes AI chatbots, live chat, and a knowledge base.",
+          img: insureMyTrip05,
+        },
+      ],
+    },
+    impact: {
+      title: "The Impact",
+      desc: "",
+      img: insureMyTrip06,
+      impact_list: [
+        {
+          title: "Enhanced Customer Experience",
+          desc: "Faster application and issuance process, 24/7 support, and self-service options.",
+        },
+        {
+          title: "Increased Operational Efficiency",
+          desc: "Manual effort reduced, real-time issuance, agents redirected to strategic tasks.",
+        },
+        {
+          title: "Increased Satisfaction and Reach",
+          desc: "Positive feedback, broader audience reach, and competitive edge.",
+        },
+      ],
+    },
+    contributions: {
+      title: "My Contributions",
+      desc: "Led implementation of core UI flows, dynamic components, API integrations, and mobile-first responsive layouts. Collaborated with design and backend teams.",
+      learning_list: [
+        {
+          title: "",
+          desc: "Customer-first design creates real business value.",
+        },
+        {
+          title: "",
+          desc: "Clear component boundaries improve scalability and maintainability.",
+        },
+        {
+          title: "",
+          desc: "Working with real-time data requires rigorous error handling and UI feedback loops.",
+        },
+      ],
+    },
+    conclusion: {
+      title: "Final Thoughts",
+      desc: "Insure My Trip redefines how customers interact with travel insurance. It offers speed, simplicity, and control all while reducing the operational burden for providers. Being part of this transformation has been both challenging and fulfilling. This project reinforced my belief in the power of user-centric, automated solutions in industries that have historically lagged behind in digital transformation.",
     },
   },
 ];

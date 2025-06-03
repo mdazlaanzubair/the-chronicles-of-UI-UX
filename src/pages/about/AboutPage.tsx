@@ -1,8 +1,8 @@
-import about_img1 from "../assets/other/about-img-1.jpg";
-import about_img2 from "../assets/other/about-img-2.jpg";
-import about_img4 from "../assets/other/about-img-4.jpg";
-import AboutBentoGrid from "../components/AboutBentoGrid";
-import AboutTerminal from "../components/AboutTerminal";
+import about_img5 from "../../assets/other/about-img-5.png";
+import about_img6 from "../../assets/other/about-img-6.png";
+import about_img7 from "../../assets/other/about-img-7.png";
+import AboutBentoGrid from "./components/AboutBentoGrid";
+import AboutTerminal from "./components/AboutTerminal";
 
 const AboutPage = () => {
   return (
@@ -21,7 +21,7 @@ const AboutPage = () => {
 
         <img
           className="w-full h-full object-center object-cover"
-          src={about_img1}
+          src={about_img7}
           alt="about section image"
         />
       </div>
@@ -80,7 +80,7 @@ const AboutPage = () => {
 
         <img
           className="w-full h-full object-center object-cover"
-          src={about_img2}
+          src={about_img6}
           alt="about section image"
         />
       </div>
@@ -140,7 +140,7 @@ const AboutPage = () => {
 
         <img
           className="w-full h-full object-center object-cover"
-          src={about_img4}
+          src={about_img5}
           alt="about section image"
         />
       </div>

@@ -1,15 +1,15 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import App from "../App";
-import HomePage from "../pages/HomePage";
-import AboutPage from "../pages/AboutPage";
+import HomePage from "../pages/home/HomePage";
+import AboutPage from "../pages/about/AboutPage";
 import CredentialsPage from "../pages/CredentialsPage";
-import WorkPage from "../pages/work-pages/WorkPage";
-import ReadPage from "../pages/read-pages/ReadPage";
-import ReadCaseStudyPage from "../pages/read-pages/ReadCaseStudyPage";
-import ReadProjectPage from "../pages/read-pages/ReadProjectPage";
-import CaseStudiesPage from "../pages/work-pages/CaseStudiesPage";
-import ProjectsPage from "../pages/work-pages/ProjectsPage";
+import WorkPage from "../pages/work/WorkPage";
+import ReadPage from "../pages/read/ReadPage";
+import ReadCaseStudyPage from "../pages/read/case-study/ReadCaseStudyPage";
+import ReadProjectPage from "../pages/read/project/ReadProjectPage";
+import CaseStudiesPage from "../pages/work/case-study/CaseStudiesPage";
+import ProjectsPage from "../pages/work/project/ProjectsPage";
 
 export const app_router = createBrowserRouter([
   {

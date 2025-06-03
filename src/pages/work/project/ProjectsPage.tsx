@@ -1,5 +1,5 @@
-import ProjectDisplayCard from "../../components/ProjectDisplayCard";
-import { projects_list } from "../../utils/constant_export";
+import ProjectDisplayCard from "../../../components/ProjectDisplayCard";
+import { projects_list } from "../../../utils/constant_export";
 
 const ProjectsPage = () => {
   return (

@@ -92,7 +92,7 @@ const Footer = () => {
             label="Book a call"
             icon_1={<FaPhone />}
             icon_2={<MdArrowOutward />}
-            onClickHandler={() => window.open(social_links[3].url, "_blank")}
+            onClickHandler={() => window.open(social_links[4].url, "_blank")}
           />
         </div>
       </div>

@@ -1,5 +1,5 @@
-import ProjectDisplayCard from "../../components/ProjectDisplayCard";
-import { case_studies } from "../../utils/constant_export";
+import ProjectDisplayCard from "../../../components/ProjectDisplayCard";
+import { case_studies } from "../../../utils/constant_export";
 
 const CaseStudiesPage = () => {
   return (
@@ -33,11 +33,11 @@ const CaseStudiesPage = () => {
         className={`w-full h-auto p-0 m-0 flex flex-col items-center justify-start gap-3`}
       >
         {case_studies.length &&
-          case_studies.map(({ title, imgSrc, id }, index) => (
+          case_studies.map(({ title, img, id }, index) => (
             <ProjectDisplayCard
               key={index}
               id={id}
-              imgSrc={imgSrc}
+              imgSrc={img}
               title={title}
               type="case-study"
             />
