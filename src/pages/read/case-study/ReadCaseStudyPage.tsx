@@ -1,9 +1,7 @@
-import { useEffect, useMemo, useState, type JSX } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { case_studies } from "../../../utils/constant_export";
-import {
-  SiNounproject,
-} from "react-icons/si";
+import { SiNounproject } from "react-icons/si";
 import SectionHeadBtn from "../../../components/SectionHeadBtn";
 import type { CaseStudy } from "./components/case-study-interface";
 import { IoBriefcase } from "react-icons/io5";
@@ -71,7 +69,6 @@ const ReadCaseStudyPage = () => {
       <ImpactComponent impact={readData.impact} />
       <ContributionsComponent contributions={readData.contributions} />
       <ConclusionComponent conclusion={readData.conclusion} />
-
 
       <div className="grid grid-cols-2 gap-3 w-full h-auto">
         <SectionHeadBtn
