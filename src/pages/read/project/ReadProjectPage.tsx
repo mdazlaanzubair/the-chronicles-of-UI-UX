@@ -1,4 +1,3 @@
-import type { JSX } from "react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { projects_list } from "../../../utils/constant_export";
@@ -8,47 +7,20 @@ import { IoCodeWorking } from "react-icons/io5";
 import { SiLinuxserver, SiNounproject } from "react-icons/si";
 import SectionHeadBtn from "../../../components/SectionHeadBtn";
 import { CgWorkAlt } from "react-icons/cg";
-
-interface ProjectDetailsInterface {
-  id: number;
-  title: string;
-  subTitle: string;
-  imgSrc: string;
-  isFeatured: boolean;
-  isLocked: boolean;
-  details: {
-    coverImgSrc: string;
-    overview: {
-      myRole: string;
-      techUsed: string;
-      timeline: string;
-      sourceCode: string;
-      liveUrl: string | null;
-      projectDesc: {
-        para1: string;
-        para2: string;
-        para3?: string;
-        para4?: string;
-      };
-    };
-    features: {
-      para: string;
-      list: {
-        title: string;
-        desc: string;
-      }[];
-    };
-  };
-}
+import {
+  ImageDisplay,
+  InfoTags,
+  InfoTagsLink,
+  ProjectOverview,
+} from "./components";
+import type { Project } from "./components/projects-interface";
 
 const ReadProjectPage: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const parsedId = useMemo(() => parseInt(id || "", 10), [id]);
-  const [readData, setReadData] = useState<ProjectDetailsInterface | null>(
-    null
-  );
+  const [readData, setReadData] = useState<Project | null>(null);
 
   useEffect(() => {
     if (isNaN(parsedId)) {
@@ -81,23 +53,6 @@ const ReadProjectPage: React.FC = () => {
 
   if (!readData) return null;
 
-  const {
-    title,
-    imgSrc,
-    details: {
-      coverImgSrc,
-      overview: {
-        myRole,
-        techUsed,
-        timeline,
-        liveUrl,
-        sourceCode,
-        projectDesc: { para1, para2, para3 },
-      },
-      features: { list: featureList },
-    },
-  } = readData;
-
   const handleNavigate = (id: number | null, fallbackPath: string) => {
     navigate(id ? `/work/read/side-project/${id}` : fallbackPath);
   };
@@ -107,33 +62,41 @@ const ReadProjectPage: React.FC = () => {
       id="read-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
     >
+      <ImageDisplay src={readData.imgSrc} alt={readData.title} />
+
       <div className="grid grid-cols-2 gap-3 w-full h-auto">
-        <ProjectOverview title={title} para1={para1} para2={para2} />
-
-        <ImageDisplay src={imgSrc} alt={title} />
-
-        <InfoTags icon={<FaUserTie />} title="My Role" value={myRole} />
-        <InfoTags icon={<FaTimeline />} title="Timeline" value={timeline} />
+        <InfoTags
+          icon={<FaUserTie />}
+          title="My Role"
+          value={readData.details.overview.myRole}
+        />
+        <InfoTags
+          icon={<FaTimeline />}
+          title="Timeline"
+          value={readData.details.overview.timeline}
+        />
         <InfoTags
           icon={<GiTechnoHeart />}
           title="Tech Stack"
-          value={techUsed}
+          value={readData.details.overview.techUsed}
           isTwoColumn={true}
         />
 
         <InfoTagsLink
           icon={<SiLinuxserver />}
           title="Live Url"
-          value={liveUrl ? liveUrl : "No Live Url"}
+          value={readData.details.overview.liveUrl}
         />
         <InfoTagsLink
           icon={<IoCodeWorking />}
           title="Source Code"
-          value={sourceCode}
+          value={readData.details.overview.sourceCode}
         />
+      </div>
 
-        <ProjectFeatures para3={para3} featureList={featureList} />
+      <ProjectOverview project={readData} />
 
+      <div className="grid grid-cols-2 gap-3 w-full h-auto">
         <SectionHeadBtn
           mode={prevProjectId ? "dark" : "light"}
           label={prevProjectId ? "Previous" : "Back"}
@@ -155,118 +118,11 @@ const ReadProjectPage: React.FC = () => {
             handleNavigate(nextProjectId, "/work/case-studies")
           }
         />
-
-        <ImageDisplay src={coverImgSrc} alt={title} />
       </div>
+
+      <ImageDisplay src={readData.details.coverImgSrc} alt={readData.title} />
     </section>
   );
 };
 
 export default ReadProjectPage;
-
-// Subcomponents
-const ProjectOverview = ({
-  title,
-  para1,
-  para2,
-}: {
-  title: string;
-  para1: string;
-  para2: string;
-}) => (
-  <div className="col-span-2 p-5 bg-base-100 rounded-lg border border-base-300">
-    <h1 className="text-[32px] font-bold mb-3">{title}</h1>
-    <p className="text-[12px] font-medium text-base-content/60 mb-3">{para1}</p>
-    <p className="text-[12px] font-medium text-base-content/60">{para2}</p>
-  </div>
-);
-
-const ImageDisplay = ({ src, alt }: { src: string; alt: string }) => (
-  <div className="w-full h-[356px] max-h-[356px] col-span-2 rounded-2xl overflow-hidden border-4 border-base-100">
-    <img
-      className="w-full h-full object-cover"
-      src={src}
-      alt={alt}
-      title={alt}
-    />
-  </div>
-);
-
-const ProjectFeatures = ({
-  para3,
-  featureList,
-}: {
-  para3?: string;
-  featureList: { title: string; desc: string }[];
-}) => (
-  <div className="col-span-2 p-5 bg-base-100 rounded-lg border border-base-300">
-    <h1 className="text-[32px] font-bold mb-3">About</h1>
-    {para3 && (
-      <p className="text-[12px] font-medium text-base-content/60 mb-3">
-        {para3}
-      </p>
-    )}
-    <h2 className="text-[18px] font-semibold mb-3">Key Features</h2>
-    <ul className="w-full flex flex-col gap-3">
-      {featureList.map((feature, index) => (
-        <li key={index} className="w-full">
-          <h3 className="text-[14px] font-medium capitalize text-base-content mb-2">
-            {feature.title}
-          </h3>
-          <p className="text-[12px] font-light capitalize text-base-content/60">
-            {feature.desc}
-          </p>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-interface InfoTagsProps {
-  title: string;
-  value: string;
-  icon?: JSX.Element;
-  isTwoColumn?: boolean | null;
-}
-
-const InfoTags: React.FC<InfoTagsProps> = ({
-  icon,
-  title,
-  value,
-  isTwoColumn,
-}) => (
-  <div
-    className={`${
-      isTwoColumn ? "col-span-2" : "col-span-1"
-    } p-5 flex items-center gap-3 bg-base-100 rounded-lg border border-base-300`}
-  >
-    {icon}
-    <div className="flex flex-col">
-      <span className="text-[12px] font-medium text-base-content/60 uppercase">
-        {title}
-      </span>
-      <span className="text-[12px] lg:text-[14px] font-medium text-base-content">
-        {value}
-      </span>
-    </div>
-  </div>
-);
-
-const InfoTagsLink: React.FC<InfoTagsProps> = ({ icon, title, value }) => (
-  <div className="col-span-1 p-5 flex items-center gap-3 bg-base-100 rounded-lg border border-base-300">
-    {icon}
-    <div className="flex flex-col">
-      <span className="text-[12px] font-medium text-base-content/60 uppercase">
-        {title}
-      </span>
-      <a
-        href={value ? value : "#no-link"}
-        className={`text-[12px] lg:text-[14px] link ${
-          value ? "link-accent" : "text-base-content"
-        } font-medium no-underline`}
-      >
-        Click here
-      </a>
-    </div>
-  </div>
-);
