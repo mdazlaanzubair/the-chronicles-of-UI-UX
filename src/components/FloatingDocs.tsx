@@ -19,7 +19,7 @@ const FloatingDocs = ({
   navList: NavItems[];
   jumpToId?: string;
 }) => {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { isDarkMode } = useDarkMode();
   const floatingBarRef = useRef<any>(null);
 
   if (navList && navList.length > 0) {
