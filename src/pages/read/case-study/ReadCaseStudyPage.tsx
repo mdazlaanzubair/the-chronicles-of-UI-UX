@@ -6,7 +6,6 @@ import SectionHeadBtn from "../../../components/SectionHeadBtn";
 import type { CaseStudy } from "./components/case-study-interface";
 import { IoBriefcase } from "react-icons/io5";
 import {
-  ConclusionComponent,
   ContributionsComponent,
   HeaderComponent,
   ImpactComponent,
@@ -62,13 +61,17 @@ const ReadCaseStudyPage = () => {
       id="read-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
     >
-      <HeaderComponent title={readData.title} sub_title={readData.sub_title} />
+      <HeaderComponent
+        title={readData.title}
+        sub_title={readData.sub_title}
+        overview={readData.overview}
+      />
       <OverviewComponent overview={readData.overview} />
       <ProblemComponent problem={readData.problem} />
       <SolutionsComponent solutions={readData.solutions} />
       <ImpactComponent impact={readData.impact} />
       <ContributionsComponent contributions={readData.contributions} />
-      <ConclusionComponent conclusion={readData.conclusion} />
+      {/* <ConclusionComponent conclusion={readData.conclusion} /> */}
 
       <div className="grid grid-cols-2 gap-3 w-full h-auto">
         <SectionHeadBtn
@@ -91,6 +94,13 @@ const ReadCaseStudyPage = () => {
           onClickHandler={() =>
             handleNavigate(nextCaseStudyId, "/work/side-projects")
           }
+        />
+      </div>
+
+      <div className="border-4 border-base-300 rounded-lg overflow-hidden">
+        <img
+          src={readData.coverImg}
+          alt={`${readData.title} Case Study Image: ${readData.sub_title}`}
         />
       </div>
     </section>

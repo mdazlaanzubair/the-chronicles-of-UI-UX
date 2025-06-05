@@ -8,30 +8,32 @@ interface TeamMember {
 // Interface for the overview section
 export interface Overview {
   timeline: string;
+  url: string;
   my_role: string;
   team: TeamMember[];
   title: string; // "Overview"
   desc: string[];
-  img: string; // Assuming variables like insureMyHealth01 resolve to string paths or identifiers
+  img: string;
 }
 
 // Interface for the problem statement section
 export interface Problem {
   title: string; // e.g., "Problem Statement"
   desc: string;
+  img: string;
 }
 
 // Interface for an individual solution item in the solution list
 interface SolutionListItem {
   title: string;
   desc: string;
-  img: string; // Can be an empty string
 }
 
 // Interface for the solutions section
 export interface Solutions {
   title: string; // e.g., "The Solution"
   desc: string;
+  img: string;
   solution_list: SolutionListItem[];
 }
 
@@ -72,6 +74,8 @@ export interface Conclusion {
 export interface CaseStudy {
   title: string;
   sub_title: string;
+  img: string; // Can be an empty string
+  coverImg: string; // Can be an empty string
   overview: Overview;
   problem: Problem;
   solutions: Solutions;
