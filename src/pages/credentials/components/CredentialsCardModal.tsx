@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import type { ModalCredentialsProps } from "./credentials-interface";
 
