@@ -131,7 +131,7 @@ export const ProblemComponent = ({ problem }: { problem: Problem }) => {
 export const SolutionsComponent = ({ solutions }: { solutions: Solutions }) => {
   return (
     <section
-      id="solutions-section"
+      id="solution-section"
       className="w-full h-auto flex flex-col items-center justify-start gap-3"
     >
       <ImagePreview
@@ -332,7 +332,7 @@ const ImagePreview = ({
       className={`flex flex-col items-center justify-center gap-3 border-t-2 border-base-300 mt-3 pt-3`}
     >
       <p className="flex w-full items-center justify-start text-[10px] text-base-content/60 gap-3">
-        <strong className="px-2 py-1 rounded bg-base-100 uppercase font-bold ring-2 ring-base-300 ">
+        <strong className="px-2 py-1 rounded text-accent bg-base-100 border-2 border-base-300 uppercase font-bold">
           Caption
         </strong>
         <span className="mt-px mb-px font-semibold">{caption}</span>

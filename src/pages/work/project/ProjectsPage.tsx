@@ -28,11 +28,11 @@ const ProjectsPage = () => {
         className={`w-full h-auto p-0 m-0 flex flex-col items-center justify-start gap-3`}
       >
         {projects_list.length &&
-          projects_list.map(({ title, imgSrc, id }, index) => (
+          projects_list.map(({ title, img, id }, index) => (
             <ProjectDisplayCard
               key={index}
               id={id}
-              imgSrc={imgSrc}
+              imgSrc={img}
               title={title}
               type="side-project"
             />

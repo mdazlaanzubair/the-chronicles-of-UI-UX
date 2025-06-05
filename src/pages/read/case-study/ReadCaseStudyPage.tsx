@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { case_studies } from "../../../utils/constant_export";
-import { SiNounproject } from "react-icons/si";
+import { SiGoogleanalytics, SiNounproject } from "react-icons/si";
 import SectionHeadBtn from "../../../components/SectionHeadBtn";
 import type { CaseStudy } from "./components/case-study-interface";
 import { IoBriefcase } from "react-icons/io5";
@@ -13,6 +13,11 @@ import {
   ProblemComponent,
   SolutionsComponent,
 } from "./components";
+import FloatingDocs from "../../../components/FloatingDocs";
+import {  FaInfo } from "react-icons/fa";
+import { TbBinocularsFilled } from "react-icons/tb";
+import { HiLightBulb, HiMiniPresentationChartLine } from "react-icons/hi2";
+import { BiSolidCommentError } from "react-icons/bi";
 
 const ReadCaseStudyPage = () => {
   const { id } = useParams();
@@ -56,9 +61,42 @@ const ReadCaseStudyPage = () => {
     navigate(id ? `/work/read/case-study/${id}` : fallbackPath);
   };
 
+  const navList = [
+    {
+      title: "Key Info",
+      sectionId: "header-section",
+      icon: <FaInfo className="text-base" />,
+    },
+    {
+      title: "Overview",
+      sectionId: "overview-section",
+      icon: <TbBinocularsFilled className="text-2xl" />,
+    },
+    {
+      title: "Problem Statement",
+      sectionId: "problem-section",
+      icon: <BiSolidCommentError />,
+    },
+    {
+      title: "Solution",
+      sectionId: "solution-section",
+      icon: <HiLightBulb />,
+    },
+    {
+      title: "Impact Analysis",
+      sectionId: "impact-section",
+      icon: <SiGoogleanalytics />,
+    },
+    {
+      title: "Contributions",
+      sectionId: "contributions-section",
+      icon: <HiMiniPresentationChartLine />,
+    },
+  ];
+
   return (
     <section
-      id="read-page"
+      id="read-case-study-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
     >
       <HeaderComponent
@@ -103,6 +141,7 @@ const ReadCaseStudyPage = () => {
           alt={`${readData.title} Case Study Image: ${readData.sub_title}`}
         />
       </div>
+      <FloatingDocs navList={navList} jumpToId="read-case-study-page" />
     </section>
   );
 };

@@ -66,7 +66,6 @@ export const experiences = [
   {
     credentialId: "",
     doc_url: "",
-    field: "",
     date: "Sep 2024 - Present",
     title: "Frontend Developer",
     firm: {
@@ -80,7 +79,6 @@ export const experiences = [
   {
     credentialId: "",
     doc_url: "",
-    field: "",
     date: "Jun 2024 - Aug 2024",
     title: "Frontend Developer",
     firm: {
@@ -94,7 +92,6 @@ export const experiences = [
   {
     credentialId: "",
     doc_url: "",
-    field: "",
     date: "Oct 2023 - Jun 2024",
     title: "Frontend Developer",
     firm: {
@@ -108,7 +105,7 @@ export const experiences = [
   {
     credentialId: "",
     doc_url: "",
-    field: "",
+
     date: "Feb 2020 - Oct 2023",
     title: "IT Assistant",
     firm: {
@@ -128,7 +125,6 @@ export const education = [
     location: "",
     date: "Aug 2024 - Sep 2026",
     title: "Master's degree",
-    field: "Computer Software Engineering",
     firm: {
       name: "FAST University",
       url: "https://khi.nu.edu.pk/",
@@ -143,7 +139,6 @@ export const education = [
     location: "",
     date: "Sep 2016 - Oct 2020",
     title: "Bachelor of Science - BS",
-    field: "Computer Software Engineering",
     firm: {
       name: "ILMA University",
       url: "https://ilmauniversity.edu.pk/",
@@ -156,7 +151,6 @@ export const education = [
 
 export const certifications = [
   {
-    field: "",
     location: "",
     title: "Front-End Web UI Frameworks and Tools",
     firm: {
@@ -172,7 +166,6 @@ export const certifications = [
       "Gained hands-on experience with front-end libraries and frameworks, particularly Bootstrap. I developed responsive web pages and completed a full-scale front-end project, enhancing my understanding of the end-to-end process of front-end development.",
   },
   {
-    field: "",
     location: "",
     title: "Image Processing and OCR",
     firm: {
@@ -188,7 +181,6 @@ export const certifications = [
       "Explored techniques in image processing and optical character recognition (OCR). I worked with libraries such as Pillow, Tesseract, and OpenCV to analyze and manipulate images, enhancing my skills in computer vision applications.",
   },
   {
-    field: "",
     location: "",
     title: "Introduction to AI",
     firm: {
@@ -204,7 +196,6 @@ export const certifications = [
       "I learned about the foundational AI concepts, including machine learning, deep learning, and neural networks. I examined the capabilities of generative AI models and large language models, gaining insights into their applications in various domains.",
   },
   {
-    field: "",
     location: "",
     title: "Data Structures in Python",
     firm: {
@@ -220,7 +211,6 @@ export const certifications = [
       "I explored core data structures in Python, such as lists, dictionaries, and tuples. Applied these structures to perform complex data analysis, enhancing my proficiency in Python programming.",
   },
   {
-    field: "",
     location: "",
     title: "Web Structuring",
     firm: {
@@ -236,7 +226,6 @@ export const certifications = [
       "This course is focused on creating syntactically correct HTML and CSS. I built responsive and accessible websites, laying a strong foundation in web development practices.",
   },
   {
-    field: "",
     location: "",
     title: "Python Programming",
     firm: {
@@ -250,6 +239,25 @@ export const certifications = [
       "https://www.coursera.org/account/accomplishments/certificate/893KLF5Y6NL9",
     description:
       "Acquired fundamental programming concepts in Python, including variables, conditionals, loops, and functions. This course served as a stepping stone to more advanced topics in Python programming.",
+  },
+];
+
+export const publications = [
+  {
+    field: "Generative AI, Reasoning AI, LLMs",
+    location: "LLMs - Gen AI - Reasoning AI",
+    title:
+      "Evaluating AI Reasoning and Prompt Engineering in Automated Test Case Generation: A Comparative Study of GPT-4o, O1 Models, and Human QA",
+    firm: {
+      name: "Computer Science Review",
+      url: "https://www.sciencedirect.com/journal/computer-science-review/about/aims-and-scope",
+      logo: hkust_logo,
+    },
+    date: "Under publication",
+    credentialId: "Paper Code",
+    doc_url: "https://github.com/mdazlaanzubair/8x7b-nexus-test-gen",
+    description:
+      "The growing reliance on AI in Software Quality Assurance (SQA) necessitates a rigorous evaluation of AI models for TC generation. This study investigates whether the advanced reasoning capabilities of Open AI’s O1 series truly differentiate it from non reasoning models (Generative Pre-trained Transformer (GPT) 4o) and human Quality Assurance (QA) engineers. To address this, we assessed the performance of 12 experimental groups, including human testers, eight variants of GPT 4o employing diverse prompt engineering techniques (e.g., chain-of-thought, few-shot, self-consistency), and three variants of the O1 model, in generating TCs for 11 software applications. A total of 3,682 TCs were evaluated using the mixtral-8x7B-32768 model against four criteria: Coverage, Clarity, Edge & Negative Cases (E/NC), and Non-Functional Coverage (NFC). Descriptive statistics demonstrated uniformly high coverage and strong clarity across groups, while the capture of edge, negative, and non-functional scenarios varied considerably. Statistical analyses via Analysis of Variance (ANOVA) (F ≈ 8.09, p ≪ 0.05) and pairwise t-tests revealed significant differences in quality scores, highlighting that both the underlying model architecture and the prompting strategy substantially affect the outcomes. Notably, AI models not only generated a greater number of TCs but also achieved a superior Quality-to-Quantity (QTQ) ratio compared to human engineers, even when provided with minimal contextual information. In conclusion, although reasoning models produce more structured outputs, their marginal performance improvements may not justify the higher computational costs. Enhanced prompt engineering enables non-reasoning models to offer an efficient and effective alternative for TC generation, thereby underscoring the potential for AI integration in optimizing software testing processes. To facilitate replication and further research, an extensive dataset and fully documented codebase are available at https://github.com/mdazlaanzubair/8x7b-nexus-test-gen.",
   },
 ];
 
@@ -290,7 +298,7 @@ export const projects_list = [
     id: 1,
     title: "Narrate AI",
     subTitle: "Image-to-Story Narration System",
-    imgSrc: narratorImg,
+    img: narratorImg,
     isFeatured: true,
     isLocked: false,
     details: {
@@ -328,7 +336,7 @@ export const projects_list = [
     id: 2,
     title: "Query Mind",
     subTitle: "Testing a Pre-Trained QnA Model",
-    imgSrc: queryMindImg,
+    img: queryMindImg,
     isFeatured: true,
     isLocked: false,
     details: {
@@ -370,7 +378,7 @@ export const projects_list = [
     id: 3,
     title: "Web Crawler",
     subTitle: "Web Scraper for Health Information",
-    imgSrc: webCrawlerImg,
+    img: webCrawlerImg,
     isFeatured: true,
     isLocked: false,
     details: {

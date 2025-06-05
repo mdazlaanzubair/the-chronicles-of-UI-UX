@@ -22,7 +22,7 @@ const VersionsMenu = () => {
 
   if (version_links.length > 0) {
     return (
-      <div className="dropdown hidden lg:block">
+      <div className="fixed top-0 left-0 dropdown hidden lg:block">
         <button
           className={`btn btn-ghost btn-sm group relative overflow-hidden border-transparent bg-transparent shadow-none btn-default`}
           tabIndex={1}

@@ -59,10 +59,10 @@ const ReadProjectPage: React.FC = () => {
 
   return (
     <section
-      id="read-page"
+      id="read-project-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
     >
-      <ImageDisplay src={readData.imgSrc} alt={readData.title} />
+      <ImageDisplay src={readData.img} alt={readData.title} />
 
       <div className="grid grid-cols-2 gap-3 w-full h-auto">
         <InfoTags

@@ -22,7 +22,7 @@ export interface Project {
   id: number;
   title: string;
   subTitle: string;
-  imgSrc: string; // Assuming `narratorImg` etc. are string paths to images
+  img: string; // Assuming `narratorImg` etc. are string paths to images
   isFeatured: boolean;
   isLocked: boolean;
   details: Details;

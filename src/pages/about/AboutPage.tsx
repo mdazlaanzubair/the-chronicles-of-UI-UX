@@ -1,18 +1,46 @@
 import about_img5 from "../../assets/other/about-img-5.png";
 import about_img6 from "../../assets/other/about-img-6.png";
 import about_img7 from "../../assets/other/about-img-7.png";
-import AboutBentoGrid from "./components/AboutBentoGrid";
+import FloatingDocs from "../../components/FloatingDocs";
 import AboutTerminal from "./components/AboutTerminal";
+import { ImSteam } from "react-icons/im";
+import { SiCodefresh } from "react-icons/si";
+import { GiBrain } from "react-icons/gi";
+import { useEffect } from "react";
+import { smoothScroller } from "../../utils/pageScrollers";
 
 const AboutPage = () => {
+  const navList = [
+    {
+      title: "Gaming Dreams",
+      sectionId: "become-gamer-section",
+      icon: <ImSteam />,
+    },
+    {
+      title: "Basit's Advice",
+      sectionId: "become-programmer-section",
+      icon: <GiBrain />,
+    },
+    {
+      title: "Spare Time",
+      sectionId: "free-time-section",
+      icon: <SiCodefresh />,
+    },
+  ];
+
+  // hit top on page reload
+  useEffect(() => smoothScroller("about-page"), []);
+
   return (
     <section
       id="about-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
-      <AboutBentoGrid />
       <AboutTerminal />
-      <div className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300">
+      <div
+        id="become-gamer-section"
+        className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300"
+      >
         <div className="absolute z-10 bottom-0 right-0 w-fit flex items-center justify-center gap-2 bg-base-300 rounded-tl-lg pt-1 px-3">
           <small className="text-[10px] font-medium text-base-content">
             Wanted to become pro-gamer
@@ -71,7 +99,10 @@ const AboutPage = () => {
           <span className="text-base-content">pro-gamer</span>.
         </p>
       </div>
-      <div className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300">
+      <div
+        id="become-programmer-section"
+        className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300"
+      >
         <div className="absolute z-10 bottom-0 right-0 w-fit flex items-center justify-center gap-2 bg-base-300 rounded-tl-lg pt-1 px-3">
           <small className="text-[10px] font-medium text-base-content">
             Programming As Professional
@@ -131,7 +162,10 @@ const AboutPage = () => {
           mastering them to craft incredible experiences for the web.
         </p>
       </div>
-      <div className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300">
+      <div
+        id="free-time-section"
+        className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300"
+      >
         <div className="absolute z-10 bottom-0 right-0 w-fit flex items-center justify-center gap-2 bg-base-300 rounded-tl-lg pt-1 px-3">
           <small className="text-[10px] font-medium text-base-content">
             Learning never stops
@@ -188,6 +222,7 @@ const AboutPage = () => {
           , I thrive on friendly competition that keeps my mind sharp and agile.
         </p>
       </div>
+      <FloatingDocs navList={navList} jumpToId="about-page" />
     </section>
   );
 };

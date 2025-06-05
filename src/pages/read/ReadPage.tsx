@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { smoothScroller } from "../../utils/pageScrollers";
 
 const ReadPage = () => {
+
+  // hit top on page reload
+  useEffect(() => smoothScroller("read-page"), []);
+
   return (
     <section
       id="read-page"

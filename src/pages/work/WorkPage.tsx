@@ -2,10 +2,15 @@ import { CgWorkAlt } from "react-icons/cg";
 import SectionHeadBtn from "../../components/SectionHeadBtn";
 import { SiNounproject } from "react-icons/si";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { smoothScroller } from "../../utils/pageScrollers";
 
 const WorkPage = () => {
   const navigate = useNavigate();
   const active_route = window.location.pathname.split("/").pop();
+
+  // hit top on page reload
+  useEffect(() => smoothScroller("work-page"), []);
 
   return (
     <section

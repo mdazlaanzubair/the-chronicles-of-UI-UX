@@ -30,10 +30,9 @@ const HeroSection = () => {
         <span className="text-base-content font-medium">
           establish your online presence
         </span>
-        . I'm a <br />
-        software engineer, specialized in{" "}
+        . I'm a software engineer, specialized in{" "}
         <span className="text-base-content font-medium">
-          building &amp; designing <br /> things for the web
+          building &amp; designing things for the web
         </span>
         .
       </p>
