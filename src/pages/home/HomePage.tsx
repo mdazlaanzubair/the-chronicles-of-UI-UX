@@ -1,7 +1,7 @@
 import HeroSection from "./components/HeroSection";
-import IconSlider from "../../components/IconSlider";
+import { IconSlider } from "../../components/IconSlider";
 import { toolKit } from "../../utils/iconExporter";
-import ProjectGridSlider from "../../components/ProjectGridSlider";
+import { ProjectGridSlider } from "../../components/ProjectGridSlider";
 import ServicesSection from "./components/ServicesSection";
 import { projects_list, case_studies } from "../../utils/constant_export";
 import AboutBentoGrid from "./components/AboutBentoGrid";
@@ -40,15 +40,32 @@ const HomePage = () => {
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
       <HeroSection />
-      <IconSlider icons={toolKit} />
+      {/* <IconSlider
+        icons={toolKit.map((tool) => ({ src: tool.src, title: tool.title }))}
+      /> */}
       <AboutBentoGrid />
       <SectionHeader
         id="case-study-section-head"
         title="Projects and Business Solution"
         mode="dark"
       />
-      <ProjectGridSlider direction="right" projects={projects_list} />
-      <ProjectGridSlider direction="left" projects={case_studies} />
+
+      <ProjectGridSlider
+        direction="right"
+        projects={projects_list.map((project) => ({
+          img: `${project.img}`,
+          title: `${project.title}`,
+          sub_title: `${project.subTitle}`,
+        }))}
+      />
+      <ProjectGridSlider
+        direction="left"
+        projects={case_studies.map((case_study) => ({
+          img: case_study.img,
+          title: case_study.title,
+          sub_title: case_study.sub_title,
+        }))}
+      />
       <ServicesSection />
       <FloatingDocs navList={navList} jumpToId="home-page" />
     </section>

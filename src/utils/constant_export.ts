@@ -285,14 +285,6 @@ export const services_list = [
   },
 ];
 
-export const caseStudyNotFound = {
-  id: 0,
-  title: "Case Study Not Found",
-  subTitle: "Project Management Tool",
-  url: "https://mdazlaanzubair.com/",
-  imgSrc: noImage,
-};
-
 export const projects_list = [
   {
     id: 1,

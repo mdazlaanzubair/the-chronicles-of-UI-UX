@@ -76,10 +76,9 @@ const FloatingDocs = ({
           </div>
         )}
         {navList.map((item, index) => (
-          <div className="tooltip" data-tip={item.title}>
+          <div className="tooltip" data-tip={item.title} key={index}>
             <button
               onClick={() => smoothScroller(item.sectionId)}
-              key={index}
               className="group w-14 h-14 text-xl flex flex-col items-center justify-center cursor-pointer hover:mx-3 hover:text-accent transition-all ease-in-out duration-300"
             >
               <span className="text-xl  group-hover:scale-125 transition-all ease-in-out duration-300">

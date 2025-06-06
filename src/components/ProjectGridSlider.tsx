@@ -2,24 +2,29 @@ import Marquee from "react-fast-marquee";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  projects: any[];
-  direction?: "right" | "left" | "up" | "down";
-  speed?: number;
-  autofill?: boolean;
-  pauseOnHover?: boolean;
+  projects: {
+    title: string | any;
+    sub_title: string | any;
+    img: string | any;
+  }[];
+  direction?: "right" | "left" | "up" | "down" | any;
+  speed?: number | any;
+  autofill?: boolean | any;
+  pauseOnHover?: boolean | any;
 };
 
-const ProjectGridSlider = (props: Props) => {
+export const ProjectGridSlider = (props: Props) => {
   const navigate = useNavigate();
 
   if (props.projects.length > 0) {
     return (
-      <Marquee
-        autoFill={props.autofill ?? true}
-        pauseOnHover={props.pauseOnHover ?? true}
-        direction={props.direction ?? "right"}
-        speed={props.speed ?? 25}
-      >
+      // <Marquee
+      //   autoFill={props.autofill ?? true}
+      //   pauseOnHover={props.pauseOnHover ?? true}
+      //   direction={props.direction ?? "right"}
+      //   speed={props.speed ?? 25}
+      // >
+      <>
         {props.projects?.map(({ img, title, sub_title }, index) => (
           <div
             key={index}
@@ -46,9 +51,8 @@ const ProjectGridSlider = (props: Props) => {
             </button>
           </div>
         ))}
-      </Marquee>
+      </>
+      // </Marquee>
     );
   }
 };
-
-export default ProjectGridSlider;

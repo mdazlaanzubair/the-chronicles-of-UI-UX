@@ -1,4 +1,10 @@
-import React, { createContext, useState, useEffect, type ReactNode, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  type ReactNode,
+  useContext,
+} from "react";
 
 interface DarkModeContextType {
   isDarkMode: boolean;
@@ -6,26 +12,35 @@ interface DarkModeContextType {
 }
 
 // Create context
-const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined);
+const DarkModeContext = createContext<DarkModeContextType | undefined>(
+  undefined
+);
 
 // Create provider
 interface DarkModeProviderProps {
   children: ReactNode;
 }
 
-export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    const stored = localStorage.getItem("darkMode");
-    return stored ? JSON.parse(stored) : true; // default to true if not found
-  });
+export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({
+  children,
+}) => {
+  // const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+  //   const stored = localStorage.getItem("darkMode");
+  //   return stored ? JSON.parse(stored) : true; // default to true if not found
+  // });
+
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
 
   useEffect(() => {
-    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
-    document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+    // localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+    document.documentElement.setAttribute(
+      "data-theme",
+      isDarkMode ? "dark" : "light"
+    );
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(prev => !prev);
+    setIsDarkMode((prev) => !prev);
   };
 
   return (

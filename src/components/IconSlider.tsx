@@ -1,18 +1,21 @@
 import Marquee from "react-fast-marquee";
 
 interface Icon {
-  src: string;
-  title: string;
+  src: string | any;
+  title: string| any;
 }
 
 type Props = {
   icons: Icon[];
 };
 
-const IconSlider = (props: Props) => {
+export const IconSlider = (props: Props) => {
   return (
-    <section id="icon-section" className="flex flex-col w-full bg-base-100 rounded-lg px-3 py-5 border border-base-300">
-      <Marquee
+    <section
+      id="icon-section"
+      className="flex flex-col w-full bg-base-100 rounded-lg px-3 py-5 border border-base-300"
+    >
+      {/* <Marquee
         autoFill
         pauseOnHover
         direction="left"
@@ -21,7 +24,7 @@ const IconSlider = (props: Props) => {
           maskImage:
             "linear-gradient(90deg, transparent, #fff, #fff, #fff, #fff, #fff, #fff, transparent)",
         }}
-      >
+      > */}
         {props.icons?.map((logo, index) => (
           <div
             key={index}
@@ -33,12 +36,14 @@ const IconSlider = (props: Props) => {
               alt={logo?.title + "-logo"}
               title={logo?.title}
             />
-            <span className="grow text-base-content/60 group-hover:text-base-content whitespace-nowrap transition-all ease-in-out duration-300">{logo.title}</span>
+            <span className="grow text-base-content/60 group-hover:text-base-content whitespace-nowrap transition-all ease-in-out duration-300">
+              {logo.title}
+            </span>
           </div>
         ))}
-      </Marquee>
+      {/* </Marquee> */}
     </section>
   );
 };
 
-export default IconSlider;
+// export default IconSlider;
