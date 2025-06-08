@@ -1,5 +1,5 @@
 // THIS FILE HOLD THE DYNAMIC DATA OF THIS WEBSITE
-import noImage from "../assets/backgrounds/card-bg-img.jpg";
+// import noImage from "../assets/backgrounds/card-bg-img.jpg";
 
 // IMAGES FOR WORK PROJECT
 import projectDisplayTaskVare from "../assets/work/taskvare.png";

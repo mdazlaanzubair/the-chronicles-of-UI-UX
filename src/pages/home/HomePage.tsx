@@ -40,9 +40,9 @@ const HomePage = () => {
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
       <HeroSection />
-      {/* <IconSlider
+      <IconSlider
         icons={toolKit.map((tool) => ({ src: tool.src, title: tool.title }))}
-      /> */}
+      />
       <AboutBentoGrid />
       <SectionHeader
         id="case-study-section-head"

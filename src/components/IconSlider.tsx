@@ -15,7 +15,7 @@ export const IconSlider = (props: Props) => {
       id="icon-section"
       className="flex flex-col w-full bg-base-100 rounded-lg px-3 py-5 border border-base-300"
     >
-      {/* <Marquee
+      <Marquee
         autoFill
         pauseOnHover
         direction="left"
@@ -24,7 +24,7 @@ export const IconSlider = (props: Props) => {
           maskImage:
             "linear-gradient(90deg, transparent, #fff, #fff, #fff, #fff, #fff, #fff, transparent)",
         }}
-      > */}
+      >
         {props.icons?.map((logo, index) => (
           <div
             key={index}
@@ -41,7 +41,7 @@ export const IconSlider = (props: Props) => {
             </span>
           </div>
         ))}
-      {/* </Marquee> */}
+      </Marquee>
     </section>
   );
 };
