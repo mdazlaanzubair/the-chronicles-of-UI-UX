@@ -2,11 +2,7 @@ import Marquee from "react-fast-marquee";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  projects: {
-    title: string | any;
-    sub_title: string | any;
-    img: string | any;
-  }[];
+  projects: any[];
   direction?: "right" | "left" | "up" | "down" | any;
   speed?: number | any;
   autofill?: boolean | any;

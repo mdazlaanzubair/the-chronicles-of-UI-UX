@@ -40,9 +40,7 @@ const HomePage = () => {
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
       <HeroSection />
-      <IconSlider
-        icons={toolKit.map((tool) => ({ src: tool.src, title: tool.title }))}
-      />
+      <IconSlider icons={toolKit} />
       <AboutBentoGrid />
       <SectionHeader
         id="case-study-section-head"
@@ -50,22 +48,8 @@ const HomePage = () => {
         mode="dark"
       />
 
-      <ProjectGridSlider
-        direction="right"
-        projects={projects_list.map((project) => ({
-          img: `${project.img}`,
-          title: `${project.title}`,
-          sub_title: `${project.subTitle}`,
-        }))}
-      />
-      <ProjectGridSlider
-        direction="left"
-        projects={case_studies.map((case_study) => ({
-          img: case_study.img,
-          title: case_study.title,
-          sub_title: case_study.sub_title,
-        }))}
-      />
+      <ProjectGridSlider direction="right" projects={projects_list} />
+      <ProjectGridSlider direction="left" projects={case_studies} />
       <ServicesSection />
       <FloatingDocs navList={navList} jumpToId="home-page" />
     </section>
