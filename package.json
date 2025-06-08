@@ -11,8 +11,8 @@
 
     "ssr:dev": "node server",
     "ssr:build": "npm run build:client && npm run build:server",
-    "ssr:build:client": "vite build --outDir dist/client",
-    "ssr:build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
     "ssr:preview": "cross-env NODE_ENV=production node server"
   },
   "dependencies": {
