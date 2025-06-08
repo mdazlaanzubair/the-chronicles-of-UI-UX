@@ -20,7 +20,6 @@ export const ProjectGridSlider = (props: Props) => {
         direction={props.direction ?? "right"}
         speed={props.speed ?? 25}
       >
-        <>
           {props.projects?.map(({ img, title, sub_title }, index) => (
             <div
               key={index}
@@ -47,7 +46,6 @@ export const ProjectGridSlider = (props: Props) => {
               </button>
             </div>
           ))}
-        </>
       </Marquee>
     );
   }
