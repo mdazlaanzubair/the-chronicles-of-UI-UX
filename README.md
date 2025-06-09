@@ -1,54 +1,16 @@
-# React + TypeScript + Vite
+# v4: Personal Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the fourth portfolio I have completed today i.e. `Jun 9, 2025`. It's just a re-designed of my previous portfolio. This iteration focuses on a refined user experience, emphasizing performance, accessibility, and a seamless presentation. 
 
-Currently, two official plugins are available:
+I've aimed for a balance of technical sophistication and intuitive design, creating a portfolio that's both impressive and user-friendly. Let's check it out [**live here**](https://v4.mdazlaanzubair.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## Expanding the ESLint configuration
+This project utilizes a cutting-edge tech stack for a high-performing and maintainable codebase:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **Vite (v6.3.5):** The build tool for fast frontend build powering the next generation of web applications.
+- **React (v19):** JavaScript library for building the UI, known for its component-based architecture and virtual DOM.
+- **Motion (v12.16.0):** A motion library for React, used to create fluid animations and transitions.
+- **React Fast Marquee (v1.6.4):** A library for creating smooth, hardware-accelerated marquee effects.
+- **Daisy UI CSS (v3.3.0):** Tailwind CSS plugin that provides useful component class names to help write less code and build faster.
+- **Tailwind CSS (v3.3.0):** A utility-first CSS framework that allows for rapid UI development and consistent design.
