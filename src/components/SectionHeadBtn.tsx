@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import type { JSX } from "react";
+import { childVariantFadeIn } from "../utils/animationVarients";
 
 type SectionHeadBtnProps = {
   mode?: "light" | "dark"; // Optional, restricted to "light" or "dark"
@@ -13,7 +15,11 @@ type SectionHeadBtnProps = {
 
 const SectionHeadBtn = (props: SectionHeadBtnProps) => {
   return (
-    <button
+    <motion.button
+      variants={childVariantFadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
       type={props.type ?? "button"}
       className={`group relative btn btn-block h-full overflow-hidden py-4 border border-base-300 shadow-none ${
         props.mode === "light"
@@ -46,7 +52,7 @@ const SectionHeadBtn = (props: SectionHeadBtnProps) => {
           {props.icon_2}
         </div>
       )}
-    </button>
+    </motion.button>
   );
 };
 

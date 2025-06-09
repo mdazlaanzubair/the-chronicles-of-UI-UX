@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { projects_list } from "../../../utils/constant_export";
@@ -14,6 +15,10 @@ import {
   ProjectOverview,
 } from "./components";
 import type { Project } from "./components/projects-interface";
+import {
+  childVariantFadeIn,
+  parentVariantFadeIn,
+} from "../../../utils/animationVarients";
 
 const ReadProjectPage: React.FC = () => {
   const { id } = useParams();
@@ -58,8 +63,12 @@ const ReadProjectPage: React.FC = () => {
   };
 
   return (
-    <section
+    <motion.section
       id="read-project-page"
+      variants={parentVariantFadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
     >
       <ImageDisplay src={readData.img} alt={readData.title} />
@@ -96,7 +105,13 @@ const ReadProjectPage: React.FC = () => {
 
       <ProjectOverview project={readData} />
 
-      <div className="grid grid-cols-2 gap-3 w-full h-auto">
+      <motion.div
+      variants={parentVariantFadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+        className="grid grid-cols-2 gap-3 w-full h-auto"
+      >
         <SectionHeadBtn
           mode={prevProjectId ? "dark" : "light"}
           label={prevProjectId ? "Previous" : "Back"}
@@ -118,10 +133,10 @@ const ReadProjectPage: React.FC = () => {
             handleNavigate(nextProjectId, "/work/case-studies")
           }
         />
-      </div>
+      </motion.div>
 
       <ImageDisplay src={readData.details.coverImgSrc} alt={readData.title} />
-    </section>
+    </motion.section>
   );
 };
 

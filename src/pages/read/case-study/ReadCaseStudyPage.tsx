@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { case_studies } from "../../../utils/constant_export";
@@ -18,6 +19,10 @@ import { FaInfo } from "react-icons/fa";
 import { TbBinocularsFilled } from "react-icons/tb";
 import { HiLightBulb, HiMiniPresentationChartLine } from "react-icons/hi2";
 import { BiSolidCommentError } from "react-icons/bi";
+import {
+  childVariantFadeIn,
+  parentVariantFadeIn,
+} from "../../../utils/animationVarients";
 
 const ReadCaseStudyPage = () => {
   const { id } = useParams();
@@ -95,16 +100,23 @@ const ReadCaseStudyPage = () => {
   ];
 
   return (
-    <section
+    <motion.section
       id="read-case-study-page"
+      variants={parentVariantFadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
     >
-      <div className="border-4 border-base-300 rounded-lg overflow-hidden">
+      <motion.div
+        variants={childVariantFadeIn}
+        className="border-4 border-base-300 rounded-lg overflow-hidden"
+      >
         <img
           src={readData.coverImg}
           alt={`${readData.title} Case Study Image: ${readData.sub_title}`}
         />
-      </div>
+      </motion.div>
 
       <HeaderComponent
         title={readData.title}
@@ -143,7 +155,7 @@ const ReadCaseStudyPage = () => {
       </div>
 
       <FloatingDocs navList={navList} />
-    </section>
+    </motion.section>
   );
 };
 

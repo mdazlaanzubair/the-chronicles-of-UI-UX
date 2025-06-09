@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import profile_pic from "../assets/profile.jpeg";
 import { FaPhone } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
@@ -7,6 +8,12 @@ import { FaLinkedin, FaTwitter } from "react-icons/fa6";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import SectionHeader from "./SectionHeader";
+import {
+  childVariantFadeIn,
+  childVariantReveal,
+  parentVariantFadeIn,
+  parentVariantReveal,
+} from "../utils/animationVarients";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -69,12 +76,22 @@ const Footer = () => {
 
   return (
     <>
-      <div className="w-full h-auto grid grid-cols-2 gap-3">
+      <motion.div
+        variants={parentVariantFadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="w-full h-auto grid grid-cols-2 gap-3"
+      >
         {social_links.length &&
           social_links.map(
             (link, index) =>
               link.title !== "Calendly" && (
-                <div className="col-span-1" key={index}>
+                <motion.div
+                  variants={childVariantFadeIn}
+                  className="col-span-1"
+                  key={index}
+                >
                   <SectionHeadBtn
                     mode="light"
                     label={link.title}
@@ -83,10 +100,16 @@ const Footer = () => {
                     icon_2={<MdArrowOutward />}
                     onClickHandler={() => window.open(link.url, "_blank")}
                   />
-                </div>
+                </motion.div>
               )
           )}
-        <div className="col-span-2">
+        <motion.div
+          variants={parentVariantFadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="col-span-2"
+        >
           <SectionHeadBtn
             mode="dark"
             label="Book a call"
@@ -94,32 +117,49 @@ const Footer = () => {
             icon_2={<MdArrowOutward />}
             onClickHandler={() => window.open(social_links[4].url, "_blank")}
           />
-        </div>
-      </div>
-      <section
+        </motion.div>
+      </motion.div>
+      <motion.section
         id="footer-section"
+        variants={parentVariantFadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
         className="relative w-full h-auto flex flex-col justify-center items-center p-5 lg:py-5 lg:px-3 bg-base-content rounded-lg border-4 overflow-hidden border-base-content text-base-200"
       >
         <div className="w-fit flex flex-col items-center justify-center gap-3 mb-7 mx-auto">
-          <div className="avatar shrink">
+          <motion.div variants={childVariantFadeIn} className="avatar shrink">
             <div className="w-16 rounded-full">
               <img src={profile_pic} alt="profile pic" />
             </div>
-          </div>
+          </motion.div>
           <div className="grow text-center">
-            <h1 className="text-[18px] font-normal text-base-200 mb-0">
+            <motion.h1
+              variants={childVariantFadeIn}
+              className="text-[18px] font-normal text-base-200 mb-0"
+            >
               Md. Azlaan Zubair
-            </h1>
-            <h2 className="text-[14px] font-normal text-base-200/60">
+            </motion.h1>
+            <motion.h2
+              variants={childVariantFadeIn}
+              className="text-[14px] font-normal text-base-200/60"
+            >
               Web Engineer
-            </h2>
+            </motion.h2>
           </div>
         </div>
-        <nav className="w-fit flex flex-wrap justify-center items-center gap-0 lg:gap-1">
+        <motion.nav
+          variants={parentVariantReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="w-fit flex flex-wrap justify-center items-center gap-0 lg:gap-1"
+        >
           {footer_navigation.length &&
             footer_navigation.map((menu_item, index) => (
-              <button
+              <motion.button
                 key={index}
+                variants={childVariantReveal}
                 className={`btn text-[12px] w-fit btn-ghost btn-sm group relative overflow-hidden border-transparent bg-transparent shadow-none btn-default text-base-200/60`}
                 onClick={() => navigate(menu_item.url)}
               >
@@ -129,10 +169,10 @@ const Footer = () => {
                 <div className="absolute whitespace-nowrap top-0 left-0 right-0 bottom-0 flex items-center justify-center gap-2 content-center opacity-0 group-hover:opacity-100 translate-y-full group-hover:translate-y-0 transition-all ease-in-out duration-500 z-10">
                   {menu_item.title}
                 </div>
-              </button>
+              </motion.button>
             ))}
-        </nav>
-      </section>
+        </motion.nav>
+      </motion.section>
       <SectionHeader
         mode="light"
         id="copy-right-section"

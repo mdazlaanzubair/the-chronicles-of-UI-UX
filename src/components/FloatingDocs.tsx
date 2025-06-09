@@ -1,9 +1,14 @@
+import { motion } from "framer-motion";
 import { useEffect, useRef, type JSX } from "react";
 import { smoothScroller } from "../utils/pageScrollers";
 import dark_logo from "../assets/logo-dark.svg";
 import light_logo from "../assets/logo-light.svg";
 import { useDarkMode } from "../provider/DarkModeProvider";
 import { useNavigate } from "react-router-dom";
+import {
+  childVariantFadeIn,
+  parentVariantFadeIn,
+} from "../utils/animationVarients";
 
 interface NavItems {
   sectionId: string;
@@ -40,13 +45,18 @@ const FloatingDocs = ({
     }, []);
 
     return (
-      <div
+      <motion.div
         ref={floatingBarRef}
+        variants={parentVariantFadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
         className={`flex flex-row items-center justify-center gap-1 h-fit w-auto lg:max-w-[500px] mx-auto px-px z-50 shadow-2xl
         fixed bottom-2 lg:bottom-3 rounded-lg border-2 border-base-300 bg-base-200/70 backdrop-blur transition-opacity ease-in-out duration-300`}
       >
-        <div
+        <motion.div
           className="tooltip"
+          variants={childVariantFadeIn}
           data-tip={
             !jumpToId || jumpToId.length <= 0 ? "Go Back" : "Jump to Top"
           }
@@ -71,9 +81,14 @@ const FloatingDocs = ({
               />
             </div>
           </button>
-        </div>
+        </motion.div>
         {navList.map((item, index) => (
-          <div className="tooltip" data-tip={item.title} key={index}>
+          <motion.div
+            variants={childVariantFadeIn}
+            className="tooltip"
+            data-tip={item.title}
+            key={index}
+          >
             <button
               onClick={() => smoothScroller(item.sectionId)}
               className="group w-14 h-14 text-xl flex flex-col items-center justify-center cursor-pointer hover:mx-3 hover:text-accent transition-all ease-in-out duration-300"
@@ -82,9 +97,9 @@ const FloatingDocs = ({
                 {item.icon}
               </span>
             </button>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     );
   }
 };

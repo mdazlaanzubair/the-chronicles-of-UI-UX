@@ -1,4 +1,9 @@
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import {
+  childVariantFadeIn,
+  parentVariantFadeIn,
+} from "../utils/animationVarients";
 
 const NavigationMenu = () => {
   const navigate = useNavigate();
@@ -40,16 +45,20 @@ const NavigationMenu = () => {
             Open
           </div>
         </button>
-        <ul
+        <motion.ul
           tabIndex={1}
+          variants={parentVariantFadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           className="menu dropdown-content rounded-b-2xl bg-base-200 z-1 mt-3 w-52 p-2"
         >
           {navigation_links.map((menu_item, index) => (
-            <li key={index}>
+            <motion.li variants={childVariantFadeIn} key={index}>
               <a onClick={() => navigate(menu_item.url)}>{menu_item.title}</a>
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       </div>
     );
   }

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import about_img5 from "../../assets/other/about-img-5.png";
 import about_img6 from "../../assets/other/about-img-6.png";
 import about_img7 from "../../assets/other/about-img-7.png";
@@ -8,6 +9,10 @@ import { SiCodefresh } from "react-icons/si";
 import { GiBrain } from "react-icons/gi";
 import { useEffect } from "react";
 import { smoothScroller } from "../../utils/pageScrollers";
+import {
+  childVariantFadeIn,
+  parentVariantFadeIn,
+} from "../../utils/animationVarients";
 
 const AboutPage = () => {
   const navList = [
@@ -32,28 +37,41 @@ const AboutPage = () => {
   useEffect(() => smoothScroller("app-top"), []);
 
   return (
-    <section
+    <motion.section
       id="about-page"
+      variants={parentVariantFadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
       <AboutTerminal />
-      <div
-        id="become-gamer-section"
-        className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300"
-      >
-        <div className="absolute z-10 bottom-0 right-0 w-fit flex items-center justify-center gap-2 bg-base-300 rounded-tl-lg pt-1 px-3">
-          <small className="text-[10px] font-medium text-base-content">
-            Wanted to become pro-gamer
-          </small>
-        </div>
 
-        <img
-          className="w-full h-full object-center object-cover"
-          src={about_img7}
-          alt="about section image"
-        />
-      </div>
-      <div className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg overflow-hidden">
+      <motion.div
+        id="become-gamer-section"
+        variants={childVariantFadeIn}
+        className={`flex flex-col items-center justify-center gap-3`}
+      >
+        <p className="flex w-full items-center justify-start text-[10px] text-base-content/60 gap-3">
+          <strong className="px-2 py-1 rounded text-base-content bg-base-100 border-2 border-base-300 uppercase font-bold">
+            Caption
+          </strong>
+          <span className="mt-px mb-px font-semibold">
+            Wanted to become pro-gamer
+          </span>
+        </p>
+        <div className="ring-2 ring-base-300 rounded-lg overflow-hidden">
+          <img
+            className="w-full h-full object-center object-cover"
+            src={about_img7}
+            alt="about section image"
+          />
+        </div>
+      </motion.div>
+      <motion.div
+        variants={childVariantFadeIn}
+        className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg overflow-hidden"
+      >
         <h1 className="text-[14px] font-semibold">
           The Dream of becoming a gamer
         </h1>
@@ -98,24 +116,33 @@ const AboutPage = () => {
           strategizing and honing my skills, all with the goal of becoming a{" "}
           <span className="text-base-content">pro-gamer</span>.
         </p>
-      </div>
-      <div
-        id="become-programmer-section"
-        className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300"
-      >
-        <div className="absolute z-10 bottom-0 right-0 w-fit flex items-center justify-center gap-2 bg-base-300 rounded-tl-lg pt-1 px-3">
-          <small className="text-[10px] font-medium text-base-content">
-            Programming As Professional
-          </small>
-        </div>
+      </motion.div>
 
-        <img
-          className="w-full h-full object-center object-cover"
-          src={about_img6}
-          alt="about section image"
-        />
-      </div>
-      <div className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg overflow-hidden">
+      <motion.div
+        id="become-programmer-section"
+        variants={childVariantFadeIn}
+        className={`flex flex-col items-center justify-center gap-3`}
+      >
+        <p className="flex w-full items-center justify-start text-[10px] text-base-content/60 gap-3">
+          <strong className="px-2 py-1 rounded text-base-content bg-base-100 border-2 border-base-300 uppercase font-bold">
+            Caption
+          </strong>
+          <span className="mt-px mb-px font-semibold">
+            Programming As Professional
+          </span>
+        </p>
+        <div className="ring-2 ring-base-300 rounded-lg overflow-hidden">
+          <img
+            className="w-full h-full object-center object-cover"
+            src={about_img6}
+            alt="about section image"
+          />
+        </div>
+      </motion.div>
+      <motion.div
+        variants={childVariantFadeIn}
+        className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg overflow-hidden"
+      >
         <h1 className="text-[14px] font-semibold">
           Journey from gaming to programming
         </h1>
@@ -161,24 +188,33 @@ const AboutPage = () => {
           There, I immersed myself in learning various web development tools,
           mastering them to craft incredible experiences for the web.
         </p>
-      </div>
-      <div
-        id="free-time-section"
-        className="group relative w-full h-auto flex flex-col justify-between bg-base-100 rounded-lg border-4 overflow-hidden border-base-300"
-      >
-        <div className="absolute z-10 bottom-0 right-0 w-fit flex items-center justify-center gap-2 bg-base-300 rounded-tl-lg pt-1 px-3">
-          <small className="text-[10px] font-medium text-base-content">
-            Learning never stops
-          </small>
-        </div>
+      </motion.div>
 
-        <img
-          className="w-full h-full object-center object-cover"
-          src={about_img5}
-          alt="about section image"
-        />
-      </div>
-      <div className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg overflow-hidden">
+      <motion.div
+        id="free-time-section"
+        variants={childVariantFadeIn}
+        className={`flex flex-col items-center justify-center gap-3`}
+      >
+        <p className="flex w-full items-center justify-start text-[10px] text-base-content/60 gap-3">
+          <strong className="px-2 py-1 rounded text-base-content bg-base-100 border-2 border-base-300 uppercase font-bold">
+            Caption
+          </strong>
+          <span className="mt-px mb-px font-semibold">
+            Learning never stops
+          </span>
+        </p>
+        <div className="ring-2 ring-base-300 rounded-lg overflow-hidden">
+          <img
+            className="w-full h-full object-center object-cover"
+            src={about_img5}
+            alt="about section image"
+          />
+        </div>
+      </motion.div>
+      <motion.div
+        variants={childVariantFadeIn}
+        className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg overflow-hidden"
+      >
         <h1 className="text-[14px] font-semibold">
           How I spent most of my time
         </h1>
@@ -221,9 +257,10 @@ const AboutPage = () => {
           </a>
           , I thrive on friendly competition that keeps my mind sharp and agile.
         </p>
-      </div>
+      </motion.div>
+
       <FloatingDocs navList={navList} />
-    </section>
+    </motion.section>
   );
 };
 

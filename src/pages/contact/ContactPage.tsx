@@ -1,8 +1,13 @@
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { smoothScroller } from "../../utils/pageScrollers";
 import { FaPaperPlane } from "react-icons/fa";
 import { IoMdMailUnread } from "react-icons/io";
 import { BiSolidError } from "react-icons/bi";
+import {
+  childVariantFadeIn,
+  parentVariantFadeIn,
+} from "../../utils/animationVarients";
 
 interface FormData {
   name: string;
@@ -98,11 +103,18 @@ const ContactPage = () => {
   useEffect(() => smoothScroller("app-top"), []);
 
   return (
-    <section
+    <motion.section
       id="contact-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
-      <form onSubmit={handleSubmit} className="w-full grid grid-cols-2 gap-3">
+      <motion.form
+        variants={parentVariantFadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        onSubmit={handleSubmit}
+        className="w-full grid grid-cols-2 gap-3"
+      >
         {error && (
           <div role="alert" className="alert alert-error col-span-2 rounded-md">
             <BiSolidError />
@@ -124,7 +136,10 @@ const ContactPage = () => {
           </div>
         )}
 
-        <div className="flex flex-col gap-1">
+        <motion.div
+          variants={childVariantFadeIn}
+          className="flex flex-col gap-1"
+        >
           <label htmlFor="name" className="text-[13px] w-full">
             Full Name <strong className="text-red-500">*</strong>
           </label>
@@ -137,9 +152,12 @@ const ContactPage = () => {
             value={formData.name}
             onChange={handleChange}
           />
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-1">
+        <motion.div
+          variants={childVariantFadeIn}
+          className="flex flex-col gap-1"
+        >
           <label className="text-[13px] w-full">Message via</label>
           <div className="flex items-center justify-evenly gap-3 text-[13px] bg-base-100 border border-base-300 px-3 py-2 rounded-md">
             <label htmlFor="email-medium">
@@ -167,11 +185,14 @@ const ContactPage = () => {
               />
             </label>
           </div>
-        </div>
+        </motion.div>
 
         {/* Dynamically render subject only for email */}
         {formData.medium === "email" && (
-          <div className="flex flex-col gap-1 col-span-2">
+          <motion.div
+            variants={childVariantFadeIn}
+            className="flex flex-col gap-1 col-span-2"
+          >
             <label htmlFor="subject" className="text-[13px] w-full">
               Subject <strong className="text-red-500">*</strong>
             </label>
@@ -184,10 +205,13 @@ const ContactPage = () => {
               value={formData.subject}
               onChange={handleChange}
             />
-          </div>
+          </motion.div>
         )}
 
-        <div className="flex flex-col gap-1 col-span-2">
+        <motion.div
+          variants={childVariantFadeIn}
+          className="flex flex-col gap-1 col-span-2"
+        >
           <label htmlFor="message" className="text-[13px] w-full">
             Message <strong className="text-red-500">*</strong>
           </label>
@@ -200,9 +224,12 @@ const ContactPage = () => {
             value={formData.message}
             onChange={handleChange}
           />
-        </div>
+        </motion.div>
 
-        <div className="col-span-2 flex justify-center">
+        <motion.div
+          variants={childVariantFadeIn}
+          className="col-span-2 flex justify-center"
+        >
           <button
             type="submit"
             className="btn btn-neutral btn-block rounded-md text-[14px] group relative overflow-hidden"
@@ -214,9 +241,9 @@ const ContactPage = () => {
               Message <IoMdMailUnread />
             </div>
           </button>
-        </div>
-      </form>
-    </section>
+        </motion.div>
+      </motion.form>
+    </motion.section>
   );
 };
 

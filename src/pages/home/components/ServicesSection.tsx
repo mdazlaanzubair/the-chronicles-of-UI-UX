@@ -1,8 +1,13 @@
+import { motion } from "framer-motion";
 import { CgDesignmodo } from "react-icons/cg";
 import { services_list } from "../../../utils/constant_export";
 import SectionHeader from "../../../components/SectionHeader";
 import { IoCodeWorking } from "react-icons/io5";
 import { SiConsul, SiGoogledataproc } from "react-icons/si";
+import {
+  childVariantReveal,
+  parentVariantReveal,
+} from "../../../utils/animationVarients";
 
 const ServicesSection = () => {
   return (
@@ -12,13 +17,18 @@ const ServicesSection = () => {
         title="Capabilities"
         mode="dark"
       />
-      <section
+      <motion.section
         id="services-section-body"
+        variants={parentVariantReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
         className="relative w-full h-auto grid grid-cols-2 gap-3 cursor-text"
       >
         {services_list.map((service) => (
-          <div
+          <motion.div
             key={service.id}
+            variants={childVariantReveal}
             className={`group relative col-span-1 w-full h-auto flex flex-col items-center justify-center py-5 px-3 
             bg-base-100 rounded-lg border border-base-300 overflow-hidden
             `}
@@ -40,9 +50,9 @@ const ServicesSection = () => {
             <h3 className="text-[12px] font-extralight text-base-content/50 text-center">
               {service.desc}
             </h3>
-          </div>
+          </motion.div>
         ))}
-      </section>
+      </motion.section>
     </>
   );
 };
