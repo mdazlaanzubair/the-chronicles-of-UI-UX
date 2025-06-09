@@ -81,7 +81,7 @@ const CredentialsPage = () => {
           </ul>
         </div>
       ))}
-      <FloatingDocs navList={navList} jumpToId="credentials-page" />
+      <FloatingDocs navList={navList} />
     </section>
   );
 };

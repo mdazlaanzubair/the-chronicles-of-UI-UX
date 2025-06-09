@@ -12,6 +12,7 @@ import {
   ProjectsPage,
   ReadProjectPage,
   ContactPage,
+  PageNotFound,
 } from "../pages";
 
 export const app_router = createBrowserRouter([
@@ -74,6 +75,10 @@ export const app_router = createBrowserRouter([
       {
         path: "contact",
         element: <ContactPage />,
+      },
+      {
+        path: "*",
+        element: <PageNotFound />,
       },
     ],
   },

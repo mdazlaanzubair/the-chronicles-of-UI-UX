@@ -14,7 +14,7 @@ import {
   SolutionsComponent,
 } from "./components";
 import FloatingDocs from "../../../components/FloatingDocs";
-import {  FaInfo } from "react-icons/fa";
+import { FaInfo } from "react-icons/fa";
 import { TbBinocularsFilled } from "react-icons/tb";
 import { HiLightBulb, HiMiniPresentationChartLine } from "react-icons/hi2";
 import { BiSolidCommentError } from "react-icons/bi";
@@ -99,6 +99,13 @@ const ReadCaseStudyPage = () => {
       id="read-case-study-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-start gap-3"
     >
+      <div className="border-4 border-base-300 rounded-lg overflow-hidden">
+        <img
+          src={readData.coverImg}
+          alt={`${readData.title} Case Study Image: ${readData.sub_title}`}
+        />
+      </div>
+
       <HeaderComponent
         title={readData.title}
         sub_title={readData.sub_title}
@@ -135,13 +142,7 @@ const ReadCaseStudyPage = () => {
         />
       </div>
 
-      <div className="border-4 border-base-300 rounded-lg overflow-hidden">
-        <img
-          src={readData.coverImg}
-          alt={`${readData.title} Case Study Image: ${readData.sub_title}`}
-        />
-      </div>
-      <FloatingDocs navList={navList} jumpToId="read-case-study-page" />
+      <FloatingDocs navList={navList} />
     </section>
   );
 };

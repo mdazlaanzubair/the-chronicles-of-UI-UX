@@ -222,7 +222,7 @@ const AboutPage = () => {
           , I thrive on friendly competition that keeps my mind sharp and agile.
         </p>
       </div>
-      <FloatingDocs navList={navList} jumpToId="about-page" />
+      <FloatingDocs navList={navList} />
     </section>
   );
 };

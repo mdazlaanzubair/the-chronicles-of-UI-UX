@@ -1,9 +1,7 @@
 // THIS FILE HOLD THE DYNAMIC DATA OF THIS WEBSITE
-// import noImage from "../assets/backgrounds/card-bg-img.jpg";
 
 // IMAGES FOR WORK PROJECT
 import projectDisplayTaskVare from "../assets/work/taskvare.png";
-// import taskVareImg from "../assets/work/taskvare-img.jpg";
 import taskVareCoverImg from "../assets/work/taskvare-cover-img.jpg";
 import taskvare01 from "../assets/work/taskvare-01.png";
 import taskvare02 from "../assets/work/taskvare-02.png";
@@ -11,7 +9,6 @@ import taskvare03 from "../assets/work/taskvare-03.png";
 import taskvare04 from "../assets/work/taskvare-04.png";
 
 import projectDisplayTalentVare from "../assets/work/talentvare.png";
-// import talentVareImg from "../assets/work/talentvare-img.jpg";
 import talentVareCoverImg from "../assets/work/talentvare-cover-img.jpg";
 import talentvare01 from "../assets/work/talentvare-01.png";
 import talentvare02 from "../assets/work/talentvare-02.png";
@@ -19,7 +16,6 @@ import talentvare03 from "../assets/work/talentvare-03.png";
 import talentvare04 from "../assets/work/talentvare-04.png";
 
 import projectDisplayTravelInsurance from "../assets/work/travel_insurance.png";
-// import insureMyTripImg from "../assets/work/insure-my-trip-img.jpg";
 import insureMyTripCoverImg from "../assets/work/insure-my-trip-cover-img.jpg";
 import insureMyTrip01 from "../assets/work/insure-my-trip-01.png";
 import insureMyTrip02 from "../assets/work/insure-my-trip-02.png";
@@ -27,15 +23,13 @@ import insureMyTrip03 from "../assets/work/insure-my-trip-03.png";
 import insureMyTrip04 from "../assets/work/insure-my-trip-04.png";
 
 import projectDisplayLoade from "../assets/work/loade.png";
-// import loadeImg from "../assets/work/loade-img.jpg";
-import loadeCoverImg from "../assets/work/loade-cover-img.jpg";
+import loadeCoverImg from "../assets/work/loade-img.jpg";
 import loade01 from "../assets/work/loade-01.png";
 import loade02 from "../assets/work/loade-02.png";
 import loade03 from "../assets/work/loade-03.png";
 import loade04 from "../assets/work/loade-04.png";
 
 import projectDisplayHealthInsurance from "../assets/work/health_insurance.png";
-// import insureMyHealthImg from "../assets/work/insure-my-health-img.jpg";
 import insureMyHealthCoverImg from "../assets/work/insure-my-health-cover-img.jpg";
 import insureMyHealth01 from "../assets/work/insure-my-health-01.png";
 import insureMyHealth02 from "../assets/work/insure-my-health-02.png";

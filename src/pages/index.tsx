@@ -8,6 +8,7 @@ import CaseStudiesPage from "./work/case-study/CaseStudiesPage";
 import ReadCaseStudyPage from "./read/case-study/ReadCaseStudyPage";
 import ProjectsPage from "./work/project/ProjectsPage";
 import ReadProjectPage from "./read/project/ReadProjectPage";
+import PageNotFound from "./error-404/PageNotFound";
 
 export {
   HomePage,
@@ -20,4 +21,5 @@ export {
   ProjectsPage,
   ReadProjectPage,
   ContactPage,
+  PageNotFound,
 };
