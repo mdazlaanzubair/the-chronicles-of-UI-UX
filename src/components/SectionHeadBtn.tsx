@@ -3,6 +3,7 @@ import type { JSX } from "react";
 type SectionHeadBtnProps = {
   mode?: "light" | "dark"; // Optional, restricted to "light" or "dark"
   label: string;
+  type?: "button" | "submit" | "reset" | undefined;
   sub_label?: string;
   classNames?: string;
   icon_1: JSX.Element;
@@ -13,6 +14,7 @@ type SectionHeadBtnProps = {
 const SectionHeadBtn = (props: SectionHeadBtnProps) => {
   return (
     <button
+      type={props.type ?? "button"}
       className={`group relative btn btn-block h-full overflow-hidden py-4 border border-base-300 shadow-none ${
         props.mode === "light"
           ? "bg-base-100 text-base-content"

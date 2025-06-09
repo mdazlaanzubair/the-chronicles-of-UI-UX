@@ -1,15 +1,18 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import App from "../App";
-import HomePage from "../pages/home/HomePage";
-import AboutPage from "../pages/about/AboutPage";
-import CredentialsPage from "../pages/credentials/CredentialsPage";
-import WorkPage from "../pages/work/WorkPage";
-import ReadPage from "../pages/read/ReadPage";
-import ReadCaseStudyPage from "../pages/read/case-study/ReadCaseStudyPage";
-import ReadProjectPage from "../pages/read/project/ReadProjectPage";
-import CaseStudiesPage from "../pages/work/case-study/CaseStudiesPage";
-import ProjectsPage from "../pages/work/project/ProjectsPage";
+import {
+  HomePage,
+  AboutPage,
+  CredentialsPage,
+  ReadPage,
+  WorkPage,
+  CaseStudiesPage,
+  ReadCaseStudyPage,
+  ProjectsPage,
+  ReadProjectPage,
+  ContactPage,
+} from "../pages";
 
 export const app_router = createBrowserRouter([
   {
@@ -70,7 +73,7 @@ export const app_router = createBrowserRouter([
       },
       {
         path: "contact",
-        element: <h1>Contact Me</h1>,
+        element: <ContactPage />,
       },
     ],
   },
