@@ -1,7 +1,5 @@
-import { motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
 import { useNavigate } from "react-router-dom";
-import { childVariantFadeIn } from "../utils/animationVarients";
 
 type Props = {
   projects: any[];
