@@ -13,7 +13,6 @@ const CredentialCardModal = (props: ModalCredentialsProps) => {
       onClick={() => props.setShowModal(false)}
     >
       <div
-        key={props.key}
         className="group relative w-full max-w-[600px] flex flex-wrap items-center justify-center gap-5 bg-base-100 rounded-xl border border-base-300 p-5 overflow-hidden transition-all ease-in-out duration-300"
         onClick={(e) => e.stopPropagation()}
       >

@@ -15,10 +15,7 @@ import {
   ProjectOverview,
 } from "./components";
 import type { Project } from "./components/projects-interface";
-import {
-  childVariantFadeIn,
-  parentVariantFadeIn,
-} from "../../../utils/animationVarients";
+import { parentVariantFadeIn } from "../../../utils/animationVarients";
 
 const ReadProjectPage: React.FC = () => {
   const { id } = useParams();
@@ -106,10 +103,10 @@ const ReadProjectPage: React.FC = () => {
       <ProjectOverview project={readData} />
 
       <motion.div
-      variants={parentVariantFadeIn}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
+        variants={parentVariantFadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
         className="grid grid-cols-2 gap-3 w-full h-auto"
       >
         <SectionHeadBtn
