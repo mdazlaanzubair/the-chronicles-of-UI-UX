@@ -4,10 +4,12 @@ import { Outlet } from "react-router-dom";
 import VersionsMenu from "./components/VersionsMenu";
 import { useEffect, useRef, useState } from "react";
 import { DarkModeProvider } from "./provider/DarkModeProvider";
+import LoadingTerminal from "./pages/about/components/LoadingTerminal";
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null); // ✅ ref for the app container
   const [showFloatBar, setShowFloatBar] = useState<boolean>(false);
+  const [showLoader, setShowLoader] = useState<boolean>(true);
 
   useEffect(() => {
     const appElement = appRef.current;
@@ -23,15 +25,21 @@ function App() {
       appElement.addEventListener("scroll", handleScroll);
     }
 
+    // set show loader to true and reset after 3 sec
+    setShowLoader(true);
+    const timer = setTimeout(() => setShowLoader(false), 5000);
+
     return () => {
       if (appElement) {
         appElement.removeEventListener("scroll", handleScroll);
       }
+      clearTimeout(timer);
     };
   }, []);
 
   return (
     <DarkModeProvider>
+      {showLoader && <LoadingTerminal />}
       <div
         id="app-top"
         ref={appRef}

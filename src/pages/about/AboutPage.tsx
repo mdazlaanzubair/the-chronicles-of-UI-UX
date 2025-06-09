@@ -3,7 +3,6 @@ import about_img5 from "../../assets/other/about-img-5.png";
 import about_img6 from "../../assets/other/about-img-6.png";
 import about_img7 from "../../assets/other/about-img-7.png";
 import FloatingDocs from "../../components/FloatingDocs";
-import AboutTerminal from "./components/AboutTerminal";
 import { ImSteam } from "react-icons/im";
 import { SiCodefresh } from "react-icons/si";
 import { GiBrain } from "react-icons/gi";
@@ -53,7 +52,6 @@ const AboutPage = () => {
         viewport={{ once: true }}
         className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
       >
-        <AboutTerminal />
 
         <motion.div
           id="become-gamer-section"
