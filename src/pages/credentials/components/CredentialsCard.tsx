@@ -8,7 +8,6 @@ const CredentialCard = (props: CredentialsProps) => {
   return (
     <>
       <div
-        key={props.key}
         id="credential-card"
         className="group w-full relative flex items-center justify-between gap-5 bg-base-100/50 rounded-xl border border-base-300 p-3 overflow-hidden transition-all ease-in-out duration-300 cursor-pointer"
         onClick={() => setShowModal(true)}
@@ -50,7 +49,6 @@ const CredentialCard = (props: CredentialsProps) => {
         </div>
       </div>
       <CredentialCardModal
-        key={props.key}
         showModal={showModal}
         setShowModal={setShowModal}
         firm={props.firm}

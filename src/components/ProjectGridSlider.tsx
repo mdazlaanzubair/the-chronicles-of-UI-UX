@@ -23,12 +23,8 @@ export const ProjectGridSlider = (props: Props) => {
         speed={props.speed ?? 25}
       >
         {props.projects?.map(({ img, title, sub_title }, index) => (
-          <motion.div
+          <div
             key={index}
-            variants={childVariantFadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
             className="group relative flex flex-col items-center justify-center mx-[6px] w-fit h-fit gap-3 overflow-hidden cursor-pointer"
             onClick={() => navigate("/work")}
             title={`${title} Case Study`}
@@ -50,7 +46,7 @@ export const ProjectGridSlider = (props: Props) => {
             >
               View All
             </button>
-          </motion.div>
+          </div>
         ))}
       </Marquee>
     );

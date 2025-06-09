@@ -6,6 +6,7 @@ import { IoMdMailUnread } from "react-icons/io";
 import { BiSolidError } from "react-icons/bi";
 import {
   childVariantFadeIn,
+  pageTransitionVariants,
   parentVariantFadeIn,
 } from "../../utils/animationVarients";
 
@@ -105,6 +106,10 @@ const ContactPage = () => {
   return (
     <motion.section
       id="contact-page"
+      variants={pageTransitionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
       <motion.form

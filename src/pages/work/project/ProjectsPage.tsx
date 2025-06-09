@@ -44,11 +44,11 @@ const ProjectsPage = () => {
         {projects_list.length &&
           projects_list.map(({ title, img, id }, index) => (
             <motion.div
+              key={index}
               variants={childVariantFadeIn}
               className="flex flex-col items-center justify-center gap-3 w-full h-auto"
             >
               <ProjectDisplayCard
-                key={index}
                 id={id}
                 imgSrc={img}
                 title={title}

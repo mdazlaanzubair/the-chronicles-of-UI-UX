@@ -8,4 +8,3 @@ export const smoothScroller = (elementId: string) => {
     });
   }
 };
-

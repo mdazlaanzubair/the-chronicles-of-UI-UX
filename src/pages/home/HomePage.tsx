@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import HeroSection from "./components/HeroSection";
 import { IconSlider } from "../../components/IconSlider";
 import { toolKit } from "../../utils/iconExporter";
@@ -11,6 +12,7 @@ import { MdWorkspacesFilled } from "react-icons/md";
 import SectionHeader from "../../components/SectionHeader";
 import { useEffect } from "react";
 import { smoothScroller } from "../../utils/pageScrollers";
+import { pageTransitionVariants } from "../../utils/animationVarients";
 
 const HomePage = () => {
   const navList = [
@@ -35,24 +37,28 @@ const HomePage = () => {
   useEffect(() => smoothScroller("app-top"), []);
 
   return (
-    <section
+    <motion.section
       id="home-page"
+      variants={pageTransitionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
-        <HeroSection />
-        <IconSlider icons={toolKit} />
-        <AboutBentoGrid />
-        <SectionHeader
-          id="case-study-section-head"
-          title="Projects and Business Solution"
-          mode="dark"
-        />
+      <HeroSection />
+      <IconSlider icons={toolKit} />
+      <AboutBentoGrid />
+      <SectionHeader
+        id="case-study-section-head"
+        title="Projects and Business Solution"
+        mode="dark"
+      />
 
-        <ProjectGridSlider direction="right" projects={projects_list} />
-        <ProjectGridSlider direction="left" projects={case_studies} />
-        <ServicesSection />
-        <FloatingDocs navList={navList} jumpToId="home-page" />
-    </section>
+      <ProjectGridSlider direction="right" projects={projects_list} />
+      <ProjectGridSlider direction="left" projects={case_studies} />
+      <ServicesSection />
+      <FloatingDocs navList={navList} jumpToId="home-page" />
+    </motion.section>
   );
 };
 

@@ -9,12 +9,11 @@ type Props = {
   index?: number;
 };
 
-const ProjectDisplayCard = ({ title, imgSrc, id, type, index }: Props) => {
+const ProjectDisplayCard = ({ title, imgSrc, id, type }: Props) => {
   const navigate = useNavigate();
 
   return (
     <div
-      key={index}
       className="group relative flex flex-col items-center justify-center w-full h-[356px] max-h-[356px] gap-3 overflow-hidden cursor-pointer"
       title={`${title} Case Study`}
     >

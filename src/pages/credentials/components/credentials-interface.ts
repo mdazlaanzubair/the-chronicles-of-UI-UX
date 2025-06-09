@@ -5,7 +5,6 @@ export type firmType = {
 };
 
 export type CredentialsProps = {
-  key: number | string;
   date: string;
   title: string;
   firm: firmType;
