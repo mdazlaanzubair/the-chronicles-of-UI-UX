@@ -32,26 +32,26 @@ const HomePage = () => {
   ];
 
   // hit top on page reload
-  useEffect(() => smoothScroller("home-page"), []);
+  useEffect(() => smoothScroller("app-top"), []);
 
   return (
     <section
       id="home-page"
       className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
     >
-      <HeroSection />
-      <IconSlider icons={toolKit} />
-      <AboutBentoGrid />
-      <SectionHeader
-        id="case-study-section-head"
-        title="Projects and Business Solution"
-        mode="dark"
-      />
+        <HeroSection />
+        <IconSlider icons={toolKit} />
+        <AboutBentoGrid />
+        <SectionHeader
+          id="case-study-section-head"
+          title="Projects and Business Solution"
+          mode="dark"
+        />
 
-      <ProjectGridSlider direction="right" projects={projects_list} />
-      <ProjectGridSlider direction="left" projects={case_studies} />
-      <ServicesSection />
-      <FloatingDocs navList={navList} jumpToId="home-page" />
+        <ProjectGridSlider direction="right" projects={projects_list} />
+        <ProjectGridSlider direction="left" projects={case_studies} />
+        <ServicesSection />
+        <FloatingDocs navList={navList} jumpToId="home-page" />
     </section>
   );
 };

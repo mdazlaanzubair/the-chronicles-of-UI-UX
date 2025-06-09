@@ -29,7 +29,7 @@ const AboutPage = () => {
   ];
 
   // hit top on page reload
-  useEffect(() => smoothScroller("about-page"), []);
+  useEffect(() => smoothScroller("app-top"), []);
 
   return (
     <section

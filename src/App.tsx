@@ -33,6 +33,7 @@ function App() {
   return (
     <DarkModeProvider>
       <div
+        id="app-top"
         ref={appRef}
         className="m-0 p-0 w-full h-full overflow-auto animated-background bg-gradient-to-t from-base-100 to-base-300 scroll-smooth"
         style={{

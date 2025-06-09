@@ -94,6 +94,9 @@ const ContactPage = () => {
     });
   };
 
+  // hit top on page reload
+  useEffect(() => smoothScroller("app-top"), []);
+
   return (
     <section
       id="contact-page"

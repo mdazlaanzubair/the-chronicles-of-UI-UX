@@ -10,7 +10,7 @@ const WorkPage = () => {
   const active_route = window.location.pathname.split("/").pop();
 
   // hit top on page reload
-  useEffect(() => smoothScroller("work-page"), []);
+  useEffect(() => smoothScroller("app-top"), []);
 
   return (
     <section

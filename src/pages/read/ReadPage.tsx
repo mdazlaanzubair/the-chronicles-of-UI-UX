@@ -5,7 +5,7 @@ import { smoothScroller } from "../../utils/pageScrollers";
 const ReadPage = () => {
 
   // hit top on page reload
-  useEffect(() => smoothScroller("read-page"), []);
+  useEffect(() => smoothScroller("app-top"), []);
 
   return (
     <section

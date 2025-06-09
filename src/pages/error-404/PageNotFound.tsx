@@ -7,7 +7,7 @@ const PageNotFound = () => {
   const navigate = useNavigate();
 
   // hit top on page reload
-  useEffect(() => smoothScroller("page-not-found"), []);
+  useEffect(() => smoothScroller("app-top"), []);
 
   return (
     <section

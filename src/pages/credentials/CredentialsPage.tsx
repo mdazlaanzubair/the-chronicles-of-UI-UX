@@ -47,7 +47,7 @@ const CredentialsPage = () => {
   ];
 
   // hit top on page reload
-  useEffect(() => smoothScroller("credentials-page"), []);
+  useEffect(() => smoothScroller("app-top"), []);
 
   return (
     <section
