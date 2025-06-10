@@ -13,6 +13,7 @@ import {
   pageTransitionVariants,
   parentVariantFadeIn,
 } from "../../utils/animationVarients";
+import { ImagePreview } from "./components";
 
 const AboutPage = () => {
   const navList = [
@@ -52,28 +53,11 @@ const AboutPage = () => {
         viewport={{ once: true }}
         className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
       >
-
-        <motion.div
+        <ImagePreview
           id="become-gamer-section"
-          variants={childVariantFadeIn}
-          className={`flex flex-col items-center justify-center gap-3`}
-        >
-          <p className="flex w-full items-center justify-start text-[10px] text-base-content/60 gap-3">
-            <strong className="px-2 py-1 rounded text-base-content bg-base-100 border-2 border-base-300 uppercase font-bold">
-              Caption
-            </strong>
-            <span className="mt-px mb-px font-semibold">
-              Wanted to become pro-gamer
-            </span>
-          </p>
-          <div className="ring-2 ring-base-300 rounded-lg overflow-hidden">
-            <img
-              className="w-full h-full object-center object-cover"
-              src={about_img7}
-              alt="about section image"
-            />
-          </div>
-        </motion.div>
+          caption="Wanted to become pro-gamer"
+          image={about_img7}
+        />
         <motion.div
           variants={childVariantFadeIn}
           className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg overflow-hidden"
@@ -124,27 +108,11 @@ const AboutPage = () => {
           </p>
         </motion.div>
 
-        <motion.div
+        <ImagePreview
           id="become-programmer-section"
-          variants={childVariantFadeIn}
-          className={`flex flex-col items-center justify-center gap-3`}
-        >
-          <p className="flex w-full items-center justify-start text-[10px] text-base-content/60 gap-3">
-            <strong className="px-2 py-1 rounded text-base-content bg-base-100 border-2 border-base-300 uppercase font-bold">
-              Caption
-            </strong>
-            <span className="mt-px mb-px font-semibold">
-              Programming As Professional
-            </span>
-          </p>
-          <div className="ring-2 ring-base-300 rounded-lg overflow-hidden">
-            <img
-              className="w-full h-full object-center object-cover"
-              src={about_img6}
-              alt="about section image"
-            />
-          </div>
-        </motion.div>
+          caption="Programming As Professional"
+          image={about_img6}
+        />
         <motion.div
           variants={childVariantFadeIn}
           className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg overflow-hidden"
@@ -197,27 +165,11 @@ const AboutPage = () => {
           </p>
         </motion.div>
 
-        <motion.div
+        <ImagePreview
           id="free-time-section"
-          variants={childVariantFadeIn}
-          className={`flex flex-col items-center justify-center gap-3`}
-        >
-          <p className="flex w-full items-center justify-start text-[10px] text-base-content/60 gap-3">
-            <strong className="px-2 py-1 rounded text-base-content bg-base-100 border-2 border-base-300 uppercase font-bold">
-              Caption
-            </strong>
-            <span className="mt-px mb-px font-semibold">
-              Learning never stops
-            </span>
-          </p>
-          <div className="ring-2 ring-base-300 rounded-lg overflow-hidden">
-            <img
-              className="w-full h-full object-center object-cover"
-              src={about_img5}
-              alt="about section image"
-            />
-          </div>
-        </motion.div>
+          caption="Learning never stops"
+          image={about_img5}
+        />
         <motion.div
           variants={childVariantFadeIn}
           className="relative w-full h-auto flex flex-col justify-between p-5 bg-base-100 rounded-lg overflow-hidden"
