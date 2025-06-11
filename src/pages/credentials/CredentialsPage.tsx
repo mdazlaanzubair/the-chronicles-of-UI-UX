@@ -71,7 +71,7 @@ const CredentialsPage = () => {
         viewport={{ once: true }}
         className="w-full h-full m-0 p-0 flex flex-col items-center justify-center gap-3"
       >
-        {Object.entries(credentials).map(([sectionKey, items], index) => (
+        {Object.entries(credentials).map(([sectionKey, items]) => (
           <motion.div
             variants={childVariantFadeIn}
             className="w-full h-auto"
