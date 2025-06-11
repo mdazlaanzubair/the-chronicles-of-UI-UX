@@ -16,6 +16,7 @@ import {
 } from "./components";
 import type { Project } from "./components/projects-interface";
 import { parentVariantFadeIn } from "../../../utils/animationVarients";
+import { smoothScroller } from "../../../utils/pageScrollers";
 
 const ReadProjectPage: React.FC = () => {
   const { id } = useParams();
@@ -40,6 +41,9 @@ const ReadProjectPage: React.FC = () => {
     } else {
       setReadData(matchedProject);
     }
+
+    // hit top on page reload
+    smoothScroller("app-top");
   }, [parsedId, navigate]);
 
   const { prevProjectId, nextProjectId } = useMemo(() => {

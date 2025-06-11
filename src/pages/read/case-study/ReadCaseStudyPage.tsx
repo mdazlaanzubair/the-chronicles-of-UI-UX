@@ -23,6 +23,7 @@ import {
   childVariantFadeIn,
   parentVariantFadeIn,
 } from "../../../utils/animationVarients";
+import { smoothScroller } from "../../../utils/pageScrollers";
 
 const ReadCaseStudyPage = () => {
   const { id } = useParams();
@@ -47,6 +48,9 @@ const ReadCaseStudyPage = () => {
     } else {
       setReadData(matchedProject);
     }
+
+    // hit top on page reload
+    smoothScroller("app-top");
   }, [parsedId, navigate]);
 
   const { prevCaseStudyId, nextCaseStudyId } = useMemo(() => {

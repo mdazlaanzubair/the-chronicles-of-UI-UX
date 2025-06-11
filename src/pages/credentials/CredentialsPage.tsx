@@ -78,7 +78,7 @@ const CredentialsPage = () => {
             key={`${sectionKey}`}
           >
             <SectionHeader
-              id={`${sectionKey}-section-${index}`}
+              id={`${sectionKey}-section`}
               title={`${sectionKey}`}
               mode="dark"
             />

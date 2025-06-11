@@ -5,7 +5,7 @@ const commandContainerVariant = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
     },
   },
 };
@@ -16,6 +16,7 @@ const commandTypeVariant = {
     opacity: 1,
     y: 0,
     transition: {
+      duration: 0.1,
       type: "tween", // Not really needed because adding a duration will force "tween"
       ease: "easeInOut",
     },
@@ -27,7 +28,7 @@ const lineContainerVariant = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 1,
+      staggerChildren: 0.2,
     },
   },
 };
@@ -159,16 +160,16 @@ const LoadingTerminal = ({
     `}
       onClick={() => setShowLoader(false)}
     >
-      <div className="group relative w-full max-w-[500px] flex flex-wrap items-center justify-center gap-5 rounded-xl border border-base-300 overflow-hidden transition-all ease-in-out duration-300">
+      <div className="group relative w-full max-w-[500px] flex flex-wrap items-center justify-center gap-5 rounded-xl overflow-hidden transition-all ease-in-out duration-300">
         <motion.div
           layout
           variants={commandContainerVariant}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           initial="hidden"
           animate="visible"
-          className="bg-slate-900 w-full h-auto rounded-xl p-3 flex flex-col items-center justify-center gap-3 overflow-hidden"
+          className="bg-base-200 w-full h-auto rounded-xl p-3 flex flex-col items-center justify-center gap-3 overflow-hidden"
         >
-          <div className="bg-slate-950 w-full h-auto flex items-center justify-start rounded-full overflow-hidden p-2">
+          <div className="bg-base-100 w-full h-auto flex items-center justify-start rounded-full overflow-hidden p-2">
             <span
               className="w-3 h-3 bg-red-400 rounded-full mx-1 hover:bg-red-500 cursor-pointer"
               onClick={() => setShowLoader(false)}
@@ -176,7 +177,7 @@ const LoadingTerminal = ({
             <span className="w-3 h-3 bg-yellow-400/40 rounded-full mx-1"></span>
             <span className="w-3 h-3 bg-green-400/40 rounded-full mx-1"></span>
           </div>
-          <div className="w-full h-auto bg-slate-950 flex flex-col items-center justify-start rounded-xl overflow-hidden p-2">
+          <div className="w-full h-auto bg-base-100 flex flex-col items-center justify-start rounded-xl overflow-hidden p-2">
             {commands.map((command, index) => (
               <motion.pre layout key={index} className="w-full h-auto px-2">
                 <code className={`flex flex-col w-full h-auto`}>

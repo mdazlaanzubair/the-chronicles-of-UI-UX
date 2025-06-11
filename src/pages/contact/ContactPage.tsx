@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { smoothScroller } from "../../utils/pageScrollers";
 import { FaPaperPlane } from "react-icons/fa";
@@ -153,7 +153,7 @@ const ContactPage = () => {
             name="name"
             type="text"
             placeholder="Full Name"
-            className="w-full text-[13px] leading-relaxed tracking-wide outline-accent bg-base-100 border border-base-300 px-3 py-2 rounded-md"
+            className="w-full text-[13px] leading-relaxed tracking-wide outline-none active:shadow focus:shadow bg-base-100 border border-base-300 px-3 py-2 rounded-md"
             value={formData.name}
             onChange={handleChange}
           />
@@ -164,7 +164,7 @@ const ContactPage = () => {
           className="flex flex-col gap-1"
         >
           <label className="text-[13px] w-full">Message via</label>
-          <div className="flex items-center justify-evenly gap-3 text-[13px] bg-base-100 border border-base-300 px-3 py-2 rounded-md">
+          <div className="flex items-center justify-evenly gap-3 text-[13px] bg-base-100 border border-base-300 px-3 py-[9px] rounded-md">
             <label htmlFor="email-medium">
               Email
               <input
@@ -192,26 +192,32 @@ const ContactPage = () => {
           </div>
         </motion.div>
 
-        {/* Dynamically render subject only for email */}
-        {formData.medium === "email" && (
-          <motion.div
-            variants={childVariantFadeIn}
-            className="flex flex-col gap-1 col-span-2"
-          >
-            <label htmlFor="subject" className="text-[13px] w-full">
-              Subject <strong className="text-red-500">*</strong>
-            </label>
-            <input
-              id="subject"
-              name="subject"
-              type="text"
-              placeholder="Subject"
-              className="w-full text-[13px] leading-relaxed tracking-wide outline-accent bg-base-100 border border-base-300 px-3 py-2 rounded-md"
-              value={formData.subject}
-              onChange={handleChange}
-            />
-          </motion.div>
-        )}
+          {/* Dynamically render subject only for email */}
+        <AnimatePresence mode="wait">
+          {formData.medium === "email" && (
+            <motion.div
+              variants={childVariantFadeIn}
+              initial="hidden"
+              animate="visible"
+              exit={"hidden"}
+              viewport={{ once: true }}
+              className="flex flex-col gap-1 col-span-2"
+            >
+              <label htmlFor="subject" className="text-[13px] w-full">
+                Subject <strong className="text-red-500">*</strong>
+              </label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                placeholder="Subject"
+                className="w-full text-[13px] leading-relaxed tracking-wide outline-none active:shadow focus:shadow bg-base-100 border border-base-300 px-3 py-2 rounded-md"
+                value={formData.subject}
+                onChange={handleChange}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <motion.div
           variants={childVariantFadeIn}
@@ -225,7 +231,7 @@ const ContactPage = () => {
             name="message"
             rows={5}
             placeholder="Message"
-            className="w-full text-[13px] leading-relaxed tracking-wide outline-accent bg-base-100 border border-base-300 px-3 py-2 rounded-md"
+            className="w-full text-[13px] leading-relaxed tracking-wide outline-none active:shadow focus:shadow bg-base-100 border border-base-300 px-3 py-2 rounded-md"
             value={formData.message}
             onChange={handleChange}
           />
@@ -237,7 +243,7 @@ const ContactPage = () => {
         >
           <button
             type="submit"
-            className="btn btn-neutral btn-block rounded-md text-[14px] group relative overflow-hidden"
+            className="btn btn-neutral btn-block rounded-md text-[14px] group relative overflow-hidden my-1"
           >
             <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-100 group-hover:opacity-0 translate-y-0 group-hover:-translate-y-full transition-all ease-in-out duration-500">
               Send <FaPaperPlane />

@@ -21,11 +21,11 @@ const SectionHeadBtn = (props: SectionHeadBtnProps) => {
       whileInView="visible"
       viewport={{ once: true }}
       type={props.type ?? "button"}
-      className={`group relative btn btn-block h-full overflow-hidden py-4 border border-base-300 shadow-none ${
+      className={`group relative btn btn-block h-full overflow-hidden py-3 ${
         props.mode === "light"
           ? "bg-base-100 text-base-content"
-          : "bg-base-content text-base-200"
-      } ${props.classNames}`}
+          : "btn-neutral"
+      } ${props.classNames} transition-all ease-in-out duration-500`}
       onClick={props.onClickHandler}
     >
       <div className="grow text-left flex flex-col">

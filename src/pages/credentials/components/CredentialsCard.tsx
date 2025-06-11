@@ -9,7 +9,7 @@ const CredentialCard = (props: CredentialsProps) => {
     <>
       <div
         id="credential-card"
-        className="group w-full relative flex items-center justify-between gap-5 bg-base-100/50 rounded-xl border border-base-300 p-3 overflow-hidden transition-all ease-in-out duration-300 cursor-pointer"
+        className="group w-full relative flex items-center justify-between gap-5 bg-base-100/50 rounded-xl border border-base-300 p-3 overflow-hidden hover:shadow transition-all ease-in-out duration-300 cursor-pointer"
         onClick={() => setShowModal(true)}
       >
         <div className="min-w-14 min-h-14 max-w-14 max-h-14 w-14 h-14 shrink overflow-hidden rounded-box p-2 my-auto">
@@ -37,6 +37,7 @@ const CredentialCard = (props: CredentialsProps) => {
                   href={props.doc_url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {` ${props.credential_id}`}
                 </a>
