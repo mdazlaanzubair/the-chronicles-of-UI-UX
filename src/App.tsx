@@ -1,17 +1,17 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import VersionsMenu from "./components/VersionsMenu";
 import { useEffect, useState } from "react";
 import { DarkModeProvider } from "./provider/DarkModeProvider";
-import LoadingTerminal from "./components/LoadingTerminal";
+// import LoadingTerminal from "./components/LoadingTerminal";
 
 function App() {
   const [showFloatBar, setShowFloatBar] = useState<boolean>(false);
-  const [showLoader, setShowLoader] = useState<boolean>(true);
+  // const [showLoader, setShowLoader] = useState<boolean>(true);
   const [scrollProgress, setScrollProgress] = useState<number>(0);
 
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
