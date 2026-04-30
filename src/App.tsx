@@ -51,10 +51,10 @@ function App() {
         </main>
       </div>
 
-      {(location.pathname === "/" || location.pathname === "/home") &&
+      {/* {(location.pathname === "/" || location.pathname === "/home") &&
       showLoader ? (
         <LoadingTerminal setShowLoader={setShowLoader} />
-      ) : null}
+      ) : null} */}
     </DarkModeProvider>
   );
 }
