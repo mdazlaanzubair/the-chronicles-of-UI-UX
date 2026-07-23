@@ -1,0 +1,139 @@
+{
+    "experience": [],
+    "publications": [
+        {
+            "title": "Evaluating AI reasoning and prompt engineering in automated test case generation: A comparative study of GPT-4o, O1 models, and human QA",
+            "authors": [
+                "Muhammad Azlaan Zubair",
+                "Wided Bouchelligua",
+                "Sufyan Danish",
+                "Shabir Ahmad",
+                "Amel Ksibi"
+            ],
+            "journal": "Computer Science Review",
+            "status": "Published",
+            "year": "2026",
+            "url": "https://linkinghub.elsevier.com/retrieve/pii/S1568494626011567"
+        },
+        {
+            "title": "UAV-Based Fire and Smoke Detection via Attention-Enhanced Multi-Scale Feature Fusion",
+            "authors": [
+                "Sufyan Danish",
+                "Muhammad Azlaan Zubair",
+                "Muhammad Fayaz",
+                "L. Minh Dang",
+                "Hyeonjoon Moon"
+            ],
+            "journal": "",
+            "status": "Ready to Publish",
+            "year": "",
+            "url": ""
+        },
+        {
+            "title": "MS Deep CensorNet Lite: Advancing Context-Aware YOLO Detection for Automated Content Moderation",
+            "authors": [
+                "Muhammad Azlaan Zubair",
+                "Sufyan Danish",
+                "Zulfiqar Ali Memon",
+                "Waiz bin Qasim"
+            ],
+            "journal": "",
+            "status": "Ready to Publish",
+            "year": "",
+            "url": ""
+        }
+    ],
+    "writing": [
+        {
+            "title": "Evaluating AI reasoning and prompt engineering in automated test case generation: A comparative study of GPT-4o, O1 models, and human QA",
+            "authors": [
+                "Muhammad Azlaan Zubair",
+                "Wided Bouchelligua",
+                "Sufyan Danish",
+                "Shabir Ahmad",
+                "Amel Ksibi"
+            ],
+            "journal": "Computer Science Review",
+            "status": "Published",
+            "year": "2026",
+            "url": "https://linkinghub.elsevier.com/retrieve/pii/S1568494626011567"
+        }
+    ],
+    "case_studies": [
+        {
+            "title": "Evaluating AI reasoning and prompt engineering in automated test case generation: A comparative study of GPT-4o, O1 models, and human QA",
+            "authors": [
+                "Muhammad Azlaan Zubair",
+                "Wided Bouchelligua",
+                "Sufyan Danish",
+                "Shabir Ahmad",
+                "Amel Ksibi"
+            ],
+            "journal": "Computer Science Review",
+            "status": "Published",
+            "year": "2026",
+            "url": "https://linkinghub.elsevier.com/retrieve/pii/S1568494626011567"
+        },
+        {
+            "title": "UAV-Based Fire and Smoke Detection via Attention-Enhanced Multi-Scale Feature Fusion",
+            "authors": [
+                "Sufyan Danish",
+                "Muhammad Azlaan Zubair",
+                "Muhammad Fayaz",
+                "L. Minh Dang",
+                "Hyeonjoon Moon"
+            ],
+            "journal": "",
+            "status": "Ready to Publish",
+            "year": "",
+            "url": ""
+        },
+        {
+            "title": "MS Deep CensorNet Lite: Advancing Context-Aware YOLO Detection for Automated Content Moderation",
+            "authors": [
+                "Muhammad Azlaan Zubair",
+                "Sufyan Danish",
+                "Zulfiqar Ali Memon",
+                "Waiz bin Qasim"
+            ],
+            "journal": "",
+            "status": "Ready to Publish",
+            "year": "",
+            "url": ""
+        }
+    ],
+    "academics": [],
+    "certifications": [],
+    "social_links": [
+        {
+            "label": "Github",
+            "url": "https://github.com/mdazlaanzubair",
+            "username": "/mdazlaanzubair",
+            "isHide": false
+        },
+        {
+            "label": "Linkedin",
+            "url": "https://www.linkedin.com/in/mdazlaanzubair/",
+            "username": "/in/mdazlaanzubair",
+            "isHide": false
+        },
+        {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/mdazlaanzubairr/",
+            "username": "@mdazlaanzubairr",
+            "isHide": false
+        },
+        {
+            "label": "X",
+            "url": "https://x.com/mdazlaanzubair",
+            "username": "@mdazlaanzubair",
+            "isHide": true
+        },
+        {
+            "label": "Email",
+            "url": "mailto:mdazlaan1996@gmail.com",
+            "username": "@mdazlaan1996",
+            "isHide": false
+        }
+    ]
+}

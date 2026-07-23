@@ -2,11 +2,14 @@ import { Geist, Geist_Mono, Oxanium, Playfair_Display } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const playfairDisplayHeading = Playfair_Display({subsets:['latin'],variable:'--font-heading'});
+const playfairDisplayHeading = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-heading",
+})
 
-const oxanium = Oxanium({subsets:['latin'],variable:'--font-sans'})
+const oxanium = Oxanium({ subsets: ["latin"], variable: "--font-sans" })
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
@@ -22,7 +25,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", oxanium.variable, playfairDisplayHeading.variable)}
+      className={cn(
+        "antialiased",
+        fontMono.variable,
+        "font-sans",
+        oxanium.variable,
+        playfairDisplayHeading.variable
+      )}
     >
       <body>
         <ThemeProvider>{children}</ThemeProvider>
