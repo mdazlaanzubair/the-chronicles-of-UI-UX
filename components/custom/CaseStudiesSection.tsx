@@ -2,13 +2,12 @@ import Link from "next/link"
 import localConstantData from "@/constant.json"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "../ui/button"
-import { ExternalLinkIcon } from "lucide-react"
-import { HorizontalCardData } from "@/type"
+import { ExternalLinkIcon, FileTextIcon } from "lucide-react"
+import { CaseStudyCardData } from "@/type"
 import HorizontalCard from "./HorizontalCard"
-import { Badge } from "../ui/badge"
 
 const CaseStudiesSection = () => {
-  const caseStudies = localConstantData.case_studies as HorizontalCardData[]
+  const caseStudies = localConstantData.case_studies as CaseStudyCardData[]
   const hasMore = caseStudies.length > 2
 
   if (caseStudies.length <= 0) return null
@@ -38,55 +37,48 @@ const CaseStudiesSection = () => {
         </div>
       </div>
       <div id="case-studies-card" className="flex w-full flex-col gap-5">
-        {caseStudies.slice(0, 2).map((item, idx) => {
-          const journal = item.journal.trim().length <= 0 ? null : item.journal
-          const year = item.year.trim().length <= 0 ? null : item.year
+        {caseStudies.slice(0).map((item, idx) => {
+          return (
+            <HorizontalCard
+              key={`research-card-${idx}-${item.title}`}
+              tag={`${item.timeline}`}
+              title={item.title}
+              content={item.description}
+              // content={
+              //   <>
+              //     <div className="flex flex-wrap gap-3">
+              //       {item.authors.map((author, idx) => (
+              //         <Badge
+              //           key={`author-${item.title}-${author}-${idx}`}
+              //           variant="ghost"
+              //           className="section-card-badge"
+              //         >
+              //           {author}
+              //         </Badge>
+              //       ))}
+              //     </div>
+              //   </>
+              // }
+              footer={
+                <div className="flex w-full items-center justify-between gap-3">
+                  <span className="eyebrow text-primary md:text-[11px]">
+                    @{item.company.name}
+                  </span>
 
-          const Tag = () => {
-            return (
-              <div className="flex items-center justify-between gap-3">
-                <span className="eyebrow md:text-[11px]">{`${item.status} ${journal && `· ${journal}`} ${year && `· ${year}`}`}</span>
-
-                {item.url.trim().length <= 0 ? null : (
                   <Link
-                    href={item.url}
+                    href={`/case-studies/${item.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "sm" }),
-                      "text-muted-foreground capitalize opacity-0 transition-opacity group-hover:opacity-100 hover:text-secondary-foreground"
+                      "section-view-link"
                     )}
                   >
-                    Read here
-                    <ExternalLinkIcon className="size-3" />
+                    <FileTextIcon className="size-3" />
+                    Read Case Study
                   </Link>
-                )}
-              </div>
-            )
-          }
-
-          return (
-            <HorizontalCard
-              key={`research-card-${idx}-${item.title}`}
-              tag={<Tag />}
-              title={item.title}
-              // description={""}
-              content={
-                <>
-                  <div className="flex flex-wrap gap-3">
-                    {item.authors.map((author, idx) => (
-                      <Badge
-                        key={`author-${item.title}-${author}-${idx}`}
-                        variant="ghost"
-                        className="section-card-badge"
-                      >
-                        {author}
-                      </Badge>
-                    ))}
-                  </div>
-                </>
+                </div>
               }
-              // footer={<></>}
             />
           )
         })}

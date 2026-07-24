@@ -46,6 +46,7 @@
     "writing": [
         {
             "title": "Evaluating AI reasoning and prompt engineering in automated test case generation: A comparative study of GPT-4o, O1 models, and human QA",
+            "abstract": "",
             "authors": [
                 "Muhammad Azlaan Zubair",
                 "Wided Bouchelligua",
@@ -61,45 +62,64 @@
     ],
     "case_studies": [
         {
-            "title": "Evaluating AI reasoning and prompt engineering in automated test case generation: A comparative study of GPT-4o, O1 models, and human QA",
-            "authors": [
-                "Muhammad Azlaan Zubair",
-                "Wided Bouchelligua",
-                "Sufyan Danish",
-                "Shabir Ahmad",
-                "Amel Ksibi"
-            ],
-            "journal": "Computer Science Review",
-            "status": "Published",
-            "year": "2026",
-            "url": "https://linkinghub.elsevier.com/retrieve/pii/S1568494626011567"
+            "title": "From Paperwork to Policy",
+            "slug": "/from-paperwork-to-policy",
+            "description": "A guided health-insurance application replaced repeated manual steps with structured data capture, dependable integrations, and a smoother path to purchase.",
+            "company": {
+                "name": "YallaCompare",
+                "url": "https://yallacompare.com/ae/en-us"
+            },
+            "images": [],
+            "timeline": "Jul 2024 - Aug 2024",
+            "url": "https://yallacompare.com/ae/en-us/products/medical"
         },
         {
-            "title": "UAV-Based Fire and Smoke Detection via Attention-Enhanced Multi-Scale Feature Fusion",
-            "authors": [
-                "Sufyan Danish",
-                "Muhammad Azlaan Zubair",
-                "Muhammad Fayaz",
-                "L. Minh Dang",
-                "Hyeonjoon Moon"
-            ],
-            "journal": "",
-            "status": "Ready to Publish",
-            "year": "",
-            "url": ""
+            "title": "Quoting Travel Cover Without Friction",
+            "slug": "/quoting-travel-cover-without-friction",
+            "description": "Trip details, traveller data, live pricing, and checkout came together in a responsive flow built to keep every step connected.",
+            "company": {
+                "name": "YallaCompare",
+                "url": "https://yallacompare.com/ae/en-us"
+            },
+            "images": [],
+            "timeline": "Jul 2024 - Aug 2024",
+            "url": "https://yallacompare.com/ae/en-us/products/travel"
         },
         {
-            "title": "MS Deep CensorNet Lite: Advancing Context-Aware YOLO Detection for Automated Content Moderation",
-            "authors": [
-                "Muhammad Azlaan Zubair",
-                "Sufyan Danish",
-                "Zulfiqar Ali Memon",
-                "Waiz bin Qasim"
-            ],
-            "journal": "",
-            "status": "Ready to Publish",
-            "year": "",
-            "url": ""
+            "title": "When Deliveries Become Recurring",
+            "slug": "/when-deliveries-become-recurring",
+            "description": "Fixed vehicles, driver attendance, billing, and reporting reshaped one-off bookings into a manageable operating model for repeat deliveries.",
+            "company": {
+                "name": "LOADe",
+                "url": "https://loade.net/"
+            },
+            "images": [],
+            "timeline": "Oct 2023 - Jan 2024",
+            "url": "https://loade.net/our-apps/"
+        },
+        {
+            "title": "Syncing Teams Without Duplicate Admin",
+            "slug": "/syncing-teams-without-duplicate-admin",
+            "description": "Microsoft Graph connected employee records to the task platform, reducing duplicate setup while making sync status and recovery easier to understand.",
+            "company": {
+                "name": "Transviti",
+                "url": "https://transviti.com/"
+            },
+            "images": [],
+            "timeline": "Jan 2024 - Feb 2024",
+            "url": "https://ecovis.taskvare.com/login"
+        },
+        {
+            "title": "One Hiring Flow, Many Roles",
+            "slug": "/one-hiring-flow-many-roles",
+            "description": "Candidates gained visibility while recruiters coordinated interviews, evaluations, approvals, offers, and onboarding through one shared workflow.",
+            "company": {
+                "name": "Transviti",
+                "url": "https://transviti.com/"
+            },
+            "images": [],
+            "timeline": "Feb 2024 - Feb 2025",
+            "url": "https://ecovis.talentvare.com/login"
         }
     ],
     "academics": [],

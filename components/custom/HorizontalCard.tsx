@@ -76,7 +76,11 @@ const HorizontalCard = ({
           </CardAction>
         )}
       </CardHeader>
-      {content && <CardContent>{content}</CardContent>}
+      {content && (
+        <CardContent className="text-lg text-muted-foreground">
+          {content}
+        </CardContent>
+      )}
       {footer && <CardFooter>{footer}</CardFooter>}
     </Card>
   )

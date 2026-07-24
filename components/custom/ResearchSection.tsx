@@ -1,14 +1,14 @@
 import { buttonVariants } from "../ui/button"
 import { ChevronRightIcon, ExternalLinkIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { HorizontalCardData } from "@/type"
+import { PublicationCardData } from "@/type"
 import Link from "next/link"
 import HorizontalCard from "./HorizontalCard"
 import { Badge } from "../ui/badge"
 import localConstantData from "@/constant.json"
 
 const ResearchSection = () => {
-  const publications = localConstantData.publications as HorizontalCardData[]
+  const publications = localConstantData.publications as PublicationCardData[]
   const hasMore = publications.length > 2
 
   if (publications.length <= 0) return null
@@ -48,7 +48,7 @@ const ResearchSection = () => {
                 <strong className="text-primary">{item.status}</strong>
                 {journal && (
                   <>
-                    <ChevronRightIcon className="h-3 w-3 mb-0.5" />
+                    <ChevronRightIcon className="mb-0.5 h-3 w-3" />
                     <span title={journal}>
                       {journal && journal.split(" ").slice(0, 5).join(" ")}
                     </span>
@@ -56,7 +56,7 @@ const ResearchSection = () => {
                 )}
                 {year && (
                   <>
-                    <ChevronRightIcon className="h-3 w-3 mb-0.5" />
+                    <ChevronRightIcon className="mb-0.5 h-3 w-3" />
                     <span>{year && year}</span>
                   </>
                 )}
