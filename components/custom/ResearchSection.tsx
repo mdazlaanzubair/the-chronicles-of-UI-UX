@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils"
 import { PublicationCardData } from "@/type"
 import Link from "next/link"
 import HorizontalCard from "./HorizontalCard"
-import { Badge } from "../ui/badge"
 import localConstantData from "@/constant.json"
 
 const ResearchSection = () => {
@@ -70,20 +69,19 @@ const ResearchSection = () => {
               tag={<ResearchTag />}
               title={item.title}
               // description=""
-              content={
-                <div className="space-y-2">
-                  <h3 className="font-heading font-semibold text-muted-foreground">
+              footer={
+                <div className="space-y-3">
+                  <h3 className="font-heading text-sm font-semibold text-foreground">
                     Authors
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {item.authors.map((author, idx) => (
-                      <Badge
+                      <span
                         key={`author-${item.title}-${author}-${idx}`}
-                        variant="ghost"
                         className="section-card-badge"
                       >
                         {author}
-                      </Badge>
+                      </span>
                     ))}
                   </div>
                 </div>

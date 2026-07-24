@@ -35,7 +35,7 @@ const HorizontalCard = ({
   content,
 }: Props) => {
   return (
-    <Card className="group relative shadow-none hover:shadow">
+    <Card className="group relative shadow-sm transition-shadow duration-300 hover:shadow-lg">
       <CardHeader>
         <span className="eyebrow md:text-[11px]">{tag}</span>
         <CardTitle
