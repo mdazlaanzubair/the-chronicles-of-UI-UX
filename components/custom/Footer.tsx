@@ -1,5 +1,3 @@
-// "use client"
-
 import {
   Item,
   ItemActions,
@@ -9,14 +7,12 @@ import {
 } from "@/components/ui/item"
 import ExternalLink from "@/components/custom/ExternalLink"
 import Image from "next/image"
-import type { LegacySocialLink } from "./legacyTypes"
 import localConstantData from "@/constant.json"
-// import { useTheme } from "next-themes"
 import ThemeToggler from "./ThemeToggler"
+import { SocialMediaInterface } from "@/type"
 
 export const Footer = () => {
-  //   const { theme } = useTheme()
-  const social_links = localConstantData.social_links as LegacySocialLink[]
+  const social_links = localConstantData.socialMedia as SocialMediaInterface[]
 
   return (
     <footer className="flex w-full items-center gap-3">
@@ -34,29 +30,17 @@ export const Footer = () => {
             className="z-10 object-cover"
           />
         </ItemMedia>
-        {/* <ItemMedia
-          variant="icon"
-          className="relative h-14 w-14 overflow-hidden rounded-full bg-secondary"
-        >
-          <Image
-            src={`/logo-${theme}.svg`}
-            alt={"Muhammad Azlaan Zubair's profile picture"}
-            width={128}
-            height={128}
-            className="size-12 pb-1"
-          />
-        </ItemMedia> */}
         <ItemContent>
           <ItemTitle className="text-sm font-semibold">
             I&apos;m social
           </ItemTitle>
           <div className="flex flex-1 items-center gap-3">
             {social_links.map((item, idx) => {
-              if (item.isHide) return
+              if (item.isHidden) return
               return (
                 <ExternalLink
                   key={`social-link-${idx}`}
-                  label={item.label}
+                  label={item.platform}
                   title={item.username}
                   url={item.url}
                   classname="text-xs tracking-wider"
