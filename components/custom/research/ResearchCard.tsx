@@ -19,7 +19,7 @@ const ResearchCard = ({ researchItem }: ResearchCardProps) => {
   // HELPER COMPONENTS
   const ResearchEyebrow = () => {
     return (
-      <div className="flex items-center gap-1 text-muted-foreground">
+      <div className="flex items-center gap-1 eyebrow text-muted-foreground md:text-[11px]">
         <span className="text-primary">{status}</span>
         {journal && status === "published" && (
           <>
@@ -42,15 +42,13 @@ const ResearchCard = ({ researchItem }: ResearchCardProps) => {
   const ResearchHeader = () => {
     return (
       <>
-        <span className="eyebrow md:text-[11px]">
-          <ResearchEyebrow />
-        </span>
+        <ResearchEyebrow />
         <CardTitle
           title={title}
           aria-label={title}
           className="line-clamp-2 text-2xl font-semibold tracking-normal"
         >
-          {title.split(" ").slice(0).join(" ")}
+          {title}
         </CardTitle>
         {doi && (
           <CardAction>

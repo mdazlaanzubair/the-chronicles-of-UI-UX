@@ -1,7 +1,6 @@
 import CaseStudiesSection from "@/components/custom/case-studies/CaseStudiesSection"
 import ResearchSection from "@/components/custom/research/ResearchSection"
 import SidebarNavigation from "@/components/custom/SidebarNavigation"
-import WritingSection from "@/components/custom/WritingSection"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
@@ -9,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { Footer } from "@/components/custom/Footer"
 import Header from "@/components/custom/Header"
 import WorkSection from "@/components/custom/work/WorkSection"
+import WritingSection from "@/components/custom/writing/WritingSection"
 
 export default function Page() {
   return (

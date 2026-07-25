@@ -12,7 +12,7 @@ const WorkCard = ({ workItem }: { workItem: WorkInterface }) => {
   const { title, description } = workItem
 
   // HELPER COMPONENTS
-  const CaseStudyHeader = () => {
+  const WorkHeader = () => {
     return (
       <>
         <CardTitle
@@ -20,7 +20,7 @@ const WorkCard = ({ workItem }: { workItem: WorkInterface }) => {
           aria-label={title}
           className="mt-1 line-clamp-2 text-2xl font-semibold tracking-normal"
         >
-          {title.split(" ").slice(0).join(" ")}
+          {title}
         </CardTitle>
         <CardDescription>{description}</CardDescription>
         <CardAction>
@@ -42,7 +42,7 @@ const WorkCard = ({ workItem }: { workItem: WorkInterface }) => {
   return (
     <HorizontalCard
       className="border-muted shadow-none ring-0 transition-opacity duration-300 group-hover/work:opacity-70 hover:!opacity-100 hover:shadow-none"
-      header={<CaseStudyHeader />}
+      header={<WorkHeader />}
     />
   )
 }

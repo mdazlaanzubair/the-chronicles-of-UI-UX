@@ -31,7 +31,7 @@ const CaseStudyCard = ({
           aria-label={title}
           className="line-clamp-2 text-2xl font-semibold tracking-normal"
         >
-          {title.split(" ").slice(0).join(" ")}
+          {title}
         </CardTitle>
         <CardDescription>
           <p className="line-clamp-3 text-muted-foreground">{description}</p>

@@ -1,54 +1,31 @@
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 interface Props {
-  tag?: React.ReactNode
-  title: string
-  description?: string
-  action?: React.ReactNode
+  className?: string
+  children?: React.ReactNode
+  header?: React.ReactNode
   footer?: React.ReactNode
-  content?: React.ReactNode
+  onCardClick?: () => void
 }
 
 const VerticalCard = ({
-  tag,
-  title,
-  description,
-  action,
+  children,
+  className,
+  header,
   footer,
-  content,
+  onCardClick,
 }: Props) => {
   return (
-    <Card className="group h-90 shadow-none hover:shadow">
-      <CardHeader>
-        {tag && tag}
-        <CardTitle
-          title={title}
-          aria-label={title}
-          className="font-heading text-2xl font-bold tracking-wide"
-        >
-          {title}
-        </CardTitle>
-        {description && (
-          <CardDescription
-            aria-label={description}
-            title={description}
-            className="line-clamp-2"
-          >
-            {description}
-          </CardDescription>
-        )}
-
-        {action && <CardAction>{action}</CardAction>}
-      </CardHeader>
-      {content && <CardContent>{content}</CardContent>}
+    <Card
+      onClick={onCardClick}
+      className={cn(
+        "group relative shadow-sm transition-shadow duration-300 hover:shadow-lg",
+        className
+      )}
+    >
+      {header && <CardHeader>{header}</CardHeader>}
+      <CardContent className="flex-1">{children}</CardContent>
       {footer && <CardFooter>{footer}</CardFooter>}
     </Card>
   )
