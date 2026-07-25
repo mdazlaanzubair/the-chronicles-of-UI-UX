@@ -136,7 +136,7 @@
 }
 
 @utility eyebrow {
-  @apply text-xs font-medium tracking-wide text-muted-foreground uppercase;
+  @apply text-xs font-medium tracking-wide text-primary uppercase;
 }
 
 @utility section-title {

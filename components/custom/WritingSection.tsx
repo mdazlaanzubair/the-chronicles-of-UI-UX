@@ -3,12 +3,13 @@ import localConstantData from "@/constant.json"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "../ui/button"
 import { ExternalLinkIcon } from "lucide-react"
-import { HorizontalCardData } from "@/type"
+import type { LegacyHorizontalCardData } from "./legacyTypes"
 import HorizontalCard from "./HorizontalCard"
 import { Badge } from "../ui/badge"
 
 const WritingSection = () => {
-  const writing = (localConstantData.writing || []) as HorizontalCardData[]
+  const writing = (localConstantData.writing ||
+    []) as LegacyHorizontalCardData[]
   const hasMore = writing.length > 2
 
   if (writing.length <= 0) return null

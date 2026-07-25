@@ -1,13 +1,14 @@
 import { buttonVariants } from "../ui/button"
 import { ChevronRightIcon, ExternalLinkIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { PublicationCardData } from "@/type"
+import type { LegacyPublicationCardData } from "./legacyTypes"
 import Link from "next/link"
 import HorizontalCard from "./HorizontalCard"
 import localConstantData from "@/constant.json"
 
 const ResearchSection = () => {
-  const publications = localConstantData.publications as PublicationCardData[]
+  const publications =
+    localConstantData.publications as LegacyPublicationCardData[]
   const hasMore = publications.length > 2
 
   if (publications.length <= 0) return null

@@ -1,0 +1,68 @@
+import { defineQuery } from "next-sanity"
+
+import {
+  portableTextMembersProjection,
+  timestampsProjection,
+} from "./fragments"
+
+export const EXPERIENCE_QUERY = defineQuery(/* groq */ `
+  *[_type == "experience"]
+  | order(_createdAt desc) {
+    "company": select(
+      company.isAnonymized == true => {
+        "name": "Confidential organization",
+        "website": null,
+        "location": company.location,
+        "isAnonymized": true
+      },
+      {
+        "name": coalesce(company.name, "Organization"),
+        "website": company.website,
+        "location": company.location,
+        "isAnonymized": false
+      }
+    ),
+    timeline,
+    role,
+    "key_contributions": coalesce(key_contributions[]{
+      ${portableTextMembersProjection}
+    }, []),
+    ${timestampsProjection}
+  }
+`)
+
+export const ACADEMIC_HISTORY_QUERY = defineQuery(/* groq */ `
+  *[_type == "academic"]
+  | order(_createdAt desc) {
+    "institute": {
+      "name": institute.name,
+      "website": institute.website
+    },
+    degree,
+    field,
+    timeline,
+    ${timestampsProjection}
+  }
+`)
+
+export const SKILLS_QUERY = defineQuery(/* groq */ `
+  coalesce(*[_id == "siteSettings"][0].skills, [])[]{
+    _key,
+    title,
+    "tags": coalesce(tags, [])
+  }
+`)
+
+export const SOCIAL_PROFILES_QUERY = defineQuery(/* groq */ `
+  coalesce(*[_id == "siteSettings"][0].socialMedia, [])[]{
+    _key,
+    platform,
+    username,
+    url,
+    "isHidden": isHidden == true
+  }
+`)
+
+export const INTERESTS_QUERY = defineQuery(/* groq */ `
+  coalesce(*[_id == "siteSettings"][0].interests, [])
+`)

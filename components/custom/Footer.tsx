@@ -9,14 +9,14 @@ import {
 } from "@/components/ui/item"
 import ExternalLink from "@/components/custom/ExternalLink"
 import Image from "next/image"
-import { SocialLink } from "@/type"
+import type { LegacySocialLink } from "./legacyTypes"
 import localConstantData from "@/constant.json"
 // import { useTheme } from "next-themes"
 import ThemeToggler from "./ThemeToggler"
 
 export const Footer = () => {
   //   const { theme } = useTheme()
-  const social_links = localConstantData.social_links as SocialLink[]
+  const social_links = localConstantData.social_links as LegacySocialLink[]
 
   return (
     <footer className="flex w-full items-center gap-3">

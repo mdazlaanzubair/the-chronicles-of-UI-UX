@@ -3,11 +3,12 @@ import localConstantData from "@/constant.json"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "../ui/button"
 import { ExternalLinkIcon, FileTextIcon } from "lucide-react"
-import { CaseStudyCardData } from "@/type"
+import type { LegacyCaseStudyCardData } from "./legacyTypes"
 import HorizontalCard from "./HorizontalCard"
 
 const CaseStudiesSection = () => {
-  const caseStudies = localConstantData.case_studies as CaseStudyCardData[]
+  const caseStudies =
+    localConstantData.case_studies as LegacyCaseStudyCardData[]
   const hasMore = caseStudies.length > 2
 
   if (caseStudies.length <= 0) return null

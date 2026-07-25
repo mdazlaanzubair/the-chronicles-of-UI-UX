@@ -9,10 +9,12 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "typegen": "sanity schema extract --enforce-required-fields --force && sanity typegen generate"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
+    "@sanity/icons": "^5.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.26.0",
