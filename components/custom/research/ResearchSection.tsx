@@ -33,7 +33,10 @@ const ResearchSection = () => {
           </Link>
         </div>
       </div>
-      <div id="research-card" className="flex w-full flex-col gap-5">
+      <div
+        id="research-card"
+        className="group/research flex w-full flex-col gap-5"
+      >
         {featured.map((item, idx) => {
           return (
             <ResearchCard

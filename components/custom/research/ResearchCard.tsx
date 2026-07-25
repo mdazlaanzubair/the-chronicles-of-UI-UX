@@ -96,7 +96,7 @@ const ResearchCard = ({ researchItem }: ResearchCardProps) => {
 
   return (
     <HorizontalCard
-      className="cursor-pointer"
+      className="cursor-pointer transition-opacity duration-300 group-hover/research:bg-transparent group-hover/research:opacity-30 hover:bg-card hover:!opacity-100"
       header={<ResearchHeader />}
       footer={<ResearchFooter />}
       onCardClick={handleCardClick}

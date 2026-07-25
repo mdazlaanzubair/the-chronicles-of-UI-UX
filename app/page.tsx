@@ -9,6 +9,7 @@ import { Footer } from "@/components/custom/Footer"
 import Header from "@/components/custom/Header"
 import WorkSection from "@/components/custom/work/WorkSection"
 import WritingSection from "@/components/custom/writing/WritingSection"
+import QuickViewModal from "@/components/custom/Modal"
 
 export default function Page() {
   return (
@@ -60,6 +61,7 @@ export default function Page() {
             <Separator className="mt-10 mb-15 bg-transparent" />
             <WorkSection key={"work-section-component"} />
           </div>
+          <QuickViewModal />
         </main>
       </div>
     </div>
