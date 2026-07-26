@@ -1,14 +1,23 @@
-import { buttonVariants } from "../../ui/button"
+"use client"
+
+import { useState } from "react"
+
 import { ExternalLinkIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import localConstantData from "@/constant.json"
 import { PublicationInterface } from "@/type"
 import ResearchCard from "./ResearchCard"
+import { buttonVariants } from "@/components/ui/button"
+import QuickViewModal from "../quick-view-modal"
 
 const ResearchSection = () => {
+  const [viewResearch, setViewResearch] = useState<PublicationInterface | null>(
+    null
+  )
   const publications = localConstantData.publications as PublicationInterface[]
   const featured = publications.filter((item) => item.metadata.isFeatured)
+
   if (featured.length <= 0) return null
   return (
     <section id="research" className="mb-10 flex flex-col gap-10">
@@ -42,10 +51,16 @@ const ResearchSection = () => {
             <ResearchCard
               key={`${idx}-${item.title}-research-card`}
               researchItem={item}
+              onView={() => setViewResearch(item)}
             />
           )
         })}
       </div>
+      <QuickViewModal
+        isOpen={!!viewResearch}
+        data={viewResearch as PublicationInterface}
+        onClose={() => setViewResearch(null)}
+      />
     </section>
   )
 }

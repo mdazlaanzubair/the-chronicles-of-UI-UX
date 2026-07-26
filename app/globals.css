@@ -136,7 +136,7 @@
 }
 
 @utility eyebrow {
-  @apply text-xs font-medium tracking-wide text-primary uppercase;
+  @apply inline-block text-xs font-medium tracking-wide text-primary uppercase;
 }
 
 @utility section-title {
@@ -148,9 +148,25 @@
 }
 
 @utility section-view-link {
-  @apply text-muted-foreground capitalize hover:text-secondary-foreground
+  @apply text-muted-foreground capitalize hover:text-secondary-foreground;
 }
 
 @utility section-card-badge {
-  @apply bg-accent px-2 py-1 text-muted-foreground text-xs tracking-tight
+  @apply bg-accent px-2 py-1 text-xs tracking-tight text-muted-foreground;
+}
+
+@utility modal-title {
+  @apply font-serif text-xl font-bold capitalize;
+}
+
+@utility modal-tag {
+  @apply inline-block px-2 py-1 text-xs font-semibold tracking-tight text-foreground;
+}
+
+@utility modal-tag-muted {
+  @apply inline-block border border-muted-foreground/30 bg-muted/50 px-2 py-1 text-xs font-light tracking-tight text-foreground;
+}
+
+@utility modal-tag-primary {
+  @apply inline-block border border-muted-foreground/80 bg-muted/50 px-2 py-1 text-xs font-medium tracking-tight text-foreground;
 }

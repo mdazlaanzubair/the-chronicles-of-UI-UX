@@ -3,16 +3,17 @@
 import { PublicationInterface } from "@/type"
 import HorizontalCard from "../HorizontalCard"
 import { ChevronRightIcon, GlobeIcon } from "lucide-react"
-import { CardAction, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardAction, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 interface ResearchCardProps {
   researchItem: PublicationInterface
+  onView: () => void
 }
 
-const ResearchCard = ({ researchItem }: ResearchCardProps) => {
+const ResearchCard = ({ researchItem, onView }: ResearchCardProps) => {
   const { title, authors, metadata } = researchItem
   const { journal, year, status, doi } = metadata
 
@@ -88,18 +89,12 @@ const ResearchCard = ({ researchItem }: ResearchCardProps) => {
     )
   }
 
-  const handleCardClick = () => {
-    if (doi) {
-      window.open(doi, "_blank")
-    }
-  }
-
   return (
     <HorizontalCard
       className="cursor-pointer transition-opacity duration-300 group-hover/research:bg-transparent group-hover/research:opacity-30 hover:bg-card hover:!opacity-100"
       header={<ResearchHeader />}
       footer={<ResearchFooter />}
-      onCardClick={handleCardClick}
+      onCardClick={onView}
     />
   )
 }
