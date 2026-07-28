@@ -315,31 +315,31 @@
       "platform": "github",
       "username": "mdazlaanzubair",
       "url": "https://github.com/mdazlaanzubair",
-      "isHidden": false
+      "isHidden": true
     },
     {
       "platform": "linkedin",
       "username": "azlaanzubair",
       "url": "https://linkedin.com/in/azlaanzubair",
-      "isHidden": false
-    },
-    {
-      "platform": "x",
-      "username": "azlaanzubair",
-      "url": "https://x.com/azlaanzubair",
-      "isHidden": false
+      "isHidden": true
     },
     {
       "platform": "scholar",
       "username": "Azlaan Zubair",
       "url": "https://scholar.google.com/citations?user=example",
+      "isHidden": true
+    },
+    {
+      "platform": "Instagram",
+      "username": "azlaanzubair.ui",
+      "url": "https://instagram.com/azlaanzubair.ui",
       "isHidden": false
     },
     {
-      "platform": "instagram",
-      "username": "azlaanzubair.ui",
-      "url": "https://instagram.com/azlaanzubair.ui",
-      "isHidden": true
+      "platform": "X/Twitter",
+      "username": "azlaanzubair",
+      "url": "https://x.com/azlaanzubair",
+      "isHidden": false
     }
   ],
   "works": [

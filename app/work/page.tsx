@@ -1,26 +1,36 @@
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { getHashnodePosts, type HashnodePost } from "@/src/hashnode/hashnode"
+import {
+  getHashnodeSeriesPosts,
+  type HashnodePost,
+  type HashnodeSeries,
+} from "@/src/hashnode/hashnode"
 import Image from "next/image"
 import Link from "next/link"
 
 export default async function Page() {
   let posts: HashnodePost[] = []
+  let series: HashnodeSeries | null = null
   let fetchError: string | null = null
 
   try {
-    const res = await getHashnodePosts({
+    const res = await getHashnodeSeriesPosts({
+      seriesSlug: "case-studies",
       first: 12,
-      excludeCaseStudies: true,
     })
     posts = res.posts
+    series = res.series
   } catch (error: any) {
-    console.error("Hashnode fetch error:", error)
-    fetchError = error?.message || "Failed to load Hashnode posts."
+    console.error("Hashnode series fetch error:", error)
+    fetchError = error?.message || "Failed to load Hashnode case study posts."
   }
 
+  const seriesUrl = series?.slug
+    ? `https://blog.mdazlaanzubair.com/series/${series.slug}`
+    : "https://blog.mdazlaanzubair.com/"
+
   return (
-    <section id="writing" className="flex flex-col">
+    <section id="work" className="flex flex-col">
       {(() => {
         if (posts.length <= 0) {
           return (
@@ -99,7 +109,7 @@ export default async function Page() {
               )
             })}
             <Link
-              href="https://blog.mdazlaanzubair.com/"
+              href={seriesUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
@@ -115,3 +125,4 @@ export default async function Page() {
     </section>
   )
 }
+

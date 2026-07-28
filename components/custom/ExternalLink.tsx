@@ -29,7 +29,7 @@ const ExternalLink = ({
       title={title || label}
     >
       {label}
-      <ExternalLinkIcon className="h-3 w-3" />
+      {/* <ExternalLinkIcon className="h-3 w-3" /> */}
     </a>
   )
 }
