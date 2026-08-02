@@ -522,44 +522,74 @@
   ],
   "skills": [
     {
-      "title": "Frontend & Core Web",
+      "id": "frontend",
+      "title": "Frontend",
       "tags": [
-        "TypeScript",
-        "JavaScript (ESNext)",
         "React",
-        "Next.js",
-        "HTML5 / CSS3",
-        "Tailwind CSS"
+        "Next",
+        "TypeScript",
+        "JavaScript",
+        "Tailwind CSS",
+        "Shadcn UI"
       ]
     },
     {
-      "title": "UI/UX & Systems",
+      "id": "backend",
+      "title": "Backend",
       "tags": [
-        "Figma",
-        "Design Tokens",
-        "Design Systems",
-        "Micro-interactions",
-        "Accessibility (WCAG)",
-        "Framer Motion"
+        "Node.js",
+        "Express.js",
+        "REST APIs",
+        "Flask",
+        "WebSockets",
+        "Database Integration"
       ]
     },
     {
-      "title": "Testing & Tooling",
+      "id": "ai-ml",
+      "title": "AI & ML",
       "tags": [
-        "Jest",
-        "Playwright",
-        "Storybook",
-        "Git / GitHub",
-        "Vite",
-        "Sanity CMS"
+        "LLMs",
+        "RAG",
+        "VLMs",
+        "LangChain",
+        "TensorFlow.js",
+        "Transformers.js",
+        "Computer Vision"
+      ]
+    },
+    {
+      "id": "automation",
+      "title": "Automation",
+      "tags": [
+        "n8n",
+        "Python",
+        "Robotic Process Automation (RPA)",
+        "Automation Scripting",
+        "Browser Automation",
+        "Workflow Design"
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": "Delivery",
+      "tags": [
+        "Git",
+        "GitHub",
+        "Application Deployment",
+        "Environment Configuration",
+        "CI/CD Fundamentals"
       ]
     }
   ],
   "interests": [
-    "Spatial Computing & AR/VR",
-    "Typography & Modular Grid Systems",
-    "Generative Visual Art & Shaders",
-    "Open Source Tooling",
-    "Ergonomic Keyboards"
+    "Research",
+    "AI Automation",
+    "Coding",
+    "Scripting",
+    "Blogging",
+    "Chess",
+    "Counter Strike",
+    "Valorant"
   ]
 }

@@ -71,7 +71,7 @@ export default async function Page() {
                         ))}
                       </div>
 
-                      <h2 className="line-clamp-2 text-sm leading-snug font-semibold tracking-tight sm:text-base">
+                      <h2 className="line-clamp-3 text-lg leading-snug font-semibold tracking-tight sm:text-base">
                         <Link
                           href={post.url}
                           target="_blank"
@@ -81,6 +81,10 @@ export default async function Page() {
                           {post.title}
                         </Link>
                       </h2>
+
+                      {/* <p className="line-clamp-3 text-xs text-muted-foreground">
+                        {post.brief}
+                      </p> */}
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-1 text-xs text-muted-foreground">

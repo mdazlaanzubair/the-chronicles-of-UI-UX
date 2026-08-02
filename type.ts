@@ -126,6 +126,7 @@ export interface AcademicInterface {
 }
 
 export interface SkillInterface {
+  id: string;
   title: string
   tags: string[]
 }

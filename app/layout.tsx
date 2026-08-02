@@ -1,4 +1,4 @@
-import { Geist_Mono, Oxanium, Playfair_Display } from "next/font/google"
+import { Geist_Mono, Oxanium, Playfair_Display, Red_Hat_Display } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -7,7 +7,13 @@ import ProfileHeader from "@/components/custom/ProfileHeader"
 import Navbar from "@/components/custom/Navbar"
 import { Footer } from "@/components/custom/Footer"
 
-const playfairDisplayHeading = Playfair_Display({
+// const playfairDisplayHeading = Playfair_Display({
+//   subsets: ["latin"],
+//   variable: "--font-heading",
+// })
+
+const playfairDisplayHeading = Red_Hat_Display({
+  // weight: ["400"],
   subsets: ["latin"],
   variable: "--font-heading",
 })
@@ -39,10 +45,10 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <div className="h-screen w-screen bg-background">
-            <div className="mx-auto w-full max-w-xl overflow-x-hidden overflow-y-auto border-s border-e border-accent bg-foreground">
+            <div className="flex flex-col mx-auto w-full max-w-xl overflow-x-hidden overflow-y-auto border-s border-e border-accent bg-foreground">
               <ProfileHeader />
               <Navbar />
-              <main className="w-full border-b border-accent bg-card">
+              <main className="flex-1 h-full w-full border-b border-accent bg-card">
                 {children}
               </main>
               <Footer />
