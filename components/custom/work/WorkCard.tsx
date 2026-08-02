@@ -41,7 +41,7 @@ const WorkCard = ({ workItem }: { workItem: WorkInterface }) => {
 
   return (
     <HorizontalCard
-      className="cursor-pointer border-muted shadow-none ring-0 transition-opacity duration-300 group-hover/work:bg-transparent group-hover/work:opacity-30 hover:bg-card hover:!opacity-100 hover:shadow-none"
+      className="cursor-pointer border-accent shadow-none ring-0 transition-opacity duration-300 group-hover/work:bg-transparent group-hover/work:opacity-30 hover:bg-card hover:!opacity-100 hover:shadow-none"
       header={<WorkHeader />}
     />
   )

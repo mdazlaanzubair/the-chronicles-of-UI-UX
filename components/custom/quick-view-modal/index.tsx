@@ -1,28 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { PublicationInterface, WorkInterface, WritingInterface } from "@/type"
-import {
-  XIcon,
-  GlobeIcon,
-  ExternalLinkIcon,
-  CopyIcon,
-  CheckIcon,
-  FileTextIcon,
-  ChevronRightIcon,
-  LayersIcon,
-  BookOpenIcon,
-} from "lucide-react"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import ResearchContent from "./ResearchContent"
 
 interface QuickViewModalProps {
@@ -37,16 +16,10 @@ const isPublication = (
   return "authors" in item
 }
 
-const isWork = (
+const isProject = (
   item: PublicationInterface | WorkInterface | WritingInterface
 ): item is WorkInterface => {
   return "metadata" in item && "key_contributions" in item.metadata
-}
-
-const isWriting = (
-  item: PublicationInterface | WorkInterface | WritingInterface
-): item is WritingInterface => {
-  return "metadata" in item && "category" in item.metadata
 }
 
 const QuickViewModal = ({ isOpen, data, onClose }: QuickViewModalProps) => {

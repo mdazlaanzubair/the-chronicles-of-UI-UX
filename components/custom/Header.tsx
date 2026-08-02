@@ -10,7 +10,7 @@ const Header = () => {
       <span className="eyebrow">Software · AI · Research</span>
       <h1 className="font-heading text-4xl font-bold">
         <HoverCard>
-          <HoverCardTrigger className="cursor-pointer border-b border-dashed border-secondary-foreground">
+          <HoverCardTrigger className="cursor-pointer border-b border-dashed border-accent">
             Md.
           </HoverCardTrigger>
           <HoverCardContent side="bottom" align="start" className="space-y-3">

@@ -1,14 +1,4 @@
-import {
-  Calendar,
-  ChevronRight,
-  Link as LinkIcon,
-  MapPin,
-  BadgeCheck,
-  GraduationCapIcon,
-  CameraIcon,
-  MailIcon,
-  DotIcon,
-} from "lucide-react"
+import { Calendar, MapPin, GraduationCapIcon, MailIcon } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
 import { Button } from "../ui/button"
 import LinkedinIcon from "@sanity/icons/Linkedin"
@@ -25,7 +15,7 @@ export default function ProfileHeader() {
           className="h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 top-0 right-0 bottom-0 left-0 z-10 bg-black/50">
-          <h2 className="absolute top-[50%] left-[50%] translate-[-50%] translate-y-[-50%] text-2xl md:text-3xl lg:text-4xl text-center font-bold text-primary-foreground">
+          <h2 className="absolute top-[50%] left-[50%] translate-[-50%] translate-y-[-50%] text-center text-2xl font-bold text-primary-foreground md:text-3xl lg:text-4xl">
             Hello World
           </h2>
         </div>
@@ -92,7 +82,7 @@ export default function ProfileHeader() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center lg:justify-end gap-2">
+              <div className="flex flex-wrap items-center gap-2 lg:justify-end">
                 <Button size="sm">Book a Call</Button>
                 <Button variant="outline" size="icon-sm">
                   <LinkedinIcon />

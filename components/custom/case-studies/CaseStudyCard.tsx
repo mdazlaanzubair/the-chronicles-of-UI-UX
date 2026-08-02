@@ -66,7 +66,7 @@ const CaseStudyCard = ({
         {project && project.website && (
           <HoverCard key={`item-${slug}-${project.name}`}>
             <HoverCardTrigger>
-              <span className="border-b border-dashed border-foreground">
+              <span className="border-b border-dashed border-accent">
                 {project.name}
               </span>
             </HoverCardTrigger>
@@ -91,7 +91,7 @@ const CaseStudyCard = ({
         {company && company.website && (
           <HoverCard key={`item-${slug}-${company.name}`}>
             <HoverCardTrigger>
-              <span className="border-b border-dashed border-foreground">
+              <span className="border-b border-dashed border-accent">
                 {company.name}
               </span>
             </HoverCardTrigger>

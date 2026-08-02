@@ -1,8 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
+import { InterestType } from "@/type"
 import localConstantData from "@/constant.json"
 
 const Interest = () => {
-  const interests = localConstantData.interests as string[]
+  const interests = localConstantData.interests as InterestType
 
   if (!interests || interests.length <= 0) return null
   return (
@@ -18,7 +18,7 @@ const Interest = () => {
         {interests.map((interest, idx) => (
           <li
             key={interest}
-            className="flex items-center gap-2 bg-background font-semibold border border-muted p-3 text-xs"
+            className="flex items-center gap-2 border border-accent bg-background p-3 text-xs font-semibold"
           >
             <span className="eyebrow">{idx + 1}</span>
             <p className="text-muted-foreground">{interest}</p>

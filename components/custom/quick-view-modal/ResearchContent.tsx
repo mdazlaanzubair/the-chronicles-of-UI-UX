@@ -31,7 +31,7 @@ const ResearchContent = ({
   return (
     <div className="flex w-full flex-col gap-3">
       {/* Modal Header */}
-      <DialogHeader className="mb-0 flex flex-row items-start justify-between border-b border-foreground/30 pb-4">
+      <DialogHeader className="mb-0 flex flex-row items-start justify-between border-b border-accent pb-4">
         {/* Research Header */}
         <div className="flex flex-col space-y-1.5">
           <span className="eyebrow text-[11px]">
