@@ -51,16 +51,6 @@ export const portableTextProjection = /* groq */ `
   }, [])
 `
 
-export const seoProjection = /* groq */ `
-  "seo": {
-    "title": coalesce(seo.title, title),
-    "description": coalesce(seo.description, description),
-    "canonicalUrl": seo.canonicalUrl,
-    "imageUrl": seo.openGraphImage.asset->url,
-    "noIndex": seo.noIndex == true
-  }
-`
-
 export const timestampsProjection = /* groq */ `
   "createdAt": _createdAt,
   "updatedAt": _updatedAt

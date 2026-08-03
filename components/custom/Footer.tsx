@@ -36,14 +36,18 @@ export const Footer = async () => {
 
       <div className="flex items-center gap-3">
         {social_links.map((item, idx) => {
-          if (item.isHidden) return
+          if (
+            item.isHidden ||
+            ["github", "scholar", "linkedin"].includes(item.platform)
+          )
+            return
           return (
             <ExternalLink
               key={`social-link-${idx}`}
               label={item.platform}
               title={item.username}
               url={item.url}
-              classname="text-xs tracking-wider"
+              classname="text-xs tracking-wider capitalize"
             />
           )
         })}

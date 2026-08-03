@@ -1,7 +1,5 @@
 import type { PortableTextBlock } from "next-sanity"
 
-export type ContentStatus = "draft" | "published" | "archived"
-
 export type PublicationStatus =
   "in_preparation" | "submitted" | "under_review" | "accepted" | "published"
 
@@ -24,54 +22,6 @@ export interface PublicationInterface {
   updatedAt: string
 }
 
-export interface CaseStudyInterface {
-  title: string
-  slug: string
-  description: string
-  tags: string[]
-  body: PortableTextBlock[]
-
-  metadata: {
-    isFeatured: boolean
-    timeline: string | null
-
-    project: {
-      name: string
-      slug: string | null
-      website: string | null
-    } | null
-
-    company: {
-      name: string
-      logoUrl: string | null
-      website: string | null
-      isAnonymized: boolean
-    } | null
-  }
-
-  createdAt: string
-  updatedAt: string
-}
-
-export interface WritingInterface {
-  title: string
-  slug: string
-  description: string
-  tags: string[]
-  body: PortableTextBlock[]
-
-  metadata: {
-    status: ContentStatus
-    isFeatured: boolean
-    category: string
-    topics: string[]
-    publishedAt: string | null
-  }
-
-  createdAt: string
-  updatedAt: string
-}
-
 export interface SocialMediaInterface {
   platform: SocialPlatform
   username: string
@@ -80,6 +30,7 @@ export interface SocialMediaInterface {
 }
 
 export interface WorkInterface {
+  id: string
   title: string
   description: string
   tags: string[]

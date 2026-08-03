@@ -40,12 +40,7 @@ const relatedContentAnnotation = defineArrayMember({
     defineField({
       name: "reference",
       type: "reference",
-      to: [
-        { type: "caseStudy" },
-        { type: "publication" },
-        { type: "writing" },
-        { type: "work" },
-      ],
+      to: [{ type: "publication" }, { type: "work" }],
       validation: (rule) => rule.required(),
     }),
   ],
@@ -306,12 +301,7 @@ export const relatedContent = defineType({
     defineField({
       name: "reference",
       type: "reference",
-      to: [
-        { type: "caseStudy" },
-        { type: "publication" },
-        { type: "writing" },
-        { type: "work" },
-      ],
+      to: [{ type: "publication" }, { type: "work" }],
       validation: (rule) => rule.required(),
     }),
     defineField({

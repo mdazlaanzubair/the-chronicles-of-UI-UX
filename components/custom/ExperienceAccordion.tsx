@@ -4,16 +4,51 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import localConstantData from "@/constant.json"
 import { cn } from "@/lib/utils"
+import { toExperience } from "@/src/sanity/adapters"
+import { client } from "@/src/sanity/client"
+import { EXPERIENCE_QUERY } from "@/src/sanity/queries"
 import { ExperienceInterface } from "@/type"
 import { AtSignIcon, Briefcase, MapPinIcon } from "lucide-react"
-import { PortableText } from "next-sanity"
+import { PortableText, type PortableTextComponents } from "next-sanity"
 import Link from "next/link"
 import { buttonVariants } from "../ui/button"
 
-const ExperienceAccordion = () => {
-  const items = localConstantData.experiences as ExperienceInterface[]
+const options = { next: { revalidate: 30 } }
+const portableTextComponents: PortableTextComponents = {
+  list: {
+    bullet: ({ children }) => (
+      <ul className="list-outside list-disc space-y-1 pl-5">{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol className="list-outside list-decimal space-y-1 pl-5">{children}</ol>
+    ),
+  },
+}
+
+const ExperienceAccordion = async () => {
+  let items: ExperienceInterface[] = []
+  let fetchError: string | null = null
+
+  try {
+    const response = await client.fetch(EXPERIENCE_QUERY, {}, options)
+    items = toExperience(response)
+  } catch (error: unknown) {
+    console.error("Sanity experience fetch error:", error)
+    fetchError =
+      error instanceof Error ? error.message : "Failed to load experiences."
+  }
+
+  if (fetchError) {
+    return (
+      <section id="experience" className="p-4">
+        <p className="text-xs text-muted-foreground">{fetchError}</p>
+      </section>
+    )
+  }
+
+  if (items.length === 0) return null
+
   return (
     <section id="experience">
       <div className="p-4">
@@ -85,7 +120,10 @@ const ExperienceAccordion = () => {
                     Responsibilities
                   </h3>
                   <div className="text-xs text-muted-foreground">
-                    <PortableText value={key_contributions} />
+                    <PortableText
+                      value={key_contributions}
+                      components={portableTextComponents}
+                    />
                   </div>
                 </div>
               </AccordionContent>

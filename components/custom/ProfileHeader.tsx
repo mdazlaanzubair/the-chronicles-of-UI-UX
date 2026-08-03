@@ -6,7 +6,7 @@ import {
   ExternalLinkIcon,
 } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
-import { Button, buttonVariants } from "../ui/button"
+import { buttonVariants } from "../ui/button"
 import LinkedinIcon from "@sanity/icons/Linkedin"
 import GithubIcon from "@sanity/icons/Github"
 import { SocialMediaInterface } from "@/type"
@@ -26,7 +26,6 @@ export default async function ProfileHeader() {
   try {
     const res = await client.fetch(SOCIAL_PROFILES_QUERY, {}, options)
     social_links = toSocialProfiles(res)
-    console.log(social_links)
   } catch (error: any) {
     console.error("Sanity fetch error:", error)
     fetchError = error?.message || "Failed to load social links."

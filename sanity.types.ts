@@ -15,25 +15,11 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: schema.json
-export type CaseStudyReference = {
-  _ref: string
-  _type: "reference"
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: "caseStudy"
-}
-
 export type PublicationReference = {
   _ref: string
   _type: "reference"
   _weak?: boolean
   [internalGroqTypeReferenceTo]?: "publication"
-}
-
-export type WritingReference = {
-  _ref: string
-  _type: "reference"
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: "writing"
 }
 
 export type WorkReference = {
@@ -61,11 +47,7 @@ export type PortableText = Array<
             _key: string
           }
         | {
-            reference:
-              | CaseStudyReference
-              | PublicationReference
-              | WritingReference
-              | WorkReference
+            reference: PublicationReference | WorkReference
             _type: "relatedContentLink"
             _key: string
           }
@@ -93,8 +75,7 @@ export type PortableText = Array<
 
 export type RelatedContent = {
   _type: "relatedContent"
-  reference:
-    CaseStudyReference | PublicationReference | WritingReference | WorkReference
+  reference: PublicationReference | WorkReference
   label?: string
 }
 
@@ -190,13 +171,6 @@ export type SocialProfile = {
   isHidden?: boolean
 }
 
-export type ProjectSummary = {
-  _type: "projectSummary"
-  name: string
-  slug?: Slug
-  website?: string
-}
-
 export type Institute = {
   _type: "institute"
   name: string
@@ -209,35 +183,6 @@ export type ExperienceCompany = {
   name?: string
   website?: string
   location: string
-}
-
-export type Company = {
-  _type: "company"
-  isAnonymized?: boolean
-  name?: string
-  logo?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: "image"
-  }
-  website?: string
-}
-
-export type Seo = {
-  _type: "seo"
-  title?: string
-  description?: string
-  canonicalUrl?: string
-  openGraphImage?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: "image"
-  }
-  noIndex?: boolean
 }
 
 export type SiteSettings = {
@@ -283,24 +228,21 @@ export type Experience = {
   key_contributions: PortableText
 }
 
-export type CaseStudy = {
+export type Work = {
   _id: string
-  _type: "caseStudy"
+  _type: "work"
   _createdAt: string
   _updatedAt: string
   _rev: string
   title: string
-  slug: Slug
   description: string
   tags: Array<string>
-  body: PortableText
   metadata: {
     isFeatured?: boolean
-    timeline?: string
-    project?: ProjectSummary
-    company?: Company
+    projectUrl?: string
+    repositoryUrl?: string
+    key_contributions: PortableText
   }
-  seo?: Seo
 }
 
 export type SanityImageCrop = {
@@ -317,50 +259,6 @@ export type SanityImageHotspot = {
   y: number
   height: number
   width: number
-}
-
-export type Slug = {
-  _type: "slug"
-  current: string
-  source?: string
-}
-
-export type Writing = {
-  _id: string
-  _type: "writing"
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title: string
-  slug: Slug
-  description: string
-  tags: Array<string>
-  body: PortableText
-  metadata: {
-    status: "draft" | "published" | "archived"
-    isFeatured?: boolean
-    category: string
-    topics: Array<string>
-    publishedAt?: string
-  }
-  seo?: Seo
-}
-
-export type Work = {
-  _id: string
-  _type: "work"
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title: string
-  description: string
-  tags: Array<string>
-  metadata: {
-    isFeatured?: boolean
-    projectUrl?: string
-    repositoryUrl?: string
-    key_contributions: PortableText
-  }
 }
 
 export type Publication = {
@@ -479,10 +377,14 @@ export type Geopoint = {
   alt?: number
 }
 
+export type Slug = {
+  _type: "slug"
+  current: string
+  source?: string
+}
+
 export type AllSanitySchemaTypes =
-  | CaseStudyReference
   | PublicationReference
-  | WritingReference
   | WorkReference
   | PortableText
   | RelatedContent
@@ -494,20 +396,14 @@ export type AllSanitySchemaTypes =
   | PortableImage
   | Skill
   | SocialProfile
-  | ProjectSummary
   | Institute
   | ExperienceCompany
-  | Company
-  | Seo
   | SiteSettings
   | Academic
   | Experience
-  | CaseStudy
+  | Work
   | SanityImageCrop
   | SanityImageHotspot
-  | Slug
-  | Writing
-  | Work
   | Publication
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -517,741 +413,7 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
-
-// Source: src/sanity/queries/caseStudies.ts
-// Variable: CASE_STUDIES_LIST_QUERY
-// Query: *[_type == "caseStudy" && defined(slug.current)]  | order(metadata.isFeatured desc, _updatedAt desc) {    title,    "slug": slug.current,    description,    "tags": coalesce(tags, []),    "metadata": {      "isFeatured": metadata.isFeatured == true,      "timeline": metadata.timeline,        "project": select(    !defined(metadata.project) => null,    {      "name": coalesce(metadata.project.name, "Untitled project"),      "slug": metadata.project.slug.current,      "website": metadata.project.website    }  ),        "company": select(    !defined(metadata.company) => null,    metadata.company.isAnonymized == true => {      "name": "Confidential organization",      "logoUrl": null,      "website": null,      "isAnonymized": true    },    {      "name": coalesce(metadata.company.name, "Organization"),      "logoUrl": metadata.company.logo.asset->url,      "website": metadata.company.website,      "isAnonymized": false    }  )    }  }
-export type CASE_STUDIES_LIST_QUERY_RESULT = Array<{
-  title: string
-  slug: string
-  description: string
-  tags: Array<string>
-  metadata: {
-    isFeatured: boolean | false
-    timeline: string | null
-    project: null | {
-      name: string | "Untitled project"
-      slug: string | null
-      website: string | null
-    }
-    company:
-      | null
-      | {
-          name: string | "Organization"
-          logoUrl: string | null
-          website: string | null
-          isAnonymized: false
-        }
-      | {
-          name: "Confidential organization"
-          logoUrl: null
-          website: null
-          isAnonymized: true
-        }
-  }
-}>
-
-// Source: src/sanity/queries/caseStudies.ts
-// Variable: CASE_STUDY_DETAIL_QUERY
-// Query: *[    _type == "caseStudy" &&    slug.current == $slug  ][0] {    title,    "slug": slug.current,    description,    "tags": coalesce(tags, []),      "body": coalesce(body[]{      ...,  _type == "portableImage" => {    image {      ...,      asset->{        _id,        url,        metadata {          dimensions,          lqip        }      }    }  },  _type == "callout" => {    content[]{...}  },  _type == "tableBlock" => {    rows[]{      _key,      cells    }  },  _type == "relatedContent" => {    reference->{      _id,      _type,      title,      "slug": slug.current    }  },  _type == "block" => {    markDefs[]{      ...,      _type == "relatedContentLink" => {        reference->{          _id,          _type,          title,          "slug": slug.current        }      }    }  }  }, []),    "metadata": {      "isFeatured": metadata.isFeatured == true,      "timeline": metadata.timeline,        "project": select(    !defined(metadata.project) => null,    {      "name": coalesce(metadata.project.name, "Untitled project"),      "slug": metadata.project.slug.current,      "website": metadata.project.website    }  ),        "company": select(    !defined(metadata.company) => null,    metadata.company.isAnonymized == true => {      "name": "Confidential organization",      "logoUrl": null,      "website": null,      "isAnonymized": true    },    {      "name": coalesce(metadata.company.name, "Organization"),      "logoUrl": metadata.company.logo.asset->url,      "website": metadata.company.website,      "isAnonymized": false    }  )    },      "createdAt": _createdAt,  "updatedAt": _updatedAt,    "seo": select(      metadata.company.isAnonymized == true => {        "title": title,        "description": description,        "canonicalUrl": null,        "imageUrl": null,        "noIndex": seo.noIndex == true      },      {        "title": coalesce(seo.title, title),        "description": coalesce(seo.description, description),        "canonicalUrl": seo.canonicalUrl,        "imageUrl": seo.openGraphImage.asset->url,        "noIndex": seo.noIndex == true      }    )  }
-export type CASE_STUDY_DETAIL_QUERY_RESULT = {
-  title: string
-  slug: string
-  description: string
-  tags: Array<string>
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: "span"
-          _key: string
-        }>
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal"
-        listItem?: "bullet" | "number"
-        markDefs: Array<
-          | {
-              href: string
-              openInNewTab?: boolean
-              _type: "link"
-              _key: string
-            }
-          | {
-              reference:
-                | {
-                    _id: string
-                    _type: "caseStudy"
-                    title: string
-                    slug: string
-                  }
-                | {
-                    _id: string
-                    _type: "publication"
-                    title: string
-                    slug: null
-                  }
-                | {
-                    _id: string
-                    _type: "work"
-                    title: string
-                    slug: null
-                  }
-                | {
-                    _id: string
-                    _type: "writing"
-                    title: string
-                    slug: string
-                  }
-              _type: "relatedContentLink"
-              _key: string
-            }
-        > | null
-        level?: number
-        _type: "block"
-        _key: string
-      }
-    | {
-        _key: string
-        _type: "callout"
-        tone: "note" | "tip" | "warning"
-        title?: string
-        content: Array<{
-          children?: Array<{
-            marks?: Array<string>
-            text?: string
-            _type: "span"
-            _key: string
-          }>
-          style?: "normal"
-          listItem?: "bullet" | "number"
-          markDefs?: Array<{
-            href: string
-            openInNewTab?: boolean
-            _type: "link"
-            _key: string
-          }>
-          level?: number
-          _type: "block"
-          _key: string
-        }>
-      }
-    | {
-        _key: string
-        _type: "codeBlock"
-        code: string
-        language:
-          | "bash"
-          | "css"
-          | "groq"
-          | "html"
-          | "javascript"
-          | "json"
-          | "jsx"
-          | "text"
-          | "tsx"
-          | "typescript"
-        filename?: string
-      }
-    | {
-        _key: string
-        _type: "portableImage"
-        image: {
-          asset: {
-            _id: string
-            url: string
-            metadata: {
-              dimensions: SanityImageDimensions | null
-              lqip: string | null
-            } | null
-          } | null
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: "image"
-        }
-        alt: string
-        caption?: string
-      }
-    | {
-        _key: string
-        _type: "relatedContent"
-        reference:
-          | {
-              _id: string
-              _type: "caseStudy"
-              title: string
-              slug: string
-            }
-          | {
-              _id: string
-              _type: "publication"
-              title: string
-              slug: null
-            }
-          | {
-              _id: string
-              _type: "work"
-              title: string
-              slug: null
-            }
-          | {
-              _id: string
-              _type: "writing"
-              title: string
-              slug: string
-            }
-        label?: string
-      }
-    | {
-        _key: string
-        _type: "tableBlock"
-        caption?: string
-        hasHeaderRow?: boolean
-        rows: Array<{
-          _key: string
-          cells: Array<string>
-        }>
-      }
-  >
-  metadata: {
-    isFeatured: boolean | false
-    timeline: string | null
-    project: null | {
-      name: string | "Untitled project"
-      slug: string | null
-      website: string | null
-    }
-    company:
-      | null
-      | {
-          name: string | "Organization"
-          logoUrl: string | null
-          website: string | null
-          isAnonymized: false
-        }
-      | {
-          name: "Confidential organization"
-          logoUrl: null
-          website: null
-          isAnonymized: true
-        }
-  }
-  createdAt: string
-  updatedAt: string
-  seo:
-    | {
-        title: string
-        description: string
-        canonicalUrl: null
-        imageUrl: null
-        noIndex: boolean | false
-      }
-    | {
-        title: string
-        description: string
-        canonicalUrl: string | null
-        imageUrl: string | null
-        noIndex: boolean | false
-      }
-} | null
-
-// Source: src/sanity/queries/featured.ts
-// Variable: FEATURED_CONTENT_QUERY
-// Query: *[    _type in ["publication", "caseStudy", "writing", "work"] &&    metadata.isFeatured == true &&    (      !(_type in ["caseStudy", "writing"]) ||      defined(slug.current)    ) &&    (      _type != "writing" ||      metadata.status == "published"    )  ]  | order(metadata.publishedAt desc, _updatedAt desc) {    _id,    _type,    title,    _type in ["caseStudy", "writing"] => {      "slug": slug.current    },    _type == "publication" => {      abstract,      "authors": coalesce(authors, [])    },    _type in ["caseStudy", "writing", "work"] => {      description,      "tags": coalesce(tags, [])    },    "metadata": {      "isFeatured": true,      "status": metadata.status,      "publishedAt": metadata.publishedAt,      "year": metadata.year,      "category": metadata.category,      "projectUrl": metadata.projectUrl,      "repositoryUrl": metadata.repositoryUrl,      "key_contributions": coalesce(metadata.key_contributions[]{          ...,  _type == "portableImage" => {    image {      ...,      asset->{        _id,        url,        metadata {          dimensions,          lqip        }      }    }  },  _type == "callout" => {    content[]{...}  },  _type == "tableBlock" => {    rows[]{      _key,      cells    }  },  _type == "relatedContent" => {    reference->{      _id,      _type,      title,      "slug": slug.current    }  },  _type == "block" => {    markDefs[]{      ...,      _type == "relatedContentLink" => {        reference->{          _id,          _type,          title,          "slug": slug.current        }      }    }  }      }, [])    }  }
-export type FEATURED_CONTENT_QUERY_RESULT = Array<
-  | {
-      _id: string
-      _type: "caseStudy"
-      title: string
-      slug: string
-      description: string
-      tags: Array<string>
-      metadata: {
-        isFeatured: true
-        status: null
-        publishedAt: null
-        year: null
-        category: null
-        projectUrl: null
-        repositoryUrl: null
-        key_contributions: Array<never>
-      }
-    }
-  | {
-      _id: string
-      _type: "caseStudy"
-      title: string
-      description: string
-      tags: Array<string>
-      metadata: {
-        isFeatured: true
-        status: null
-        publishedAt: null
-        year: null
-        category: null
-        projectUrl: null
-        repositoryUrl: null
-        key_contributions: Array<never>
-      }
-    }
-  | {
-      _id: string
-      _type: "caseStudy"
-      title: string
-      slug: string
-      metadata: {
-        isFeatured: true
-        status: null
-        publishedAt: null
-        year: null
-        category: null
-        projectUrl: null
-        repositoryUrl: null
-        key_contributions: Array<never>
-      }
-    }
-  | {
-      _id: string
-      _type: "caseStudy"
-      title: string
-      metadata: {
-        isFeatured: true
-        status: null
-        publishedAt: null
-        year: null
-        category: null
-        projectUrl: null
-        repositoryUrl: null
-        key_contributions: Array<never>
-      }
-    }
-  | {
-      _id: string
-      _type: "publication"
-      title: string
-      abstract: string
-      authors: Array<string>
-      metadata: {
-        isFeatured: true
-        status:
-          | "accepted"
-          | "in_preparation"
-          | "published"
-          | "submitted"
-          | "under_review"
-        publishedAt: null
-        year: number | null
-        category: null
-        projectUrl: null
-        repositoryUrl: null
-        key_contributions: Array<never>
-      }
-    }
-  | {
-      _id: string
-      _type: "work"
-      title: string
-      description: string
-      tags: Array<string>
-      metadata: {
-        isFeatured: true
-        status: null
-        publishedAt: null
-        year: null
-        category: null
-        projectUrl: string | null
-        repositoryUrl: string | null
-        key_contributions: Array<
-          | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: "span"
-                _key: string
-              }>
-              style?: "blockquote" | "h2" | "h3" | "h4" | "normal"
-              listItem?: "bullet" | "number"
-              markDefs: Array<
-                | {
-                    href: string
-                    openInNewTab?: boolean
-                    _type: "link"
-                    _key: string
-                  }
-                | {
-                    reference:
-                      | {
-                          _id: string
-                          _type: "caseStudy"
-                          title: string
-                          slug: string
-                        }
-                      | {
-                          _id: string
-                          _type: "publication"
-                          title: string
-                          slug: null
-                        }
-                      | {
-                          _id: string
-                          _type: "work"
-                          title: string
-                          slug: null
-                        }
-                      | {
-                          _id: string
-                          _type: "writing"
-                          title: string
-                          slug: string
-                        }
-                    _type: "relatedContentLink"
-                    _key: string
-                  }
-              > | null
-              level?: number
-              _type: "block"
-              _key: string
-            }
-          | {
-              _key: string
-              _type: "callout"
-              tone: "note" | "tip" | "warning"
-              title?: string
-              content: Array<{
-                children?: Array<{
-                  marks?: Array<string>
-                  text?: string
-                  _type: "span"
-                  _key: string
-                }>
-                style?: "normal"
-                listItem?: "bullet" | "number"
-                markDefs?: Array<{
-                  href: string
-                  openInNewTab?: boolean
-                  _type: "link"
-                  _key: string
-                }>
-                level?: number
-                _type: "block"
-                _key: string
-              }>
-            }
-          | {
-              _key: string
-              _type: "codeBlock"
-              code: string
-              language:
-                | "bash"
-                | "css"
-                | "groq"
-                | "html"
-                | "javascript"
-                | "json"
-                | "jsx"
-                | "text"
-                | "tsx"
-                | "typescript"
-              filename?: string
-            }
-          | {
-              _key: string
-              _type: "portableImage"
-              image: {
-                asset: {
-                  _id: string
-                  url: string
-                  metadata: {
-                    dimensions: SanityImageDimensions | null
-                    lqip: string | null
-                  } | null
-                } | null
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: "image"
-              }
-              alt: string
-              caption?: string
-            }
-          | {
-              _key: string
-              _type: "relatedContent"
-              reference:
-                | {
-                    _id: string
-                    _type: "caseStudy"
-                    title: string
-                    slug: string
-                  }
-                | {
-                    _id: string
-                    _type: "publication"
-                    title: string
-                    slug: null
-                  }
-                | {
-                    _id: string
-                    _type: "work"
-                    title: string
-                    slug: null
-                  }
-                | {
-                    _id: string
-                    _type: "writing"
-                    title: string
-                    slug: string
-                  }
-              label?: string
-            }
-          | {
-              _key: string
-              _type: "tableBlock"
-              caption?: string
-              hasHeaderRow?: boolean
-              rows: Array<{
-                _key: string
-                cells: Array<string>
-              }>
-            }
-        >
-      }
-    }
-  | {
-      _id: string
-      _type: "work"
-      title: string
-      metadata: {
-        isFeatured: true
-        status: null
-        publishedAt: null
-        year: null
-        category: null
-        projectUrl: string | null
-        repositoryUrl: string | null
-        key_contributions: Array<
-          | {
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: "span"
-                _key: string
-              }>
-              style?: "blockquote" | "h2" | "h3" | "h4" | "normal"
-              listItem?: "bullet" | "number"
-              markDefs: Array<
-                | {
-                    href: string
-                    openInNewTab?: boolean
-                    _type: "link"
-                    _key: string
-                  }
-                | {
-                    reference:
-                      | {
-                          _id: string
-                          _type: "caseStudy"
-                          title: string
-                          slug: string
-                        }
-                      | {
-                          _id: string
-                          _type: "publication"
-                          title: string
-                          slug: null
-                        }
-                      | {
-                          _id: string
-                          _type: "work"
-                          title: string
-                          slug: null
-                        }
-                      | {
-                          _id: string
-                          _type: "writing"
-                          title: string
-                          slug: string
-                        }
-                    _type: "relatedContentLink"
-                    _key: string
-                  }
-              > | null
-              level?: number
-              _type: "block"
-              _key: string
-            }
-          | {
-              _key: string
-              _type: "callout"
-              tone: "note" | "tip" | "warning"
-              title?: string
-              content: Array<{
-                children?: Array<{
-                  marks?: Array<string>
-                  text?: string
-                  _type: "span"
-                  _key: string
-                }>
-                style?: "normal"
-                listItem?: "bullet" | "number"
-                markDefs?: Array<{
-                  href: string
-                  openInNewTab?: boolean
-                  _type: "link"
-                  _key: string
-                }>
-                level?: number
-                _type: "block"
-                _key: string
-              }>
-            }
-          | {
-              _key: string
-              _type: "codeBlock"
-              code: string
-              language:
-                | "bash"
-                | "css"
-                | "groq"
-                | "html"
-                | "javascript"
-                | "json"
-                | "jsx"
-                | "text"
-                | "tsx"
-                | "typescript"
-              filename?: string
-            }
-          | {
-              _key: string
-              _type: "portableImage"
-              image: {
-                asset: {
-                  _id: string
-                  url: string
-                  metadata: {
-                    dimensions: SanityImageDimensions | null
-                    lqip: string | null
-                  } | null
-                } | null
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: "image"
-              }
-              alt: string
-              caption?: string
-            }
-          | {
-              _key: string
-              _type: "relatedContent"
-              reference:
-                | {
-                    _id: string
-                    _type: "caseStudy"
-                    title: string
-                    slug: string
-                  }
-                | {
-                    _id: string
-                    _type: "publication"
-                    title: string
-                    slug: null
-                  }
-                | {
-                    _id: string
-                    _type: "work"
-                    title: string
-                    slug: null
-                  }
-                | {
-                    _id: string
-                    _type: "writing"
-                    title: string
-                    slug: string
-                  }
-              label?: string
-            }
-          | {
-              _key: string
-              _type: "tableBlock"
-              caption?: string
-              hasHeaderRow?: boolean
-              rows: Array<{
-                _key: string
-                cells: Array<string>
-              }>
-            }
-        >
-      }
-    }
-  | {
-      _id: string
-      _type: "writing"
-      title: string
-      slug: string
-      description: string
-      tags: Array<string>
-      metadata: {
-        isFeatured: true
-        status: "archived" | "draft" | "published"
-        publishedAt: string | null
-        year: null
-        category: string
-        projectUrl: null
-        repositoryUrl: null
-        key_contributions: Array<never>
-      }
-    }
-  | {
-      _id: string
-      _type: "writing"
-      title: string
-      description: string
-      tags: Array<string>
-      metadata: {
-        isFeatured: true
-        status: "archived" | "draft" | "published"
-        publishedAt: string | null
-        year: null
-        category: string
-        projectUrl: null
-        repositoryUrl: null
-        key_contributions: Array<never>
-      }
-    }
-  | {
-      _id: string
-      _type: "writing"
-      title: string
-      slug: string
-      metadata: {
-        isFeatured: true
-        status: "archived" | "draft" | "published"
-        publishedAt: string | null
-        year: null
-        category: string
-        projectUrl: null
-        repositoryUrl: null
-        key_contributions: Array<never>
-      }
-    }
-  | {
-      _id: string
-      _type: "writing"
-      title: string
-      metadata: {
-        isFeatured: true
-        status: "archived" | "draft" | "published"
-        publishedAt: string | null
-        year: null
-        category: string
-        projectUrl: null
-        repositoryUrl: null
-        key_contributions: Array<never>
-      }
-    }
->
+  | Slug
 
 // Source: src/sanity/queries/profile.ts
 // Variable: EXPERIENCE_QUERY
@@ -1293,12 +455,6 @@ export type EXPERIENCE_QUERY_RESULT = Array<{
               reference:
                 | {
                     _id: string
-                    _type: "caseStudy"
-                    title: string
-                    slug: string
-                  }
-                | {
-                    _id: string
                     _type: "publication"
                     title: string
                     slug: null
@@ -1308,12 +464,6 @@ export type EXPERIENCE_QUERY_RESULT = Array<{
                     _type: "work"
                     title: string
                     slug: null
-                  }
-                | {
-                    _id: string
-                    _type: "writing"
-                    title: string
-                    slug: string
                   }
               _type: "relatedContentLink"
               _key: string
@@ -1391,12 +541,6 @@ export type EXPERIENCE_QUERY_RESULT = Array<{
         reference:
           | {
               _id: string
-              _type: "caseStudy"
-              title: string
-              slug: string
-            }
-          | {
-              _id: string
               _type: "publication"
               title: string
               slug: null
@@ -1406,12 +550,6 @@ export type EXPERIENCE_QUERY_RESULT = Array<{
               _type: "work"
               title: string
               slug: null
-            }
-          | {
-              _id: string
-              _type: "writing"
-              title: string
-              slug: string
             }
         label?: string
       }
@@ -1458,11 +596,6 @@ export type SOCIAL_PROFILES_QUERY_RESULT =
     }>
   | Array<never>
 
-// Source: src/sanity/queries/profile.ts
-// Variable: INTERESTS_QUERY
-// Query: coalesce(*[_id == "siteSettings"][0].interests, [])
-export type INTERESTS_QUERY_RESULT = Array<string> | Array<never>
-
 // Source: src/sanity/queries/publications.ts
 // Variable: PUBLICATIONS_LIST_QUERY
 // Query: *[_type == "publication"]  | order(metadata.year desc, _createdAt desc) {    title,    abstract,    "authors": coalesce(authors, []),    "metadata": {      "journal": metadata.journal,      "status": metadata.status,      "year": metadata.year,      "doi": metadata.doi,      "isFeatured": metadata.isFeatured == true    },      "createdAt": _createdAt,  "updatedAt": _updatedAt  }
@@ -1484,8 +617,9 @@ export type PUBLICATIONS_LIST_QUERY_RESULT = Array<{
 
 // Source: src/sanity/queries/work.ts
 // Variable: WORK_LIST_QUERY
-// Query: *[_type == "work"]  | order(metadata.isFeatured desc, _updatedAt desc) {    title,    description,    "tags": coalesce(tags, []),    "metadata": {      "isFeatured": metadata.isFeatured == true,      "projectUrl": metadata.projectUrl,      "repositoryUrl": metadata.repositoryUrl,      "key_contributions": coalesce(metadata.key_contributions[]{          ...,  _type == "portableImage" => {    image {      ...,      asset->{        _id,        url,        metadata {          dimensions,          lqip        }      }    }  },  _type == "callout" => {    content[]{...}  },  _type == "tableBlock" => {    rows[]{      _key,      cells    }  },  _type == "relatedContent" => {    reference->{      _id,      _type,      title,      "slug": slug.current    }  },  _type == "block" => {    markDefs[]{      ...,      _type == "relatedContentLink" => {        reference->{          _id,          _type,          title,          "slug": slug.current        }      }    }  }      }, [])    },      "createdAt": _createdAt,  "updatedAt": _updatedAt  }
+// Query: *[_type == "work"]  | order(coalesce(metadata.isFeatured, false) desc, _updatedAt desc, _id asc) {    "id": _id,    title,    description,    "tags": coalesce(tags, []),    "metadata": {      "isFeatured": metadata.isFeatured == true,      "projectUrl": metadata.projectUrl,      "repositoryUrl": metadata.repositoryUrl,      "key_contributions": coalesce(metadata.key_contributions[]{          ...,  _type == "portableImage" => {    image {      ...,      asset->{        _id,        url,        metadata {          dimensions,          lqip        }      }    }  },  _type == "callout" => {    content[]{...}  },  _type == "tableBlock" => {    rows[]{      _key,      cells    }  },  _type == "relatedContent" => {    reference->{      _id,      _type,      title,      "slug": slug.current    }  },  _type == "block" => {    markDefs[]{      ...,      _type == "relatedContentLink" => {        reference->{          _id,          _type,          title,          "slug": slug.current        }      }    }  }      }, [])    },      "createdAt": _createdAt,  "updatedAt": _updatedAt  }
 export type WORK_LIST_QUERY_RESULT = Array<{
+  id: string
   title: string
   description: string
   tags: Array<string>
@@ -1514,12 +648,6 @@ export type WORK_LIST_QUERY_RESULT = Array<{
                 reference:
                   | {
                       _id: string
-                      _type: "caseStudy"
-                      title: string
-                      slug: string
-                    }
-                  | {
-                      _id: string
                       _type: "publication"
                       title: string
                       slug: null
@@ -1529,12 +657,6 @@ export type WORK_LIST_QUERY_RESULT = Array<{
                       _type: "work"
                       title: string
                       slug: null
-                    }
-                  | {
-                      _id: string
-                      _type: "writing"
-                      title: string
-                      slug: string
                     }
                 _type: "relatedContentLink"
                 _key: string
@@ -1612,12 +734,6 @@ export type WORK_LIST_QUERY_RESULT = Array<{
           reference:
             | {
                 _id: string
-                _type: "caseStudy"
-                title: string
-                slug: string
-              }
-            | {
-                _id: string
                 _type: "publication"
                 title: string
                 slug: null
@@ -1627,12 +743,6 @@ export type WORK_LIST_QUERY_RESULT = Array<{
                 _type: "work"
                 title: string
                 slug: null
-              }
-            | {
-                _id: string
-                _type: "writing"
-                title: string
-                slug: string
               }
           label?: string
         }
@@ -1652,213 +762,14 @@ export type WORK_LIST_QUERY_RESULT = Array<{
   updatedAt: string
 }>
 
-// Source: src/sanity/queries/writings.ts
-// Variable: WRITINGS_LIST_QUERY
-// Query: *[    _type == "writing" &&    defined(slug.current) &&    metadata.status == "published"  ]  | order(metadata.publishedAt desc, _createdAt desc) {    title,    "slug": slug.current,    description,    "tags": coalesce(tags, []),    "metadata": {      "status": metadata.status,      "isFeatured": metadata.isFeatured == true,      "category": metadata.category,      "topics": coalesce(metadata.topics, []),      "publishedAt": metadata.publishedAt    }  }
-export type WRITINGS_LIST_QUERY_RESULT = Array<{
-  title: string
-  slug: string
-  description: string
-  tags: Array<string>
-  metadata: {
-    status: "published"
-    isFeatured: boolean | false
-    category: string
-    topics: Array<string>
-    publishedAt: string | null
-  }
-}>
-
-// Source: src/sanity/queries/writings.ts
-// Variable: WRITING_DETAIL_QUERY
-// Query: *[    _type == "writing" &&    slug.current == $slug &&    metadata.status == "published"  ][0] {    title,    "slug": slug.current,    description,    "tags": coalesce(tags, []),      "body": coalesce(body[]{      ...,  _type == "portableImage" => {    image {      ...,      asset->{        _id,        url,        metadata {          dimensions,          lqip        }      }    }  },  _type == "callout" => {    content[]{...}  },  _type == "tableBlock" => {    rows[]{      _key,      cells    }  },  _type == "relatedContent" => {    reference->{      _id,      _type,      title,      "slug": slug.current    }  },  _type == "block" => {    markDefs[]{      ...,      _type == "relatedContentLink" => {        reference->{          _id,          _type,          title,          "slug": slug.current        }      }    }  }  }, []),    "metadata": {      "status": metadata.status,      "isFeatured": metadata.isFeatured == true,      "category": metadata.category,      "topics": coalesce(metadata.topics, []),      "publishedAt": metadata.publishedAt    },      "createdAt": _createdAt,  "updatedAt": _updatedAt,      "seo": {    "title": coalesce(seo.title, title),    "description": coalesce(seo.description, description),    "canonicalUrl": seo.canonicalUrl,    "imageUrl": seo.openGraphImage.asset->url,    "noIndex": seo.noIndex == true  }  }
-export type WRITING_DETAIL_QUERY_RESULT = {
-  title: string
-  slug: string
-  description: string
-  tags: Array<string>
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: "span"
-          _key: string
-        }>
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal"
-        listItem?: "bullet" | "number"
-        markDefs: Array<
-          | {
-              href: string
-              openInNewTab?: boolean
-              _type: "link"
-              _key: string
-            }
-          | {
-              reference:
-                | {
-                    _id: string
-                    _type: "caseStudy"
-                    title: string
-                    slug: string
-                  }
-                | {
-                    _id: string
-                    _type: "publication"
-                    title: string
-                    slug: null
-                  }
-                | {
-                    _id: string
-                    _type: "work"
-                    title: string
-                    slug: null
-                  }
-                | {
-                    _id: string
-                    _type: "writing"
-                    title: string
-                    slug: string
-                  }
-              _type: "relatedContentLink"
-              _key: string
-            }
-        > | null
-        level?: number
-        _type: "block"
-        _key: string
-      }
-    | {
-        _key: string
-        _type: "callout"
-        tone: "note" | "tip" | "warning"
-        title?: string
-        content: Array<{
-          children?: Array<{
-            marks?: Array<string>
-            text?: string
-            _type: "span"
-            _key: string
-          }>
-          style?: "normal"
-          listItem?: "bullet" | "number"
-          markDefs?: Array<{
-            href: string
-            openInNewTab?: boolean
-            _type: "link"
-            _key: string
-          }>
-          level?: number
-          _type: "block"
-          _key: string
-        }>
-      }
-    | {
-        _key: string
-        _type: "codeBlock"
-        code: string
-        language:
-          | "bash"
-          | "css"
-          | "groq"
-          | "html"
-          | "javascript"
-          | "json"
-          | "jsx"
-          | "text"
-          | "tsx"
-          | "typescript"
-        filename?: string
-      }
-    | {
-        _key: string
-        _type: "portableImage"
-        image: {
-          asset: {
-            _id: string
-            url: string
-            metadata: {
-              dimensions: SanityImageDimensions | null
-              lqip: string | null
-            } | null
-          } | null
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: "image"
-        }
-        alt: string
-        caption?: string
-      }
-    | {
-        _key: string
-        _type: "relatedContent"
-        reference:
-          | {
-              _id: string
-              _type: "caseStudy"
-              title: string
-              slug: string
-            }
-          | {
-              _id: string
-              _type: "publication"
-              title: string
-              slug: null
-            }
-          | {
-              _id: string
-              _type: "work"
-              title: string
-              slug: null
-            }
-          | {
-              _id: string
-              _type: "writing"
-              title: string
-              slug: string
-            }
-        label?: string
-      }
-    | {
-        _key: string
-        _type: "tableBlock"
-        caption?: string
-        hasHeaderRow?: boolean
-        rows: Array<{
-          _key: string
-          cells: Array<string>
-        }>
-      }
-  >
-  metadata: {
-    status: "archived" | "draft" | "published"
-    isFeatured: boolean | false
-    category: string
-    topics: Array<string>
-    publishedAt: string | null
-  }
-  createdAt: string
-  updatedAt: string
-  seo: {
-    title: string
-    description: string
-    canonicalUrl: string | null
-    imageUrl: string | null
-    noIndex: boolean | false
-  }
-} | null
-
 // Query TypeMap
 import "@sanity/client"
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[\n    _type == "caseStudy" &&\n    slug.current == $slug\n  ][0] {\n    title,\n    "slug": slug.current,\n    description,\n    "tags": coalesce(tags, []),\n    \n  "body": coalesce(body[]{\n    \n  ...,\n  _type == "portableImage" => {\n    image {\n      ...,\n      asset->{\n        _id,\n        url,\n        metadata {\n          dimensions,\n          lqip\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    content[]{...}\n  },\n  _type == "tableBlock" => {\n    rows[]{\n      _key,\n      cells\n    }\n  },\n  _type == "relatedContent" => {\n    reference->{\n      _id,\n      _type,\n      title,\n      "slug": slug.current\n    }\n  },\n  _type == "block" => {\n    markDefs[]{\n      ...,\n      _type == "relatedContentLink" => {\n        reference->{\n          _id,\n          _type,\n          title,\n          "slug": slug.current\n        }\n      }\n    }\n  }\n\n  }, [])\n,\n    "metadata": {\n      "isFeatured": metadata.isFeatured == true,\n      "timeline": metadata.timeline,\n      \n  "project": select(\n    !defined(metadata.project) => null,\n    {\n      "name": coalesce(metadata.project.name, "Untitled project"),\n      "slug": metadata.project.slug.current,\n      "website": metadata.project.website\n    }\n  )\n,\n      \n  "company": select(\n    !defined(metadata.company) => null,\n    metadata.company.isAnonymized == true => {\n      "name": "Confidential organization",\n      "logoUrl": null,\n      "website": null,\n      "isAnonymized": true\n    },\n    {\n      "name": coalesce(metadata.company.name, "Organization"),\n      "logoUrl": metadata.company.logo.asset->url,\n      "website": metadata.company.website,\n      "isAnonymized": false\n    }\n  )\n\n    },\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n,\n    "seo": select(\n      metadata.company.isAnonymized == true => {\n        "title": title,\n        "description": description,\n        "canonicalUrl": null,\n        "imageUrl": null,\n        "noIndex": seo.noIndex == true\n      },\n      {\n        "title": coalesce(seo.title, title),\n        "description": coalesce(seo.description, description),\n        "canonicalUrl": seo.canonicalUrl,\n        "imageUrl": seo.openGraphImage.asset->url,\n        "noIndex": seo.noIndex == true\n      }\n    )\n  }\n': CASE_STUDY_DETAIL_QUERY_RESULT
-    '\n  *[\n    _type in ["publication", "caseStudy", "writing", "work"] &&\n    metadata.isFeatured == true &&\n    (\n      !(_type in ["caseStudy", "writing"]) ||\n      defined(slug.current)\n    ) &&\n    (\n      _type != "writing" ||\n      metadata.status == "published"\n    )\n  ]\n  | order(metadata.publishedAt desc, _updatedAt desc) {\n    _id,\n    _type,\n    title,\n    _type in ["caseStudy", "writing"] => {\n      "slug": slug.current\n    },\n    _type == "publication" => {\n      abstract,\n      "authors": coalesce(authors, [])\n    },\n    _type in ["caseStudy", "writing", "work"] => {\n      description,\n      "tags": coalesce(tags, [])\n    },\n    "metadata": {\n      "isFeatured": true,\n      "status": metadata.status,\n      "publishedAt": metadata.publishedAt,\n      "year": metadata.year,\n      "category": metadata.category,\n      "projectUrl": metadata.projectUrl,\n      "repositoryUrl": metadata.repositoryUrl,\n      "key_contributions": coalesce(metadata.key_contributions[]{\n        \n  ...,\n  _type == "portableImage" => {\n    image {\n      ...,\n      asset->{\n        _id,\n        url,\n        metadata {\n          dimensions,\n          lqip\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    content[]{...}\n  },\n  _type == "tableBlock" => {\n    rows[]{\n      _key,\n      cells\n    }\n  },\n  _type == "relatedContent" => {\n    reference->{\n      _id,\n      _type,\n      title,\n      "slug": slug.current\n    }\n  },\n  _type == "block" => {\n    markDefs[]{\n      ...,\n      _type == "relatedContentLink" => {\n        reference->{\n          _id,\n          _type,\n          title,\n          "slug": slug.current\n        }\n      }\n    }\n  }\n\n      }, [])\n    }\n  }\n': FEATURED_CONTENT_QUERY_RESULT
     '\n  *[_type == "experience"]\n  | order(_createdAt desc) {\n    "company": select(\n      company.isAnonymized == true => {\n        "name": "Confidential organization",\n        "website": null,\n        "location": company.location,\n        "isAnonymized": true\n      },\n      {\n        "name": coalesce(company.name, "Organization"),\n        "website": company.website,\n        "location": company.location,\n        "isAnonymized": false\n      }\n    ),\n    timeline,\n    role,\n    "key_contributions": coalesce(key_contributions[]{\n      \n  ...,\n  _type == "portableImage" => {\n    image {\n      ...,\n      asset->{\n        _id,\n        url,\n        metadata {\n          dimensions,\n          lqip\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    content[]{...}\n  },\n  _type == "tableBlock" => {\n    rows[]{\n      _key,\n      cells\n    }\n  },\n  _type == "relatedContent" => {\n    reference->{\n      _id,\n      _type,\n      title,\n      "slug": slug.current\n    }\n  },\n  _type == "block" => {\n    markDefs[]{\n      ...,\n      _type == "relatedContentLink" => {\n        reference->{\n          _id,\n          _type,\n          title,\n          "slug": slug.current\n        }\n      }\n    }\n  }\n\n    }, []),\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': EXPERIENCE_QUERY_RESULT
     '\n  *[_type == "academic"]\n  | order(_createdAt desc) {\n    "institute": {\n      "name": institute.name,\n      "website": institute.website\n    },\n    degree,\n    field,\n    timeline,\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': ACADEMIC_HISTORY_QUERY_RESULT
     '\n  coalesce(*[_id == "siteSettings"][0].socialMedia, [])[]{\n    _key,\n    platform,\n    username,\n    url,\n    "isHidden": isHidden == true\n  }\n': SOCIAL_PROFILES_QUERY_RESULT
     '\n  *[_type == "publication"]\n  | order(metadata.year desc, _createdAt desc) {\n    title,\n    abstract,\n    "authors": coalesce(authors, []),\n    "metadata": {\n      "journal": metadata.journal,\n      "status": metadata.status,\n      "year": metadata.year,\n      "doi": metadata.doi,\n      "isFeatured": metadata.isFeatured == true\n    },\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': PUBLICATIONS_LIST_QUERY_RESULT
-    '\n  *[_type == "work"]\n  | order(metadata.isFeatured desc, _updatedAt desc) {\n    title,\n    description,\n    "tags": coalesce(tags, []),\n    "metadata": {\n      "isFeatured": metadata.isFeatured == true,\n      "projectUrl": metadata.projectUrl,\n      "repositoryUrl": metadata.repositoryUrl,\n      "key_contributions": coalesce(metadata.key_contributions[]{\n        \n  ...,\n  _type == "portableImage" => {\n    image {\n      ...,\n      asset->{\n        _id,\n        url,\n        metadata {\n          dimensions,\n          lqip\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    content[]{...}\n  },\n  _type == "tableBlock" => {\n    rows[]{\n      _key,\n      cells\n    }\n  },\n  _type == "relatedContent" => {\n    reference->{\n      _id,\n      _type,\n      title,\n      "slug": slug.current\n    }\n  },\n  _type == "block" => {\n    markDefs[]{\n      ...,\n      _type == "relatedContentLink" => {\n        reference->{\n          _id,\n          _type,\n          title,\n          "slug": slug.current\n        }\n      }\n    }\n  }\n\n      }, [])\n    },\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': WORK_LIST_QUERY_RESULT
+    '\n  *[_type == "work"]\n  | order(coalesce(metadata.isFeatured, false) desc, _updatedAt desc, _id asc) {\n    "id": _id,\n    title,\n    description,\n    "tags": coalesce(tags, []),\n    "metadata": {\n      "isFeatured": metadata.isFeatured == true,\n      "projectUrl": metadata.projectUrl,\n      "repositoryUrl": metadata.repositoryUrl,\n      "key_contributions": coalesce(metadata.key_contributions[]{\n        \n  ...,\n  _type == "portableImage" => {\n    image {\n      ...,\n      asset->{\n        _id,\n        url,\n        metadata {\n          dimensions,\n          lqip\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    content[]{...}\n  },\n  _type == "tableBlock" => {\n    rows[]{\n      _key,\n      cells\n    }\n  },\n  _type == "relatedContent" => {\n    reference->{\n      _id,\n      _type,\n      title,\n      "slug": slug.current\n    }\n  },\n  _type == "block" => {\n    markDefs[]{\n      ...,\n      _type == "relatedContentLink" => {\n        reference->{\n          _id,\n          _type,\n          title,\n          "slug": slug.current\n        }\n      }\n    }\n  }\n\n      }, [])\n    },\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': WORK_LIST_QUERY_RESULT
   }
 }

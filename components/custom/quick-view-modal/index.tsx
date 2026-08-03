@@ -1,25 +1,19 @@
 "use client"
 
 import { Dialog, DialogContent } from "@/components/ui/dialog"
-import { PublicationInterface, WorkInterface, WritingInterface } from "@/type"
+import { PublicationInterface, WorkInterface } from "@/type"
 import ResearchContent from "./ResearchContent"
 
 interface QuickViewModalProps {
   isOpen: boolean
-  data: PublicationInterface | WorkInterface | WritingInterface | null
+  data: PublicationInterface | WorkInterface | null
   onClose: () => void
 }
 
 const isPublication = (
-  item: PublicationInterface | WorkInterface | WritingInterface
+  item: PublicationInterface | WorkInterface
 ): item is PublicationInterface => {
   return "authors" in item
-}
-
-const isProject = (
-  item: PublicationInterface | WorkInterface | WritingInterface
-): item is WorkInterface => {
-  return "metadata" in item && "key_contributions" in item.metadata
 }
 
 const QuickViewModal = ({ isOpen, data, onClose }: QuickViewModalProps) => {

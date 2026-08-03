@@ -1,9 +1,3 @@
-export const contentStatusOptions = [
-  { title: "Draft", value: "draft" },
-  { title: "Published", value: "published" },
-  { title: "Archived", value: "archived" },
-] as const
-
 export const publicationStatusOptions = [
   { title: "In preparation", value: "in_preparation" },
   { title: "Submitted", value: "submitted" },
