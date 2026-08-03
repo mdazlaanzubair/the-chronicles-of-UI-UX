@@ -20,9 +20,12 @@ export default async function Page() {
     })
     posts = res.posts
     series = res.series
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Hashnode series fetch error:", error)
-    fetchError = error?.message || "Failed to load Hashnode case study posts."
+    fetchError =
+      error instanceof Error
+        ? error.message
+        : "Failed to load Hashnode case study posts."
   }
 
   const seriesUrl = series?.slug
@@ -91,10 +94,6 @@ export default async function Page() {
                           {post.title}
                         </Link>
                       </h2>
-
-                      {/* <p className="line-clamp-3 text-xs text-muted-foreground">
-                        {post.brief}
-                      </p> */}
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-1 text-xs text-muted-foreground">

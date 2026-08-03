@@ -2,7 +2,7 @@ import ExternalLink from "@/components/custom/ExternalLink"
 import { toSocialProfiles } from "@/src/sanity/adapters"
 import { client } from "@/src/sanity/client"
 import { SOCIAL_PROFILES_QUERY } from "@/src/sanity/queries"
-import { SocialMediaInterface } from "@/type"
+import type { SocialMediaInterface } from "@/type"
 
 const options = { next: { revalidate: 30 } }
 
@@ -13,10 +13,10 @@ export const Footer = async () => {
   try {
     const res = await client.fetch(SOCIAL_PROFILES_QUERY, {}, options)
     social_links = toSocialProfiles(res)
-    console.log(social_links)
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Sanity fetch error:", error)
-    fetchError = error?.message || "Failed to load social links."
+    fetchError =
+      error instanceof Error ? error.message : "Failed to load social links."
   }
 
   if (fetchError) {
@@ -27,7 +27,7 @@ export const Footer = async () => {
     )
   }
 
-  if (!social_links || social_links.length <= 0) return null
+  if (social_links.length === 0) return null
   return (
     <footer className="flex w-full items-center justify-between gap-3 border-b border-accent bg-card p-4">
       <p className="text-xs text-muted-foreground">
@@ -35,7 +35,7 @@ export const Footer = async () => {
       </p>
 
       <div className="flex items-center gap-3">
-        {social_links.map((item, idx) => {
+        {social_links.map((item) => {
           if (
             item.isHidden ||
             ["github", "scholar", "linkedin"].includes(item.platform)
@@ -43,7 +43,7 @@ export const Footer = async () => {
             return
           return (
             <ExternalLink
-              key={`social-link-${idx}`}
+              key={item.url}
               label={item.platform}
               title={item.username}
               url={item.url}

@@ -14,9 +14,10 @@ export default async function Page() {
       excludeCaseStudies: true,
     })
     posts = res.posts
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Hashnode fetch error:", error)
-    fetchError = error?.message || "Failed to load Hashnode posts."
+    fetchError =
+      error instanceof Error ? error.message : "Failed to load Hashnode posts."
   }
 
   return (
@@ -81,10 +82,6 @@ export default async function Page() {
                           {post.title}
                         </Link>
                       </h2>
-
-                      {/* <p className="line-clamp-3 text-xs text-muted-foreground">
-                        {post.brief}
-                      </p> */}
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-1 text-xs text-muted-foreground">

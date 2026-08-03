@@ -45,12 +45,6 @@ export const portableTextMembersProjection = /* groq */ `
   }
 `
 
-export const portableTextProjection = /* groq */ `
-  "body": coalesce(body[]{
-    ${portableTextMembersProjection}
-  }, [])
-`
-
 export const timestampsProjection = /* groq */ `
   "createdAt": _createdAt,
   "updatedAt": _updatedAt

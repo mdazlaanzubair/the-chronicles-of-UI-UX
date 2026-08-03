@@ -1,10 +1,9 @@
 import type { PortableTextBlock } from "next-sanity"
 
-export type PublicationStatus =
+type PublicationStatus =
   "in_preparation" | "submitted" | "under_review" | "accepted" | "published"
 
-export type SocialPlatform =
-  "x" | "instagram" | "linkedin" | "github" | "scholar"
+type SocialPlatform = "x" | "instagram" | "linkedin" | "github" | "scholar"
 
 export interface PublicationInterface {
   id: string
@@ -78,7 +77,7 @@ export interface AcademicInterface {
 }
 
 export interface SkillInterface {
-  id: string;
+  id: string
   title: string
   tags: string[]
 }

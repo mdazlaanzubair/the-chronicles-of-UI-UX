@@ -52,11 +52,6 @@ const ResearchList = ({
               <p className="mt-1 line-clamp-3 text-xs leading-5 text-muted-foreground">
                 {publication.abstract}
               </p>
-              {/* {publication.authors.length > 0 && (
-                <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
-                  {publication.authors.join(", ")}
-                </p>
-              )} */}
             </div>
           </article>
         ))}

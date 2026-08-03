@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils"
-import { ExternalLinkIcon } from "lucide-react"
 
 const ExternalLink = ({
   classname = "",
@@ -29,7 +28,6 @@ const ExternalLink = ({
       title={title || label}
     >
       {label}
-      {/* <ExternalLinkIcon className="h-3 w-3" /> */}
     </a>
   )
 }

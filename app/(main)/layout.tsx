@@ -1,9 +1,4 @@
-import {
-  Geist_Mono,
-  Oxanium,
-  Playfair_Display,
-  Red_Hat_Display,
-} from "next/font/google"
+import { Geist_Mono, Oxanium, Red_Hat_Display } from "next/font/google"
 
 import "../globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -12,13 +7,7 @@ import ProfileHeader from "@/components/custom/ProfileHeader"
 import Navbar from "@/components/custom/Navbar"
 import { Footer } from "@/components/custom/Footer"
 
-// const playfairDisplayHeading = Playfair_Display({
-//   subsets: ["latin"],
-//   variable: "--font-heading",
-// })
-
 const playfairDisplayHeading = Red_Hat_Display({
-  // weight: ["400"],
   subsets: ["latin"],
   variable: "--font-heading",
 })

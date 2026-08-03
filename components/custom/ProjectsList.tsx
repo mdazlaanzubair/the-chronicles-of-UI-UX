@@ -105,14 +105,6 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
                     Featured
                   </span>
                 )}
-                {/* {project.tags.slice(0, 4).map((tag) => (
-                  <span
-                    key={`${project.id}-${tag}`}
-                    className="text-xs font-medium text-muted-foreground"
-                  >
-                    #{tag}
-                  </span>
-                ))} */}
               </div>
 
               <h2 className="line-clamp-2 text-lg leading-snug font-semibold tracking-tight transition-colors group-hover/project:text-foreground sm:text-base">
@@ -123,43 +115,6 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
                 {project.description}
               </p>
             </div>
-
-            {/* <div className="pointer-events-none relative z-10 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
-              <time dateTime={project.updatedAt}>
-                Updated {formatDate(project.updatedAt)}
-              </time>
-
-              <div className="pointer-events-auto flex items-center gap-1">
-                {project.metadata.repositoryUrl && (
-                  <Link
-                    href={project.metadata.repositoryUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      buttonVariants({ variant: "ghost", size: "sm" }),
-                      "h-7 gap-1 px-2 text-xs"
-                    )}
-                  >
-                    <Code2Icon className="size-3" />
-                    Source
-                  </Link>
-                )}
-                {project.metadata.projectUrl && (
-                  <Link
-                    href={project.metadata.projectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      buttonVariants({ variant: "ghost", size: "sm" }),
-                      "h-7 gap-1 px-2 text-xs"
-                    )}
-                  >
-                    <ExternalLinkIcon className="size-3" />
-                    Visit
-                  </Link>
-                )}
-              </div>
-            </div> */}
           </article>
         ))}
       </section>
@@ -172,11 +127,11 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
       >
         {selectedProject && (
           <DialogContent className="max-h-[85vh] overflow-hidden border border-border/60 bg-card sm:max-w-2xl">
-            <DialogHeader className="">
+            <DialogHeader>
               {selectedProject.metadata.isFeatured && (
                 <span className="eyebrow text-[11px]">Featured project</span>
               )}
-              <DialogTitle className="normal-case font-heading text-xl font-semibold">
+              <DialogTitle className="font-heading text-xl font-semibold normal-case">
                 {selectedProject.title}
               </DialogTitle>
               <DialogDescription className="text-sm text-muted-foreground">
@@ -218,9 +173,7 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
             </div>
 
             <DialogFooter className="items-center border-t border-accent pt-4 sm:justify-between">
-              <p className="text-xs text-muted-foreground">
-                Updated {formatDate(selectedProject.updatedAt)}
-              </p>
+              <div />
               <div className="flex items-center gap-2">
                 {selectedProject.metadata.repositoryUrl && (
                   <Link
