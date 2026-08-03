@@ -102,7 +102,7 @@ const ResearchViewModal = ({
               className={cn(buttonVariants({ size: "sm" }), "gap-1 text-xs")}
             >
               Read publication
-              <ExternalLinkIcon className="size-3" />
+              <ExternalLinkIcon className="size-3 transition-transform duration-150 group-hover/button:translate-x-0.5 motion-reduce:transform-none" />
             </Link>
           </DialogFooter>
         )}

@@ -77,11 +77,11 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
 
   return (
     <>
-      <section className="flex flex-col gap-0">
+      <section className="motion-stagger flex flex-col gap-0">
         {projects.map((project) => (
           <article
             key={project.id}
-            className="group/project relative flex flex-col gap-3 border-b border-accent bg-card p-4 transition-colors last:border-b-0 hover:bg-muted/30"
+            className="motion-lift group/project relative flex flex-col gap-3 border-b border-accent bg-card p-4 last:border-b-0 hover:bg-muted/30"
           >
             <button
               type="button"
@@ -190,7 +190,7 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
                       "gap-1 text-xs"
                     )}
                   >
-                    <ExternalLinkIcon className="size-3" />
+                    <ExternalLinkIcon className="size-3 transition-transform duration-150 group-hover/button:translate-x-0.5 motion-reduce:transform-none" />
                     Visit project
                   </Link>
                 )}

@@ -14,11 +14,11 @@ const ResearchList = ({
 
   return (
     <>
-      <section className="flex flex-col gap-0">
+      <section className="motion-stagger flex flex-col gap-0">
         {publications.map((publication) => (
           <article
             key={publication.id}
-            className="group/research relative flex flex-col gap-2 border-b border-accent bg-card p-4 transition-colors last:border-b-0 hover:bg-muted/30"
+            className="motion-lift group/research relative flex flex-col gap-2 border-b border-accent bg-card p-4 last:border-b-0 hover:bg-muted/30"
           >
             <button
               type="button"

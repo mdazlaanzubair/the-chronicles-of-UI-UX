@@ -85,7 +85,10 @@ export default async function Page() {
         }
 
         return (
-          <section key="post-container" className="flex flex-col gap-0">
+          <section
+            key="post-container"
+            className="motion-stagger flex flex-col gap-0"
+          >
             {posts.map((post, idx) => {
               const hasImage = Boolean(post.coverImage?.url)
               return (
@@ -155,7 +158,7 @@ export default async function Page() {
               )}
             >
               View More Case Studies
-              <ExternalLinkIcon className="size-2.5" />
+              <ExternalLinkIcon className="size-2.5 transition-transform duration-150 group-hover/button:translate-x-0.5 motion-reduce:transform-none" />
             </Link>
           </section>
         )

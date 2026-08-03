@@ -38,7 +38,7 @@ const Page = () => {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="flex flex-col"
+      className="motion-page-enter flex flex-col"
     >
       <JsonLd data={aboutJsonLd} />
       <header className="sr-only">

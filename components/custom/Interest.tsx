@@ -37,7 +37,7 @@ const Interest = async () => {
           A broad toolkit organized around shipping robust digital products.
         </p>
       </div>
-      <ul className="grid grid-cols-1 gap-4 px-4 pb-4 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="motion-stagger grid grid-cols-1 gap-4 px-4 pb-4 md:grid-cols-2 lg:grid-cols-3">
         {interests.map((interest, idx) => (
           <li
             key={interest}

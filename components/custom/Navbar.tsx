@@ -114,7 +114,7 @@ export default function Navbar({
   const isOverflowActive = overflowItems.some((item) => isItemActive(item.href))
 
   return (
-    <div className="sticky top-0 z-50 w-full border-b border-accent bg-card text-card-foreground">
+    <div className="sticky top-0 z-50 w-full border-b border-accent bg-card/95 text-card-foreground supports-backdrop-filter:backdrop-blur-md">
       {/* Hidden measurer container */}
       <div
         className="pointer-events-none invisible absolute top-0 left-0 -z-50 flex items-center gap-2 opacity-0"
@@ -155,7 +155,7 @@ export default function Navbar({
               key={item.href}
               href={item.href}
               className={cn(
-                "relative -mb-px flex items-center justify-center border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all",
+                "relative -mb-px flex items-center justify-center border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors duration-150",
                 active
                   ? "border-primary font-semibold text-primary"
                   : "border-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground"
@@ -173,7 +173,7 @@ export default function Navbar({
               onClick={() => setIsMoreOpen((prev) => !prev)}
               type="button"
               className={cn(
-                "relative -mb-px flex cursor-pointer items-center gap-1.5 rounded-t-md border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all",
+                "relative -mb-px flex cursor-pointer items-center gap-1.5 rounded-t-md border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors duration-150",
                 isOverflowActive
                   ? "border-primary font-semibold text-primary"
                   : isMoreOpen
@@ -194,7 +194,7 @@ export default function Navbar({
 
             {/* Dropdown Menu */}
             {isMoreOpen && (
-              <div className="absolute top-full right-0 z-50 mt-1.5 w-48 animate-in rounded-lg border border-accent bg-popover p-1.5 shadow-md fade-in-0 zoom-in-95">
+              <div className="absolute top-full right-0 z-50 mt-1.5 w-48 animate-in rounded-lg border border-accent bg-popover p-1.5 shadow-md duration-150 fade-in-0 zoom-in-95 motion-reduce:animate-none">
                 {overflowItems.map((item) => {
                   const active = isItemActive(item.href)
                   return (
