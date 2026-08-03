@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useLayoutEffect, useRef } from "react"
+import { useState, useEffect, useLayoutEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -20,6 +20,7 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
   { label: "Work", href: "/work" },
   { label: "Research", href: "/research" },
   { label: "Projects", href: "/projects" },
+  { label: "Blog", href: "https://blog.mdazlaanzubair.com/" },
 ]
 
 export default function Navbar({
@@ -173,7 +174,7 @@ export default function Navbar({
               onClick={() => setIsMoreOpen((prev) => !prev)}
               type="button"
               className={cn(
-                "relative -mb-px flex cursor-pointer items-center gap-1.5 rounded-t-md border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors duration-150",
+                "relative -mb-px flex cursor-pointer items-center gap-1.5 border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors duration-150",
                 isOverflowActive
                   ? "border-primary font-semibold text-primary"
                   : isMoreOpen
@@ -194,7 +195,7 @@ export default function Navbar({
 
             {/* Dropdown Menu */}
             {isMoreOpen && (
-              <div className="absolute top-full right-0 z-50 mt-1.5 w-48 animate-in rounded-lg border border-accent bg-popover p-1.5 shadow-md duration-150 fade-in-0 zoom-in-95 motion-reduce:animate-none">
+              <div className="absolute top-full right-0 z-50 mt-1.5 w-48 animate-in border border-accent bg-popover p-1.5 shadow-md duration-150 fade-in-0 zoom-in-95 motion-reduce:animate-none">
                 {overflowItems.map((item) => {
                   const active = isItemActive(item.href)
                   return (
@@ -203,7 +204,7 @@ export default function Navbar({
                       href={item.href}
                       onClick={() => setIsMoreOpen(false)}
                       className={cn(
-                        "flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                        "flex items-center px-3 py-2 text-sm font-medium transition-colors",
                         active
                           ? "bg-primary/10 font-semibold text-primary"
                           : "text-popover-foreground hover:bg-muted"

@@ -195,6 +195,18 @@
   }
 }
 
+@keyframes cover-ripple {
+  from {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 @layer utilities {
   .motion-page-enter {
     animation: editorial-page-enter 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -232,6 +244,21 @@
     transition-property: transform, background-color, border-color, box-shadow;
     transition-duration: 180ms;
     transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .cover-ripple {
+    position: absolute;
+    border: 1px solid rgb(255 255 255 / 45%);
+    border-radius: 9999px;
+    background: radial-gradient(
+      circle,
+      rgb(255 255 255 / 18%) 0%,
+      rgb(255 255 255 / 8%) 38%,
+      transparent 70%
+    );
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 8%);
+    pointer-events: none;
+    animation: cover-ripple 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
   [data-slot="accordion-trigger"][aria-expanded="true"]

@@ -45,11 +45,11 @@ const ResearchList = ({
                 )}
               </div>
 
-              <h2 className="line-clamp-2 text-lg leading-snug font-semibold tracking-tight transition-colors group-hover/research:text-foreground sm:text-base">
+              <h2 className="line-clamp-1 truncate text-lg leading-snug font-semibold tracking-tight transition-colors group-hover/research:text-foreground sm:text-base">
                 {publication.title}
               </h2>
 
-              <p className="mt-1 line-clamp-3 text-xs leading-5 text-muted-foreground">
+              <p className="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">
                 {publication.abstract}
               </p>
             </div>

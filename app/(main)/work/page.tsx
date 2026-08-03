@@ -1,6 +1,4 @@
 import JsonLd from "@/components/seo/JsonLd"
-import { buttonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 import {
   getHashnodeSeriesPosts,
   type HashnodePost,
@@ -8,7 +6,6 @@ import {
 } from "@/src/hashnode/hashnode"
 import { createPageMetadata } from "@/src/seo/site"
 import { createCollectionJsonLd, PERSON_ID } from "@/src/seo/structured-data"
-import { ExternalLinkIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -94,10 +91,10 @@ export default async function Page() {
               return (
                 <article
                   key={`blog-post-${post.id}-${idx}`}
-                  className="flex flex-row items-center gap-4 border-b border-accent bg-card p-4 last:border-b-0"
+                  className="flex flex-col lg:flex-row items-center gap-4 border-b border-accent bg-card p-4 last:border-b-0"
                 >
                   {hasImage ? (
-                    <div className="relative aspect-video w-36 shrink-0 overflow-hidden rounded-md bg-muted sm:w-44">
+                    <div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-md bg-muted lg:w-44">
                       <Image
                         src={post.coverImage!.url}
                         alt={post.title}
@@ -148,7 +145,7 @@ export default async function Page() {
                 </article>
               )
             })}
-            <Link
+            {/* <Link
               href={seriesUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -159,7 +156,7 @@ export default async function Page() {
             >
               View More Case Studies
               <ExternalLinkIcon className="size-2.5 transition-transform duration-150 group-hover/button:translate-x-0.5 motion-reduce:transform-none" />
-            </Link>
+            </Link> */}
           </section>
         )
       })()}

@@ -17,6 +17,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import Image from "next/image"
+import CoverBanner from "./CoverBanner"
 
 const options = { next: { revalidate: 30 } }
 
@@ -44,21 +45,7 @@ export default async function ProfileHeader() {
   return (
     <header className="flex w-full flex-col bg-card text-foreground">
       {/* Cover Banner Photo */}
-      <div className="relative h-36 w-full overflow-hidden border-b border-accent">
-        <Image
-          src="/cover.jpeg"
-          alt="Cover photo"
-          fill
-          priority
-          sizes="(max-width: 576px) 100vw, 576px"
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 top-0 right-0 bottom-0 left-0 z-10 bg-black/50">
-          <h2 className="absolute top-[50%] left-[50%] translate-[-50%] translate-y-[-50%] text-center text-2xl font-bold text-primary-foreground md:text-3xl lg:text-4xl">
-            Hello World
-          </h2>
-        </div>
-      </div>
+      <CoverBanner />
 
       {/* Profile Info Container */}
       <div className="z-20 border-b border-accent px-4 pb-4">
@@ -80,7 +67,7 @@ export default async function ProfileHeader() {
         <div className="space-y-3">
           {/* Name & Explanation */}
           <div>
-            <div className="grid grid-cols-1 items-start justify-between gap-3 lg:grid-cols-2">
+            <div className="grid grid-cols-1 items-start justify-between gap-3 md:grid-cols-2">
               <div>
                 <h1 className="font-heading text-xl font-bold tracking-tight text-foreground sm:text-2xl">
                   <HoverCard>
@@ -123,7 +110,7 @@ export default async function ProfileHeader() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+              <div className="flex flex-wrap items-center gap-2 md:justify-end">
                 <Link
                   href="https://calendar.app.google/Le7g5jxPwGDRSJRSA"
                   target="_blank"
