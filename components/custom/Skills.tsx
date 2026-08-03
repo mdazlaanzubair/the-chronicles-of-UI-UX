@@ -1,11 +1,34 @@
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
-import localConstantData from "@/constant.json"
-import { SkillInterface } from "@/type"
+import { toSkills } from "@/src/sanity/adapters"
+import { client } from "@/src/sanity/client"
+import { SKILLS_QUERY } from "@/src/sanity/queries"
+import type { SkillInterface } from "@/type"
+import { Card, CardContent, CardTitle } from "../ui/card"
 
-const Skills = () => {
-  const skillSets = localConstantData.skills as SkillInterface[]
+const options = { next: { revalidate: 30 } }
 
-  if (!skillSets || skillSets.length <= 0) return null
+const Skills = async () => {
+  let skillSets: SkillInterface[] = []
+  let fetchError: string | null = null
+
+  try {
+    const response = await client.fetch(SKILLS_QUERY, {}, options)
+    skillSets = toSkills(response)
+  } catch (error: unknown) {
+    console.error("Sanity skills fetch error:", error)
+    fetchError =
+      error instanceof Error ? error.message : "Failed to load skills."
+  }
+
+  if (fetchError) {
+    return (
+      <section id="skills" className="p-4">
+        <p className="text-xs text-muted-foreground">{fetchError}</p>
+      </section>
+    )
+  }
+
+  if (skillSets.length === 0) return null
+
   return (
     <section id="skills">
       <div className="p-4">
@@ -17,7 +40,10 @@ const Skills = () => {
       </div>
       <div className="grid grid-cols-1 gap-4 px-4 pb-4 lg:grid-cols-2">
         {skillSets.map((skillSet) => (
-          <Card key={skillSet.id} className="bg-background p-6 border border-accent shadow-none">
+          <Card
+            key={skillSet.id}
+            className="border border-accent bg-background p-6 shadow-none"
+          >
             <CardContent className="p-0 text-xs text-muted-foreground bg-transparent">
               <CardTitle className="mb-3 font-heading text-foreground">
                 {skillSet.title}

@@ -38,7 +38,7 @@ const portableTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="my-3 grid list-outside list-disc grid-cols-1 space-y-2 pl-5 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="my-3 grid list-outside list-disc grid-cols-1 space-y-2 pl-5 md:grid-cols-2">
         {children}
       </ul>
     ),

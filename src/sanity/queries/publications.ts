@@ -4,7 +4,13 @@ import { timestampsProjection } from "./fragments"
 
 export const PUBLICATIONS_LIST_QUERY = defineQuery(/* groq */ `
   *[_type == "publication"]
-  | order(metadata.year desc, _createdAt desc) {
+  | order(
+      coalesce(metadata.isFeatured, false) desc,
+      metadata.year desc,
+      _createdAt desc,
+      _id asc
+    ) {
+    "id": _id,
     title,
     abstract,
     "authors": coalesce(authors, []),

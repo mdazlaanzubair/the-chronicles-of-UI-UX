@@ -1,12 +1,35 @@
-import { InterestType } from "@/type"
-import localConstantData from "@/constant.json"
+import { toInterests } from "@/src/sanity/adapters"
+import { client } from "@/src/sanity/client"
+import { INTERESTS_QUERY } from "@/src/sanity/queries"
+import type { InterestType } from "@/type"
 
-const Interest = () => {
-  const interests = localConstantData.interests as InterestType
+const options = { next: { revalidate: 30 } }
 
-  if (!interests || interests.length <= 0) return null
+const Interest = async () => {
+  let interests: InterestType = []
+  let fetchError: string | null = null
+
+  try {
+    const response = await client.fetch(INTERESTS_QUERY, {}, options)
+    interests = toInterests(response)
+  } catch (error: unknown) {
+    console.error("Sanity interests fetch error:", error)
+    fetchError =
+      error instanceof Error ? error.message : "Failed to load interests."
+  }
+
+  if (fetchError) {
+    return (
+      <section id="interests" className="p-4">
+        <p className="text-xs text-muted-foreground">{fetchError}</p>
+      </section>
+    )
+  }
+
+  if (interests.length === 0) return null
+
   return (
-    <section id="skills">
+    <section id="interests">
       <div className="p-4">
         <span className="eyebrow text-xs">Beyond the work</span>
         <h1 className="mb-3 font-heading text-2xl font-semibold">Interests</h1>

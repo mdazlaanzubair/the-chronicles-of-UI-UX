@@ -1,6 +1,8 @@
 export {
   ACADEMIC_HISTORY_QUERY,
   EXPERIENCE_QUERY,
+  INTERESTS_QUERY,
+  SKILLS_QUERY,
   SOCIAL_PROFILES_QUERY,
 } from "./profile"
 export { PUBLICATIONS_LIST_QUERY } from "./publications"

@@ -596,10 +596,27 @@ export type SOCIAL_PROFILES_QUERY_RESULT =
     }>
   | Array<never>
 
+// Source: src/sanity/queries/profile.ts
+// Variable: SKILLS_QUERY
+// Query: coalesce(*[_id == "siteSettings"][0].skills, [])[]{    "id": _key,    "title": coalesce(title, "Untitled skill"),    "tags": coalesce(tags, [])  }
+export type SKILLS_QUERY_RESULT =
+  | Array<{
+      id: string
+      title: string
+      tags: Array<string>
+    }>
+  | Array<never>
+
+// Source: src/sanity/queries/profile.ts
+// Variable: INTERESTS_QUERY
+// Query: coalesce(*[_id == "siteSettings"][0].interests, [])
+export type INTERESTS_QUERY_RESULT = Array<string> | Array<never>
+
 // Source: src/sanity/queries/publications.ts
 // Variable: PUBLICATIONS_LIST_QUERY
-// Query: *[_type == "publication"]  | order(metadata.year desc, _createdAt desc) {    title,    abstract,    "authors": coalesce(authors, []),    "metadata": {      "journal": metadata.journal,      "status": metadata.status,      "year": metadata.year,      "doi": metadata.doi,      "isFeatured": metadata.isFeatured == true    },      "createdAt": _createdAt,  "updatedAt": _updatedAt  }
+// Query: *[_type == "publication"]  | order(      coalesce(metadata.isFeatured, false) desc,      metadata.year desc,      _createdAt desc,      _id asc    ) {    "id": _id,    title,    abstract,    "authors": coalesce(authors, []),    "metadata": {      "journal": metadata.journal,      "status": metadata.status,      "year": metadata.year,      "doi": metadata.doi,      "isFeatured": metadata.isFeatured == true    },      "createdAt": _createdAt,  "updatedAt": _updatedAt  }
 export type PUBLICATIONS_LIST_QUERY_RESULT = Array<{
+  id: string
   title: string
   abstract: string
   authors: Array<string>
@@ -769,7 +786,9 @@ declare module "@sanity/client" {
     '\n  *[_type == "experience"]\n  | order(_createdAt desc) {\n    "company": select(\n      company.isAnonymized == true => {\n        "name": "Confidential organization",\n        "website": null,\n        "location": company.location,\n        "isAnonymized": true\n      },\n      {\n        "name": coalesce(company.name, "Organization"),\n        "website": company.website,\n        "location": company.location,\n        "isAnonymized": false\n      }\n    ),\n    timeline,\n    role,\n    "key_contributions": coalesce(key_contributions[]{\n      \n  ...,\n  _type == "portableImage" => {\n    image {\n      ...,\n      asset->{\n        _id,\n        url,\n        metadata {\n          dimensions,\n          lqip\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    content[]{...}\n  },\n  _type == "tableBlock" => {\n    rows[]{\n      _key,\n      cells\n    }\n  },\n  _type == "relatedContent" => {\n    reference->{\n      _id,\n      _type,\n      title,\n      "slug": slug.current\n    }\n  },\n  _type == "block" => {\n    markDefs[]{\n      ...,\n      _type == "relatedContentLink" => {\n        reference->{\n          _id,\n          _type,\n          title,\n          "slug": slug.current\n        }\n      }\n    }\n  }\n\n    }, []),\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': EXPERIENCE_QUERY_RESULT
     '\n  *[_type == "academic"]\n  | order(_createdAt desc) {\n    "institute": {\n      "name": institute.name,\n      "website": institute.website\n    },\n    degree,\n    field,\n    timeline,\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': ACADEMIC_HISTORY_QUERY_RESULT
     '\n  coalesce(*[_id == "siteSettings"][0].socialMedia, [])[]{\n    _key,\n    platform,\n    username,\n    url,\n    "isHidden": isHidden == true\n  }\n': SOCIAL_PROFILES_QUERY_RESULT
-    '\n  *[_type == "publication"]\n  | order(metadata.year desc, _createdAt desc) {\n    title,\n    abstract,\n    "authors": coalesce(authors, []),\n    "metadata": {\n      "journal": metadata.journal,\n      "status": metadata.status,\n      "year": metadata.year,\n      "doi": metadata.doi,\n      "isFeatured": metadata.isFeatured == true\n    },\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': PUBLICATIONS_LIST_QUERY_RESULT
+    '\n  coalesce(*[_id == "siteSettings"][0].skills, [])[]{\n    "id": _key,\n    "title": coalesce(title, "Untitled skill"),\n    "tags": coalesce(tags, [])\n  }\n': SKILLS_QUERY_RESULT
+    '\n  coalesce(*[_id == "siteSettings"][0].interests, [])\n': INTERESTS_QUERY_RESULT
+    '\n  *[_type == "publication"]\n  | order(\n      coalesce(metadata.isFeatured, false) desc,\n      metadata.year desc,\n      _createdAt desc,\n      _id asc\n    ) {\n    "id": _id,\n    title,\n    abstract,\n    "authors": coalesce(authors, []),\n    "metadata": {\n      "journal": metadata.journal,\n      "status": metadata.status,\n      "year": metadata.year,\n      "doi": metadata.doi,\n      "isFeatured": metadata.isFeatured == true\n    },\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': PUBLICATIONS_LIST_QUERY_RESULT
     '\n  *[_type == "work"]\n  | order(coalesce(metadata.isFeatured, false) desc, _updatedAt desc, _id asc) {\n    "id": _id,\n    title,\n    description,\n    "tags": coalesce(tags, []),\n    "metadata": {\n      "isFeatured": metadata.isFeatured == true,\n      "projectUrl": metadata.projectUrl,\n      "repositoryUrl": metadata.repositoryUrl,\n      "key_contributions": coalesce(metadata.key_contributions[]{\n        \n  ...,\n  _type == "portableImage" => {\n    image {\n      ...,\n      asset->{\n        _id,\n        url,\n        metadata {\n          dimensions,\n          lqip\n        }\n      }\n    }\n  },\n  _type == "callout" => {\n    content[]{...}\n  },\n  _type == "tableBlock" => {\n    rows[]{\n      _key,\n      cells\n    }\n  },\n  _type == "relatedContent" => {\n    reference->{\n      _id,\n      _type,\n      title,\n      "slug": slug.current\n    }\n  },\n  _type == "block" => {\n    markDefs[]{\n      ...,\n      _type == "relatedContentLink" => {\n        reference->{\n          _id,\n          _type,\n          title,\n          "slug": slug.current\n        }\n      }\n    }\n  }\n\n      }, [])\n    },\n    \n  "createdAt": _createdAt,\n  "updatedAt": _updatedAt\n\n  }\n': WORK_LIST_QUERY_RESULT
   }
 }

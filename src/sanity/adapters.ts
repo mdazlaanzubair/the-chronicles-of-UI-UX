@@ -3,14 +3,18 @@ import type { PortableTextBlock } from "next-sanity"
 import type {
   ACADEMIC_HISTORY_QUERY_RESULT,
   EXPERIENCE_QUERY_RESULT,
+  INTERESTS_QUERY_RESULT,
   PUBLICATIONS_LIST_QUERY_RESULT,
+  SKILLS_QUERY_RESULT,
   SOCIAL_PROFILES_QUERY_RESULT,
   WORK_LIST_QUERY_RESULT,
 } from "@/sanity.types"
 import type {
   AcademicInterface,
   ExperienceInterface,
+  InterestType,
   PublicationInterface,
+  SkillInterface,
   SocialMediaInterface,
   WorkInterface,
 } from "@/type"
@@ -59,3 +63,10 @@ export const toAcademicHistory = (
 export const toSocialProfiles = (
   profiles: SOCIAL_PROFILES_QUERY_RESULT
 ): SocialMediaInterface[] => profiles
+
+export const toSkills = (skills: SKILLS_QUERY_RESULT): SkillInterface[] =>
+  skills
+
+export const toInterests = (
+  interests: INTERESTS_QUERY_RESULT
+): InterestType => interests

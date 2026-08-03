@@ -54,3 +54,15 @@ export const SOCIAL_PROFILES_QUERY = defineQuery(/* groq */ `
     "isHidden": isHidden == true
   }
 `)
+
+export const SKILLS_QUERY = defineQuery(/* groq */ `
+  coalesce(*[_id == "siteSettings"][0].skills, [])[]{
+    "id": _key,
+    "title": coalesce(title, "Untitled skill"),
+    "tags": coalesce(tags, [])
+  }
+`)
+
+export const INTERESTS_QUERY = defineQuery(/* groq */ `
+  coalesce(*[_id == "siteSettings"][0].interests, [])
+`)

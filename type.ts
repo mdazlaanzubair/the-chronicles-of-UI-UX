@@ -7,6 +7,7 @@ export type SocialPlatform =
   "x" | "instagram" | "linkedin" | "github" | "scholar"
 
 export interface PublicationInterface {
+  id: string
   title: string
   abstract: string
   authors: string[]
