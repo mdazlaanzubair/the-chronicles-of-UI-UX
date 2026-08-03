@@ -45,14 +45,6 @@ export const ACADEMIC_HISTORY_QUERY = defineQuery(/* groq */ `
   }
 `)
 
-export const SKILLS_QUERY = defineQuery(/* groq */ `
-  coalesce(*[_id == "siteSettings"][0].skills, [])[]{
-    _key,
-    title,
-    "tags": coalesce(tags, [])
-  }
-`)
-
 export const SOCIAL_PROFILES_QUERY = defineQuery(/* groq */ `
   coalesce(*[_id == "siteSettings"][0].socialMedia, [])[]{
     _key,
@@ -61,8 +53,4 @@ export const SOCIAL_PROFILES_QUERY = defineQuery(/* groq */ `
     url,
     "isHidden": isHidden == true
   }
-`)
-
-export const INTERESTS_QUERY = defineQuery(/* groq */ `
-  coalesce(*[_id == "siteSettings"][0].interests, [])
 `)

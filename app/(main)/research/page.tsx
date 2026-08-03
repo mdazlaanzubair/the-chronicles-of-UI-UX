@@ -16,9 +16,8 @@ export default async function Page() {
   let fetchError: string | null = null
 
   try {
-    // const { data } = await sanityFetch({ query: PUBLICATIONS_LIST_QUERY })
-    const data = await client.fetch(PUBLICATIONS_LIST_QUERY, {}, options)
-    publications = toPublications(data)
+    const res = await client.fetch(PUBLICATIONS_LIST_QUERY, {}, options)
+    publications = toPublications(res)
   } catch (error: any) {
     console.error("Sanity fetch error:", error)
     fetchError = error?.message || "Failed to load publications."
@@ -85,7 +84,7 @@ export default async function Page() {
                           <HoverCardContent
                             side="top"
                             align="center"
-                            className="space-y-3 w-56"
+                            className="w-56 space-y-3"
                           >
                             <h1 className="font-heading text-xl font-bold tracking-tight text-foreground sm:text-2xl">
                               Abstract

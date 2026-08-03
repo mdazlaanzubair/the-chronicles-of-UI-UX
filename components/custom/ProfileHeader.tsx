@@ -1,10 +1,45 @@
-import { Calendar, MapPin, GraduationCapIcon, MailIcon } from "lucide-react"
+import {
+  Calendar,
+  MapPin,
+  GraduationCapIcon,
+  MailIcon,
+  ExternalLinkIcon,
+} from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
-import { Button } from "../ui/button"
+import { Button, buttonVariants } from "../ui/button"
 import LinkedinIcon from "@sanity/icons/Linkedin"
 import GithubIcon from "@sanity/icons/Github"
+import { SocialMediaInterface } from "@/type"
+import { SOCIAL_PROFILES_QUERY } from "@/src/sanity/queries"
+import { toSocialProfiles } from "@/src/sanity/adapters"
+import { client } from "@/src/sanity/client"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 
-export default function ProfileHeader() {
+const options = { next: { revalidate: 30 } }
+
+export default async function ProfileHeader() {
+  let social_links: SocialMediaInterface[] = []
+  let fetchError: string | null = null
+
+  try {
+    const res = await client.fetch(SOCIAL_PROFILES_QUERY, {}, options)
+    social_links = toSocialProfiles(res)
+    console.log(social_links)
+  } catch (error: any) {
+    console.error("Sanity fetch error:", error)
+    fetchError = error?.message || "Failed to load social links."
+  }
+
+  if (fetchError) {
+    return (
+      <footer className="flex w-full items-center justify-between gap-3 border-b border-accent bg-card p-4">
+        <p className="text-xs text-muted-foreground">{fetchError}</p>
+      </footer>
+    )
+  }
+
   return (
     <header className="flex w-full flex-col bg-card text-foreground">
       {/* Cover Banner Photo */}
@@ -83,16 +118,55 @@ export default function ProfileHeader() {
               </div>
 
               <div className="flex flex-wrap items-center gap-2 lg:justify-end">
-                <Button size="sm">Book a Call</Button>
-                <Button variant="outline" size="icon-sm">
-                  <LinkedinIcon />
-                </Button>
-                <Button variant="outline" size="icon-sm">
-                  <GraduationCapIcon />
-                </Button>
-                <Button variant="outline" size="icon-sm">
-                  <GithubIcon />
-                </Button>
+                <Link
+                  href="https://calendar.app.google/Le7g5jxPwGDRSJRSA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    buttonVariants({
+                      size: "sm",
+                    })
+                  )}
+                >
+                  Book a Call
+                </Link>
+                {social_links &&
+                  social_links.length > 0 &&
+                  social_links.map((social_link, idx) => {
+                    const { url, platform, username } = social_link
+
+                    if (platform === "instagram" || platform === "x") return
+                    return (
+                      <Tooltip key={`${url}-${platform}-${username}-${idx}`}>
+                        <TooltipTrigger>
+                          <Link
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={cn(
+                              buttonVariants({
+                                variant: "outline",
+                                size: "icon-sm",
+                              })
+                            )}
+                          >
+                            {(() => {
+                              if (platform === "github") return <GithubIcon />
+                              else if (platform === "linkedin")
+                                return <LinkedinIcon />
+                              else if (platform === "scholar")
+                                return <GraduationCapIcon />
+                              else return <ExternalLinkIcon />
+                            })()}
+                          </Link>
+                        </TooltipTrigger>
+
+                        <TooltipContent className="capitalize">
+                          {platform}
+                        </TooltipContent>
+                      </Tooltip>
+                    )
+                  })}
               </div>
             </div>
           </div>
