@@ -114,7 +114,7 @@ export default function Navbar({
   const isOverflowActive = overflowItems.some((item) => isItemActive(item.href))
 
   return (
-    <div className="relative w-full border-b border-accent bg-card text-card-foreground">
+    <div className="sticky top-0 z-50 w-full border-b border-accent bg-card text-card-foreground">
       {/* Hidden measurer container */}
       <div
         className="pointer-events-none invisible absolute top-0 left-0 -z-50 flex items-center gap-2 opacity-0"

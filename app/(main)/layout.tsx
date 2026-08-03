@@ -55,8 +55,8 @@ export default function RootLayout({
       <body>
         <JsonLd data={siteJsonLd} />
         <ThemeProvider>
-          <div className="flex flex-col min-h-screen w-screen bg-background">
-            <div className="mx-auto flex-1 flex w-full max-w-xl flex-col overflow-x-hidden overflow-y-auto border-s border-e border-accent bg-foreground">
+          <div className="flex min-h-screen w-screen flex-col bg-background">
+            <div className="mx-auto flex w-full max-w-xl flex-1 flex-col overflow-x-clip border-s border-e border-accent bg-foreground">
               <ProfileHeader />
               <Navbar />
               <main className="h-full w-full flex-1 border-b border-accent bg-card">
