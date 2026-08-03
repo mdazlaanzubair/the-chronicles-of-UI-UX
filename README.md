@@ -17,7 +17,7 @@ This will place the ui components in the `components` directory.
 To use the components in your app, import them as follows:
 
 ```tsx
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 ```
 
 ## Sanity Studio
@@ -39,3 +39,5 @@ npm run dev
 
 Set the same `NEXT_PUBLIC_SANITY_PROJECT_ID` and
 `NEXT_PUBLIC_SANITY_DATASET` variables in the hosting provider before deploying.
+Set `NEXT_PUBLIC_SITE_URL` to the canonical production origin used by metadata,
+structured data, the sitemap, and robots.txt.

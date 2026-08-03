@@ -1,3 +1,4 @@
+import JsonLd from "@/components/seo/JsonLd"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import {
@@ -5,8 +6,20 @@ import {
   type HashnodePost,
   type HashnodeSeries,
 } from "@/src/hashnode/hashnode"
+import { createPageMetadata } from "@/src/seo/site"
+import { createCollectionJsonLd, PERSON_ID } from "@/src/seo/structured-data"
+import { ExternalLinkIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+
+const description =
+  "Engineering and product case studies by Muhammad Azlaan Zubair, covering architecture decisions, implementation challenges, and measurable outcomes."
+
+export const metadata = createPageMetadata({
+  title: "Case Studies",
+  description,
+  path: "/work",
+})
 
 export default async function Page() {
   let posts: HashnodePost[] = []
@@ -32,8 +45,29 @@ export default async function Page() {
     ? `https://blog.mdazlaanzubair.com/series/${series.slug}`
     : "https://blog.mdazlaanzubair.com/"
 
+  const workJsonLd = createCollectionJsonLd({
+    path: "/work",
+    name: "Engineering and product case studies",
+    description,
+    items: posts.map((post) => ({
+      "@type": "Article",
+      headline: post.title,
+      description: post.brief,
+      url: post.url,
+      datePublished: post.publishedAt,
+      author: { "@id": PERSON_ID },
+      keywords: post.tags.map((tag) => tag.name),
+      ...(post.coverImage?.url ? { image: post.coverImage.url } : {}),
+    })),
+  })
+
   return (
-    <section id="work" className="flex flex-col">
+    <section id="work" aria-labelledby="work-heading" className="flex flex-col">
+      <JsonLd data={workJsonLd} />
+      <header className="sr-only">
+        <h1 id="work-heading">Engineering and product case studies</h1>
+        <p>{description}</p>
+      </header>
       {(() => {
         if (posts.length <= 0) {
           return (
@@ -120,7 +154,8 @@ export default async function Page() {
                 "w-full px-0 text-xs"
               )}
             >
-              View More
+              View More Case Studies
+              <ExternalLinkIcon className="size-2.5" />
             </Link>
           </section>
         )

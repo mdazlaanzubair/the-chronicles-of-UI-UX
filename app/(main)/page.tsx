@@ -1,8 +1,21 @@
+import JsonLd from "@/components/seo/JsonLd"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { getHashnodePosts, type HashnodePost } from "@/src/hashnode/hashnode"
+import { createPageMetadata } from "@/src/seo/site"
+import { createCollectionJsonLd, PERSON_ID } from "@/src/seo/structured-data"
+import { ExternalLinkIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+
+const description =
+  "Technical writing by Muhammad Azlaan Zubair on software architecture, web engineering, artificial intelligence, automation, and product development."
+
+export const metadata = createPageMetadata({
+  title: "Writing & Insights",
+  description,
+  path: "/",
+})
 
 export default async function Page() {
   let posts: HashnodePost[] = []
@@ -20,8 +33,33 @@ export default async function Page() {
       error instanceof Error ? error.message : "Failed to load Hashnode posts."
   }
 
+  const writingJsonLd = createCollectionJsonLd({
+    path: "/",
+    name: "Writing and technical insights",
+    description,
+    items: posts.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.brief,
+      url: post.url,
+      datePublished: post.publishedAt,
+      author: { "@id": PERSON_ID },
+      keywords: post.tags.map((tag) => tag.name),
+      ...(post.coverImage?.url ? { image: post.coverImage.url } : {}),
+    })),
+  })
+
   return (
-    <section id="writing" className="flex flex-col">
+    <section
+      id="writing"
+      aria-labelledby="writing-heading"
+      className="flex flex-col"
+    >
+      <JsonLd data={writingJsonLd} />
+      <header className="sr-only">
+        <h1 id="writing-heading">Writing and technical insights</h1>
+        <p>{description}</p>
+      </header>
       {(() => {
         if (posts.length <= 0) {
           return (
@@ -108,7 +146,8 @@ export default async function Page() {
                 "w-full px-0 text-xs"
               )}
             >
-              View More
+              Checkout More Articles
+              <ExternalLinkIcon className="size-2.5" />
             </Link>
           </section>
         )

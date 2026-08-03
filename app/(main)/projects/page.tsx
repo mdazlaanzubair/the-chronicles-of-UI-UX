@@ -1,10 +1,21 @@
 import ProjectsList from "@/components/custom/ProjectsList"
+import JsonLd from "@/components/seo/JsonLd"
 import { toWorkItems } from "@/src/sanity/adapters"
 import { client } from "@/src/sanity/client"
 import { WORK_LIST_QUERY } from "@/src/sanity/queries"
+import { absoluteUrl, createPageMetadata } from "@/src/seo/site"
+import { createCollectionJsonLd, PERSON_ID } from "@/src/seo/structured-data"
 import type { WorkInterface } from "@/type"
 
 const options = { next: { revalidate: 30 } }
+const description =
+  "Selected software architecture, web engineering, AI, automation, and product development projects by Muhammad Azlaan Zubair."
+
+export const metadata = createPageMetadata({
+  title: "Projects",
+  description,
+  path: "/projects",
+})
 
 const Page = async () => {
   let projects: WorkInterface[] = []
@@ -19,8 +30,39 @@ const Page = async () => {
       error instanceof Error ? error.message : "Failed to load projects."
   }
 
+  const projectsJsonLd = createCollectionJsonLd({
+    path: "/projects",
+    name: "Software and product engineering projects",
+    description,
+    items: projects.map((project) => ({
+      "@type": "CreativeWork",
+      "@id": `${absoluteUrl("/projects")}#${encodeURIComponent(project.id)}`,
+      name: project.title,
+      description: project.description,
+      creator: { "@id": PERSON_ID },
+      dateCreated: project.createdAt,
+      dateModified: project.updatedAt,
+      keywords: project.tags,
+      ...(project.metadata.projectUrl
+        ? { url: project.metadata.projectUrl }
+        : {}),
+      ...(project.metadata.repositoryUrl
+        ? { sameAs: project.metadata.repositoryUrl }
+        : {}),
+    })),
+  })
+
   return (
-    <section id="projects" className="flex flex-col">
+    <section
+      id="projects"
+      aria-labelledby="projects-heading"
+      className="flex flex-col"
+    >
+      <JsonLd data={projectsJsonLd} />
+      <header className="sr-only">
+        <h1 id="projects-heading">Software engineering projects</h1>
+        <p>{description}</p>
+      </header>
       {projects.length === 0 ? (
         <div className="rounded-md border border-dashed border-accent bg-muted/20 p-4">
           <p className="text-sm font-medium text-muted-foreground">

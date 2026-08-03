@@ -70,14 +70,6 @@ const portableTextComponents: PortableTextComponents = {
   },
 }
 
-const formatDate = (date: string) =>
-  new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    timeZone: "UTC",
-  }).format(new Date(date))
-
 const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
   const [selectedProject, setSelectedProject] = useState<WorkInterface | null>(
     null
@@ -172,8 +164,7 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
               )}
             </div>
 
-            <DialogFooter className="items-center border-t border-accent pt-4 sm:justify-between">
-              <div />
+            <DialogFooter className="items-center border-t border-accent pt-4">
               <div className="flex items-center gap-2">
                 {selectedProject.metadata.repositoryUrl && (
                   <Link
