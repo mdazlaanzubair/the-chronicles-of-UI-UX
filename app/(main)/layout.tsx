@@ -1,4 +1,6 @@
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { GoogleAnalytics } from "@next/third-parties/google"
 import { Geist_Mono, Oxanium, Red_Hat_Display } from "next/font/google"
 import type { Viewport } from "next"
 
@@ -75,7 +77,6 @@ export default async function RootLayout({
       )}
     >
       <body>
-        <Analytics />
         <JsonLd data={createSiteJsonLd(socialProfiles)} />
         <ThemeProvider>
           <div className="flex min-h-screen w-screen flex-col bg-background">
@@ -84,6 +85,12 @@ export default async function RootLayout({
               <Navbar />
               <main className="h-full w-full flex-1 border-b border-accent bg-card">
                 {children}
+                {/* Adds Vercel Analytics telemetry monitoring */}
+                <Analytics />
+                {/* Seamless, optimized Google Analytics tag integration */}
+                <GoogleAnalytics gaId="G-NETESH3QT8" />
+                {/* Next.js Speed Insights for performance metrics */}
+                <SpeedInsights />
               </main>
               <Footer socialLinks={socialProfiles} />
             </div>
