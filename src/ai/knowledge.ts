@@ -36,6 +36,7 @@ const STATIC_KNOWLEDGE: KnowledgeDocument[] = [
       "Muhammad Azlaan Zubair is a software architect and web engineer based in Karachi, Pakistan.",
       "He works across scalable systems, product engineering, artificial intelligence, machine learning, and automation.",
       "His public handle is @mdazlaanzubair but only for Instagram it is @mdazlaanzubairr.",
+      "Azlaan's contact number is not mentioned but visitors can contact him via his email, i.e. mdazlaan1996@gmail.com or other social media accounts like LinkedIn, Twitter, Instagram, etc."
     ].join(" "),
     tags: [
       "profile",
