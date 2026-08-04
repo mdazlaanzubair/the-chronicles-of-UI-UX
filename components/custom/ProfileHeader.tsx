@@ -98,6 +98,7 @@ export default function ProfileHeader({
                 >
                   Book a Call
                 </Link>
+                <PortfolioAssistant />
                 {socialLinks.map((social_link) => {
                   const { url, platform, username } = social_link
 
