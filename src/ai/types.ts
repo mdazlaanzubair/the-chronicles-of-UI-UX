@@ -16,6 +16,7 @@ export interface AssistantAction {
   label: string
   url: string
   kind: "link" | "download"
+  fileName?: string
 }
 
 export interface AssistantReply {

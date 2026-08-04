@@ -27,8 +27,6 @@ If you have any questions or want to talk, just [**reach out**](https://www.link
 
 The current portfolio includes a Gemini-powered AI representative grounded in the site's Sanity content, Hashnode articles, and a curated personality profile. It answers questions about Azlaan, recommends relevant work and writing, cites the pages it used, and redirects unrelated requests back to the portfolio.
 
-Copy `.env.example` to `.env.local` and provide `GOOGLE_GEMINI_API_KEY`. Set `PORTFOLIO_RESUME_URL` to a public or site-relative resume URL to enable the download action. `GEMINI_MODEL` is optional and defaults to `gemini-3.5-flash-lite`.
-
 Enjoy! 💻✨
 
 \- Muhammad Azlaan Zubair

@@ -15,6 +15,20 @@ import type {
 const DEFAULT_MODEL = "gemini-3.5-flash-lite"
 const MAX_CONTEXT_CHARACTERS = 18_000
 
+const PROFESSIONAL_RESUME_ACTION = {
+  label: "Download professional resume (PDF)",
+  url: "/resume/Resume - Software Engineer - Muhammad Azlaan Zubair.pdf",
+  kind: "download",
+  fileName: "Resume - Software Engineer - Muhammad Azlaan Zubair.pdf",
+} satisfies AssistantAction
+
+const ACADEMIC_CV_ACTION = {
+  label: "Download academic CV (PDF)",
+  url: "/resume/CV - Software Engineer - Muhammad Azlaan Zubair (Academic).pdf",
+  kind: "download",
+  fileName: "CV - Software Engineer - Muhammad Azlaan Zubair (Academic).pdf",
+} satisfies AssistantAction
+
 export class AssistantConfigurationError extends Error {}
 
 const CLEARLY_OFF_TOPIC = [
@@ -69,27 +83,170 @@ const toSource = (document: KnowledgeDocument): AssistantSource => ({
   url: document.sourceUrl,
 })
 
-const getResumeAction = (): AssistantAction | null => {
-  const url = process.env.PORTFOLIO_RESUME_URL?.trim()
-  if (!url) return null
+type PortfolioDocument = "professional-resume" | "academic-cv"
 
+const normalizeForIntent = (value: string) =>
+  value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+
+const getRequestedDocuments = (
+  messages: AssistantMessageInput[]
+): PortfolioDocument[] => {
+  const question = normalizeForIntent(messages.at(-1)?.content || "")
+  const visitorOwnedDocument =
+    /\b(?:my|mine|our)\s+(?:academic\s+)?(?:resume|cv|curriculum vitae)\b/.test(
+      question
+    )
+  const azlaanOwnedDocument =
+    /\b(?:your|azlaan(?:'s)?|his)\s+(?:academic\s+)?(?:resume|cv|curriculum vitae)\b/.test(
+      question
+    )
+
+  if (visitorOwnedDocument && !azlaanOwnedDocument) return []
+
+  const asksForAcademicCv =
+    /\bacademic\s+cv\b|\bcurriculum vitae\b|\bcv\b/.test(question)
+  const asksForProfessionalResume = /\bprofessional\s+resume\b|\bresume\b/.test(
+    question
+  )
+
+  if (asksForAcademicCv && asksForProfessionalResume) {
+    return ["professional-resume", "academic-cv"]
+  }
+  if (asksForAcademicCv) return ["academic-cv"]
+  if (asksForProfessionalResume) return ["professional-resume"]
+
+  const deliveryCue =
+    /\b(download|send|share|give|provide|get|open|view|see|available|where|document|application materials)\b/.test(
+      question
+    )
+  const academicAudience =
+    /\b(professor|faculty|research position|research role|phd|doctoral|lab|university|scholarship)\b/.test(
+      question
+    )
+  const professionalAudience =
+    /\b(recruiter|hiring manager|job|industry|software engineer(?:ing)? role|developer role)\b/.test(
+      question
+    )
+
+  if (deliveryCue && academicAudience && professionalAudience) {
+    return ["professional-resume", "academic-cv"]
+  }
+  if (deliveryCue && academicAudience) return ["academic-cv"]
+  if (deliveryCue && professionalAudience) return ["professional-resume"]
+  if (
+    deliveryCue &&
+    /\b(application materials|career documents|both documents|documents)\b/.test(
+      question
+    )
+  ) {
+    return ["professional-resume", "academic-cv"]
+  }
+
+  const recentContext = normalizeForIntent(
+    messages
+      .slice(0, -1)
+      .slice(-4)
+      .map((message) => message.content)
+      .join(" ")
+  )
+  const followsDocumentConversation = /\b(resume|cv|curriculum vitae)\b/.test(
+    recentContext
+  )
+
+  if (followsDocumentConversation) {
+    if (/\b(both|either|all)\b/.test(question)) {
+      return ["professional-resume", "academic-cv"]
+    }
+    if (
+      /\bacademic (?:one|version|document)\b|\bresearch version\b/.test(
+        question
+      )
+    ) {
+      return ["academic-cv"]
+    }
+    if (
+      /\bprofessional (?:one|version|document)\b|\bhiring version\b|\bindustry version\b/.test(
+        question
+      )
+    ) {
+      return ["professional-resume"]
+    }
+  }
+
+  return []
+}
+
+const toDocumentActions = (documents: PortfolioDocument[]): AssistantAction[] =>
+  documents.map((document) =>
+    document === "academic-cv" ? ACADEMIC_CV_ACTION : PROFESSIONAL_RESUME_ACTION
+  )
+
+const isDirectDocumentRequest = (
+  question: string,
+  documents: PortfolioDocument[]
+) => {
+  if (documents.length === 0) return false
+
+  const normalized = normalizeForIntent(question)
+  const additionalTopic =
+    /\b(summarize|explain|compare)\b|\b(?:latest|recent)\s+(?:blog|article|paper|publication|project)\b|\b(?:tell me about|describe)\s+(?:your\s+)?(?:work|research|project|paper|publication|experience|skills?)\b/.test(
+      normalized
+    )
+
+  return !additionalTopic
+}
+
+const createDocumentReply = (
+  documents: PortfolioDocument[]
+): AssistantReply => {
+  if (documents.length === 2) {
+    return {
+      answer:
+        "I keep two versions for different audiences. My professional resume is the concise option for hiring and industry roles; my academic CV gives professors and research teams the fuller record. You can download either below.",
+      sources: [],
+      suggestions: [
+        "What is your current research focus?",
+        "Which project should a hiring manager see first?",
+        "How can I contact you?",
+      ],
+      actions: toDocumentActions(documents),
+      scope: "answered",
+    }
+  }
+
+  const isAcademic = documents[0] === "academic-cv"
   return {
-    label: "Download résumé",
-    url,
-    kind: "download",
+    answer: isAcademic
+      ? "For professors, research teams, and university opportunities, my academic CV has the fuller record of my education, publications, manuscripts, research projects, and technical work. You can download it below."
+      : "For hiring managers and industry roles, my professional resume is the concise version of my engineering experience, impact, selected AI projects, and education. You can download it below.",
+    sources: [],
+    suggestions: isAcademic
+      ? [
+          "Can I see the professional resume too?",
+          "What is your current research focus?",
+          "Tell me about your published paper.",
+        ]
+      : [
+          "Can I see the academic CV too?",
+          "Which project should I look at first?",
+          "How can I contact you?",
+        ],
+    actions: toDocumentActions(documents),
+    scope: "answered",
   }
 }
 
-const getActions = (question: string, sources: AssistantSource[]) => {
-  const actions: AssistantAction[] = []
-  const resumeAction = getResumeAction()
-
-  if (resumeAction && /\b(resume|résumé|cv)\b/i.test(question)) {
-    actions.push(resumeAction)
-  }
+const getActions = (
+  documentActions: AssistantAction[],
+  sources: AssistantSource[]
+) => {
+  const actions: AssistantAction[] = [...documentActions]
 
   const firstSource = sources[0]
-  if (firstSource) {
+  if (firstSource && actions.length < 3) {
     actions.push({
       label: `Open ${firstSource.label.toLowerCase()}`,
       url: firstSource.url,
@@ -97,7 +254,7 @@ const getActions = (question: string, sources: AssistantSource[]) => {
     })
   }
 
-  return actions.slice(0, 2)
+  return actions.slice(0, 3)
 }
 
 const safeSuggestions = (value: unknown) => {
@@ -157,7 +314,8 @@ const buildSystemInstruction = (documents: KnowledgeDocument[]) =>
 ${PERSONA_FOUNDATION}
 
 CURRENT CAPABILITIES
-- A résumé download is ${process.env.PORTFOLIO_RESUME_URL?.trim() ? "available" : "not configured yet"}. If it is unavailable, point visitors to the About/Experience source instead of promising a file.
+- Two verified PDF downloads are always available through interface actions: a concise professional resume for hiring and industry roles, and a detailed academic CV for professors, research teams, and university opportunities.
+- When a visitor asks for either document, explain the audience distinction briefly and tell them to use the download button below. Do not write a raw document URL in the answer.
 
 RESPONSE CONTRACT
 - Produce a concise answer in Azlaan's documented voice.
@@ -173,6 +331,11 @@ export async function createAssistantReply(
   messages: AssistantMessageInput[]
 ): Promise<AssistantReply> {
   const question = messages.at(-1)?.content.trim() || ""
+  const requestedDocuments = getRequestedDocuments(messages)
+
+  if (isDirectDocumentRequest(question, requestedDocuments)) {
+    return createDocumentReply(requestedDocuments)
+  }
 
   if (isClearlyOffTopic(question)) {
     return {
@@ -263,7 +426,7 @@ export async function createAssistantReply(
               "How do you make technical decisions?",
               "What have you written recently?",
             ],
-      actions: getActions(question, sources),
+      actions: getActions(toDocumentActions(requestedDocuments), sources),
       scope: modelReply.scope,
     }
   } finally {
