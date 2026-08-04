@@ -52,6 +52,7 @@ export interface HashnodePost {
   readTimeInMinutes: number
   views: number
   reactionCount: number
+  content?: string
 
   coverImage: {
     url: string
@@ -558,6 +559,7 @@ const parseHashnodeRss = (xml: string): HashnodePost[] =>
       ),
       views: 0,
       reactionCount: 0,
+      content,
       coverImage: enclosureUrl ? { url: enclosureUrl } : null,
       author: {
         name: authorName || "Muhammad Azlaan Zubair",

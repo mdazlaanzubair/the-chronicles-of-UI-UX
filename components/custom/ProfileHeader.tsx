@@ -1,10 +1,4 @@
-import {
-  Calendar,
-  MapPin,
-  GraduationCapIcon,
-  MailIcon,
-  ExternalLinkIcon,
-} from "lucide-react"
+import { Calendar, MapPin, MailIcon, DotSquareIcon } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
 import { buttonVariants } from "../ui/button"
 import LinkedinIcon from "@sanity/icons/Linkedin"
@@ -15,6 +9,7 @@ import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import Image from "next/image"
 import CoverBanner from "./CoverBanner"
+import PortfolioAssistant from "./PortfolioAssistant"
 
 export default function ProfileHeader({
   socialLinks,
@@ -96,6 +91,7 @@ export default function ProfileHeader({
                   rel="noopener noreferrer"
                   className={cn(
                     buttonVariants({
+                      variant: "outline",
                       size: "sm",
                     })
                   )}
@@ -105,7 +101,7 @@ export default function ProfileHeader({
                 {socialLinks.map((social_link) => {
                   const { url, platform, username } = social_link
 
-                  if (platform === "instagram" || platform === "x") return
+                  if (["instagram", "x", "scholar"].includes(platform)) return
                   return (
                     <Tooltip key={`${url}-${platform}-${username}`}>
                       <TooltipTrigger>
@@ -124,9 +120,7 @@ export default function ProfileHeader({
                             if (platform === "github") return <GithubIcon />
                             else if (platform === "linkedin")
                               return <LinkedinIcon />
-                            else if (platform === "scholar")
-                              return <GraduationCapIcon />
-                            else return <ExternalLinkIcon />
+                            else return <DotSquareIcon />
                           })()}
                         </Link>
                       </TooltipTrigger>
@@ -137,6 +131,7 @@ export default function ProfileHeader({
                     </Tooltip>
                   )
                 })}
+                <PortfolioAssistant />
               </div>
             </div>
           </div>

@@ -16,7 +16,7 @@ export const Footer = ({
         {socialLinks.map((item) => {
           if (
             item.isHidden ||
-            ["github", "scholar", "linkedin"].includes(item.platform)
+            ["github", "linkedin"].includes(item.platform)
           )
             return
           return (
