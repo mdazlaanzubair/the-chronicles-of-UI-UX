@@ -38,6 +38,14 @@ npm run dev
 ```
 
 Set the same `NEXT_PUBLIC_SANITY_PROJECT_ID` and
-`NEXT_PUBLIC_SANITY_DATASET` variables in the hosting provider before deploying.
-Set `NEXT_PUBLIC_SITE_URL` to the canonical production origin used by metadata,
-structured data, the sitemap, and robots.txt.
+`NEXT_PUBLIC_SANITY_DATASET` variables in the hosting provider before deploying,
+along with a server-only `SANITY_API_READ_TOKEN` that can read the private
+dataset. Hashnode also requires `HASHNODE_GQL_ENDPOINT`,
+`HASHNODE_PUBLICATION_HOST`, and a server-only `HASHNODE_ACCESS_TOKEN`.
+The site uses Hashnode GraphQL as its primary source and the publication RSS
+feed as a read-only fallback so transient API failures do not empty the
+prerendered writing and case-study pages.
+
+The production canonical origin is intentionally fixed to
+`https://mdazlaanzubair.com` in `src/seo/site.ts` so previews and deployment
+aliases cannot emit duplicate canonicals.

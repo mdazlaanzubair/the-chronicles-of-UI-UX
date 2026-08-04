@@ -1,9 +1,12 @@
+import ArticleCard from "@/components/custom/ArticleCard"
 import JsonLd from "@/components/seo/JsonLd"
-import { getHashnodePosts, type HashnodePost } from "@/src/hashnode/hashnode"
+import {
+  getHashnodePosts,
+  getHashnodeRssPosts,
+  type HashnodePost,
+} from "@/src/hashnode/hashnode"
 import { createPageMetadata } from "@/src/seo/site"
 import { createCollectionJsonLd, PERSON_ID } from "@/src/seo/structured-data"
-import Image from "next/image"
-import Link from "next/link"
 
 const description =
   "Technical writing by Muhammad Azlaan Zubair on software architecture, web engineering, artificial intelligence, automation, and product development."
@@ -12,7 +15,16 @@ export const metadata = createPageMetadata({
   title: "Writing & Insights",
   description,
   path: "/",
+  keywords: [
+    "software architecture articles",
+    "web engineering blog",
+    "artificial intelligence insights",
+    "developer automation",
+    "Muhammad Azlaan Zubair writing",
+  ],
 })
+
+export const revalidate = 21600
 
 export default async function Page() {
   let posts: HashnodePost[] = []
@@ -20,14 +32,27 @@ export default async function Page() {
 
   try {
     const res = await getHashnodePosts({
-      first: 12,
-      excludeCaseStudies: true,
+      first: 10,
+      excludeCaseStudies: false,
     })
     posts = res.posts
-  } catch (error: unknown) {
-    console.error("Hashnode fetch error:", error)
-    fetchError =
-      error instanceof Error ? error.message : "Failed to load Hashnode posts."
+  } catch (apiError: unknown) {
+    const apiMessage =
+      apiError instanceof Error ? apiError.message : "Unknown GraphQL error"
+    console.warn(`Hashnode GraphQL unavailable (${apiMessage}); using RSS.`)
+
+    try {
+      posts = await getHashnodeRssPosts({
+        first: 10,
+        excludeCaseStudies: false,
+      })
+    } catch (rssError: unknown) {
+      console.error("Hashnode RSS fetch error:", rssError)
+      fetchError =
+        rssError instanceof Error
+          ? rssError.message
+          : "Failed to load Hashnode posts."
+    }
   }
 
   const writingJsonLd = createCollectionJsonLd({
@@ -36,6 +61,7 @@ export default async function Page() {
     description,
     items: posts.map((post) => ({
       "@type": "BlogPosting",
+      "@id": `${post.url}#article`,
       headline: post.title,
       description: post.brief,
       url: post.url,
@@ -53,10 +79,6 @@ export default async function Page() {
       className="flex flex-col"
     >
       <JsonLd data={writingJsonLd} />
-      <header className="sr-only">
-        <h1 id="writing-heading">Writing and technical insights</h1>
-        <p>{description}</p>
-      </header>
       {(() => {
         if (posts.length <= 0) {
           return (
@@ -74,82 +96,14 @@ export default async function Page() {
         }
 
         return (
-          <section
+          <div
             key="post-container"
             className="motion-stagger flex flex-col gap-0"
           >
-            {posts.map((post, idx) => {
-              const hasImage = Boolean(post.coverImage?.url)
-              return (
-                <article
-                  key={`blog-post-${post.id}-${idx}`}
-                  className="flex flex-col lg:flex-row items-center gap-4 border-b border-accent bg-card p-4 last:border-b-0"
-                >
-                  {hasImage ? (
-                    <div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-md bg-muted lg:w-44">
-                      <Image
-                        src={post.coverImage!.url}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 144px, 176px"
-                      />
-                    </div>
-                  ) : null}
-
-                  <div className="flex min-w-0 flex-1 flex-col justify-between gap-2 self-stretch">
-                    <div>
-                      <div className="mb-1.5 flex flex-wrap gap-1.5">
-                        {post.tags.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag.id}
-                            className="text-xs font-medium text-muted-foreground"
-                          >
-                            #{tag.name}
-                          </span>
-                        ))}
-                      </div>
-
-                      <h2 className="line-clamp-3 text-lg leading-snug font-semibold tracking-tight sm:text-base">
-                        <Link
-                          href={post.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="hover:underline"
-                        >
-                          {post.title}
-                        </Link>
-                      </h2>
-                    </div>
-
-                    <div className="flex flex-wrap items-center justify-between gap-1 text-xs text-muted-foreground">
-                      <time dateTime={post.publishedAt}>
-                        {new Intl.DateTimeFormat("en-US", {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        }).format(new Date(post.publishedAt))}
-                      </time>
-
-                      <span>{post.readTimeInMinutes} min read</span>
-                    </div>
-                  </div>
-                </article>
-              )
-            })}
-            {/* <Link
-              href="https://blog.mdazlaanzubair.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
-                "w-full px-0 text-xs"
-              )}
-            >
-              Checkout More Articles
-              <ExternalLinkIcon className="size-2.5 transition-transform duration-150 group-hover/button:translate-x-0.5 motion-reduce:transform-none" />
-            </Link> */}
-          </section>
+            {posts.map((post, idx) => (
+              <ArticleCard key={`blog-post-${post.id}-${idx}`} post={post} />
+            ))}
+          </div>
         )
       })()}
     </section>

@@ -6,9 +6,7 @@ export const SITE_TITLE =
   "Muhammad Azlaan Zubair | Software Architect & Web Engineer"
 export const SITE_DESCRIPTION =
   "Portfolio of Muhammad Azlaan Zubair, a software architect and web engineer focused on scalable systems, product engineering, AI, and automation."
-export const SITE_URL = new URL(
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://mdazlaanzubair.com"
-)
+export const SITE_URL = new URL("https://mdazlaanzubair.com")
 
 export const absoluteUrl = (path: string) => new URL(path, SITE_URL).toString()
 
@@ -26,13 +24,22 @@ export const rootMetadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
+  keywords: [
+    "Muhammad Azlaan Zubair",
+    "software architect",
+    "web engineer",
+    "Next.js developer",
+    "artificial intelligence",
+    "developer automation",
+    "technical research",
+  ],
   applicationName: `${SITE_NAME} Portfolio`,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   category: "technology",
   alternates: {
-    canonical: "/",
+    canonical: absoluteUrl("/"),
   },
   openGraph: {
     type: "website",
@@ -68,18 +75,21 @@ export const createPageMetadata = ({
   title,
   description,
   path,
+  keywords,
 }: {
   title: string
   description: string
   path: string
+  keywords: string[]
 }): Metadata => {
   const socialTitle = `${title} | ${SITE_NAME}`
 
   return {
     title,
     description,
+    keywords,
     alternates: {
-      canonical: path,
+      canonical: absoluteUrl(path),
     },
     openGraph: {
       type: "website",

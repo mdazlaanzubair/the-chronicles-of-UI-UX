@@ -9,39 +9,18 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
 import { buttonVariants } from "../ui/button"
 import LinkedinIcon from "@sanity/icons/Linkedin"
 import GithubIcon from "@sanity/icons/Github"
-import { SocialMediaInterface } from "@/type"
-import { SOCIAL_PROFILES_QUERY } from "@/src/sanity/queries"
-import { toSocialProfiles } from "@/src/sanity/adapters"
-import { client } from "@/src/sanity/client"
+import type { SocialMediaInterface } from "@/type"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import Image from "next/image"
 import CoverBanner from "./CoverBanner"
 
-const options = { next: { revalidate: 30 } }
-
-export default async function ProfileHeader() {
-  let social_links: SocialMediaInterface[] = []
-  let fetchError: string | null = null
-
-  try {
-    const res = await client.fetch(SOCIAL_PROFILES_QUERY, {}, options)
-    social_links = toSocialProfiles(res)
-  } catch (error: unknown) {
-    console.error("Sanity fetch error:", error)
-    fetchError =
-      error instanceof Error ? error.message : "Failed to load social links."
-  }
-
-  if (fetchError) {
-    return (
-      <header className="flex w-full items-center justify-between gap-3 border-b border-accent bg-card p-4">
-        <p className="text-xs text-muted-foreground">{fetchError}</p>
-      </header>
-    )
-  }
-
+export default function ProfileHeader({
+  socialLinks,
+}: {
+  socialLinks: SocialMediaInterface[]
+}) {
   return (
     <header className="flex w-full flex-col bg-card text-foreground">
       {/* Cover Banner Photo */}
@@ -69,7 +48,7 @@ export default async function ProfileHeader() {
           <div>
             <div className="grid grid-cols-1 items-start justify-between gap-3 md:grid-cols-2">
               <div>
-                <h1 className="font-heading text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+                <p className="font-heading text-xl font-bold tracking-tight text-foreground sm:text-2xl">
                   <HoverCard>
                     <HoverCardTrigger className="cursor-pointer border-b border-dashed border-secondary-foreground">
                       Md.
@@ -104,7 +83,7 @@ export default async function ProfileHeader() {
                     </HoverCardContent>
                   </HoverCard>{" "}
                   Azlaan Zubair
-                </h1>
+                </p>
                 <p className="mt-1.5 text-sm font-normal text-muted-foreground">
                   @mdazlaanzubair
                 </p>
@@ -123,7 +102,7 @@ export default async function ProfileHeader() {
                 >
                   Book a Call
                 </Link>
-                {social_links.map((social_link) => {
+                {socialLinks.map((social_link) => {
                   const { url, platform, username } = social_link
 
                   if (platform === "instagram" || platform === "x") return
@@ -166,7 +145,9 @@ export default async function ProfileHeader() {
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-xs text-muted-foreground">
             <div className="flex cursor-pointer items-center gap-1.5 hover:text-foreground">
               <Calendar className="h-4 w-4 shrink-0" />
-              <span>Born in July 1996</span>
+              <span>
+                Born in <time dateTime="1996-07">July 1996</time>
+              </span>
             </div>
             <div className="flex items-center gap-1.5">
               <MapPin className="h-4 w-4 shrink-0" />

@@ -6,8 +6,9 @@ import { WORK_LIST_QUERY } from "@/src/sanity/queries"
 import { absoluteUrl, createPageMetadata } from "@/src/seo/site"
 import { createCollectionJsonLd, PERSON_ID } from "@/src/seo/structured-data"
 import type { WorkInterface } from "@/type"
+import { toPlainText } from "next-sanity"
 
-const options = { next: { revalidate: 30 } }
+const options = { next: { revalidate: 21600, tags: ["sanity-projects"] } }
 const description =
   "Selected software architecture, web engineering, AI, automation, and product development projects by Muhammad Azlaan Zubair."
 
@@ -15,7 +16,16 @@ export const metadata = createPageMetadata({
   title: "Projects",
   description,
   path: "/projects",
+  keywords: [
+    "Muhammad Azlaan Zubair projects",
+    "software architecture portfolio",
+    "Next.js and Sanity projects",
+    "AI automation applications",
+    "open source web engineering",
+  ],
 })
+
+export const revalidate = 21600
 
 const Page = async () => {
   let projects: WorkInterface[] = []
@@ -34,22 +44,25 @@ const Page = async () => {
     path: "/projects",
     name: "Software and product engineering projects",
     description,
-    items: projects.map((project) => ({
-      "@type": "CreativeWork",
-      "@id": `${absoluteUrl("/projects")}#${encodeURIComponent(project.id)}`,
-      name: project.title,
-      description: project.description,
-      creator: { "@id": PERSON_ID },
-      dateCreated: project.createdAt,
-      dateModified: project.updatedAt,
-      keywords: project.tags,
-      ...(project.metadata.projectUrl
-        ? { url: project.metadata.projectUrl }
-        : {}),
-      ...(project.metadata.repositoryUrl
-        ? { sameAs: project.metadata.repositoryUrl }
-        : {}),
-    })),
+    items: projects.map((project) => {
+      const featureList = toPlainText(project.metadata.key_contributions).trim()
+
+      return {
+        "@type": "SoftwareApplication",
+        "@id": `${absoluteUrl("/projects")}#${encodeURIComponent(project.id)}`,
+        name: project.title,
+        description: project.description,
+        creator: { "@id": PERSON_ID },
+        keywords: project.tags,
+        ...(featureList ? { featureList } : {}),
+        ...(project.metadata.projectUrl
+          ? { url: project.metadata.projectUrl }
+          : {}),
+        ...(project.metadata.repositoryUrl
+          ? { sameAs: [project.metadata.repositoryUrl] }
+          : {}),
+      }
+    }),
   })
 
   return (
@@ -59,10 +72,6 @@ const Page = async () => {
       className="flex flex-col"
     >
       <JsonLd data={projectsJsonLd} />
-      <header className="sr-only">
-        <h1 id="projects-heading">Software engineering projects</h1>
-        <p>{description}</p>
-      </header>
       {projects.length === 0 ? (
         <div className="rounded-md border border-dashed border-accent bg-muted/20 p-4">
           <p className="text-sm font-medium text-muted-foreground">

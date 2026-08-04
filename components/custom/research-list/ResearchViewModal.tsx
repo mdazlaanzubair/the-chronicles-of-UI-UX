@@ -1,5 +1,6 @@
 "use client"
 
+import { buttonVariants } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -8,11 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import type { PublicationInterface } from "@/type"
-import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import type { PublicationInterface } from "@/type"
 import { ExternalLinkIcon } from "lucide-react"
+import Link from "next/link"
 
 interface ResearchViewModalProps {
   isOpen: boolean
@@ -50,11 +50,17 @@ const ResearchViewModal = ({
         <div className="flex w-full flex-col gap-6">
           <DialogHeader className="border-b border-accent pr-10 pb-4">
             <span className="eyebrow text-[11px]">
-              {year ? `${statusLabel} · ${year}` : statusLabel}
+              {statusLabel}
+              {year ? (
+                <>
+                  <span aria-hidden="true"> · </span>
+                  <time dateTime={String(year)}>{year}</time>
+                </>
+              ) : null}
             </span>
             <DialogTitle className="leading-8 normal-case">{title}</DialogTitle>
-            <DialogDescription>
-              {authors.length > 0 && (
+            {authors.length > 0 ? (
+              <DialogDescription render={<div />}>
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs font-medium text-foreground">
                     Authors
@@ -69,7 +75,10 @@ const ResearchViewModal = ({
                       <span
                         key={`${data.id}-${author}-${index}`}
                         className={cn(
-                          isMainAuthor ? "modal-tag-primary" : "modal-tag-muted"
+                          isMainAuthor
+                            ? "modal-tag-primary"
+                            : "modal-tag-muted",
+                          "border border-accent bg-muted p-2 text-[11px] leading-0"
                         )}
                       >
                         {author}
@@ -77,13 +86,16 @@ const ResearchViewModal = ({
                     )
                   })}
                 </div>
-              )}
-            </DialogDescription>
+              </DialogDescription>
+            ) : null}
           </DialogHeader>
 
           <div className="max-h-64 space-y-6 overflow-y-auto pr-2">
-            <section>
-              <h3 className="mb-3 font-heading text-base font-semibold text-foreground">
+            <section aria-labelledby={`${data.id}-modal-abstract`}>
+              <h3
+                id={`${data.id}-modal-abstract`}
+                className="mb-3 font-heading text-base font-semibold text-foreground"
+              >
                 Abstract
               </h3>
               <p className="text-justify text-xs leading-6 whitespace-pre-line text-muted-foreground">
@@ -92,20 +104,24 @@ const ResearchViewModal = ({
             </section>
           </div>
         </div>
-        {doiUrl && (
+
+        {doiUrl ? (
           <DialogFooter className="items-center border-t border-accent pt-4 sm:justify-between">
             <div />
             <Link
               href={doiUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(buttonVariants({ size: "sm" }), "gap-1 text-xs")}
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "sm" }),
+                "gap-1 text-xs"
+              )}
             >
               Read publication
               <ExternalLinkIcon className="size-3 transition-transform duration-150 group-hover/button:translate-x-0.5 motion-reduce:transform-none" />
             </Link>
           </DialogFooter>
-        )}
+        ) : null}
       </DialogContent>
     </Dialog>
   )

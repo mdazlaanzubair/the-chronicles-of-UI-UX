@@ -8,10 +8,18 @@ import { cn } from "@/lib/utils"
 import ProfileHeader from "@/components/custom/ProfileHeader"
 import Navbar from "@/components/custom/Navbar"
 import { Footer } from "@/components/custom/Footer"
+import { toSocialProfiles } from "@/src/sanity/adapters"
+import { client } from "@/src/sanity/client"
+import { SOCIAL_PROFILES_QUERY } from "@/src/sanity/queries"
 import { rootMetadata } from "@/src/seo/site"
-import { siteJsonLd } from "@/src/seo/structured-data"
+import {
+  createSiteJsonLd,
+  DEFAULT_SOCIAL_PROFILES,
+  resolveSocialProfiles,
+} from "@/src/seo/structured-data"
 
 export const metadata = rootMetadata
+export const revalidate = 21600
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -35,11 +43,24 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  let socialProfiles = DEFAULT_SOCIAL_PROFILES
+
+  try {
+    const response = await client.fetch(
+      SOCIAL_PROFILES_QUERY,
+      {},
+      { next: { revalidate: 21600, tags: ["sanity-social-profiles"] } }
+    )
+    socialProfiles = resolveSocialProfiles(toSocialProfiles(response))
+  } catch (error: unknown) {
+    console.error("Sanity social profiles fetch error:", error)
+  }
+
   return (
     <html
       lang="en"
@@ -53,16 +74,16 @@ export default function RootLayout({
       )}
     >
       <body>
-        <JsonLd data={siteJsonLd} />
+        <JsonLd data={createSiteJsonLd(socialProfiles)} />
         <ThemeProvider>
           <div className="flex min-h-screen w-screen flex-col bg-background">
             <div className="mx-auto flex w-full max-w-xl flex-1 flex-col overflow-x-clip border-s border-e border-accent bg-foreground">
-              <ProfileHeader />
+              <ProfileHeader socialLinks={socialProfiles} />
               <Navbar />
               <main className="h-full w-full flex-1 border-b border-accent bg-card">
                 {children}
               </main>
-              <Footer />
+              <Footer socialLinks={socialProfiles} />
             </div>
           </div>
         </ThemeProvider>

@@ -2,18 +2,42 @@ import type { MetadataRoute } from "next"
 
 import { absoluteUrl, SITE_URL } from "@/src/seo/site"
 
+export const revalidate = 21600
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/studio", "/studio/"],
+      },
+      {
+        userAgent: "GPTBot",
+        allow: "/",
+      },
+      {
+        userAgent: "ChatGPT-User",
+        allow: "/",
+      },
+      {
+        userAgent: "ClaudeBot",
+        allow: "/",
+      },
+      {
+        userAgent: "PerplexityBot",
+        allow: "/",
+      },
+      {
+        userAgent: "Google-Extended",
+        allow: "/",
+      },
+      {
+        userAgent: "Anthropic-AI",
+        allow: "/",
       },
       {
         userAgent: "OAI-SearchBot",
         allow: "/",
-        disallow: ["/studio", "/studio/"],
       },
     ],
     sitemap: absoluteUrl("/sitemap.xml"),

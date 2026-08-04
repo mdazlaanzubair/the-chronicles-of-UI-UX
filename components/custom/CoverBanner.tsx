@@ -74,14 +74,14 @@ const CoverBanner = () => {
         ))}
       </button>
 
-      <div className="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-8 text-center text-primary-foreground">
-        <h2 className="max-w-md text-xl leading-tight font-bold sm:text-2xl">
-          Javascript is the duct tape of the Internet.
-        </h2>
-        <p className="mt-2 text-xs font-medium text-primary-foreground/65 italic sm:text-sm">
-          — Charlie Campbell —
+      <blockquote className="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-8 text-center text-primary-foreground">
+        <p className="max-w-md text-xl leading-tight font-bold sm:text-2xl">
+          JavaScript is the duct tape of the Internet.
         </p>
-      </div>
+        <cite className="mt-2 text-xs font-medium text-primary-foreground/65 sm:text-sm">
+          Charlie Campbell
+        </cite>
+      </blockquote>
     </div>
   )
 }

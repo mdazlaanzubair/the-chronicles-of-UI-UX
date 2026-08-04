@@ -48,13 +48,30 @@ export const toWorkItems = (
     },
   }))
 
+const looksLikeTimeline = (value: string) => /\b(?:19|20)\d{2}\b/.test(value)
+
 export const toExperience = (
   documents: EXPERIENCE_QUERY_RESULT
 ): ExperienceInterface[] =>
-  documents.map((document) => ({
-    ...document,
-    key_contributions: asPortableTextBlocks(document.key_contributions),
-  }))
+  documents.map((document) => {
+    const hasSwappedLocationAndTimeline =
+      !looksLikeTimeline(document.timeline) &&
+      looksLikeTimeline(document.company.location)
+
+    return {
+      ...document,
+      company: {
+        ...document.company,
+        location: hasSwappedLocationAndTimeline
+          ? document.timeline
+          : document.company.location,
+      },
+      timeline: hasSwappedLocationAndTimeline
+        ? document.company.location
+        : document.timeline,
+      key_contributions: asPortableTextBlocks(document.key_contributions),
+    }
+  })
 
 export const toAcademicHistory = (
   documents: ACADEMIC_HISTORY_QUERY_RESULT
@@ -67,6 +84,5 @@ export const toSocialProfiles = (
 export const toSkills = (skills: SKILLS_QUERY_RESULT): SkillInterface[] =>
   skills
 
-export const toInterests = (
-  interests: INTERESTS_QUERY_RESULT
-): InterestType => interests
+export const toInterests = (interests: INTERESTS_QUERY_RESULT): InterestType =>
+  interests

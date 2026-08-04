@@ -1,5 +1,6 @@
 "use client"
 
+import { buttonVariants } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -8,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import type { WorkInterface } from "@/type"
 import { Code2Icon, ExternalLinkIcon } from "lucide-react"
@@ -22,13 +22,13 @@ const portableTextComponents: PortableTextComponents = {
       <p className="leading-6 [&:not(:first-child)]:mt-3">{children}</p>
     ),
     h2: ({ children }) => (
-      <h2 className="mt-5 text-lg font-semibold text-foreground">{children}</h2>
+      <h4 className="mt-4 font-semibold text-foreground">{children}</h4>
     ),
     h3: ({ children }) => (
-      <h3 className="mt-4 font-semibold text-foreground">{children}</h3>
+      <h4 className="mt-4 font-semibold text-foreground">{children}</h4>
     ),
     h4: ({ children }) => (
-      <h4 className="mt-4 font-medium text-foreground">{children}</h4>
+      <h4 className="mt-4 font-semibold text-foreground">{children}</h4>
     ),
     blockquote: ({ children }) => (
       <blockquote className="my-4 border-l-2 border-primary pl-4 italic">
@@ -75,29 +75,33 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
     null
   )
 
+  const contributionsHeadingId = selectedProject
+    ? `${encodeURIComponent(selectedProject.id)}-modal-contributions`
+    : undefined
+
   return (
     <>
-      <section className="motion-stagger flex flex-col gap-0">
+      <div className="motion-stagger flex flex-col gap-0">
         {projects.map((project) => (
           <article
+            id={encodeURIComponent(project.id)}
             key={project.id}
             className="motion-lift group/project relative flex flex-col gap-3 border-b border-accent bg-card p-4 last:border-b-0 hover:bg-muted/30"
           >
             <button
               type="button"
               aria-label={`View details for ${project.title}`}
+              aria-haspopup="dialog"
               onClick={() => setSelectedProject(project)}
               className="absolute inset-0 z-0 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
             />
 
-            <div className="pointer-events-none relative z-10 min-w-0">
-              <div className="mb-1.5 flex flex-wrap items-center gap-1.5">
-                {project.metadata.isFeatured && (
-                  <span className="text-xs font-medium text-primary">
-                    Featured
-                  </span>
-                )}
-              </div>
+            <header className="pointer-events-none relative z-10 min-w-0">
+              {project.metadata.isFeatured ? (
+                <span className="mb-1.5 block text-xs font-medium text-primary">
+                  Featured
+                </span>
+              ) : null}
 
               <h2 className="line-clamp-1 truncate text-lg leading-snug font-semibold tracking-tight transition-colors group-hover/project:text-foreground sm:text-base">
                 {project.title}
@@ -106,10 +110,10 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
               <p className="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">
                 {project.description}
               </p>
-            </div>
+            </header>
           </article>
         ))}
-      </section>
+      </div>
 
       <Dialog
         open={selectedProject !== null}
@@ -117,12 +121,12 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
           if (!open) setSelectedProject(null)
         }}
       >
-        {selectedProject && (
+        {selectedProject ? (
           <DialogContent className="max-h-[85vh] overflow-hidden border border-border/60 bg-card sm:max-w-2xl">
             <DialogHeader>
-              {selectedProject.metadata.isFeatured && (
+              {selectedProject.metadata.isFeatured ? (
                 <span className="eyebrow text-[11px]">Featured project</span>
-              )}
+              ) : null}
               <DialogTitle className="font-heading text-xl font-semibold normal-case">
                 {selectedProject.title}
               </DialogTitle>
@@ -132,8 +136,11 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
             </DialogHeader>
 
             <div className="max-h-[52vh] space-y-6 overflow-y-auto pr-2">
-              <section>
-                <h3 className="mb-3 font-heading text-base font-semibold text-foreground">
+              <section aria-labelledby={contributionsHeadingId}>
+                <h3
+                  id={contributionsHeadingId}
+                  className="mb-3 font-heading text-base font-semibold text-foreground"
+                >
                   Key contributions
                 </h3>
                 {selectedProject.metadata.key_contributions.length > 0 ? (
@@ -150,54 +157,57 @@ const ProjectsList = ({ projects }: { projects: WorkInterface[] }) => {
                 )}
               </section>
 
-              {selectedProject.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
+              {selectedProject.tags.length > 0 ? (
+                <ul aria-label="Technologies" className="flex flex-wrap gap-2">
                   {selectedProject.tags.map((tag) => (
-                    <span
+                    <li
                       key={`${selectedProject.id}-modal-${tag}`}
-                      className="modal-tag-muted"
+                      className="border border-accent bg-muted p-2 text-[11px] leading-0"
                     >
                       {tag}
-                    </span>
+                    </li>
                   ))}
-                </div>
-              )}
+                </ul>
+              ) : null}
             </div>
 
-            <DialogFooter className="items-center border-t border-accent pt-4">
-              <div className="flex items-center gap-2">
-                {selectedProject.metadata.repositoryUrl && (
-                  <Link
-                    href={selectedProject.metadata.repositoryUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      buttonVariants({ variant: "outline", size: "sm" }),
-                      "gap-1 text-xs"
-                    )}
-                  >
-                    <Code2Icon className="size-3" />
-                    Source
-                  </Link>
-                )}
-                {selectedProject.metadata.projectUrl && (
-                  <Link
-                    href={selectedProject.metadata.projectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      buttonVariants({ size: "sm" }),
-                      "gap-1 text-xs"
-                    )}
-                  >
-                    <ExternalLinkIcon className="size-3 transition-transform duration-150 group-hover/button:translate-x-0.5 motion-reduce:transform-none" />
-                    Visit project
-                  </Link>
-                )}
-              </div>
-            </DialogFooter>
+            {selectedProject.metadata.repositoryUrl ||
+            selectedProject.metadata.projectUrl ? (
+              <DialogFooter className="items-center border-t border-accent pt-4">
+                <div className="flex items-center gap-2">
+                  {selectedProject.metadata.repositoryUrl ? (
+                    <Link
+                      href={selectedProject.metadata.repositoryUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        buttonVariants({ variant: "ghost", size: "sm" }),
+                        "gap-1 text-xs"
+                      )}
+                    >
+                      <Code2Icon className="size-3" />
+                      Source
+                    </Link>
+                  ) : null}
+                  {selectedProject.metadata.projectUrl ? (
+                    <Link
+                      href={selectedProject.metadata.projectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        buttonVariants({ variant: "ghost", size: "sm" }),
+                        "gap-1 text-xs text-primary hover:bg-primary/5 hover:text-primary"
+                      )}
+                    >
+                      <ExternalLinkIcon className="size-3 transition-transform duration-150 group-hover/button:translate-x-0.5 motion-reduce:transform-none" />
+                      Visit project
+                    </Link>
+                  ) : null}
+                </div>
+              </DialogFooter>
+            ) : null}
           </DialogContent>
-        )}
+        ) : null}
       </Dialog>
     </>
   )

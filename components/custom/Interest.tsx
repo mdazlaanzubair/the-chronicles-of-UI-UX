@@ -1,42 +1,29 @@
-import { toInterests } from "@/src/sanity/adapters"
-import { client } from "@/src/sanity/client"
-import { INTERESTS_QUERY } from "@/src/sanity/queries"
 import type { InterestType } from "@/type"
 
-const options = { next: { revalidate: 30 } }
-
-const Interest = async () => {
-  let interests: InterestType = []
-  let fetchError: string | null = null
-
-  try {
-    const response = await client.fetch(INTERESTS_QUERY, {}, options)
-    interests = toInterests(response)
-  } catch (error: unknown) {
-    console.error("Sanity interests fetch error:", error)
-    fetchError =
-      error instanceof Error ? error.message : "Failed to load interests."
-  }
-
-  if (fetchError) {
-    return (
-      <section id="interests" className="p-4">
-        <p className="text-xs text-muted-foreground">{fetchError}</p>
-      </section>
-    )
-  }
-
-  if (interests.length === 0) return null
-
+const Interest = ({
+  interests,
+  fetchError,
+}: {
+  interests: InterestType
+  fetchError?: string
+}) => {
   return (
-    <section id="interests">
+    <section id="interests" aria-labelledby="interests-heading">
       <div className="p-4">
         <span className="eyebrow text-xs">Beyond the work</span>
-        <h1 className="mb-3 font-heading text-2xl font-semibold">Interests</h1>
+        <h2
+          id="interests-heading"
+          className="mb-3 font-heading text-2xl font-semibold"
+        >
+          Interests
+        </h2>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          A broad toolkit organized around shipping robust digital products.
+          Topics and activities that keep my perspective broader than the work.
         </p>
       </div>
+      {fetchError ? (
+        <p className="px-4 pb-4 text-xs text-muted-foreground">{fetchError}</p>
+      ) : null}
       <ul className="motion-stagger grid grid-cols-1 gap-4 px-4 pb-4 md:grid-cols-2 lg:grid-cols-3">
         {interests.map((interest, idx) => (
           <li
