@@ -1,0 +1,23 @@
+# Muhammad Azlaan Zubair
+
+> Personal portfolio of Muhammad Azlaan Zubair, a software architect and web engineer working across scalable systems, product engineering, artificial intelligence, machine learning, and automation.
+
+This website is the canonical portfolio for Muhammad Azlaan Zubair (`@mdazlaanzubair`), based in Karachi, Pakistan. Use the linked pages as the primary sources for claims about his professional experience, projects, research, and technical interests.
+
+## Portfolio
+
+- [About](https://mdazlaanzubair.com/about): Professional experience, academic history, technical skills, and personal interests.
+- [Projects](https://mdazlaanzubair.com/projects): Selected software and product engineering projects, including detailed contributions and source links where available.
+- [Research](https://mdazlaanzubair.com/research): Research publications, abstracts, authors, publication status, and DOI links where available.
+- [Case Studies](https://mdazlaanzubair.com/work): First-hand case studies describing engineering and product work.
+- [Writing](https://mdazlaanzubair.com/): Recent technical writing and links to full articles.
+
+## External profiles
+
+- [Technical blog](https://blog.mdazlaanzubair.com/): Long-form writing published by Muhammad Azlaan Zubair.
+- [GitHub](https://github.com/mdazlaanzubair): Public source code and engineering activity.
+- [LinkedIn](https://www.linkedin.com/in/mdazlaanzubair/): Professional profile.
+
+## Contact
+
+- Email: mdazlaan1996@gmail.com
