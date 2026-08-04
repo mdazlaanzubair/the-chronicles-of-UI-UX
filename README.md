@@ -1,51 +1,28 @@
-# Next.js template
+# The Chronicles of UI/UX 📖✨
 
-This is a Next.js template with shadcn/ui.
+Hello and welcome to my portfolio website repository! Here, you'll find all my portfolio websites I've created so far. I've put together this repository to track my progress and growth in both design and development. You'll see how my skills have evolved over time, including improvements in design aesthetics, color selection, animations, coding, and folder organization. Enjoy exploring my work!
 
-## Adding components
+## Why I Made This 🧭
 
-To add components to your app, run the following command:
+I made this to keep track of my progress as a developer. It helps me in a few ways:
 
-```bash
-npx shadcn@latest add button
-```
+- **Keep track of my design journey:** I can see how my understanding of good design has grown over time.
+- **Remember what I’ve learned:** Each website I created, teaches me something new and shows how the trends of that time influenced me.
+- **Share my experience:** Maybe my journey can help others with their designs too.
 
-This will place the ui components in the `components` directory.
+## Take a Look Around 🗺️
 
-## Using components
+Feel free to explore the folders and see the code. Each website tells a part of my design story.
 
-To use the components in your app, import them as follows:
+- [**Latest**](https://mdazlaanzubair.com/) - Current active version
+- [Checkout v5](https://v5.mdazlaanzubair.com/) - Created on 04 Aug 2026 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v5)
+- [Checkout v4](https://v4.mdazlaanzubair.com/) - Created on 10 Jun 2025 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v4)
+- [Checkout v3](https://v3.mdazlaanzubair.com/) - Created on 07 Apr 2024 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v3)
+- [Checkout v2](https://v2.mdazlaanzubair.com/) - Created on 07 Jul 2023 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v2)
+- [Checkout v1](https://v1.mdazlaanzubair.com/) - Created on 22 Dec 2019 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v1)
 
-```tsx
-import { Button } from "@/components/ui/button"
-```
+If you have any questions or want to talk, just [**reach out**](https://www.linkedin.com/in/mdazlaanzubair/)!
 
-## Sanity Studio
+Enjoy! 💻✨
 
-The Sanity Studio is embedded at `/studio` and connects to the `production`
-dataset in the `mdazlaanzubair-portfolio` Sanity project.
-
-Copy the environment variables when setting up a new local checkout:
-
-```bash
-cp .env.example .env.local
-```
-
-Run the app and open [http://localhost:3000/studio](http://localhost:3000/studio):
-
-```bash
-npm run dev
-```
-
-Set the same `NEXT_PUBLIC_SANITY_PROJECT_ID` and
-`NEXT_PUBLIC_SANITY_DATASET` variables in the hosting provider before deploying,
-along with a server-only `SANITY_API_READ_TOKEN` that can read the private
-dataset. Hashnode also requires `HASHNODE_GQL_ENDPOINT`,
-`HASHNODE_PUBLICATION_HOST`, and a server-only `HASHNODE_ACCESS_TOKEN`.
-The site uses Hashnode GraphQL as its primary source and the publication RSS
-feed as a read-only fallback so transient API failures do not empty the
-prerendered writing and case-study pages.
-
-The production canonical origin is intentionally fixed to
-`https://mdazlaanzubair.com` in `src/seo/site.ts` so previews and deployment
-aliases cannot emit duplicate canonicals.
+\- Muhammad Azlaan Zubair
