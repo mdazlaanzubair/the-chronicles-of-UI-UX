@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next"
 import { Geist_Mono, Oxanium, Red_Hat_Display } from "next/font/google"
 import type { Viewport } from "next"
 
@@ -74,6 +75,7 @@ export default async function RootLayout({
       )}
     >
       <body>
+        <Analytics />
         <JsonLd data={createSiteJsonLd(socialProfiles)} />
         <ThemeProvider>
           <div className="flex min-h-screen w-screen flex-col bg-background">
