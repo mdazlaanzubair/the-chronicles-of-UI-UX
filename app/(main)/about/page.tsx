@@ -3,6 +3,8 @@ import ExperienceAccordion from "@/components/custom/ExperienceAccordion"
 import Interest from "@/components/custom/Interest"
 import Skills from "@/components/custom/Skills"
 import JsonLd from "@/components/seo/JsonLd"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import {
   toAcademicHistory,
   toExperience,
@@ -18,6 +20,7 @@ import {
 } from "@/src/sanity/queries"
 import { createPageMetadata } from "@/src/seo/site"
 import { createAboutPageJsonLd } from "@/src/seo/structured-data"
+import Link from "next/link"
 import ReactMarkdown from "react-markdown"
 
 const description =
@@ -131,6 +134,24 @@ const Page = async () => {
         </h2>
         <ReactMarkdown>{bio.p1}</ReactMarkdown>
         <ReactMarkdown>{bio.p2}</ReactMarkdown>
+
+        {/* Resume download section */}
+        <div className="flex items-center gap-1.5">
+          <Link
+            href="/resume/Resume - Software Engineer - Muhammad Azlaan Zubair.pdf"
+            className={cn(buttonVariants({ variant: "default"}))}
+            download
+          >
+            Resume (PDF)
+          </Link>
+          <Link
+            href="/resume/CV - Software Engineer - Muhammad Azlaan Zubair (Academic).pdf"
+            className={cn(buttonVariants({ variant: "ghost"}))}
+            download
+          >
+            Academic CV (PDF)
+          </Link>
+        </div>
       </section>
       <hr className="border-accent" />
       <ExperienceAccordion items={experiences} fetchError={experienceError} />

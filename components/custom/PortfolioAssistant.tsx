@@ -1,22 +1,23 @@
 "use client"
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import Image from "next/image"
-import { createPortal } from "react-dom"
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react"
 import ReactMarkdown from "react-markdown"
 import {
   ArrowRight,
+  Download,
   ExternalLink,
   LoaderCircle,
   Send,
   Sparkles,
-  X,
 } from "lucide-react"
 
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -27,7 +28,6 @@ import type {
   AssistantReply,
   AssistantSource,
 } from "@/src/ai/types"
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 
 interface ChatMessage {
   id: string
@@ -42,7 +42,7 @@ const STARTER_QUESTIONS = [
   "How do you approach complex engineering problems?",
   "Which project should I look at first?",
   "What have you written about AI?",
-  "Can I get your résumé?",
+  "Can I download your résumé or academic CV?",
 ]
 
 const WELCOME_MESSAGE: ChatMessage = {
@@ -73,21 +73,6 @@ export default function PortfolioAssistant() {
   useEffect(() => {
     return () => controllerRef.current?.abort()
   }, [])
-
-  useEffect(() => {
-    if (!open) return
-
-    const focusTimer = window.setTimeout(() => textareaRef.current?.focus(), 80)
-    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false)
-    }
-
-    document.addEventListener("keydown", handleKeyDown)
-    return () => {
-      window.clearTimeout(focusTimer)
-      document.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [open])
 
   useEffect(() => {
     if (!open) return
@@ -189,50 +174,31 @@ export default function PortfolioAssistant() {
     }
   }
 
-  const panel = open ? (
-    <section
-      role="dialog"
-      aria-modal="false"
-      aria-labelledby="portfolio-assistant-title"
-      className="fixed bottom-4 z-[70] flex h-[min(42rem,calc(100dvh-2rem))] w-[min(30rem,calc(100vw-2rem))] flex-col border border-accent bg-card text-card-foreground shadow-2xl motion-safe:animate-in motion-safe:duration-200 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2"
-      style={{
-        right: "max(1rem, calc((100vw - 36rem) / 2 + 1rem))",
-      }}
+  const panel = (
+    <DialogContent
+      initialFocus={textareaRef}
+      className="flex h-[min(42rem,calc(100dvh-2rem))] w-full flex-col gap-0 overflow-hidden border border-accent bg-card p-0 text-card-foreground shadow-2xl sm:max-w-[30rem]"
     >
-      <header className="flex items-center justify-between gap-3 border-b border-accent bg-background p-4">
-        <div className="flex min-w-0 items-center gap-3">
-          <div className="relative size-10 shrink-0 overflow-hidden rounded-full border-2 border-accent bg-card">
-            <Image
-              src="/portrait.png"
-              alt=""
-              fill
-              sizes="40px"
-              className="object-cover"
-            />
-            <span className="absolute right-0 bottom-0 size-2.5 rounded-full border-2 border-card bg-primary" />
-          </div>
-          <div className="min-w-0">
-            <h2
-              id="portfolio-assistant-title"
-              className="truncate font-heading text-sm font-bold tracking-wide text-foreground"
-            >
-              Ask Leo
-            </h2>
-            <p className="mt-0.5 truncate text-[11px] tracking-wide text-muted-foreground uppercase">
-              AI representative · grounded in public sources
-            </p>
-          </div>
+      <DialogHeader className="flex-row items-center gap-3 border-b border-accent bg-background p-4 pr-14">
+        <div className="relative size-10 shrink-0 overflow-hidden rounded-full border-2 border-accent bg-card">
+          <Image
+            src="/portrait.png"
+            alt=""
+            fill
+            sizes="40px"
+            className="object-cover"
+          />
+          <span className="absolute right-0 bottom-0 size-2.5 rounded-full border-2 border-card bg-primary" />
         </div>
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon-sm"
-          onClick={() => setOpen(false)}
-          aria-label="Close Leo"
-        >
-          <X />
-        </Button>
-      </header>
+        <div className="min-w-0 text-left">
+          <DialogTitle className="truncate text-sm font-bold tracking-wide normal-case">
+            Ask Leo
+          </DialogTitle>
+          <DialogDescription className="mt-0 truncate text-[11px] leading-4 tracking-wide uppercase">
+            AI representative · grounded in public sources
+          </DialogDescription>
+        </div>
+      </DialogHeader>
 
       <div
         ref={transcriptRef}
@@ -307,11 +273,19 @@ export default function PortfolioAssistant() {
                           ? "noopener noreferrer"
                           : undefined
                       }
-                      download={action.kind === "download" ? true : undefined}
+                      download={
+                        action.kind === "download"
+                          ? action.fileName || true
+                          : undefined
+                      }
                       className={buttonVariants({ size: "xs" })}
                     >
                       {action.label}
-                      <ArrowRight data-icon="inline-end" />
+                      {action.kind === "download" ? (
+                        <Download data-icon="inline-end" />
+                      ) : (
+                        <ArrowRight data-icon="inline-end" />
+                      )}
                     </a>
                   ))}
                 </div>
@@ -383,30 +357,19 @@ export default function PortfolioAssistant() {
           make mistakes.
         </p>
       </form>
-    </section>
-  ) : null
+    </DialogContent>
+  )
 
   return (
-    <Dialog>
-      <Tooltip key={`leo-ai-trigger-tooltip`}>
-        <TooltipTrigger>
-          <Button
-            type="button"
-            size="icon-sm"
-            variant="secondary"
-            onClick={() => setOpen(true)}
-            aria-expanded={open}
-            aria-haspopup="dialog"
-          >
-            <Sparkles data-icon="inline-start" />
-          </Button>
-        </TooltipTrigger>
-
-        <TooltipContent>Ask my AI</TooltipContent>
-      </Tooltip>
-      <DialogContent className="p-0">
-        {panel ? createPortal(panel, document.body) : null}
-      </DialogContent>
+    <Dialog onOpenChange={setOpen}>
+      <DialogTrigger
+        className={cn(buttonVariants({ variant: "default", size: "icon-sm" }))}
+        aria-label="Ask my AI"
+        title="Ask my AI"
+      >
+        <Sparkles data-icon="inline-start" />
+      </DialogTrigger>
+      {panel}
     </Dialog>
   )
 }
