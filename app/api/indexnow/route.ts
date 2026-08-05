@@ -2,15 +2,16 @@ import crypto from "node:crypto"
 import { NextResponse } from "next/server"
 
 export const runtime = "nodejs"
+export const dynamic = "force-dynamic"
 
-const HOST = "mdazlaanzubair.com"
-const INDEXNOW_KEY = process.env.INDEXNOW_KEY
-const HASHNODE_WEBHOOK_SECRET = process.env.HASHNODE_WEBHOOK_SECRET
+const SITE_HOST = "mdazlaanzubair.com"
 
+const HASHNODE_SIGNATURE_HEADER = "x-hashnode-signature"
 const HASHNODE_GRAPHQL_ENDPOINT = "https://gql.hashnode.com"
 const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow"
 
 const SIGNATURE_TOLERANCE_MS = 5 * 60 * 1000
+const HEX_SHA256_PATTERN = /^[a-fA-F0-9]{64}$/
 
 type HashnodeWebhookPayload = {
   metadata?: {
@@ -23,91 +24,285 @@ type HashnodeWebhookPayload = {
     }
     post?: {
       id?: string
+      url?: string
     }
   }
 }
 
-type SignatureParts = {
-  timestamp: number
-  signature: string
+type SignatureVerificationResult =
+  | {
+      valid: true
+      format: "sha256" | "timestamped"
+    }
+  | {
+      valid: false
+      reason: string
+    }
+
+type HashnodePostQueryResponse = {
+  data?: {
+    post?: {
+      url?: string
+    }
+  }
+  errors?: Array<{
+    message?: string
+  }>
 }
 
-function parseSignatureHeader(header: string): SignatureParts | null {
-  const parts = header.split(",").map((part) => part.trim())
+type IndexNowPayload = {
+  host: string
+  key: string
+  keyLocation: string
+  urlList: string[]
+}
 
-  const timestampPart = parts.find((part) => part.startsWith("t="))
-  const signaturePart = parts.find((part) => part.startsWith("v1="))
+function jsonResponse(
+  body: Record<string, unknown>,
+  status = 200
+): NextResponse {
+  return NextResponse.json(body, { status })
+}
 
-  if (!timestampPart || !signaturePart) {
-    return null
-  }
+function readEnvironment(): {
+  indexNowKey: string
+  webhookSecret: string
+} | null {
+  const indexNowKey = process.env.INDEXNOW_KEY?.trim()
+  const webhookSecret = process.env.HASHNODE_WEBHOOK_SECRET?.trim()
 
-  const timestamp = Number(timestampPart.slice(2))
-  const signature = signaturePart.slice(3)
+  if (!indexNowKey || !webhookSecret) {
+    console.error("Missing required server environment variables", {
+      hasIndexNowKey: Boolean(indexNowKey),
+      hasWebhookSecret: Boolean(webhookSecret),
+    })
 
-  if (!Number.isFinite(timestamp) || !/^[a-fA-F0-9]{64}$/.test(signature)) {
     return null
   }
 
   return {
-    timestamp,
-    signature: signature.toLowerCase(),
+    indexNowKey,
+    webhookSecret,
+  }
+}
+
+function isSha256HexDigest(value: string): boolean {
+  return HEX_SHA256_PATTERN.test(value)
+}
+
+function timingSafeHexEqual(received: string, expected: string): boolean {
+  if (
+    !isSha256HexDigest(received) ||
+    !isSha256HexDigest(expected)
+  ) {
+    return false
+  }
+
+  const receivedBuffer = Buffer.from(received, "hex")
+  const expectedBuffer = Buffer.from(expected, "hex")
+
+  return (
+    receivedBuffer.length === expectedBuffer.length &&
+    crypto.timingSafeEqual(receivedBuffer, expectedBuffer)
+  )
+}
+
+function createHmacDigest(
+  value: string,
+  secret: string
+): string {
+  return crypto
+    .createHmac("sha256", secret)
+    .update(value, "utf8")
+    .digest("hex")
+}
+
+function verifySha256Signature({
+  rawBody,
+  signatureHeader,
+  secret,
+}: {
+  rawBody: string
+  signatureHeader: string
+  secret: string
+}): SignatureVerificationResult {
+  const receivedSignature = signatureHeader
+    .slice("sha256=".length)
+    .trim()
+
+  if (!isSha256HexDigest(receivedSignature)) {
+    return {
+      valid: false,
+      reason: "Malformed sha256 webhook signature",
+    }
+  }
+
+  const expectedSignature = createHmacDigest(rawBody, secret)
+
+  if (!timingSafeHexEqual(receivedSignature, expectedSignature)) {
+    return {
+      valid: false,
+      reason: "Invalid sha256 webhook signature",
+    }
+  }
+
+  return {
+    valid: true,
+    format: "sha256",
+  }
+}
+
+function verifyTimestampedSignature({
+  rawBody,
+  signatureHeader,
+  secret,
+}: {
+  rawBody: string
+  signatureHeader: string
+  secret: string
+}): SignatureVerificationResult {
+  const components = signatureHeader
+    .split(",")
+    .map((component) => component.trim())
+
+  const timestampValue = components
+    .find((component) => component.startsWith("t="))
+    ?.slice(2)
+
+  const receivedSignature = components
+    .find((component) => component.startsWith("v1="))
+    ?.slice(3)
+
+  if (!timestampValue || !receivedSignature) {
+    return {
+      valid: false,
+      reason: "Malformed timestamped webhook signature",
+    }
+  }
+
+  if (!isSha256HexDigest(receivedSignature)) {
+    return {
+      valid: false,
+      reason: "Malformed v1 webhook signature",
+    }
+  }
+
+  const timestamp = Number(timestampValue)
+
+  if (!Number.isFinite(timestamp)) {
+    return {
+      valid: false,
+      reason: "Invalid webhook signature timestamp",
+    }
+  }
+
+  const age = Math.abs(Date.now() - timestamp)
+
+  if (age > SIGNATURE_TOLERANCE_MS) {
+    return {
+      valid: false,
+      reason: "Webhook signature timestamp is outside the allowed window",
+    }
+  }
+
+  const signedPayload = `${timestampValue}.${rawBody}`
+  const expectedSignature = createHmacDigest(
+    signedPayload,
+    secret
+  )
+
+  if (!timingSafeHexEqual(receivedSignature, expectedSignature)) {
+    return {
+      valid: false,
+      reason: "Invalid timestamped webhook signature",
+    }
+  }
+
+  return {
+    valid: true,
+    format: "timestamped",
   }
 }
 
 function verifyHashnodeSignature({
-  payload,
+  rawBody,
   signatureHeader,
   secret,
 }: {
-  payload: HashnodeWebhookPayload
+  rawBody: string
   signatureHeader: string
   secret: string
-}): { valid: true } | { valid: false; reason: string } {
-  const parsedSignature = parseSignatureHeader(signatureHeader)
+}): SignatureVerificationResult {
+  const normalizedHeader = signatureHeader.trim()
 
-  if (!parsedSignature) {
-    return {
-      valid: false,
-      reason: "Malformed x-hashnode-signature header",
-    }
+  if (normalizedHeader.startsWith("sha256=")) {
+    return verifySha256Signature({
+      rawBody,
+      signatureHeader: normalizedHeader,
+      secret,
+    })
   }
-
-  const { timestamp, signature } = parsedSignature
-
-  const timestampDifference = Math.abs(Date.now() - timestamp)
-
-  if (timestampDifference > SIGNATURE_TOLERANCE_MS) {
-    return {
-      valid: false,
-      reason: "Webhook timestamp is outside the allowed window",
-    }
-  }
-
-  const signedPayload = `${timestamp}.${JSON.stringify(payload)}`
-
-  const expectedSignature = crypto
-    .createHmac("sha256", secret)
-    .update(signedPayload)
-    .digest("hex")
-
-  const receivedBuffer = Buffer.from(signature, "hex")
-  const expectedBuffer = Buffer.from(expectedSignature, "hex")
 
   if (
-    receivedBuffer.length !== expectedBuffer.length ||
-    !crypto.timingSafeEqual(receivedBuffer, expectedBuffer)
+    normalizedHeader.includes("t=") &&
+    normalizedHeader.includes("v1=")
   ) {
-    return {
-      valid: false,
-      reason: "Invalid webhook signature",
-    }
+    return verifyTimestampedSignature({
+      rawBody,
+      signatureHeader: normalizedHeader,
+      secret,
+    })
   }
 
-  return { valid: true }
+  return {
+    valid: false,
+    reason: "Unsupported x-hashnode-signature format",
+  }
 }
 
-async function getHashnodePostUrl(postId: string): Promise<string | null> {
+function parseWebhookPayload(
+  rawBody: string
+): HashnodeWebhookPayload | null {
+  try {
+    const payload: unknown = JSON.parse(rawBody)
+
+    if (
+      typeof payload !== "object" ||
+      payload === null ||
+      Array.isArray(payload)
+    ) {
+      return null
+    }
+
+    return payload as HashnodeWebhookPayload
+  } catch {
+    return null
+  }
+}
+
+function normalizeUrl(url: string): string | null {
+  try {
+    const parsedUrl = new URL(url)
+
+    if (parsedUrl.protocol !== "https:") {
+      return null
+    }
+
+    if (parsedUrl.hostname !== SITE_HOST) {
+      return null
+    }
+
+    parsedUrl.hash = ""
+
+    return parsedUrl.toString()
+  } catch {
+    return null
+  }
+}
+
+async function resolveHashnodePostUrl(
+  postId: string
+): Promise<string | null> {
   const response = await fetch(HASHNODE_GRAPHQL_ENDPOINT, {
     method: "POST",
     headers: {
@@ -115,7 +310,7 @@ async function getHashnodePostUrl(postId: string): Promise<string | null> {
     },
     body: JSON.stringify({
       query: `
-        query GetPostById($id: ID!) {
+        query GetPostUrl($id: ID!) {
           post(id: $id) {
             url
           }
@@ -126,6 +321,7 @@ async function getHashnodePostUrl(postId: string): Promise<string | null> {
       },
     }),
     cache: "no-store",
+    signal: AbortSignal.timeout(10_000),
   })
 
   if (!response.ok) {
@@ -133,190 +329,250 @@ async function getHashnodePostUrl(postId: string): Promise<string | null> {
 
     console.error("Hashnode GraphQL request failed", {
       status: response.status,
-      responseBody,
+      responseBody: responseBody.slice(0, 500),
     })
 
-    throw new Error("Could not retrieve the published post")
+    throw new Error(
+      `Hashnode GraphQL returned ${response.status}`
+    )
   }
 
-  const result = (await response.json()) as {
-    data?: {
-      post?: {
-        url?: string
-      }
-    }
-    errors?: Array<{
-      message?: string
-    }>
-  }
+  const result =
+    (await response.json()) as HashnodePostQueryResponse
 
   if (result.errors?.length) {
-    console.error("Hashnode GraphQL errors", result.errors)
-    throw new Error("Hashnode returned a GraphQL error")
+    console.error("Hashnode GraphQL returned errors", {
+      errors: result.errors.map((error) => error.message),
+    })
+
+    throw new Error("Hashnode GraphQL returned an error")
   }
 
   return result.data?.post?.url ?? null
 }
 
-export async function POST(request: Request) {
-  if (!HASHNODE_WEBHOOK_SECRET || !INDEXNOW_KEY) {
-    console.error("Required server environment variables are missing")
+async function getPublishedPostUrl(
+  payload: HashnodeWebhookPayload
+): Promise<string | null> {
+  const payloadUrl = payload.data?.post?.url
 
-    return NextResponse.json(
+  if (payloadUrl) {
+    return normalizeUrl(payloadUrl)
+  }
+
+  const postId = payload.data?.post?.id
+
+  if (!postId) {
+    return null
+  }
+
+  const resolvedUrl = await resolveHashnodePostUrl(postId)
+
+  if (!resolvedUrl) {
+    return null
+  }
+
+  return normalizeUrl(resolvedUrl)
+}
+
+async function submitToIndexNow({
+  postUrl,
+  indexNowKey,
+}: {
+  postUrl: string
+  indexNowKey: string
+}): Promise<{
+  accepted: boolean
+  status: number
+  responseBody: string
+}> {
+  const payload: IndexNowPayload = {
+    host: SITE_HOST,
+    key: indexNowKey,
+    keyLocation: `https://${SITE_HOST}/${indexNowKey}.txt`,
+    urlList: [postUrl],
+  }
+
+  const response = await fetch(INDEXNOW_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+    signal: AbortSignal.timeout(10_000),
+  })
+
+  const responseBody = await response.text()
+
+  return {
+    accepted:
+      response.status === 200 || response.status === 202,
+    status: response.status,
+    responseBody,
+  }
+}
+
+export async function POST(request: Request) {
+  const environment = readEnvironment()
+
+  if (!environment) {
+    return jsonResponse(
       {
         success: false,
         error: "Server configuration error",
       },
-      { status: 500 }
+      500
     )
   }
 
-  const signatureHeader = request.headers.get("x-hashnode-signature")
+  const signatureHeader = request.headers.get(
+    HASHNODE_SIGNATURE_HEADER
+  )
 
   if (!signatureHeader) {
-    return NextResponse.json(
+    return jsonResponse(
       {
         success: false,
-        error: "Missing x-hashnode-signature header",
+        error: `Missing ${HASHNODE_SIGNATURE_HEADER} header`,
       },
-      { status: 401 }
+      401
     )
   }
 
-  let body: HashnodeWebhookPayload
+  const rawBody = await request.text()
 
-  try {
-    body = (await request.json()) as HashnodeWebhookPayload
-  } catch {
-    return NextResponse.json(
+  if (!rawBody) {
+    return jsonResponse(
       {
         success: false,
-        error: "Invalid JSON payload",
+        error: "Empty webhook payload",
       },
-      { status: 400 }
+      400
     )
   }
 
   const verification = verifyHashnodeSignature({
-    payload: body,
+    rawBody,
     signatureHeader,
-    secret: HASHNODE_WEBHOOK_SECRET,
+    secret: environment.webhookSecret,
   })
 
   if (!verification.valid) {
     console.warn("Hashnode webhook verification failed", {
       reason: verification.reason,
-      signatureHeaderFormat: signatureHeader
-        .split(",")
-        .map((part) => part.split("=")[0])
-        .join(","),
+      signatureFormat: signatureHeader.split("=")[0],
+      signatureHeaderLength: signatureHeader.length,
+      payloadByteLength: Buffer.byteLength(rawBody, "utf8"),
     })
 
-    return NextResponse.json(
+    return jsonResponse(
       {
         success: false,
         error: verification.reason,
       },
-      { status: 401 }
+      401
     )
   }
 
-  const eventType = body.data?.eventType
+  const payload = parseWebhookPayload(rawBody)
 
-  if (eventType !== "post_published") {
-    return NextResponse.json({
-      success: true,
-      message: `Ignored event: ${eventType ?? "unknown"}`,
-    })
-  }
-
-  const postId = body.data?.post?.id
-
-  if (!postId) {
-    return NextResponse.json(
+  if (!payload) {
+    return jsonResponse(
       {
         success: false,
-        error: "Webhook payload does not contain a post ID",
+        error: "Invalid JSON webhook payload",
       },
-      { status: 400 }
+      400
     )
+  }
+
+  const webhookId = payload.metadata?.uuid
+  const eventType = payload.data?.eventType
+
+  console.info("Hashnode webhook verified", {
+    webhookId,
+    eventType,
+    signatureFormat: verification.format,
+  })
+
+  if (eventType !== "post_published") {
+    return jsonResponse({
+      success: true,
+      ignored: true,
+      message: `Ignored Hashnode event: ${eventType ?? "unknown"}`,
+      webhookId,
+    })
   }
 
   try {
-    const postUrl = await getHashnodePostUrl(postId)
+    const postUrl = await getPublishedPostUrl(payload)
 
     if (!postUrl) {
-      return NextResponse.json(
+      return jsonResponse(
         {
           success: false,
-          error: "Published post URL could not be resolved",
+          error:
+            "Could not resolve a valid published post URL",
+          webhookId,
         },
-        { status: 502 }
+        422
       )
     }
 
-    const parsedPostUrl = new URL(postUrl)
-
-    if (parsedPostUrl.hostname !== HOST) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: `Post URL does not belong to ${HOST}`,
-        },
-        { status: 422 }
-      )
-    }
-
-    const indexNowPayload = {
-      host: HOST,
-      key: INDEXNOW_KEY,
-      keyLocation: `https://${HOST}/${INDEXNOW_KEY}.txt`,
-      urlList: [postUrl],
-    }
-
-    const indexNowResponse = await fetch(INDEXNOW_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-      body: JSON.stringify(indexNowPayload),
-      cache: "no-store",
+    const indexNowResult = await submitToIndexNow({
+      postUrl,
+      indexNowKey: environment.indexNowKey,
     })
 
-    if (!indexNowResponse.ok) {
-      const responseBody = await indexNowResponse.text()
-
+    if (!indexNowResult.accepted) {
       console.error("IndexNow submission failed", {
-        status: indexNowResponse.status,
-        responseBody,
+        status: indexNowResult.status,
+        responseBody: indexNowResult.responseBody.slice(
+          0,
+          500
+        ),
         postUrl,
+        webhookId,
       })
 
-      return NextResponse.json(
+      return jsonResponse(
         {
           success: false,
           error: "IndexNow rejected the URL submission",
-          upstreamStatus: indexNowResponse.status,
+          upstreamStatus: indexNowResult.status,
+          webhookId,
         },
-        { status: 502 }
+        502
       )
     }
 
-    return NextResponse.json({
+    return jsonResponse({
       success: true,
-      message: "URL submitted to IndexNow",
+      message:
+        indexNowResult.status === 202
+          ? "URL accepted by IndexNow and is pending validation"
+          : "URL submitted successfully to IndexNow",
+      indexNowStatus: indexNowResult.status,
       postUrl,
-      webhookId: body.metadata?.uuid,
+      webhookId,
     })
   } catch (error) {
-    console.error("Hashnode webhook processing failed", error)
+    console.error("Hashnode webhook processing failed", {
+      webhookId,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Unknown processing error",
+    })
 
-    return NextResponse.json(
+    return jsonResponse(
       {
         success: false,
         error: "Webhook processing failed",
+        webhookId,
       },
-      { status: 500 }
+      500
     )
   }
 }
