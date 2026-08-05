@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import Image from "next/image"
 import CoverBanner from "./CoverBanner"
+import PortfolioAssistant from "./PortfolioAssistant"
 
 export default function ProfileHeader({
   socialLinks,
@@ -102,6 +103,7 @@ export default function ProfileHeader({
                 >
                   Book a Call
                 </Link>
+                <PortfolioAssistant />
                 {socialLinks.map((social_link) => {
                   const { url, platform, username } = social_link
 

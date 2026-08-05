@@ -1,0 +1,412 @@
+"use client"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import Image from "next/image"
+import { createPortal } from "react-dom"
+import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react"
+import ReactMarkdown from "react-markdown"
+import {
+  ArrowRight,
+  ExternalLink,
+  LoaderCircle,
+  Send,
+  Sparkles,
+  X,
+} from "lucide-react"
+
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import type {
+  AssistantAction,
+  AssistantMessageInput,
+  AssistantReply,
+  AssistantSource,
+} from "@/src/ai/types"
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
+
+interface ChatMessage {
+  id: string
+  role: "user" | "assistant"
+  content: string
+  sources?: AssistantSource[]
+  suggestions?: string[]
+  actions?: AssistantAction[]
+}
+
+const STARTER_QUESTIONS = [
+  "How do you approach complex engineering problems?",
+  "Which project should I look at first?",
+  "What have you written about AI?",
+  "Can I get your résumé?",
+]
+
+const WELCOME_MESSAGE: ChatMessage = {
+  id: "welcome",
+  role: "assistant",
+  content:
+    "Hey — I'm Azlaan's counterpart. I'm grounded in his work, research, and writing, with a voice shaped by how he approaches engineering: structure, clarity, and long-term thinking. Ask me what he has built, how he thinks, or what you should read first.",
+  suggestions: STARTER_QUESTIONS,
+}
+
+const makeId = () =>
+  typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random()}`
+
+const isExternalUrl = (url: string) => /^https?:\/\//i.test(url)
+
+export default function PortfolioAssistant() {
+  const [open, setOpen] = useState(false)
+  const [input, setInput] = useState("")
+  const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE])
+  const [isSending, setIsSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const transcriptRef = useRef<HTMLDivElement>(null)
+  const controllerRef = useRef<AbortController | null>(null)
+
+  useEffect(() => {
+    return () => controllerRef.current?.abort()
+  }, [])
+
+  useEffect(() => {
+    if (!open) return
+
+    const focusTimer = window.setTimeout(() => textareaRef.current?.focus(), 80)
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false)
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.clearTimeout(focusTimer)
+      document.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    transcriptRef.current?.scrollTo({
+      top: transcriptRef.current.scrollHeight,
+      behavior: "smooth",
+    })
+  }, [messages, isSending, open])
+
+  const sendMessage = async (prompt: string) => {
+    const normalized = prompt.trim()
+    if (!normalized || isSending) return
+
+    const userMessage: ChatMessage = {
+      id: makeId(),
+      role: "user",
+      content: normalized,
+    }
+    const requestMessages: AssistantMessageInput[] = [
+      ...messages
+        .filter((message) => message.id !== "welcome")
+        .slice(-7)
+        .map((message) => ({
+          role: message.role,
+          content: message.content,
+        })),
+      { role: "user", content: normalized },
+    ]
+
+    setMessages((current) => [...current, userMessage])
+    setInput("")
+    setError(null)
+    setIsSending(true)
+
+    const controller = new AbortController()
+    controllerRef.current = controller
+    const timeout = window.setTimeout(() => controller.abort(), 30_000)
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: requestMessages }),
+        signal: controller.signal,
+      })
+
+      const payload: unknown = await response.json()
+      if (!response.ok) {
+        const message =
+          payload &&
+          typeof payload === "object" &&
+          "error" in payload &&
+          typeof payload.error === "string"
+            ? payload.error
+            : "I couldn't answer that just now. Please try again."
+        throw new Error(message)
+      }
+
+      const reply = payload as AssistantReply
+      setMessages((current) => [
+        ...current,
+        {
+          id: makeId(),
+          role: "assistant",
+          content: reply.answer,
+          sources: reply.sources,
+          suggestions: reply.suggestions,
+          actions: reply.actions,
+        },
+      ])
+    } catch (reason: unknown) {
+      const message =
+        reason instanceof DOMException && reason.name === "AbortError"
+          ? "That took longer than expected. Please try again."
+          : reason instanceof Error
+            ? reason.message
+            : "I couldn't answer that just now. Please try again."
+      setError(message)
+    } finally {
+      window.clearTimeout(timeout)
+      controllerRef.current = null
+      setIsSending(false)
+    }
+  }
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    void sendMessage(input)
+  }
+
+  const handleComposerKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (
+      event.key === "Enter" &&
+      !event.shiftKey &&
+      !event.nativeEvent.isComposing
+    ) {
+      event.preventDefault()
+      void sendMessage(input)
+    }
+  }
+
+  const panel = open ? (
+    <section
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="portfolio-assistant-title"
+      className="fixed bottom-4 z-[70] flex h-[min(42rem,calc(100dvh-2rem))] w-[min(30rem,calc(100vw-2rem))] flex-col border border-accent bg-card text-card-foreground shadow-2xl motion-safe:animate-in motion-safe:duration-200 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2"
+      style={{
+        right: "max(1rem, calc((100vw - 36rem) / 2 + 1rem))",
+      }}
+    >
+      <header className="flex items-center justify-between gap-3 border-b border-accent bg-background p-4">
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="relative size-10 shrink-0 overflow-hidden rounded-full border-2 border-accent bg-card">
+            <Image
+              src="/portrait.png"
+              alt=""
+              fill
+              sizes="40px"
+              className="object-cover"
+            />
+            <span className="absolute right-0 bottom-0 size-2.5 rounded-full border-2 border-card bg-primary" />
+          </div>
+          <div className="min-w-0">
+            <h2
+              id="portfolio-assistant-title"
+              className="truncate font-heading text-sm font-bold tracking-wide text-foreground"
+            >
+              Ask Leo
+            </h2>
+            <p className="mt-0.5 truncate text-[11px] tracking-wide text-muted-foreground uppercase">
+              AI representative · grounded in public sources
+            </p>
+          </div>
+        </div>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-sm"
+          onClick={() => setOpen(false)}
+          aria-label="Close Leo"
+        >
+          <X />
+        </Button>
+      </header>
+
+      <div
+        ref={transcriptRef}
+        className="flex-1 overflow-y-auto overscroll-contain"
+        aria-live="polite"
+        aria-busy={isSending}
+      >
+        {messages.map((message, index) => {
+          const isLatest = index === messages.length - 1
+          return (
+            <article
+              key={message.id}
+              className={cn(
+                "border-b border-accent p-4",
+                message.role === "user" && "bg-muted/30"
+              )}
+            >
+              <div className="mb-2 flex items-center gap-2 text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
+                {message.role === "assistant" ? (
+                  <>
+                    <Sparkles className="size-3 text-primary" />
+                    <span>Leo</span>
+                  </>
+                ) : (
+                  <span>You</span>
+                )}
+              </div>
+              <div className="prose prose-sm dark:prose-invert prose-p:my-2 prose-ul:my-2 prose-li:my-0 prose-strong:text-foreground max-w-none text-sm leading-6 text-foreground">
+                <ReactMarkdown>{message.content}</ReactMarkdown>
+              </div>
+
+              {message.sources && message.sources.length > 0 && (
+                <div className="mt-4 space-y-2">
+                  <p className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
+                    Sources
+                  </p>
+                  {message.sources.map((source) => (
+                    <a
+                      key={source.id}
+                      href={source.url}
+                      target={isExternalUrl(source.url) ? "_blank" : undefined}
+                      rel={
+                        isExternalUrl(source.url)
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      className="motion-lift flex items-center justify-between gap-3 border border-accent bg-background p-3 hover:-translate-y-0.5 hover:border-primary/40"
+                    >
+                      <span className="min-w-0">
+                        <span className="block text-[10px] tracking-widest text-primary uppercase">
+                          {source.label}
+                        </span>
+                        <span className="mt-1 block truncate text-xs font-medium text-foreground">
+                          {source.title}
+                        </span>
+                      </span>
+                      <ExternalLink className="size-3.5 shrink-0 text-muted-foreground" />
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {message.actions && message.actions.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {message.actions.map((action) => (
+                    <a
+                      key={`${action.label}-${action.url}`}
+                      href={action.url}
+                      target={isExternalUrl(action.url) ? "_blank" : undefined}
+                      rel={
+                        isExternalUrl(action.url)
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      download={action.kind === "download" ? true : undefined}
+                      className={buttonVariants({ size: "xs" })}
+                    >
+                      {action.label}
+                      <ArrowRight data-icon="inline-end" />
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {isLatest &&
+                message.suggestions &&
+                message.suggestions.length > 0 && (
+                  <div className="mt-4 flex flex-col gap-2">
+                    {message.suggestions.map((suggestion) => (
+                      <button
+                        key={suggestion}
+                        type="button"
+                        onClick={() => void sendMessage(suggestion)}
+                        disabled={isSending}
+                        className="flex items-center justify-between gap-3 border border-accent bg-card px-3 py-2 text-left text-xs leading-5 text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground disabled:pointer-events-none disabled:opacity-50"
+                      >
+                        <span>{suggestion}</span>
+                        <ArrowRight className="size-3 shrink-0" />
+                      </button>
+                    ))}
+                  </div>
+                )}
+            </article>
+          )
+        })}
+
+        {isSending && (
+          <div className="flex items-center gap-2 border-b border-accent p-4 text-xs text-muted-foreground">
+            <LoaderCircle className="size-3.5 animate-spin motion-reduce:animate-none" />
+            <span>Thinking through my work…</span>
+          </div>
+        )}
+      </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="border-t border-accent bg-background p-3"
+      >
+        {error && (
+          <p role="alert" className="mb-2 text-xs leading-5 text-destructive">
+            {error}
+          </p>
+        )}
+        <div className="flex items-end gap-2 border border-input bg-card p-2 focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/20">
+          <textarea
+            ref={textareaRef}
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            onKeyDown={handleComposerKeyDown}
+            rows={2}
+            maxLength={1_200}
+            disabled={isSending}
+            placeholder="Ask about my work, thinking, or writing…"
+            aria-label="Message Leo"
+            className="max-h-28 min-h-12 flex-1 resize-none bg-transparent px-1 py-1 text-sm leading-5 text-foreground outline-none placeholder:text-muted-foreground disabled:opacity-60"
+          />
+          <Button
+            type="submit"
+            size="icon-sm"
+            disabled={isSending || !input.trim()}
+            aria-label="Send message"
+          >
+            {isSending ? <LoaderCircle className="animate-spin" /> : <Send />}
+          </Button>
+        </div>
+        <p className="mt-2 text-[10px] leading-4 text-muted-foreground">
+          Answers are generated from approved portfolio material and may still
+          make mistakes.
+        </p>
+      </form>
+    </section>
+  ) : null
+
+  return (
+    <Dialog>
+      <Tooltip key={`leo-ai-trigger-tooltip`}>
+        <TooltipTrigger>
+          <Button
+            type="button"
+            size="icon-sm"
+            variant="secondary"
+            onClick={() => setOpen(true)}
+            aria-expanded={open}
+            aria-haspopup="dialog"
+          >
+            <Sparkles data-icon="inline-start" />
+          </Button>
+        </TooltipTrigger>
+
+        <TooltipContent>Ask my AI</TooltipContent>
+      </Tooltip>
+      <DialogContent className="p-0">
+        {panel ? createPortal(panel, document.body) : null}
+      </DialogContent>
+    </Dialog>
+  )
+}
