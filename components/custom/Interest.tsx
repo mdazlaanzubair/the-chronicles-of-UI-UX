@@ -24,7 +24,7 @@ const Interest = ({
       {fetchError ? (
         <p className="px-4 pb-4 text-xs text-muted-foreground">{fetchError}</p>
       ) : null}
-      <ul className="motion-stagger grid grid-cols-1 gap-4 px-4 pb-4 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="motion-stagger grid grid-cols-2 gap-4 px-4 pb-4 md:grid-cols-3">
         {interests.map((interest, idx) => (
           <li
             key={interest}
