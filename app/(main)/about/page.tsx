@@ -136,7 +136,7 @@ const Page = async () => {
         <ReactMarkdown>{bio.p2}</ReactMarkdown>
 
         {/* Resume download section */}
-        <div className="flex items-center gap-1.5">
+        <div id="download-resume" className="flex items-center gap-1.5">
           <Link
             href="/resume/Resume - Software Engineer - Muhammad Azlaan Zubair.pdf"
             className={cn(buttonVariants({ variant: "default"}))}

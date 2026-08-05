@@ -1,5 +1,6 @@
 import ExternalLink from "@/components/custom/ExternalLink"
 import type { SocialMediaInterface } from "@/type"
+import { ModeToggle } from "./ModeToggle"
 
 export const Footer = ({
   socialLinks,
@@ -9,15 +10,16 @@ export const Footer = ({
   return (
     <footer className="flex w-full items-center justify-between gap-3 border-b border-accent bg-card p-4">
       <p className="text-xs text-muted-foreground">
-        © 2026 Muhammad Azlaan Zubair
+        &copy;{" "}
+        <span className="hidden sm:inline-block">
+          {new Date().getFullYear()}
+        </span>{" "}
+        Muhammad Azlaan Zubair
       </p>
 
       <div className="flex items-center gap-3">
         {socialLinks.map((item) => {
-          if (
-            item.isHidden ||
-            ["github", "linkedin"].includes(item.platform)
-          )
+          if (item.isHidden || ["github", "linkedin"].includes(item.platform))
             return
           return (
             <ExternalLink
@@ -29,6 +31,7 @@ export const Footer = ({
             />
           )
         })}
+        <ModeToggle />
       </div>
     </footer>
   )
