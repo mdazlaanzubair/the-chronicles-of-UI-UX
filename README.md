@@ -1,15 +1,28 @@
-# v4: Personal Portfolio Website
+# The Chronicles of UI/UX 📖✨
 
-This is the fourth portfolio I have made in `Jun 10, 2025`. It's just a re-designed of my previous portfolio. This iteration focuses on a refined user experience, emphasizing performance, accessibility, and a seamless presentation.
+Hello and welcome to my portfolio website repository! Here, you'll find all my portfolio websites I've created so far. I've put together this repository to track my progress and growth in both design and development. You'll see how my skills have evolved over time, including improvements in design aesthetics, color selection, animations, coding, and folder organization. Enjoy exploring my work!
 
-Also, I wanted to keep this portfolio for a few years, so I decided to do something fresh and simple but with a twist. I am really happy with the result. You can check it out live [here](https://v4.mdazlaanzubair.com).
+## Why I Made This 🧭
 
-## Tech Stack
+I made this to keep track of my progress as a developer. It helps me in a few ways:
 
-This project utilizes a modern and efficient tech stack for a high-performing and maintainable codebase:
+- **Keep track of my design journey:** I can see how my understanding of good design has grown over time.
+- **Remember what I’ve learned:** Each website I created, teaches me something new and shows how the trends of that time influenced me.
+- **Share my experience:** Maybe my journey can help others with their designs too.
 
-- **React (v19):** JavaScript library for building the UI, known for its component-based architecture and virtual DOM.
-- **Vite:** A fast build tool and development server for modern web development.
-- **Framer Motion:** A production-ready motion library for React.
-- **Tailwind CSS (v4):** A utility-first CSS framework that allows for rapid UI development and consistent design.
-- **DaisyUI:** A component library for Tailwind CSS that provides a set of pre-designed UI components.
+## Take a Look Around 🗺️
+
+Feel free to explore the folders and see the code. Each website tells a part of my design story.
+
+- [**Latest**](https://mdazlaanzubair.com/) - Current active version
+- [Checkout v5](https://v5.mdazlaanzubair.com/) - Created on 04 Aug 2026 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v5)
+- [Checkout v4](https://v4.mdazlaanzubair.com/) - Created on 10 Jun 2025 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v4)
+- [Checkout v3](https://v3.mdazlaanzubair.com/) - Created on 07 Apr 2024 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v3)
+- [Checkout v2](https://v2.mdazlaanzubair.com/) - Created on 07 Jul 2023 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v2)
+- [Checkout v1](https://v1.mdazlaanzubair.com/) - Created on 22 Dec 2019 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v1)
+
+If you have any questions or want to talk, just [**reach out**](https://www.linkedin.com/in/mdazlaanzubair/)!
+
+Enjoy! 💻✨
+
+\- Muhammad Azlaan Zubair
