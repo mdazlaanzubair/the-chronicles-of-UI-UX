@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { GoogleAnalytics } from "@next/third-parties/google"
 import { Geist_Mono, Oxanium, Red_Hat_Display } from "next/font/google"
+import Script from "next/script"
 import type { Viewport } from "next"
 
 import "../globals.css"
@@ -89,6 +90,13 @@ export default async function RootLayout({
                 <Analytics />
                 {/* Seamless, optimized Google Analytics tag integration */}
                 <GoogleAnalytics gaId="G-NETESH3QT8" />
+                {/* Google AdSense script */}
+                <Script
+                  async
+                  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1061119254656808"
+                  crossOrigin="anonymous"
+                  strategy="afterInteractive"
+                />
                 {/* Next.js Speed Insights for performance metrics */}
                 <SpeedInsights />
               </main>

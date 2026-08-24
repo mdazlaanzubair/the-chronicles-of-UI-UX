@@ -110,5 +110,8 @@ export const createPageMetadata = ({
       description,
       images: [socialImage],
     },
+    other: {
+      "google-adsense-account": "ca-pub-1061119254656808",
+    },
   }
 }
