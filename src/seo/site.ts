@@ -69,6 +69,9 @@ export const rootMetadata: Metadata = {
     },
   },
   manifest: "/manifest.webmanifest",
+  other: {
+    "google-adsense-account": "ca-pub-1061119254656808",
+  },
 }
 
 export const createPageMetadata = ({
