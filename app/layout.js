@@ -12,16 +12,7 @@ export const metadata = {
   referrer: "origin-when-cross-origin",
   robots: {
     index: false,
-    follow: true,
-    nocache: true,
-    googleBot: {
-      index: true,
-      follow: false,
-      noimageindex: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    follow: false,
   },
   metadataBase: new URL("https://www.mdazlaanzubair.com/"),
   icons: {
