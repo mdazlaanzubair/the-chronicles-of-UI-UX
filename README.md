@@ -2,7 +2,7 @@
 
 This is the fourth portfolio I have made in `Jun 10, 2025`. It's just a re-designed of my previous portfolio. This iteration focuses on a refined user experience, emphasizing performance, accessibility, and a seamless presentation.
 
-Also, I wanted to keep this portfolio for a few years, so I decided to do something fresh and simple but with a twist. I am really happy with the result. You can check it out live [here](https://v4.mdazlaanzubair.com).
+Also, I wanted to keep this portfolio for a few years, so I decided to do something fresh and simple but with a twist. I am really happy with the result.
 
 ## Preview
 
