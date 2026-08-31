@@ -4,6 +4,10 @@ This is the fifth portfolio I have made in `Aug 4, 2026`. It's just a re-designe
 
 Also, I wanted to keep this portfolio for a few years, so I decided to go with a timeless design that won't go out of style anytime soon. Also, for content management I decided to use Sanity. which I am really happy with. I can update my portfolio anytime I want. Let's check it out live [here](https://v5.mdazlaanzubair.com).
 
+## Preview
+
+![v5 Preview](./v5-preview.png)
+
 ## Tech Stack
 
 This project utilizes a modern and efficient tech stack for a high-performing and maintainable codebase:

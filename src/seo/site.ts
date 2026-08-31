@@ -57,16 +57,9 @@ export const rootMetadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [socialImage],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
+robots: {
+    index: false,
+    follow: false,
   },
   manifest: "/manifest.webmanifest",
 }
