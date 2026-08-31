@@ -4,6 +4,10 @@ This is the third portfolio I have made almost 1 years back in `Apr 7, 2024`. It
 
 I've aimed for a balance of technical sophistication and intuitive design, creating a portfolio that's both impressive and user-friendly. Let's check it out [**live here**](https://v3.mdazlaanzubair.com/)
 
+## Preview
+
+![v3 Preview](./v3-preview.png)
+
 ## Tech Stack
 
 This project utilizes a cutting-edge tech stack for a high-performing and maintainable codebase:
