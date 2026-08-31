@@ -2,6 +2,10 @@
 
 This is the second portfolio I have made almost 2 years back in `Jul 7, 2023`. This portfolio is built using modern tech, allowing for dynamic content and fancy animations. It represents a significant leap from my first attempt, showcasing my growth and adaptation to web development trends in 2023. Let's check it out [**live here**](https://v2.mdazlaanzubair.com/)
 
+## Preview
+
+![v2 Preview](./v2-preview.png)
+
 ## Technologies Used
 
 This project leverages a range of cutting-edge web technologies, including:
