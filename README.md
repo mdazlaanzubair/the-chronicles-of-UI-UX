@@ -15,11 +15,11 @@ I made this to keep track of my progress as a developer. It helps me in a few wa
 Feel free to explore the folders and see the code. Each website tells a part of my design story.
 
 - [**Latest**](https://mdazlaanzubair.com/) - Current active version
-- [Checkout v5](https://v5.mdazlaanzubair.com/) - Created on 04 Aug 2026 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v5)
-- [Checkout v4](https://v4.mdazlaanzubair.com/) - Created on 10 Jun 2025 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v4)
-- [Checkout v3](https://v3.mdazlaanzubair.com/) - Created on 07 Apr 2024 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v3)
-- [Checkout v2](https://v2.mdazlaanzubair.com/) - Created on 07 Jul 2023 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v2)
-- [Checkout v1](https://v1.mdazlaanzubair.com/) - Created on 22 Dec 2019 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v1)
+- Created on 04 Aug 2026 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v5)
+- Created on 10 Jun 2025 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v4)
+- Created on 07 Apr 2024 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v3)
+- Created on 07 Jul 2023 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v2)
+- Created on 22 Dec 2019 - [Source Code](https://github.com/mdazlaanzubair/the-chronicles-of-UI-UX/tree/v1)
 
 If you have any questions or want to talk, just [**reach out**](https://www.linkedin.com/in/mdazlaanzubair/)!
 
