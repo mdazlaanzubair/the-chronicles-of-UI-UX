@@ -6,7 +6,7 @@ I remember being so excited to showcase my few initial **projects** and **skills
 
 ## Preview
 
-![v4 Preview](./v1-preview.png)
+![v1 Preview](./v1-preview.png)
 
 ## Technologies Used
 
