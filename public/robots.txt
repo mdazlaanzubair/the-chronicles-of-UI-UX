@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Ensure these are NOT set to Disallow:
+# User-agent: GPTBot
+# User-agent: ClaudeBot
+# User-agent: PerplexityBot
+# User-agent: Google-Extended
