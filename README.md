@@ -4,6 +4,10 @@ This is the fourth portfolio I have made in `Jun 10, 2025`. It's just a re-desig
 
 Also, I wanted to keep this portfolio for a few years, so I decided to do something fresh and simple but with a twist. I am really happy with the result. You can check it out live [here](https://v4.mdazlaanzubair.com).
 
+## Preview
+
+![v4 Preview](./img/projects/v4-preview.png)
+
 ## Tech Stack
 
 This project utilizes a modern and efficient tech stack for a high-performing and maintainable codebase:
