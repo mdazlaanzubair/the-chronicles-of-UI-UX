@@ -16,6 +16,10 @@ export const metadata = {
   title: "Muhammad Azlaan Zubair - Portfolio Website",
   description:
     "This website showcases my skills as a web developer and designer. I have experience with a variety of programming languages and technologies, and I am always looking for new challenges. I offer here services that matters and you need. I offer here cheap services. Looking for a freelancer, I'm here to help.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RootLayout({ children }) {
