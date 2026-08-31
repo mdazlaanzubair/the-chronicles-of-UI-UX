@@ -6,7 +6,7 @@ Also, I wanted to keep this portfolio for a few years, so I decided to do someth
 
 ## Preview
 
-![v4 Preview](./img/projects/v4-preview.png)
+![v4 Preview](./v4-preview.png)
 
 ## Tech Stack
 
