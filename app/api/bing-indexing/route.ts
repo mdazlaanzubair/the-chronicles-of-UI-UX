@@ -1,33 +1,32 @@
 import crypto from "node:crypto"
+import { revalidatePath, revalidateTag } from "next/cache"
 import { NextResponse } from "next/server"
+
+import {
+  buildBingSubmissionBatches,
+  sanitizeBingSubmissionResult,
+  submitBingUrlBatches,
+} from "@/src/indexing/bing"
+import {
+  isSupportedHashnodeEvent,
+  parseHashnodeWebhookPayload,
+  type HashnodeWebhookPayload,
+  type SupportedHashnodeEvent,
+} from "@/src/hashnode/webhook-payload"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
-const SITE_HOST = "mdazlaanzubair.com"
+const BLOG_HOST = "blog.mdazlaanzubair.com"
 
 const HASHNODE_SIGNATURE_HEADER = "x-hashnode-signature"
+const HASHNODE_EVENT_HEADER = "x-hashnode-event"
+const HASHNODE_DELIVERY_HEADER = "x-hashnode-delivery"
 const HASHNODE_GRAPHQL_ENDPOINT = "https://gql.hashnode.com"
-const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow"
+const HASHNODE_POSTS_CACHE_TAG = "hashnode-posts"
 
 const SIGNATURE_TOLERANCE_MS = 5 * 60 * 1000
 const HEX_SHA256_PATTERN = /^[a-fA-F0-9]{64}$/
-
-type HashnodeWebhookPayload = {
-  metadata?: {
-    uuid?: string
-  }
-  data?: {
-    eventType?: string
-    publication?: {
-      id?: string
-    }
-    post?: {
-      id?: string
-      url?: string
-    }
-  }
-}
 
 type SignatureVerificationResult =
   | {
@@ -50,13 +49,6 @@ type HashnodePostQueryResponse = {
   }>
 }
 
-type IndexNowPayload = {
-  host: string
-  key: string
-  keyLocation: string
-  urlList: string[]
-}
-
 function jsonResponse(
   body: Record<string, unknown>,
   status = 200
@@ -65,15 +57,15 @@ function jsonResponse(
 }
 
 function readEnvironment(): {
-  indexNowKey: string
+  bingApiKey: string
   webhookSecret: string
 } | null {
-  const indexNowKey = process.env.INDEXNOW_KEY?.trim()
+  const bingApiKey = process.env.BING_SEARCH_CONSOLE_API_KEY?.trim()
   const webhookSecret = process.env.HASHNODE_WEBHOOK_SECRET?.trim()
 
-  if (!indexNowKey || !webhookSecret) {
+  if (!bingApiKey || !webhookSecret) {
     console.error("Missing required server environment variables", {
-      hasIndexNowKey: Boolean(indexNowKey),
+      hasBingApiKey: Boolean(bingApiKey),
       hasWebhookSecret: Boolean(webhookSecret),
     })
 
@@ -81,7 +73,7 @@ function readEnvironment(): {
   }
 
   return {
-    indexNowKey,
+    bingApiKey,
     webhookSecret,
   }
 }
@@ -91,10 +83,7 @@ function isSha256HexDigest(value: string): boolean {
 }
 
 function timingSafeHexEqual(received: string, expected: string): boolean {
-  if (
-    !isSha256HexDigest(received) ||
-    !isSha256HexDigest(expected)
-  ) {
+  if (!isSha256HexDigest(received) || !isSha256HexDigest(expected)) {
     return false
   }
 
@@ -107,14 +96,8 @@ function timingSafeHexEqual(received: string, expected: string): boolean {
   )
 }
 
-function createHmacDigest(
-  value: string,
-  secret: string
-): string {
-  return crypto
-    .createHmac("sha256", secret)
-    .update(value, "utf8")
-    .digest("hex")
+function createHmacDigest(value: string, secret: string): string {
+  return crypto.createHmac("sha256", secret).update(value, "utf8").digest("hex")
 }
 
 function verifySha256Signature({
@@ -126,9 +109,7 @@ function verifySha256Signature({
   signatureHeader: string
   secret: string
 }): SignatureVerificationResult {
-  const receivedSignature = signatureHeader
-    .slice("sha256=".length)
-    .trim()
+  const receivedSignature = signatureHeader.slice("sha256=".length).trim()
 
   if (!isSha256HexDigest(receivedSignature)) {
     return {
@@ -206,10 +187,7 @@ function verifyTimestampedSignature({
   }
 
   const signedPayload = `${timestampValue}.${rawBody}`
-  const expectedSignature = createHmacDigest(
-    signedPayload,
-    secret
-  )
+  const expectedSignature = createHmacDigest(signedPayload, secret)
 
   if (!timingSafeHexEqual(receivedSignature, expectedSignature)) {
     return {
@@ -243,10 +221,7 @@ function verifyHashnodeSignature({
     })
   }
 
-  if (
-    normalizedHeader.includes("t=") &&
-    normalizedHeader.includes("v1=")
-  ) {
+  if (normalizedHeader.includes("t=") && normalizedHeader.includes("v1=")) {
     return verifyTimestampedSignature({
       rawBody,
       signatureHeader: normalizedHeader,
@@ -260,26 +235,6 @@ function verifyHashnodeSignature({
   }
 }
 
-function parseWebhookPayload(
-  rawBody: string
-): HashnodeWebhookPayload | null {
-  try {
-    const payload: unknown = JSON.parse(rawBody)
-
-    if (
-      typeof payload !== "object" ||
-      payload === null ||
-      Array.isArray(payload)
-    ) {
-      return null
-    }
-
-    return payload as HashnodeWebhookPayload
-  } catch {
-    return null
-  }
-}
-
 function normalizeUrl(url: string): string | null {
   try {
     const parsedUrl = new URL(url)
@@ -288,7 +243,7 @@ function normalizeUrl(url: string): string | null {
       return null
     }
 
-    if (parsedUrl.hostname !== SITE_HOST) {
+    if (parsedUrl.hostname !== BLOG_HOST) {
       return null
     }
 
@@ -300,9 +255,7 @@ function normalizeUrl(url: string): string | null {
   }
 }
 
-async function resolveHashnodePostUrl(
-  postId: string
-): Promise<string | null> {
+async function resolveHashnodePostUrl(postId: string): Promise<string | null> {
   const response = await fetch(HASHNODE_GRAPHQL_ENDPOINT, {
     method: "POST",
     headers: {
@@ -332,13 +285,10 @@ async function resolveHashnodePostUrl(
       responseBody: responseBody.slice(0, 500),
     })
 
-    throw new Error(
-      `Hashnode GraphQL returned ${response.status}`
-    )
+    throw new Error(`Hashnode GraphQL returned ${response.status}`)
   }
 
-  const result =
-    (await response.json()) as HashnodePostQueryResponse
+  const result = (await response.json()) as HashnodePostQueryResponse
 
   if (result.errors?.length) {
     console.error("Hashnode GraphQL returned errors", {
@@ -351,18 +301,32 @@ async function resolveHashnodePostUrl(
   return result.data?.post?.url ?? null
 }
 
-async function getPublishedPostUrl(
-  payload: HashnodeWebhookPayload
+async function getEventResourceUrl(
+  payload: HashnodeWebhookPayload,
+  eventType: SupportedHashnodeEvent
 ): Promise<string | null> {
-  const payloadUrl = payload.data?.post?.url
+  const isStaticPageEvent = eventType.startsWith("static_page_")
+  const resource = isStaticPageEvent
+    ? payload.data?.staticPage
+    : payload.data?.post
+  const payloadUrl = resource?.url
 
   if (payloadUrl) {
     return normalizeUrl(payloadUrl)
   }
 
-  const postId = payload.data?.post?.id
+  if (resource?.slug) {
+    const slugUrl = new URL(resource.slug, `https://${BLOG_HOST}/`)
+    const normalizedSlugUrl = normalizeUrl(slugUrl.toString())
 
-  if (!postId) {
+    if (normalizedSlugUrl) {
+      return normalizedSlugUrl
+    }
+  }
+
+  const postId = resource?.id
+
+  if (!postId || isStaticPageEvent || eventType === "post_deleted") {
     return null
   }
 
@@ -373,44 +337,6 @@ async function getPublishedPostUrl(
   }
 
   return normalizeUrl(resolvedUrl)
-}
-
-async function submitToIndexNow({
-  postUrl,
-  indexNowKey,
-}: {
-  postUrl: string
-  indexNowKey: string
-}): Promise<{
-  accepted: boolean
-  status: number
-  responseBody: string
-}> {
-  const payload: IndexNowPayload = {
-    host: SITE_HOST,
-    key: indexNowKey,
-    keyLocation: `https://${SITE_HOST}/${indexNowKey}.txt`,
-    urlList: [postUrl],
-  }
-
-  const response = await fetch(INDEXNOW_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-    },
-    body: JSON.stringify(payload),
-    cache: "no-store",
-    signal: AbortSignal.timeout(10_000),
-  })
-
-  const responseBody = await response.text()
-
-  return {
-    accepted:
-      response.status === 200 || response.status === 202,
-    status: response.status,
-    responseBody,
-  }
 }
 
 export async function POST(request: Request) {
@@ -426,9 +352,7 @@ export async function POST(request: Request) {
     )
   }
 
-  const signatureHeader = request.headers.get(
-    HASHNODE_SIGNATURE_HEADER
-  )
+  const signatureHeader = request.headers.get(HASHNODE_SIGNATURE_HEADER)
 
   if (!signatureHeader) {
     return jsonResponse(
@@ -475,9 +399,9 @@ export async function POST(request: Request) {
     )
   }
 
-  const payload = parseWebhookPayload(rawBody)
+  const parsedWebhook = parseHashnodeWebhookPayload(rawBody)
 
-  if (!payload) {
+  if (!parsedWebhook) {
     return jsonResponse(
       {
         success: false,
@@ -487,16 +411,42 @@ export async function POST(request: Request) {
     )
   }
 
-  const webhookId = payload.metadata?.uuid
-  const eventType = payload.data?.eventType
+  const { payload, payloadShape, topLevelKeys } = parsedWebhook
+  const webhookId =
+    payload.metadata?.uuid ??
+    request.headers.get(HASHNODE_DELIVERY_HEADER)?.trim() ??
+    undefined
+  const eventType =
+    payload.data?.eventType ??
+    request.headers.get(HASHNODE_EVENT_HEADER)?.trim() ??
+    undefined
 
   console.info("Hashnode webhook verified", {
     webhookId,
     eventType,
+    payloadShape,
     signatureFormat: verification.format,
   })
 
-  if (eventType !== "post_published") {
+  if (!eventType) {
+    console.warn("Hashnode webhook payload has no event type", {
+      webhookId,
+      payloadShape,
+      topLevelKeys,
+    })
+
+    return jsonResponse(
+      {
+        success: false,
+        error: "Unrecognized Hashnode webhook payload",
+        webhookId,
+        payloadShape,
+      },
+      422
+    )
+  }
+
+  if (!isSupportedHashnodeEvent(eventType)) {
     return jsonResponse({
       success: true,
       ignored: true,
@@ -506,64 +456,85 @@ export async function POST(request: Request) {
   }
 
   try {
-    const postUrl = await getPublishedPostUrl(payload)
+    revalidateTag(HASHNODE_POSTS_CACHE_TAG, {
+      expire: 0,
+    })
+    revalidatePath("/")
 
-    if (!postUrl) {
+    const cacheRevalidation = {
+      revalidated: true,
+      tag: HASHNODE_POSTS_CACHE_TAG,
+      path: "/",
+    }
+
+    const resourceUrl = await getEventResourceUrl(payload, eventType)
+
+    if (!resourceUrl) {
       return jsonResponse(
         {
           success: false,
-          error:
-            "Could not resolve a valid published post URL",
+          error: "Could not resolve a valid Hashnode resource URL",
           webhookId,
+          eventType,
+          cacheRevalidation,
         },
         422
       )
     }
 
-    const indexNowResult = await submitToIndexNow({
-      postUrl,
-      indexNowKey: environment.indexNowKey,
+    const batches = buildBingSubmissionBatches(resourceUrl)
+    const submissionResults = await submitBingUrlBatches({
+      apiKey: environment.bingApiKey,
+      batches,
     })
+    const submissions = submissionResults.map(sanitizeBingSubmissionResult)
+    const failedSubmissions = submissionResults.filter(
+      (result) => !result.accepted
+    )
 
-    if (!indexNowResult.accepted) {
-      console.error("IndexNow submission failed", {
-        status: indexNowResult.status,
-        responseBody: indexNowResult.responseBody.slice(
-          0,
-          500
-        ),
-        postUrl,
+    if (failedSubmissions.length > 0) {
+      console.error("Bing URL submission failed", {
+        resourceUrl,
         webhookId,
+        eventType,
+        failures: failedSubmissions.map(sanitizeBingSubmissionResult),
       })
 
       return jsonResponse(
         {
           success: false,
-          error: "IndexNow rejected the URL submission",
-          upstreamStatus: indexNowResult.status,
+          error: "Bing rejected one or more URL batches",
+          resourceUrl,
           webhookId,
+          eventType,
+          cacheRevalidation,
+          submissions,
         },
         502
       )
     }
 
+    console.info("Bing URL submissions completed", {
+      resourceUrl,
+      webhookId,
+      eventType,
+      submissions,
+    })
+
     return jsonResponse({
       success: true,
-      message:
-        indexNowResult.status === 202
-          ? "URL accepted by IndexNow and is pending validation"
-          : "URL submitted successfully to IndexNow",
-      indexNowStatus: indexNowResult.status,
-      postUrl,
+      message: "URLs submitted successfully to Bing",
+      resourceUrl,
       webhookId,
+      eventType,
+      cacheRevalidation,
+      submissions,
     })
   } catch (error) {
     console.error("Hashnode webhook processing failed", {
       webhookId,
       error:
-        error instanceof Error
-          ? error.message
-          : "Unknown processing error",
+        error instanceof Error ? error.message : "Unknown processing error",
     })
 
     return jsonResponse(
