@@ -1,8 +1,26 @@
-User-agent: *
+User-Agent: *
 Allow: /
 
-# Ensure these are NOT set to Disallow:
-# User-agent: GPTBot
-# User-agent: ClaudeBot
-# User-agent: PerplexityBot
-# User-agent: Google-Extended
+User-Agent: GPTBot
+Allow: /
+
+User-Agent: ChatGPT-User
+Allow: /
+
+User-Agent: ClaudeBot
+Allow: /
+
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: Google-Extended
+Allow: /
+
+User-Agent: Anthropic-AI
+Allow: /
+
+User-Agent: OAI-SearchBot
+Allow: /
+
+Host: https://mdazlaanzubair.com
+Sitemap: https://mdazlaanzubair.com/sitemap.xml
