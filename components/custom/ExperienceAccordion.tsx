@@ -70,7 +70,7 @@ const ExperienceAccordion = ({
         </p>
       ) : (
         <Accordion defaultValue={["experience-0"]} hiddenUntilFound>
-          {items.map((item, idx) => {
+          {items.reverse().map((item, idx) => {
             const { key_contributions, company, role, timeline } = item
             const { website, location, name: companyName } = company
             const contributionHeadingId = `experience-${idx}-contributions`
